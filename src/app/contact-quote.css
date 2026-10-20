@@ -1,39 +1,18 @@
 /* The contact page is independent of the locked Home, About and Pricing. */
 .contact-quote-page {
   background: #f0f7f2;
-  padding: 40px 0 50px;
+  padding: 28px 0 36px;
   font-family: Manrope, Arial, sans-serif;
   color: #132e35;
 }
 .contact-quote-shell {
-  width: min(1360px, calc(100% - 2 * var(--page-gutter, 24px)));
+  width: min(1160px, calc(100% - 80px));
   margin-inline: auto;
   display: grid;
-  grid-template-columns: 42% 58%;
+  grid-template-columns: minmax(0, 72fr) minmax(0, 28fr);
+  background: white;
   border-radius: 24px;
   box-shadow: 0 20px 65px #244b3410;
-}
-.contact-quote-promo {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  background: #fafcf9;
-  border-radius: 24px 0 0 24px;
-}
-.contact-promo-copy {
-  position: relative;
-  padding: 34px 35px 24px;
-}
-.contact-promo-copy .logo {
-  font-size: 27px;
-  margin-bottom: 35px;
-  color: #193e32;
-}
-.contact-promo-copy .logo-mark {
-  color: #2aa574;
-}
-.contact-promo-copy .logo-sub {
-  color: #5b7569;
 }
 .contact-quote-eyebrow {
   display: block;
@@ -43,99 +22,16 @@
   line-height: 1.6;
   letter-spacing: 0.18em;
 }
-.contact-promo-copy h2 {
-  font-family: Manrope, Arial, sans-serif;
-  font-size: clamp(31px, 3.1vw, 46px);
-  font-weight: 750;
-  color: #102d34;
-  line-height: 1.13;
-  letter-spacing: -0.045em;
-  margin: 18px 0;
-}
-.contact-promo-copy h2 span {
-  color: #118550;
-}
-.contact-promo-copy > p {
-  color: #5f7281;
-  font-size: 16px;
-  line-height: 1.65;
-  margin: 0 0 28px;
-  max-width: 420px;
-}
-.contact-promo-benefits {
-  display: grid;
-  gap: 20px;
-}
-.contact-promo-benefits > div {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-}
-.contact-promo-benefits > div > span {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 51px;
-  height: 51px;
-  color: #168447;
-  border-radius: 50%;
-  background: #e3f1e7;
-}
-.contact-promo-benefits strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 750;
-  color: #1c3540;
-}
-.contact-promo-benefits p {
-  margin: 4px 0 0;
-  color: #617485;
-  font-size: 12px;
-  line-height: 1.6;
-}
-.contact-promo-photo {
-  position: relative;
-  min-height: 290px;
-  flex: 1;
-  border-radius: 0 0 0 24px;
-  overflow: hidden;
-}
-.contact-promo-photo .photo {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  min-height: 0;
-  width: 100%;
-  border-radius: 0;
-}
-.contact-quote-page .contact-promo-photo img {
-  object-fit: cover !important;
-  object-position: 70% center !important;
-}
-.contact-promo-photo > span {
-  position: absolute;
-  bottom: 18px;
-  left: 22px;
-  right: 22px;
-  width: fit-content;
-  padding: 10px 14px;
-  background: #fffffff0;
-  color: #255140;
-  border: 1px solid #ffffff;
-  border-radius: 25px;
-  font-size: 10px;
-  font-weight: 650;
-}
 .contact-quote-card {
   min-width: 0;
   position: relative;
   background: #fff;
   border: 1px solid #e9f0ea;
   border-radius: 24px;
-  padding: 34px 38px 25px;
+  padding: 20px 28px 16px;
 }
 .contact-quote-heading {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 .contact-quote-heading .contact-quote-eyebrow {
   display: flex;
@@ -150,19 +46,19 @@
 }
 .contact-quote-card h1 {
   font-family: Manrope, Arial, sans-serif;
-  font-size: clamp(28px, 2.55vw, 38px);
+  font-size: clamp(26px, 2.1vw, 31px);
   font-weight: 750;
   color: #102c34;
   line-height: 1.2;
   letter-spacing: -0.035em;
-  margin: 12px 0 10px;
+  margin: 6px 0;
 }
 .contact-quote-card h1 span {
   color: #168a50;
 }
 .contact-quote-heading > p {
   color: #627385;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.65;
   margin: 0;
 }
@@ -178,16 +74,16 @@
 .contact-quote-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 19px 22px;
+  gap: 12px 18px;
 }
 .contact-quote-fields label,
 .contact-room-field > label {
   display: block;
   color: #243b47;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 650;
   line-height: 1.5;
-  margin-bottom: 7px;
+  margin-bottom: 4px;
 }
 .contact-quote-fields label > span:not(.contact-quote-consent > span) {
   color: #855649;
@@ -214,8 +110,8 @@
 .contact-quote-page .contact-field :is(input, select) {
   width: 100%;
   min-width: 0;
-  height: 45px;
-  min-height: 45px;
+  height: 36px;
+  min-height: 36px;
   border: 0;
   padding: 8px 0;
   border-radius: 9px;
@@ -248,8 +144,8 @@
   border-color: #c2675e;
 }
 .contact-property-details {
-  margin: 21px 0;
-  padding: 20px;
+  margin: 12px 0;
+  padding: 12px;
   background: #f2f8f4;
   border: 1px solid #e1eee5;
   border-radius: 13px;
@@ -257,14 +153,14 @@
 .contact-property-heading {
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 6px;
 }
 .contact-property-heading > span {
   display: grid;
   place-items: center;
-  width: 43px;
-  height: 43px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   color: #16864b;
   background: #e3f1e8;
@@ -275,6 +171,7 @@
   font-weight: 750;
 }
 .contact-property-heading p {
+  display: none;
   font-size: 10px;
   color: #7b8c96;
   line-height: 1.5;
@@ -299,7 +196,7 @@
   display: grid;
   place-items: center;
   flex: 0 0 34px;
-  min-height: 45px;
+  min-height: 36px;
   background: #e5f2e9;
   color: #2b8d5f;
   border: 0;
@@ -314,8 +211,9 @@
   min-width: 0;
   border: 0;
   padding: 8px 2px;
-  height: 45px;
+  height: 36px;
   background: white;
+  min-height: 36px;
   text-align: center;
   font-family: inherit;
   font-size: 14px;
@@ -330,11 +228,13 @@
 }
 .contact-quote-extra {
   align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .contact-quote-extra textarea {
   width: 100%;
   min-width: 0;
-  min-height: 85px;
+  min-height: 58px;
+  height: 58px;
   background: #fafbfb;
   border: 1px solid #dce4e5;
   border-radius: 11px;
@@ -342,7 +242,7 @@
   font-size: 12px;
   line-height: 1.6;
   color: #29414b;
-  padding: 12px 14px;
+  padding: 8px 12px;
   resize: vertical;
   margin: 0;
 }
@@ -353,7 +253,7 @@
   font-size: 10px;
   line-height: 1.5;
   color: #83929c;
-  margin: 8px 0 0;
+  margin: 4px 0 0;
 }
 .contact-quote-fields .contact-quote-consent {
   display: flex;
@@ -364,7 +264,7 @@
   font-weight: 400;
   line-height: 1.7;
   color: #6c7e86;
-  margin: 18px 0;
+  margin: 10px 0;
 }
 .contact-quote-consent input {
   accent-color: #158650;
@@ -386,7 +286,7 @@
   align-items: center;
   justify-content: center;
   gap: 13px;
-  min-height: 49px;
+  min-height: 42px;
   width: 100%;
   border: 1px solid #14814b;
   border-radius: 17px;
@@ -395,7 +295,7 @@
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
-  padding: 12px 20px;
+  padding: 9px 20px;
   box-shadow: 0 8px 22px #1a844312;
   transition:
     box-shadow 0.2s,
@@ -414,10 +314,10 @@
   color: #85949f;
   font-size: 10px;
   line-height: 1.7;
-  margin: 10px 0 0;
+  margin: 6px 0 0;
 }
 .contact-quote-trust {
-  display: grid;
+  display: none;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   padding-top: 25px;
@@ -462,8 +362,8 @@
   gap: 7px;
   font-size: 10px;
   color: #6e887a;
-  margin-top: 20px;
-  min-height: 30px;
+  margin-top: 8px;
+  min-height: 24px;
   overflow-wrap: anywhere;
 }
 .contact-field-error {
@@ -539,90 +439,110 @@
     transform: rotate(360deg);
   }
 }
-@media (max-width: 1150px) {
-  .contact-quote-shell {
-    grid-template-columns: 38% 62%;
-  }
-  .contact-promo-copy {
-    padding: 29px 25px;
-  }
-  .contact-promo-copy h2 {
-    font-size: 34px;
-  }
-  .contact-promo-copy > p {
-    font-size: 14px;
-  }
-  .contact-promo-benefits > div {
-    align-items: flex-start;
-    gap: 11px;
-  }
-  .contact-promo-benefits > div > span {
-    width: 43px;
-    height: 43px;
-  }
-  .contact-promo-benefits strong {
-    font-size: 12px;
-  }
-  .contact-promo-benefits p {
-    font-size: 11px;
-  }
-  .contact-quote-card {
-    padding: 28px;
-  }
-  .contact-quote-grid {
-    gap: 18px 14px;
-  }
-  .contact-details-grid {
-    gap: 12px;
-    grid-template-columns: 1fr 1fr;
-  }
-  .contact-details-grid > div:last-child {
-    grid-column: 1/-1;
-  }
-  .contact-details-grid.is-commercial > div:last-child {
-    grid-column: auto;
-  }
+.contact-quote-card {
+  order: 1;
+  padding: 28px 48px 22px 32px;
+  border: 0;
+  border-radius: 20px 0 0 20px;
 }
-@media (max-width: 900px) {
-  .contact-quote-page {
-    padding-block: 26px;
-  }
+.contact-quote-heading {
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #e8efeb;
+}
+.contact-info-rail {
+  position: relative;
+  z-index: 1;
+  order: 2;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(155deg, #b6ddc5, #58aa80);
+  border-radius: 0 20px 20px 0;
+  padding-block: 32px;
+}
+.contact-info-card {
+  position: relative;
+  width: calc(100% + 48px);
+  flex-shrink: 0;
+  margin-left: -24px;
+  padding: 32px 26px;
+  border-radius: 14px;
+  background: #194f3e;
+  color: #fff;
+  box-shadow: 0 18px 42px #153e3a30;
+}
+.contact-info-eyebrow {
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.18em;
+  color: #acd9c4;
+}
+.contact-info-card h2 {
+  font-family: inherit;
+  font-size: clamp(25px, 2.3vw, 32px);
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+  margin: 18px 0 14px;
+  color: white;
+}
+.contact-info-card > p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #d0e3da;
+}
+.contact-info-links {
+  display: grid;
+  gap: 18px;
+  margin-top: 26px;
+}
+.contact-info-links a {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.contact-info-links svg {
+  color: #9bddb8;
+  flex-shrink: 0;
+}
+.contact-info-links a:hover {
+  color: #b8f0ce;
+}
+.contact-info-note {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid #ffffff25;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #d0e3da;
+}
+.contact-info-note svg {
+  color: #9bddb8;
+  flex-shrink: 0;
+}
+@media (max-width: 1000px) {
   .contact-quote-shell {
     grid-template-columns: 1fr;
-    gap: 24px;
-    max-width: 700px;
-    box-shadow: none;
+    max-width: 740px;
+    width: calc(100% - 32px);
+  }
+  .contact-info-rail {
+    border-radius: 0 0 20px 20px;
+    padding: 24px;
+  }
+  .contact-info-card {
+    width: 100%;
+    margin: 0;
   }
   .contact-quote-card {
-    order: 1;
-    border-radius: 22px;
-  }
-  .contact-quote-promo {
-    order: 2;
-    border-radius: 22px;
-  }
-  .contact-promo-copy {
-    padding: 28px;
-  }
-  .contact-promo-copy .logo {
-    margin-bottom: 25px;
-  }
-  .contact-promo-copy h2 {
-    font-size: 37px;
-  }
-  .contact-promo-benefits {
-    gap: 19px;
-  }
-  .contact-promo-photo {
-    height: 330px;
-    min-height: 330px;
-    border-radius: 0 0 22px 22px;
-  }
-  .contact-details-grid {
-    grid-template-columns: 1fr 1fr 1.3fr;
-  }
-  .contact-details-grid > div:last-child {
-    grid-column: auto;
+    border-radius: 20px 20px 0 0;
   }
 }
 @media (max-width: 600px) {
@@ -640,7 +560,7 @@
   .contact-details-grid,
   .contact-details-grid.is-commercial {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 12px;
   }
   .contact-details-grid > div:last-child {
     grid-column: auto;
@@ -651,6 +571,21 @@
   .contact-quote-page .contact-field :is(input, select),
   .contact-quote-extra textarea {
     font-size: 16px;
+  }
+  .contact-quote-page .contact-field :is(input, select),
+  .contact-counter input,
+  .contact-counter button {
+    height: 44px;
+    min-height: 44px;
+  }
+  .contact-quote-submit {
+    min-height: 44px;
+  }
+  .contact-details-grid:not(.is-commercial) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .contact-details-grid:not(.is-commercial) > div:last-child {
+    grid-column: 1 / -1;
   }
   .contact-property-details {
     padding: 17px;
@@ -681,9 +616,6 @@
   }
   .contact-direct-email {
     font-size: 11px;
-  }
-  .contact-promo-copy h2 {
-    font-size: 34px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

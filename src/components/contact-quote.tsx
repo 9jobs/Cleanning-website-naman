@@ -13,7 +13,6 @@ import {
   LoaderCircle,
   Mail,
   MapPin,
-  MessageCircle,
   Minus,
   Phone,
   Plus,
@@ -22,14 +21,12 @@ import {
   UserRound,
 } from "lucide-react";
 import { services } from "@/lib/data";
-import { frequencies } from "@/lib/config";
+import { frequencies, site } from "@/lib/config";
 import { australianDate } from "@/lib/validation";
 import {
   contactFieldsSchema,
   type ContactFields,
 } from "@/lib/contact-validation";
-import { Logo } from "./layout";
-import { Photo } from "./ui";
 
 const businessEmail = "Thrive4cleaning@gmail.com";
 export function ContactQuotePage({
@@ -201,59 +198,48 @@ export function ContactQuotePage({
       aria-labelledby="contact-quote-title"
     >
       <div className="contact-quote-shell">
-        <aside className="contact-quote-promo">
-          <div className="contact-promo-copy">
-            <Logo />
-            <span className="contact-quote-eyebrow">
-              PROFESSIONAL CLEANING SERVICES
+        <aside
+          className="contact-info-rail"
+          aria-labelledby="contact-info-title"
+        >
+          <div className="contact-info-card">
+            <span className="contact-info-eyebrow">
+              THRIVE4 CLEANING · CONTACT
             </span>
-            <h2>
-              A cleaner home
+            <h2 id="contact-info-title">
+              A fresher space
               <br />
-              for a <span>brighter you.</span>
+              starts here.
             </h2>
             <p>
-              Tell us about your cleaning needs and we’ll help you find the
-              right care for your space.
+              Speak with our team about the right clean for your home or
+              workplace.
             </p>
-            <div className="contact-promo-benefits">
-              {[
-                {
-                  Icon: MessageCircle,
-                  title: "A clear next step",
-                  text: "Share your needs. We’ll review the details.",
-                },
-                {
-                  Icon: CalendarDays,
-                  title: "Flexible requests",
-                  text: "Tell us the timing that suits your routine.",
-                },
-                {
-                  Icon: ShieldCheck,
-                  title: "Care for your space",
-                  text: "A considered plan for your home or workplace.",
-                },
-              ].map(({ Icon, title, text }) => (
-                <div key={title}>
-                  <span>
-                    <Icon size={25} strokeWidth={1.7} />
-                  </span>
-                  <div>
-                    <strong>{title}</strong>
-                    <p>{text}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="contact-info-links">
+              <a href={`mailto:${site.email}`}>
+                <Mail size={21} />
+                <span>{site.email}</span>
+              </a>
+              <a href={`tel:${site.phone.replace(/\s/g, "")}`}>
+                <Phone size={21} />
+                <span>{site.phone}</span>
+              </a>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MapPin size={22} />
+                <span>{site.address}</span>
+              </a>
             </div>
-          </div>
-          <div className="contact-promo-photo">
-            <Photo
-              src="/images/thrive-australian-office.png"
-              alt="Male cleaning professional carefully mopping an office floor"
-              sizes="(max-width: 900px) 100vw, 550px"
-              priority
-            />
-            <span>Thoughtful cleaning. A fresher everyday.</span>
+            <div className="contact-info-note">
+              <Sparkles size={24} />
+              <span>
+                Thoughtful cleaning.
+                <br />A team ready to help.
+              </span>
+            </div>
           </div>
         </aside>
         <div className="contact-quote-card">

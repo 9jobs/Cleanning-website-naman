@@ -20,7 +20,7 @@ const plans = [
     icon: House,
     description:
       "Keep your home clean, fresh and comfortable with ongoing care.",
-    price: 120,
+    price: 60,
     features: [
       "Kitchen & bathroom cleaning",
       "Dusting, vacuuming & mopping",
@@ -34,7 +34,7 @@ const plans = [
     title: "Deep Cleaning",
     icon: Sparkles,
     description: "A more detailed clean for a fresher, healthier home.",
-    price: 220,
+    price: 60,
     features: [
       "Detailed kitchen & bathroom clean",
       "Accessible skirting boards & door frames",
@@ -50,7 +50,7 @@ const plans = [
     icon: KeyRound,
     description:
       "A thorough move-out clean to prepare your property for its next chapter.",
-    price: 300,
+    price: 60,
     features: [
       "Property-specific cleaning checklist",
       "Kitchen, bathrooms & laundry",
@@ -66,7 +66,7 @@ const refreshPlan = {
   icon: House,
   description:
     "A flexible refresh when your home needs a little extra attention.",
-  price: 120,
+  price: 60,
   features: [
     "Choose your priority rooms",
     "Kitchen & bathroom refresh",
@@ -157,6 +157,10 @@ export function PricingPlans({
                 </div>
                 <h2>{plan.title}</h2>
                 <p className="pricing-plan-description">{plan.description}</p>
+                <div className="pricing-plan-price">
+                  <strong>AUD ${plan.price}</strong>
+                  <span>/ hour</span>
+                </div>
                 <ul>
                   {plan.features.map((feature) => (
                     <li key={feature}>

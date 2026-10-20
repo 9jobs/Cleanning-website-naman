@@ -297,6 +297,7 @@ export function Footer() {
           {site.phone && (
             <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a>
           )}
+          {site.address && <p>{site.address}</p>}
           {site.abn && <p>ABN {site.abn}</p>}
           {site.socials.map((s) => (
             <a key={s.url} href={s.url} rel="noopener noreferrer">
