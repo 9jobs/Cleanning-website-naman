@@ -3,6 +3,9 @@ const config: NextConfig = {
   poweredByHeader: false,
   allowedDevOrigins: ["127.0.0.1"],
   serverExternalPackages: ["@supabase/supabase-js"],
+  outputFileTracingIncludes: {
+    "/api/contact": ["./certificates/supabase-root.crt"],
+  },
   async headers() {
     return [
       {

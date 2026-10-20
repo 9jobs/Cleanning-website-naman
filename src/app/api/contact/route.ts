@@ -1,19 +1,16 @@
-import { createHash, randomUUID } from "node:crypto";
+import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { contactRequestSchema } from "@/lib/contact-validation";
 import { contactMailReady, sendContactMail } from "@/lib/contact-mail";
+import {
+  contactDatabaseReady,
+  ContactRequestError,
+  saveContactEnquiry,
+  markContactNotification,
+} from "@/lib/contact-database";
 
 export const runtime = "nodejs";
-type Receipt = { digest: string; reference: string; expires: number };
-type Attempt = { count: number; expires: number };
-const cache = globalThis as typeof globalThis & {
-  thriveContactReceipts?: Map<string, Receipt>;
-  thriveContactAttempts?: Map<string, Attempt>;
-  thriveContactPending?: Map<string, { digest: string; task: Promise<string> }>;
-};
-const receipts = (cache.thriveContactReceipts ??= new Map());
-const attempts = (cache.thriveContactAttempts ??= new Map());
-const pending = (cache.thriveContactPending ??= new Map());
+export const maxDuration = 60;
 const fail = (error: string, status: number) =>
   NextResponse.json({ error }, { status });
 
@@ -61,69 +58,54 @@ export async function POST(request: NextRequest) {
       },
       { status: 400 },
     );
-  if (!contactMailReady())
+  if (!contactMailReady() || !contactDatabaseReady())
     return fail(
       "Email enquiries are temporarily unavailable. Please email Thrive4cleaning@gmail.com directly.",
       503,
     );
   const data = parsed.data;
-  const now = Date.now();
-  for (const [key, value] of receipts)
-    if (value.expires < now) receipts.delete(key);
-  for (const [key, value] of attempts)
-    if (value.expires < now) attempts.delete(key);
   const digest = createHash("sha256")
     .update(JSON.stringify(data))
     .digest("hex");
-  const receipt = receipts.get(data.submissionId);
-  if (receipt)
-    return receipt.digest === digest
-      ? NextResponse.json({ reference: receipt.reference })
-      : fail("Please start a new enquiry.", 409);
-  const inFlight = pending.get(data.submissionId);
-  if (inFlight && inFlight.digest !== digest)
-    return fail("Please wait for the current enquiry to finish.", 409);
-  if (!inFlight) {
+  let saved: Awaited<ReturnType<typeof saveContactEnquiry>>;
+  try {
     const ip =
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-    const key = createHash("sha256").update(ip).digest("hex");
-    const attempt = attempts.get(key) || {
-      count: 0,
-      expires: now + 10 * 60 * 1000,
-    };
-    if (attempt.count >= 5 || receipts.size > 5000 || attempts.size > 5000)
-      return fail(
-        "Please wait a few minutes before sending another enquiry.",
-        429,
-      );
-    attempt.count += 1;
-    attempts.set(key, attempt);
-    const task = (async () => {
-      const reference = randomUUID();
-      await sendContactMail(data, reference);
-      receipts.set(data.submissionId, {
-        reference,
-        digest,
-        expires: Date.now() + 30 * 60 * 1000,
-      });
-      return reference;
-    })();
-    pending.set(data.submissionId, { digest, task });
-  }
-  try {
-    const reference = await pending.get(data.submissionId)!.task;
-    return NextResponse.json({ reference });
+    saved = await saveContactEnquiry(data, digest, ip);
   } catch (error) {
-    const code =
-      error && typeof error === "object" && "code" in error
-        ? String(error.code)
-        : "MAIL_NOT_ACCEPTED";
-    console.error("Contact enquiry email was not accepted:", code);
+    if (error instanceof ContactRequestError)
+      return fail(error.message, error.status);
+    console.error("Contact database save failed");
     return fail(
-      "We couldn’t send your enquiry. Please try again, or email Thrive4cleaning@gmail.com directly. Your appointment has not been booked.",
+      "We couldn’t save your enquiry. Please try again, or email Thrive4cleaning@gmail.com directly. Your appointment has not been booked.",
+      503,
+    );
+  }
+  if (saved.sent) return NextResponse.json({ reference: saved.reference });
+  let messageId: string;
+  try {
+    const result = await sendContactMail(data, saved.reference);
+    messageId = result.messageId;
+  } catch {
+    await markContactNotification(saved.reference, saved.claim, null).catch(
+      () =>
+        console.error(
+          "Contact notification failure status could not be recorded",
+        ),
+    );
+    return fail(
+      "Your enquiry is saved safely, but the notification email could not be sent. Please retry with the same details, or email Thrive4cleaning@gmail.com directly. Your appointment has not been booked.",
       502,
     );
-  } finally {
-    pending.delete(data.submissionId);
   }
+  try {
+    await markContactNotification(saved.reference, saved.claim, messageId);
+  } catch {
+    // SMTP already accepted the email. Do not tell the customer to resubmit.
+    console.error(
+      "Contact email accepted; delivery status reconciliation required",
+      saved.reference,
+    );
+  }
+  return NextResponse.json({ reference: saved.reference });
 }

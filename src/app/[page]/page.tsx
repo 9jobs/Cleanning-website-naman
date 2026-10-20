@@ -1,5 +1,6 @@
 import { ContactQuotePage } from "@/components/contact-quote";
 import { contactMailReady } from "@/lib/contact-mail";
+import { contactDatabaseReady } from "@/lib/contact-database";
 import {
   ServiceDiscovery,
   CoverageDirectory,
@@ -170,7 +171,10 @@ export default async function ContentPage({
       )}
       {page === "faq" && <HelpPageBody />}
       {page === "contact" && (
-        <ContactQuotePage initial={initial} ready={contactMailReady()} />
+        <ContactQuotePage
+          initial={initial}
+          ready={contactMailReady() && contactDatabaseReady()}
+        />
       )}
       {page === "quote" && (
         <ContactCompletion kind="quote" initial={initial} live={live} />

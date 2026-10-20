@@ -1,5 +1,7 @@
 # Thrive4 Cleaning
 
+Live website: https://thrive4-cleaning.vercel.app
+
 Responsive cleaning-services website built with Next.js App Router, React and TypeScript. Includes the homepage, Who We Are, pricing plans, eleven service pages, cleaning guides, FAQ, coverage enquiries, careers and a multi-step booking request flow.
 
 ## Run locally
@@ -16,11 +18,15 @@ Open http://localhost:4317. On PowerShell, use `Copy-Item .env.example .env.loca
 
 ## Contact enquiry email
 
-The dedicated `/contact` page submits to `/api/contact` and sends enquiries through Gmail SMTP. Configure these **server-only** variables in your own ignored `.env.local` or hosting environment:
+The dedicated `/contact` page submits to `/api/contact`, commits the enquiry to Supabase PostgreSQL, then sends its notification through Gmail SMTP. Configure these **server-only** variables in your own ignored `.env.local` or hosting environment:
 
 - `CONTACT_SMTP_USER`: Gmail sender account.
 - `CONTACT_SMTP_PASSWORD`: the sender's Gmail app password.
 - `CONTACT_TO_EMAIL`: business inbox receiving enquiries.
+- `CONTACT_DATABASE_URL`: PostgreSQL transaction-pooler connection string, with a URL-encoded password.
+- `CONTACT_RATE_LIMIT_SECRET`: a random server-only secret for hashed rate-limit identifiers.
+
+Apply `supabase/migrations/002_contact_enquiries.sql` before enabling the form. The helper `node --env-file=.env.local scripts/migrate-contact.mjs` reads `CONTACT_ADMIN_DATABASE_URL` (local migration only) or `CONTACT_DATABASE_URL`. Enquiries and notification status appear in the Supabase Table Editor under `public.contact_enquiries`. Public API access to this table is blocked. The bundled public Supabase CA verifies TLS connections.
 
 No password or live environment file is stored in this repository. A fresh clone needs its own environment configuration before email will work. The form validates input, prevents repeat delivery for identical request IDs, and shows success only after the mail server accepts the enquiry. Preferred dates are enquiries, not confirmed appointments.
 
@@ -57,4 +63,4 @@ Browser QA scripts are in `qa/` and use the installed Chrome executable on Windo
 
 `qa/contact-email.mjs` sends one real, clearly labelled test enquiry to the configured recipient. Run it only when you intend to send that email. Other layout/negative tests do not send real email.
 
-The website remains local until you explicitly deploy it. Configure server environment variables separately on any future host; do not upload `.env.local`.
+Vercel settings are in `vercel.json`. Configure production secrets on the dedicated project before deploying; never upload `.env.local`. The approved Home, About and Pricing layouts are preserved.

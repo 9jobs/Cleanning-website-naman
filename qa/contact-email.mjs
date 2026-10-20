@@ -1,5 +1,6 @@
 import { chromium, expect } from "@playwright/test";
 import fs from "node:fs/promises";
+const baseUrl = process.env.QA_BASE_URL || "http://localhost:4317";
 const b = await chromium.launch({
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
@@ -10,7 +11,7 @@ const p = await b.newPage({
 });
 const errors = [];
 p.on("pageerror", (e) => errors.push(e.message));
-await p.goto("http://localhost:4317/contact");
+await p.goto(`${baseUrl}/contact`);
 await p.locator("h1").waitFor({ state: "visible" });
 let requests = 0;
 p.on("request", (r) => {
@@ -60,26 +61,24 @@ await expect(p.getByRole("heading", { level: 1 })).toContainText(
   "Your enquiry is on its way.",
 );
 const original = JSON.parse(response.request().postData());
-const replay = await p.request.post("http://localhost:4317/api/contact", {
-  headers: { origin: "http://localhost:4317" },
+const replay = await p.request.post(`${baseUrl}/api/contact`, {
+  headers: { origin: baseUrl },
   data: original,
 });
 expect(replay.status()).toBe(200);
 expect((await replay.json()).reference).toBe(result.reference);
 await p.screenshot({ path: "qa/contact-email-success.png" });
-const malformed = await p.request.post("http://localhost:4317/api/contact", {
-  headers: { origin: "http://localhost:4317" },
+const malformed = await p.request.post(`${baseUrl}/api/contact`, {
+  headers: { origin: baseUrl },
   data: {},
 });
 expect(malformed.status()).toBe(400);
-const crossOrigin = await p.request.post("http://localhost:4317/api/contact", {
+const crossOrigin = await p.request.post(`${baseUrl}/api/contact`, {
   headers: { origin: "https://example.invalid" },
   data: original,
 });
 expect(crossOrigin.status()).toBe(403);
-await p.goto(
-  "http://localhost:4317/contact?service=deep-cleaning&postcode=3000",
-);
+await p.goto(`${baseUrl}/contact?service=deep-cleaning&postcode=3000`);
 await expect(p.getByLabel("Cleaning Service", { exact: false })).toHaveValue(
   "deep-cleaning",
 );
