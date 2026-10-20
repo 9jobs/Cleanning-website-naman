@@ -1,0 +1,15 @@
+import {chromium,expect} from '@playwright/test';
+const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+const page=await browser.newPage({viewport:{width:1440,height:1000}});
+await page.goto('http://localhost:4317/pricing');
+const menu=page.locator('details.mega'), toggle=menu.locator('summary');
+const closed=()=>expect(menu).not.toHaveAttribute('open','');
+await toggle.click();await expect(menu).toHaveAttribute('open','');
+await page.locator('.desktop-nav').getByRole('link',{name:'Who We Are',exact:true}).hover();await closed();
+await toggle.click();await page.locator('.desktop-nav').getByRole('link',{name:'Contact',exact:true}).click();await expect(page).toHaveURL(/\/contact$/);await closed();
+await toggle.click();await menu.getByRole('link',{name:'Deep Cleaning',exact:true}).click();await expect(page).toHaveURL(/\/services\/deep-cleaning$/);await closed();
+await toggle.click();await page.mouse.click(20,800);await closed();
+await toggle.click();await page.keyboard.press('Escape');await closed();await expect(toggle).toBeFocused();
+await toggle.click();await page.locator('.quote-link').focus();await closed();
+await toggle.click();await menu.getByRole('link',{name:'Explore all services'}).click();await expect(page).toHaveURL(/\/services$/);await closed();
+await browser.close();console.log('PASS: closes on other nav hover, route/link navigation, service selection, outside click, focus leaving, Escape, and Explore all services.');

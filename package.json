@@ -1,0 +1,40 @@
+{
+  "name": "clearora-cleaning",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "tsx --test tests/*.test.ts",
+    "format": "prettier --write src scripts tests qa/*.mjs *.json *.ts *.mjs README.md design/FIGMA-SPEC.md"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.118.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "lucide-react": "1.59.0",
+    "motion": "14.3.1",
+    "next": "16.4.2",
+    "nodemailer": "^10.1.7",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-hook-form": "7.90.0",
+    "resend": "6.34.1",
+    "tailwindcss": "4.3.3",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/node": "26.6.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.2",
+    "prettier": "3.9.10",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3"
+  }
+}

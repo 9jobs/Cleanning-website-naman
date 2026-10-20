@@ -1,0 +1,625 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import Link from "next/link";
+import {
+  ArrowRight,
+  CalendarDays,
+  CircleCheck,
+  Clock3,
+  Headphones,
+  House,
+  LoaderCircle,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Minus,
+  Phone,
+  Plus,
+  ShieldCheck,
+  Sparkles,
+  UserRound,
+} from "lucide-react";
+import { services } from "@/lib/data";
+import { frequencies } from "@/lib/config";
+import { australianDate } from "@/lib/validation";
+import {
+  contactFieldsSchema,
+  type ContactFields,
+} from "@/lib/contact-validation";
+import { Logo } from "./layout";
+import { Photo } from "./ui";
+
+const businessEmail = "Thrive4cleaning@gmail.com";
+export function ContactQuotePage({
+  initial = {},
+  ready,
+}: {
+  initial?: Record<string, string>;
+  ready: boolean;
+}) {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    control,
+    setError,
+    clearErrors,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFields>({
+    defaultValues: {
+      name: initial.name || "",
+      email: initial.email || "",
+      phone: initial.phone || "",
+      service: services.some((service) => service.slug === initial.service)
+        ? initial.service
+        : "",
+      property: "" as ContactFields["property"],
+      location: initial.location || initial.postcode || "",
+      bedrooms: 2,
+      bathrooms: 1,
+      frequency: frequencies.includes(initial.frequency)
+        ? initial.frequency
+        : "Fortnightly",
+      size: 100,
+      date: "",
+      message: "",
+      consent: false as unknown as true,
+      website: "",
+    },
+  });
+  const [property, service] = useWatch({
+    control,
+    name: ["property", "service"],
+  });
+  const commercial =
+    property === "Office" ||
+    property === "Other commercial space" ||
+    ["commercial-cleaning", "office-cleaning"].includes(service);
+  const [busy, setBusy] = useState(false);
+  const [error, setErrorMessage] = useState("");
+  const [reference, setReference] = useState("");
+  const requestId = useRef("");
+  const successHeading = useRef<HTMLHeadingElement>(null);
+  function fieldError(name: keyof ContactFields) {
+    const message = errors[name]?.message;
+    return message ? (
+      <span id={`contact-${name}-error`} className="contact-field-error">
+        {String(message)}
+      </span>
+    ) : null;
+  }
+  function accessibility(name: keyof ContactFields) {
+    return {
+      "aria-invalid": !!errors[name],
+      "aria-describedby": errors[name] ? `contact-${name}-error` : undefined,
+    };
+  }
+  function counter(
+    name: "bedrooms" | "bathrooms",
+    title: string,
+    maximum: number,
+  ) {
+    return (
+      <div className="contact-room-field">
+        <label htmlFor={`contact-${name}`}>
+          {title} <span>*</span>
+        </label>
+        <div className="contact-counter">
+          <button
+            type="button"
+            aria-label={`Fewer ${title.toLowerCase()}`}
+            onClick={() =>
+              setValue(name, Math.max(1, Number(getValues(name)) - 1))
+            }
+          >
+            <Minus size={17} />
+          </button>
+          <input
+            id={`contact-${name}`}
+            type="number"
+            min={1}
+            max={maximum}
+            {...register(name, { valueAsNumber: true })}
+            {...accessibility(name)}
+          />
+          <button
+            type="button"
+            aria-label={`More ${title.toLowerCase()}`}
+            onClick={() =>
+              setValue(name, Math.min(maximum, Number(getValues(name)) + 1))
+            }
+          >
+            <Plus size={17} />
+          </button>
+        </div>
+        {fieldError(name)}
+      </div>
+    );
+  }
+  async function submit(fields: ContactFields) {
+    clearErrors();
+    setErrorMessage("");
+    const parsed = contactFieldsSchema.safeParse(fields);
+    if (!parsed.success) {
+      parsed.error.issues.forEach((issue, index) =>
+        setError(
+          issue.path[0] as keyof ContactFields,
+          { message: issue.message },
+          { shouldFocus: index === 0 },
+        ),
+      );
+      return;
+    }
+    if (busy) return;
+    setBusy(true);
+    requestId.current ||= crypto.randomUUID();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...parsed.data,
+          submissionId: requestId.current,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        if (result.fields)
+          Object.entries(result.fields as Record<string, string[]>).forEach(
+            ([name, messages]) => {
+              if (messages[0])
+                setError(name as keyof ContactFields, { message: messages[0] });
+            },
+          );
+        throw new Error(
+          result.error || "Your enquiry could not be sent. Please try again.",
+        );
+      }
+      if (!result.reference)
+        throw new Error(
+          "The enquiry response was incomplete. Please try again.",
+        );
+      setReference(result.reference);
+      requestAnimationFrame(() => successHeading.current?.focus());
+    } catch (failure) {
+      setErrorMessage(
+        failure instanceof Error
+          ? failure.message
+          : "We couldn’t send your enquiry. Please try again or email us directly.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <section
+      className="contact-quote-page"
+      aria-labelledby="contact-quote-title"
+    >
+      <div className="contact-quote-shell">
+        <aside className="contact-quote-promo">
+          <div className="contact-promo-copy">
+            <Logo />
+            <span className="contact-quote-eyebrow">
+              PROFESSIONAL CLEANING SERVICES
+            </span>
+            <h2>
+              A cleaner home
+              <br />
+              for a <span>brighter you.</span>
+            </h2>
+            <p>
+              Tell us about your cleaning needs and we’ll help you find the
+              right care for your space.
+            </p>
+            <div className="contact-promo-benefits">
+              {[
+                {
+                  Icon: MessageCircle,
+                  title: "A clear next step",
+                  text: "Share your needs. We’ll review the details.",
+                },
+                {
+                  Icon: CalendarDays,
+                  title: "Flexible requests",
+                  text: "Tell us the timing that suits your routine.",
+                },
+                {
+                  Icon: ShieldCheck,
+                  title: "Care for your space",
+                  text: "A considered plan for your home or workplace.",
+                },
+              ].map(({ Icon, title, text }) => (
+                <div key={title}>
+                  <span>
+                    <Icon size={25} strokeWidth={1.7} />
+                  </span>
+                  <div>
+                    <strong>{title}</strong>
+                    <p>{text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="contact-promo-photo">
+            <Photo
+              src="/images/thrive-australian-office.png"
+              alt="Male cleaning professional carefully mopping an office floor"
+              sizes="(max-width: 900px) 100vw, 550px"
+              priority
+            />
+            <span>Thoughtful cleaning. A fresher everyday.</span>
+          </div>
+        </aside>
+        <div className="contact-quote-card">
+          {reference ? (
+            <div className="contact-quote-success" role="status">
+              <span>
+                <CircleCheck size={36} />
+              </span>
+              <span className="contact-quote-eyebrow">ENQUIRY SENT</span>
+              <h1 id="contact-quote-title" ref={successHeading} tabIndex={-1}>
+                Thank you.
+                <br />
+                Your enquiry is on its way.
+              </h1>
+              <p>
+                Your cleaning enquiry has been sent to Thrive4 Cleaning. The
+                team will review your requirements and contact you using the
+                details provided.
+              </p>
+              <p className="contact-quote-reference">
+                Your reference: <strong>{reference}</strong>
+              </p>
+              <p>This is an enquiry, not a confirmed cleaning appointment.</p>
+              <button
+                type="button"
+                className="contact-quote-submit"
+                onClick={() => {
+                  setReference("");
+                  requestId.current = "";
+                  reset();
+                }}
+              >
+                Send another enquiry <ArrowRight size={18} />
+              </button>
+              <Link href="/" className="contact-return-home">
+                Return to home <ArrowRight size={16} />
+              </Link>
+            </div>
+          ) : (
+            <>
+              <div className="contact-quote-heading">
+                <span className="contact-quote-eyebrow">GET A FREE QUOTE</span>
+                <h1 id="contact-quote-title">
+                  Request a <span>Cleaning Quote</span>
+                </h1>
+                <p>
+                  Fill in a few details and our team can prepare a personalised
+                  quote.
+                </p>
+              </div>
+              {!ready && (
+                <p className="contact-quote-alert" role="note">
+                  Email enquiries are temporarily unavailable. Please email{" "}
+                  <a href={`mailto:${businessEmail}`}>{businessEmail}</a>{" "}
+                  directly.
+                </p>
+              )}
+              <form
+                onSubmit={(event) => void handleSubmit(submit)(event)}
+                noValidate
+                aria-busy={busy}
+              >
+                <fieldset disabled={busy} className="contact-quote-fields">
+                  <div className="contact-quote-grid">
+                    <div>
+                      <label htmlFor="contact-name">
+                        Full Name <span>*</span>
+                      </label>
+                      <div className="contact-field">
+                        <UserRound size={19} />
+                        <input
+                          id="contact-name"
+                          autoComplete="name"
+                          placeholder="Your full name"
+                          {...register("name")}
+                          {...accessibility("name")}
+                        />
+                      </div>
+                      {fieldError("name")}
+                    </div>
+                    <div>
+                      <label htmlFor="contact-email">
+                        Email Address <span>*</span>
+                      </label>
+                      <div className="contact-field">
+                        <Mail size={19} />
+                        <input
+                          id="contact-email"
+                          type="email"
+                          autoComplete="email"
+                          placeholder="you@example.com"
+                          {...register("email")}
+                          {...accessibility("email")}
+                        />
+                      </div>
+                      {fieldError("email")}
+                    </div>
+                    <div>
+                      <label htmlFor="contact-phone">
+                        Phone Number <span>*</span>
+                      </label>
+                      <div className="contact-field">
+                        <Phone size={19} />
+                        <input
+                          id="contact-phone"
+                          type="tel"
+                          autoComplete="tel"
+                          placeholder="04XX XXX XXX"
+                          {...register("phone")}
+                          {...accessibility("phone")}
+                        />
+                      </div>
+                      {fieldError("phone")}
+                    </div>
+                    <div>
+                      <label htmlFor="contact-service">
+                        Cleaning Service <span>*</span>
+                      </label>
+                      <div className="contact-field">
+                        <Sparkles size={19} />
+                        <select
+                          id="contact-service"
+                          {...register("service")}
+                          {...accessibility("service")}
+                        >
+                          <option value="">Select a service</option>
+                          {services.map((item) => (
+                            <option key={item.slug} value={item.slug}>
+                              {item.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {fieldError("service")}
+                    </div>
+                    <div>
+                      <label htmlFor="contact-property">
+                        Property Type <span>*</span>
+                      </label>
+                      <div className="contact-field">
+                        <House size={19} />
+                        <select
+                          id="contact-property"
+                          {...register("property")}
+                          {...accessibility("property")}
+                        >
+                          <option value="">Select property type</option>
+                          {[
+                            "House",
+                            "Apartment",
+                            "Townhouse",
+                            "Office",
+                            "Other commercial space",
+                          ].map((item) => (
+                            <option key={item}>{item}</option>
+                          ))}
+                        </select>
+                      </div>
+                      {fieldError("property")}
+                    </div>
+                    <div>
+                      <label htmlFor="contact-location">
+                        Suburb / Postcode <span>*</span>
+                      </label>
+                      <div className="contact-field">
+                        <MapPin size={19} />
+                        <input
+                          id="contact-location"
+                          autoComplete="postal-code"
+                          placeholder="e.g. Melbourne VIC 3000"
+                          {...register("location")}
+                          {...accessibility("location")}
+                        />
+                      </div>
+                      {fieldError("location")}
+                    </div>
+                  </div>
+                  <div className="contact-property-details">
+                    <div className="contact-property-heading">
+                      <span>
+                        <House size={26} />
+                      </span>
+                      <div>
+                        <strong>
+                          {commercial
+                            ? "Workplace Details"
+                            : "Residential Details"}
+                        </strong>
+                        <p>
+                          {commercial
+                            ? "Tell us a little more about your workspace."
+                            : "Please tell us a bit more about your home."}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className={`contact-details-grid${commercial ? " is-commercial" : ""}`}
+                    >
+                      {commercial ? (
+                        <div>
+                          <label htmlFor="contact-size">
+                            Approximate floor area (m²)
+                          </label>
+                          <div className="contact-field">
+                            <House size={18} />
+                            <input
+                              id="contact-size"
+                              type="number"
+                              min={1}
+                              max={100000}
+                              {...register("size", { valueAsNumber: true })}
+                              {...accessibility("size")}
+                            />
+                          </div>
+                          {fieldError("size")}
+                        </div>
+                      ) : (
+                        <>
+                          {counter("bedrooms", "Bedrooms", 8)}
+                          {counter("bathrooms", "Bathrooms", 6)}
+                        </>
+                      )}
+                      <div>
+                        <label htmlFor="contact-frequency">
+                          Cleaning Frequency <span>*</span>
+                        </label>
+                        <div className="contact-field">
+                          <CalendarDays size={18} />
+                          <select
+                            id="contact-frequency"
+                            {...register("frequency")}
+                            {...accessibility("frequency")}
+                          >
+                            {frequencies.map((item) => (
+                              <option key={item}>{item}</option>
+                            ))}
+                          </select>
+                        </div>
+                        {fieldError("frequency")}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="contact-quote-grid contact-quote-extra">
+                    <div>
+                      <label htmlFor="contact-date">
+                        Preferred Cleaning Date <small>(optional)</small>
+                      </label>
+                      <div className="contact-field">
+                        <CalendarDays size={18} />
+                        <input
+                          id="contact-date"
+                          type="date"
+                          min={australianDate()}
+                          {...register("date")}
+                          {...accessibility("date")}
+                        />
+                      </div>
+                      {fieldError("date")}
+                      <p className="contact-field-hint">
+                        Your preferred date is subject to confirmation.
+                      </p>
+                    </div>
+                    <div>
+                      <label htmlFor="contact-message">
+                        Additional Requirements <small>(optional)</small>
+                      </label>
+                      <textarea
+                        id="contact-message"
+                        placeholder="Specific areas, stains, pets or access details…"
+                        rows={3}
+                        {...register("message")}
+                        {...accessibility("message")}
+                      />
+                      {fieldError("message")}
+                    </div>
+                  </div>
+                  <label className="contact-quote-consent">
+                    <input
+                      type="checkbox"
+                      {...register("consent")}
+                      {...accessibility("consent")}
+                    />
+                    <span>
+                      I agree to be contacted about this enquiry and have read
+                      the <Link href="/privacy">privacy notice</Link>.
+                    </span>
+                  </label>
+                  {fieldError("consent")}
+                  <div className="contact-quote-honeypot" aria-hidden="true">
+                    <label>
+                      Website
+                      <input
+                        tabIndex={-1}
+                        autoComplete="off"
+                        {...register("website")}
+                      />
+                    </label>
+                  </div>
+                </fieldset>
+                {error && (
+                  <div className="contact-quote-alert" role="alert">
+                    {error}{" "}
+                    <a href={`mailto:${businessEmail}`}>Email us directly</a>
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  className="contact-quote-submit"
+                  disabled={busy || !ready}
+                >
+                  {busy ? (
+                    <>
+                      <LoaderCircle
+                        size={18}
+                        className="contact-sending-icon"
+                      />
+                      Sending your enquiry…
+                    </>
+                  ) : (
+                    <>
+                      Get My Free Quote <ArrowRight size={20} />
+                    </>
+                  )}
+                </button>
+                <p className="contact-submit-note">
+                  Submit your enquiry. Our team will confirm the cleaning
+                  details, price and availability.
+                </p>
+              </form>
+            </>
+          )}
+          <div className="contact-quote-trust">
+            {[
+              {
+                Icon: Clock3,
+                title: "No obligation quote",
+                text: "Free and easy to request.",
+              },
+              {
+                Icon: ShieldCheck,
+                title: "Your information is safe",
+                text: "We respect your privacy.",
+              },
+              {
+                Icon: Headphones,
+                title: "Friendly support",
+                text: "Here to help with your clean.",
+              },
+            ].map(({ Icon, title, text }) => (
+              <div key={title}>
+                <span>
+                  <Icon size={23} strokeWidth={1.6} />
+                </span>
+                <div>
+                  <strong>{title}</strong>
+                  <small>{text}</small>
+                </div>
+              </div>
+            ))}
+          </div>
+          <a className="contact-direct-email" href={`mailto:${businessEmail}`}>
+            <Mail size={15} />
+            {businessEmail}
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}

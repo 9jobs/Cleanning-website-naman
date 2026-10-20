@@ -1,0 +1,136 @@
+/* Layout corrections only. Keep the approved component visuals in their own files. */
+:root {
+  --content-max: 1360px;
+  --page-gutter: clamp(32px, 3.4vw, 64px);
+}
+
+/* Explicit max-width prevents Tailwind's container breakpoints from adding
+   a second, unrelated constraint to our custom width calculation. */
+.container {
+  width: min(var(--content-max), calc(100% - 2 * var(--page-gutter)));
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.site-header .header-inner,
+.site-header--home .header-inner,
+.reference-hero .reference-hero-content,
+.reference-intro .split,
+.reference-packages > .container,
+.service-showcase > .container,
+.reference-lead {
+  width: min(var(--content-max), calc(100% - 2 * var(--page-gutter)));
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.site-header--home.is-scrolled .header-inner {
+  height: 68px;
+}
+.reference-intro .split {
+  gap: clamp(40px, 5vw, 88px);
+}
+.reference-hero-features > span {
+  min-width: 0;
+}
+.reference-lead .lead-form-fields > label {
+  min-width: 0;
+}
+.reference-lead .lead-form-fields input {
+  width: 100%;
+}
+
+/* Bind the previously viewport-sized card typography to its real content area.
+   This avoids the 1800px viewport rules inflating text inside capped columns. */
+.reference-packages > .container,
+.service-showcase > .container {
+  container-type: inline-size;
+}
+
+@media (min-width: 1101px) {
+  .plans-heading h2 {
+    font-size: clamp(48px, 5.4cqi, 76px);
+  }
+  .plans-heading p {
+    font-size: clamp(15px, 1.25cqi, 18px);
+  }
+  .reference-packages .pricing-path {
+    min-height: 0;
+    padding: 42px 12.5% 27px;
+  }
+  .reference-packages .pricing-path.featured {
+    padding-top: 58px;
+  }
+  .reference-packages .pricing-path h3 {
+    font-size: clamp(35px, 3.2cqi, 44px);
+  }
+  .reference-packages .pricing-path > p {
+    font-size: clamp(14px, 1.2cqi, 17px);
+  }
+  .reference-packages .pricing-path ul {
+    font-size: clamp(12px, 1.05cqi, 15px);
+  }
+  .reference-packages .pricing-path > .button {
+    font-size: clamp(12px, 1.05cqi, 15px);
+    min-height: 48px;
+  }
+  .reference-packages .pricing-paths {
+    gap: 18px;
+  }
+  .service-showcase .service-mosaic {
+    grid-template-rows: clamp(230px, 19cqi, 280px) clamp(
+        230px,
+        18cqi,
+        270px
+      ) clamp(150px, 11.5cqi, 175px);
+  }
+  .service-showcase .section-heading h2 {
+    font-size: clamp(46px, 4.8cqi, 68px);
+    max-width: 700px;
+  }
+  .service-showcase .section-heading p {
+    font-size: clamp(15px, 1.2cqi, 17px);
+    max-width: 690px;
+  }
+  .service-showcase .service-tile h3,
+  .service-showcase .service-tile:not(.service-tile-featured) h3 {
+    font-size: clamp(24px, 2cqi, 30px);
+    max-width: 240px;
+  }
+  .service-showcase .service-tile-featured h3 {
+    font-size: clamp(38px, 3.7cqi, 52px);
+    max-width: 380px;
+  }
+  .service-showcase .service-tile p {
+    font-size: 13px;
+    max-width: 300px;
+  }
+  .service-showcase .service-tile-featured p {
+    font-size: 15px;
+    max-width: 350px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  :root {
+    --page-gutter: 32px;
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --page-gutter: 20px;
+  }
+  .site-header--home .header-inner {
+    width: calc(100% - 32px);
+  }
+  .site-header--home.is-scrolled .header-inner {
+    height: 61px;
+  }
+  .reference-hero .reference-hero-content {
+    width: calc(100% - 40px);
+  }
+  .reference-intro .split {
+    gap: 30px;
+  }
+}

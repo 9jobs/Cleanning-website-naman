@@ -1,0 +1,368 @@
+/* Reference proportions scale with the viewport, including browser zoom. */
+.reference-packages {
+  padding: 28px 0 30px;
+}
+.reference-packages > .container {
+  width: min(1600px, 74.5%);
+}
+.reference-packages::before {
+  background-position: center;
+  opacity: 0.86;
+}
+.reference-packages::after {
+  background:
+    radial-gradient(
+      ellipse 45% 30% at 50% 11%,
+      #fffffff5 40%,
+      #ffffff9c 90%,
+      transparent
+    ),
+    linear-gradient(0deg, #ffffffe8, transparent 22%);
+}
+.plans-heading {
+  margin-bottom: 20px;
+}
+.plans-heading .eyebrow {
+  font-size: clamp(10px, 0.7vw, 14px);
+  margin-bottom: 15px;
+}
+.plans-heading h2 {
+  font-size: clamp(48px, 4.4vw, 94px);
+  line-height: 0.99;
+  letter-spacing: -0.045em;
+  color: #10191c;
+  margin-bottom: 12px;
+}
+.plans-heading p {
+  font-size: clamp(15px, 1vw, 22px);
+  line-height: 1.45;
+}
+.reference-packages .pricing-paths {
+  gap: 16px;
+  align-items: stretch;
+  position: relative;
+}
+.reference-packages .pricing-paths::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -115px -150px 90px -170px;
+  border-radius: 45% 58% 50% 35%;
+  background: linear-gradient(145deg, #becdb66b, #dce8d745 50%, transparent);
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+.reference-packages .pricing-path {
+  isolation: isolate;
+  overflow: hidden;
+  margin: 0;
+  padding: 42px 12.5% 27px;
+  border: 1.5px solid #ffffffee;
+  border-radius: 43% 57% 14% 20% / 15% 17% 12% 15%;
+  background: linear-gradient(135deg, #ffffffeb, #f7f7f0cc);
+  box-shadow: 0 20px 40px #445a3721;
+  min-height: 520px;
+  backdrop-filter: blur(17px);
+}
+.reference-packages .pricing-path:nth-child(3) {
+  border-radius: 57% 43% 20% 13% / 17% 15% 15% 12%;
+}
+.reference-packages .pricing-path:not(.featured) {
+  margin-top: -13px;
+  margin-bottom: 13px;
+}
+.reference-packages .pricing-path.featured {
+  padding-top: 58px;
+  border: 1.5px solid #ffffffed;
+  border-radius: 64px 64px 48px 48px;
+  background: linear-gradient(135deg, #f5fbf5c9, #d5e4d0d9);
+  box-shadow: 0 22px 42px #36532f28;
+}
+.reference-packages .pricing-path.featured::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  inset: 24% -10% -20% 48%;
+  padding: 0;
+  border-radius: 65% 0 0 0;
+  transform: rotate(17deg);
+  background: linear-gradient(135deg, #c2d3bba3, #b2c6a830);
+}
+.path-featured-badge {
+  top: 13px;
+  padding: 9px 18px;
+  font-size: clamp(10px, 0.7vw, 14px);
+  min-width: 60%;
+  justify-content: center;
+  background: linear-gradient(110deg, #409d7b, #005734);
+  border: 1px solid #ffffffc7;
+  box-shadow:
+    0 9px 20px #256b4138,
+    inset 0 1px 0 #ffffff75;
+}
+.path-featured-badge svg {
+  width: 17px;
+  height: 17px;
+}
+.reference-packages .path-top {
+  align-items: center;
+  margin-bottom: 9px;
+}
+.path-service-icon {
+  width: clamp(62px, 4.2vw, 92px);
+  height: clamp(62px, 4.2vw, 92px);
+  border-radius: 50%;
+  background: linear-gradient(130deg, #eaf2e4, #dcead6);
+}
+.path-service-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.7;
+}
+.featured .path-service-icon {
+  background: linear-gradient(130deg, #dff2e8, #cbe8d4);
+}
+.reference-packages .path-top > span:last-child {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: clamp(26px, 1.7vw, 38px);
+  color: #a4afa0;
+}
+.reference-packages .path-top > span:last-child::before {
+  content: "";
+  width: clamp(25px, 2.6vw, 52px);
+  height: 1px;
+  background: #c1cdbd;
+}
+.reference-packages .pricing-path > .mini-label {
+  font-size: clamp(10px, 0.7vw, 14px);
+  letter-spacing: 2.4px;
+  margin: 0 0 7px;
+  color: #075438;
+}
+.reference-packages .pricing-path h3 {
+  font-size: clamp(35px, 2.4vw, 57px);
+  line-height: 0.97;
+  min-height: 0;
+  max-width: none;
+  margin: 0 0 16px;
+  letter-spacing: -0.045em;
+  color: #101b21;
+}
+.reference-packages .pricing-path > p {
+  font-size: clamp(14px, 1.02vw, 22px);
+  line-height: 1.4;
+  min-height: 2.8em;
+  margin: 0 0 16px;
+  color: #66717b;
+}
+.reference-packages .pricing-path ul {
+  padding-top: 17px;
+  margin: 0 0 26px;
+  gap: 10px;
+  border-color: #d6dfd2;
+  font-size: clamp(12px, 0.88vw, 19px);
+}
+.reference-packages .pricing-path li {
+  gap: 12px;
+  white-space: normal;
+}
+.reference-packages .pricing-path li svg {
+  width: clamp(28px, 1.9vw, 40px);
+  height: clamp(28px, 1.9vw, 40px);
+  background: linear-gradient(135deg, #e1ecda, #c0dcc0);
+  color: #143b29;
+}
+.reference-packages .pricing-path > .button {
+  position: relative;
+  z-index: 2;
+  min-height: clamp(44px, 3vw, 62px);
+  font-size: clamp(12px, 0.9vw, 20px);
+  background: linear-gradient(120deg, #248d67, #005438);
+  box-shadow: 0 9px 20px #26724f30;
+  border: 1px solid #ffffffa6;
+}
+.reference-packages .pricing-path > .button.secondary {
+  color: #18282b;
+  background: #ffffffa8;
+  border-color: #446d61;
+  box-shadow: none;
+}
+.path-corner-art {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  bottom: -4px;
+  width: 52%;
+  height: 43%;
+  opacity: 0.78;
+  background-image: url("/images/cleaning-plans-room.png");
+  background-size: auto 140%;
+  background-repeat: no-repeat;
+  mask-image: linear-gradient(0deg, black, transparent 98%);
+}
+.pricing-path:first-child .path-corner-art {
+  left: 0;
+  border-radius: 0 75% 0 0;
+  background-position: left bottom;
+  mask-image: radial-gradient(
+    ellipse at 0% 100%,
+    black 10%,
+    #0009 48%,
+    transparent 78%
+  );
+}
+.pricing-path.featured .path-corner-art {
+  right: 0;
+  width: 39%;
+  height: 54%;
+  background-position: right bottom;
+  border-radius: 90% 0 0 0;
+  mask-image: radial-gradient(
+    ellipse at 100% 100%,
+    black 10%,
+    #0009 48%,
+    transparent 78%
+  );
+  opacity: 0.6;
+}
+.pricing-path:last-child .path-corner-art {
+  right: 0;
+  width: 38%;
+  background-position: right bottom;
+  mask-image: radial-gradient(
+    ellipse at 100% 100%,
+    black 10%,
+    #0009 48%,
+    transparent 78%
+  );
+  opacity: 0.5;
+}
+.plans-reassurance {
+  margin-top: 30px;
+  padding: 0 6%;
+  gap: 30px;
+}
+.plans-reassurance > div {
+  font-size: clamp(12px, 0.94vw, 20px);
+}
+.plans-reassurance svg {
+  width: clamp(48px, 3.7vw, 77px);
+  height: clamp(48px, 3.7vw, 77px);
+  padding: 13px;
+  background: linear-gradient(135deg, #e9f0e2, #d0e6d0);
+}
+.plans-reassurance small {
+  font-size: clamp(11px, 0.8vw, 17px);
+}
+@media (min-width: 1800px) {
+  .reference-packages {
+    padding-top: 54px;
+  }
+  .reference-packages .pricing-path {
+    min-height: 680px;
+    padding-bottom: 38px;
+  }
+  .reference-packages .pricing-path.featured {
+    padding-top: 73px;
+  }
+  .plans-heading {
+    margin-bottom: 37px;
+  }
+  .reference-packages .pricing-paths {
+    gap: 21px;
+  }
+}
+@media (max-width: 1100px) {
+  .reference-packages > .container {
+    width: calc(100% - 70px);
+  }
+  .reference-packages .pricing-path {
+    padding: 42px 24px 28px;
+  }
+  .reference-packages .pricing-path.featured {
+    padding-top: 58px;
+  }
+  .reference-packages .pricing-path h3 {
+    font-size: 34px;
+  }
+  .reference-packages .pricing-path > p {
+    font-size: 13px;
+    min-height: 4.2em;
+  }
+  .plans-reassurance {
+    padding: 0;
+    gap: 18px;
+  }
+}
+@media (max-width: 800px) {
+  .reference-packages > .container {
+    width: calc(100% - 48px);
+  }
+  .reference-packages .pricing-paths {
+    gap: 25px;
+  }
+  .reference-packages .pricing-path {
+    min-height: 0;
+    padding: 44px 34px 30px;
+  }
+  .reference-packages .pricing-path.featured {
+    padding-top: 61px;
+  }
+  .reference-packages .pricing-path h3 {
+    font-size: 40px;
+  }
+  .reference-packages .pricing-path > p {
+    min-height: 0;
+    font-size: 15px;
+  }
+  .reference-packages .pricing-path ul {
+    font-size: 13px;
+  }
+  .path-service-icon {
+    width: 67px;
+    height: 67px;
+  }
+  .plans-heading h2 {
+    font-size: 49px;
+  }
+  .plans-reassurance {
+    padding: 0 10px;
+  }
+}
+@media (max-width: 500px) {
+  .reference-packages {
+    padding-top: 40px;
+  }
+  .reference-packages > .container {
+    width: calc(100% - 40px);
+  }
+  .plans-heading h2 {
+    font-size: clamp(34px, 9.8vw, 45px);
+  }
+  .plans-heading .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+  }
+  .plans-heading p {
+    font-size: 13px;
+  }
+  .reference-packages .pricing-path {
+    padding-inline: 29px;
+    border-radius: 42% 58% 13% 18% / 11% 14% 10% 12%;
+  }
+  .reference-packages .pricing-path h3 {
+    font-size: 38px;
+  }
+  .reference-packages .pricing-path.featured {
+    border-radius: 48px 48px 35px 35px;
+  }
+  .reference-packages .pricing-path > .button {
+    font-size: 12px;
+  }
+  .path-featured-badge {
+    font-size: 9px;
+  }
+}

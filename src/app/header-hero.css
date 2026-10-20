@@ -1,0 +1,612 @@
+/* A crisp navigation bar and a natural-flow hero at every screen size. */
+.site-header,
+.site-header--home,
+.site-header.is-scrolled,
+.site-header--home.is-scrolled {
+  position: sticky;
+  inset: 0 0 auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid #e3eae4;
+  box-shadow: 0 4px 22px #173d2910;
+  backdrop-filter: none;
+  transition: none;
+}
+.site-header .header-inner,
+.site-header--home .header-inner,
+.site-header.is-scrolled .header-inner,
+.site-header--home.is-scrolled .header-inner {
+  width: min(1360px, calc(100% - 2 * var(--page-gutter)));
+  max-width: 1360px;
+  height: 82px;
+  padding: 0;
+  gap: 26px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.site-header .logo,
+.site-header--home .logo {
+  color: #183d30;
+  font-size: 29px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.site-header .logo-sub {
+  color: #536a5d;
+  font-size: 7px;
+  letter-spacing: 0.3em;
+  margin-top: 7px;
+}
+.site-header .logo-mark {
+  color: #189b63;
+  width: 36px;
+  height: 38px;
+}
+.site-header .logo-mark svg {
+  width: 38px;
+  height: 38px;
+}
+.site-header .desktop-nav {
+  display: flex;
+  gap: clamp(16px, 1.55vw, 25px);
+  color: #304039;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.site-header .desktop-nav > a,
+.site-header .desktop-nav summary {
+  color: #304039;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+  text-transform: none;
+  padding-block: 29px;
+}
+.site-header .desktop-nav .active,
+.site-header .desktop-nav > a:hover,
+.site-header .desktop-nav summary:hover {
+  color: #148351;
+}
+.site-header .desktop-nav > a:after {
+  bottom: 20px;
+  height: 2px;
+  background: #148351;
+}
+.site-header .header-actions {
+  display: flex;
+  gap: 18px;
+  flex-shrink: 0;
+}
+.site-header .header-actions .call-link {
+  display: none;
+}
+.site-header .quote-link {
+  color: #314d3f;
+  font-size: 12px;
+  font-weight: 650;
+}
+.site-header .header-actions .button {
+  min-height: 44px;
+  padding: 12px 22px;
+  font-size: 12px;
+  text-transform: none;
+  background: #137d50;
+  border: 1px solid #137d50;
+  box-shadow: none;
+}
+.site-header .header-actions .button:hover {
+  background: #0d633f;
+}
+.site-header .menu-toggle {
+  display: none;
+}
+.site-header .mega-panel,
+.site-header.is-scrolled .mega-panel {
+  top: 82px;
+  left: 0;
+  right: 0;
+  border: 1px solid #e0e9e1;
+  border-radius: 0 0 20px 20px;
+  background: #fff;
+  box-shadow: 0 24px 45px #15392b15;
+}
+.site-header .mobile-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: calc(100dvh - 68px);
+  overflow-y: auto;
+  margin: 0;
+  padding: 24px max(20px, calc((100vw - 800px) / 2));
+  background: #fff;
+  border-top: 1px solid #e3eae4;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 20px 35px #183a2920;
+}
+.site-header .mobile-nav nav a {
+  min-height: 46px;
+  padding-block: 10px;
+  font-size: 16px;
+}
+.site-header .mobile-nav nav a.button {
+  margin-top: 12px;
+  color: white;
+}
+.site-header .hamburger span {
+  background: #193d30;
+}
+.mobile-book {
+  display: none !important;
+}
+.back-top {
+  bottom: 22px;
+  right: 20px;
+}
+.thrive-hero {
+  position: relative;
+  background: #f6f8f3;
+  padding: 58px 0 52px;
+}
+.thrive-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  gap: clamp(36px, 5vw, 76px);
+  align-items: center;
+}
+.thrive-hero-copy,
+.thrive-hero-visual {
+  min-width: 0;
+}
+.thrive-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #37644a;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.19em;
+  line-height: 1.6;
+}
+.thrive-hero-kicker > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #299762;
+  flex-shrink: 0;
+}
+.thrive-hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(43px, 4.55vw, 70px);
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+  margin: 22px 0;
+  color: #172f29;
+}
+.thrive-hero h1 em {
+  color: #187c50;
+  font-style: normal;
+}
+.thrive-hero-copy p {
+  max-width: 510px;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+  color: #5c6d62;
+}
+.thrive-hero .actions {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 28px 0 25px;
+}
+.thrive-hero .button {
+  min-height: 50px;
+  padding: 13px 24px;
+  font-size: 13px;
+  background: #137d50;
+  border: 1px solid #137d50;
+  box-shadow: 0 8px 18px #157f5015;
+}
+.thrive-hero .button.secondary {
+  background: transparent;
+  color: #254b37;
+  border: 1px solid #b6cbbc;
+  box-shadow: none;
+}
+.thrive-hero .button:hover {
+  background: #0d633f;
+  color: white;
+}
+.thrive-hero-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+.thrive-hero-benefits > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #455c4c;
+}
+.thrive-hero-benefits svg {
+  color: #168453;
+  flex-shrink: 0;
+}
+.thrive-hero-footnote {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid #dce6d9;
+  color: #66786a;
+  font-size: 11px;
+  line-height: 1.6;
+  max-width: 510px;
+}
+.thrive-hero-footnote svg {
+  color: #528467;
+  flex-shrink: 0;
+}
+.thrive-hero-visual {
+  border-radius: 24px;
+  border: 1px solid #e1e8dd;
+  padding: 9px;
+  background: #fff;
+  box-shadow: 0 22px 45px #294c2910;
+}
+.thrive-hero-photo-wrap {
+  position: relative;
+}
+.thrive-hero .thrive-hero-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/2;
+  border-radius: 17px;
+  overflow: hidden;
+  background: #f2f4ed;
+}
+.thrive-hero .thrive-hero-photo img {
+  object-fit: contain !important;
+  object-position: center;
+  filter: none;
+}
+.thrive-photo-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 8px 7px;
+  color: #62755f;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+.thrive-hero-service {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 12px 13px;
+  border-top: 1px solid #e4eae0;
+  margin-top: 7px;
+}
+.thrive-service-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: #eaf4e9;
+  color: #22754d;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.thrive-hero-service strong {
+  display: block;
+  font-size: 13px;
+  color: #274332;
+}
+.thrive-hero-service small {
+  display: block;
+  font-size: 11px;
+  color: #748170;
+  margin-top: 2px;
+}
+.thrive-hero-service > a {
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid #d3e2d4;
+  border-radius: 50%;
+  color: #24613e;
+}
+.reference-lead {
+  margin-top: 0;
+  padding-top: 26px;
+  padding-bottom: 0;
+  position: relative;
+  z-index: auto;
+}
+.reference-lead .hero-enquiry {
+  backdrop-filter: none;
+  background: #fff;
+  box-shadow: 0 12px 35px #193c2d0a;
+  border: 1px solid #dfe8df;
+  border-radius: 18px;
+  padding: 24px 28px 18px;
+}
+.reference-lead .lead-form-heading {
+  gap: 20px;
+}
+.reference-lead .lead-form-heading > span {
+  background: #f4f8f1;
+}
+.reference-lead .lead-form-fields {
+  grid-template-columns: 1fr 1fr 1fr auto;
+}
+.reference-lead .lead-form-fields .button {
+  min-width: 190px;
+}
+.trust-strip {
+  padding-block: 30px;
+}
+/* Full photographs for people: avoid cutting off faces or work equipment. */
+.inner-site img[src*="thrive-australian"] {
+  object-fit: contain !important;
+  background: #f2f6f0;
+}
+.inner-site--detail .service-hero .photo {
+  height: auto;
+  aspect-ratio: 3/2;
+}
+@media (max-width: 1150px) {
+  .site-header .desktop-nav {
+    display: none;
+  }
+  .site-header .header-inner,
+  .site-header.is-scrolled .header-inner {
+    height: 72px;
+    gap: 18px;
+  }
+  .site-header .header-actions {
+    margin-left: auto;
+  }
+  .site-header .header-actions .quote-link {
+    display: none;
+  }
+  .site-header .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    margin: 0;
+    flex-shrink: 0;
+    border: 1px solid #dce7dc;
+    border-radius: 50%;
+    color: #193d30;
+    background: white;
+  }
+  .site-header .mega-panel {
+    top: 72px;
+  }
+  .thrive-hero {
+    padding: 42px 0;
+  }
+  .thrive-hero-grid {
+    gap: 32px;
+  }
+  .thrive-hero h1 {
+    font-size: 49px;
+  }
+  .thrive-hero-copy p {
+    font-size: 14px;
+  }
+  .reference-lead .lead-form-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+  .reference-lead .lead-form-fields .button {
+    grid-column: auto;
+    align-self: end;
+    width: 100%;
+  }
+}
+@media (max-width: 900px) {
+  .thrive-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .thrive-hero-copy {
+    max-width: 650px;
+  }
+  .thrive-hero h1 {
+    font-size: clamp(43px, 6vw, 58px);
+  }
+  .thrive-hero h1 br {
+    display: none;
+  }
+  .thrive-hero h1 em {
+    display: block;
+  }
+  .thrive-hero-copy p {
+    max-width: 550px;
+    font-size: 15px;
+  }
+  .thrive-hero-visual {
+    width: 100%;
+    max-width: 660px;
+    justify-self: center;
+  }
+  .thrive-hero-footnote {
+    max-width: 100%;
+  }
+  .reference-lead .lead-form-heading {
+    flex-direction: row;
+  }
+}
+@media (max-width: 600px) {
+  .site-header .header-inner,
+  .site-header--home .header-inner,
+  .site-header.is-scrolled .header-inner,
+  .site-header--home.is-scrolled .header-inner {
+    width: calc(100% - 32px);
+    height: 68px;
+    gap: 12px;
+  }
+  .site-header .logo,
+  .site-header--home .logo {
+    font-size: 25px;
+    gap: 4px;
+  }
+  .site-header .logo-mark {
+    width: 29px;
+    height: 32px;
+  }
+  .site-header .logo-mark svg {
+    width: 32px;
+    height: 32px;
+  }
+  .site-header .logo-sub {
+    font-size: 6px;
+    margin-top: 6px;
+  }
+  .site-header .header-actions .button {
+    min-height: 39px;
+    padding: 9px 14px;
+    font-size: 10px;
+  }
+  .site-header .header-actions .button svg {
+    display: none;
+  }
+  .site-header .menu-toggle {
+    width: 37px;
+    height: 37px;
+  }
+  .thrive-hero {
+    padding: 33px 0 26px;
+  }
+  .thrive-hero-grid {
+    gap: 26px;
+  }
+  .thrive-hero-kicker {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+  .thrive-hero h1 {
+    font-size: clamp(37px, 10.4vw, 53px);
+    margin: 17px 0 18px;
+    line-height: 1.07;
+  }
+  .thrive-hero-copy p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  .thrive-hero .actions {
+    margin: 23px 0 22px;
+    gap: 10px;
+  }
+  .thrive-hero .button {
+    min-height: 46px;
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+  .thrive-hero-benefits {
+    gap: 10px 18px;
+  }
+  .thrive-hero-benefits > span {
+    font-size: 10px;
+  }
+  .thrive-hero-footnote {
+    font-size: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .thrive-hero-visual {
+    border-radius: 19px;
+    padding: 7px;
+  }
+  .thrive-hero .thrive-hero-photo {
+    border-radius: 13px;
+  }
+  .thrive-hero-service {
+    padding: 13px 7px 9px;
+    gap: 9px;
+  }
+  .thrive-hero-service strong {
+    font-size: 12px;
+  }
+  .thrive-hero-service small {
+    font-size: 10px;
+  }
+  .thrive-service-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .reference-lead {
+    padding-top: 20px;
+  }
+  .reference-lead .hero-enquiry {
+    padding: 22px 18px 17px;
+    border-radius: 18px;
+  }
+  .reference-lead .lead-form-heading {
+    flex-direction: column;
+    gap: 13px;
+  }
+  .reference-lead .lead-form-heading > span {
+    width: 100%;
+    max-width: none;
+  }
+  .reference-lead .lead-form-fields {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+  .reference-lead .lead-form-heading h2 {
+    font-size: 24px;
+  }
+  .reference-lead .lead-form-fields .button {
+    width: 100%;
+  }
+  .reference-lead .lead-input-wrap input {
+    font-size: 16px;
+  }
+  .trust-strip {
+    padding-block: 25px;
+  }
+}
+@media (max-width: 359px) {
+  .site-header .header-inner {
+    gap: 8px;
+  }
+  .site-header .logo {
+    font-size: 23px;
+  }
+  .site-header .header-actions .button {
+    padding-inline: 11px;
+  }
+  .thrive-hero .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .thrive-hero .button {
+    width: 100%;
+    justify-content: center;
+  }
+  .thrive-hero-service strong {
+    font-size: 11px;
+  }
+}

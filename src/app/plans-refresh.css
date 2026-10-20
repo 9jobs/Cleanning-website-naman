@@ -1,0 +1,342 @@
+.reference-packages {
+  position: relative;
+  isolation: isolate;
+  padding: 44px 0 36px;
+  background: #f2f7f3;
+  overflow: hidden;
+}
+.reference-packages::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background: url("/images/cleaning-plans-room.png") center / cover no-repeat;
+}
+.reference-packages::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    #ffffffa3,
+    #f7fbf65c 55%,
+    #ffffff24
+  );
+}
+.reference-packages > .container {
+  width: min(1180px, calc(100% - 80px));
+}
+.plans-heading {
+  text-align: center;
+  margin: 0 auto 44px;
+}
+.plans-heading .eyebrow {
+  color: #414c48;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  margin-bottom: 18px;
+  display: inline-flex;
+  gap: 18px;
+}
+.plans-heading .eyebrow::before,
+.plans-heading .eyebrow::after {
+  content: "";
+  width: 29px;
+  height: 1px;
+  background: #8bb7a1;
+}
+.plans-heading h2 {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: clamp(45px, 4.4vw, 69px);
+  font-weight: 700;
+  letter-spacing: -2.5px;
+  line-height: 1.04;
+  color: #14222b;
+  margin: 0 0 17px;
+}
+.plans-heading h2 span {
+  color: #145e40;
+}
+.plans-heading p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #66706e;
+  margin: 0;
+}
+.reference-packages .pricing-paths {
+  gap: 17px;
+}
+.reference-packages .pricing-path {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  margin: 0;
+  padding: 25px 30px 20px;
+  background: linear-gradient(130deg, #ffffffed, #ffffffdf);
+  border: 1px solid #dbe3e2;
+  border-radius: 16px;
+  box-shadow: 0 16px 34px #273f3410;
+  backdrop-filter: blur(15px);
+}
+.reference-packages .pricing-path.featured {
+  padding-top: 25px;
+  border: 1.5px solid #118351;
+  background: linear-gradient(130deg, #fffffff5, #fafffbe6);
+  box-shadow: 0 15px 36px #15744820;
+}
+.reference-packages .pricing-path.featured::before {
+  content: none;
+}
+.path-featured-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 15px;
+  white-space: nowrap;
+  background: linear-gradient(110deg, #0c9665, #10814c);
+  box-shadow: 0 6px 15px #1a8a5c20;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 30px;
+}
+.reference-packages .path-top {
+  margin-bottom: 14px;
+  gap: 15px;
+  align-items: flex-start;
+}
+.path-service-icon {
+  display: grid;
+  place-items: center;
+  width: 53px;
+  height: 53px;
+  border-radius: 12px;
+  color: #084b32;
+  background: linear-gradient(135deg, #e4f3eb, #dfeee8);
+}
+.reference-packages .path-top > span:last-child {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: 33px;
+  color: #cbd4d5;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.reference-packages .pricing-path > .mini-label {
+  color: #3b8060;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin: 0 0 7px;
+  font-weight: 650;
+}
+.reference-packages .pricing-path h3 {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: 35px;
+  line-height: 1.02;
+  font-weight: 400;
+  letter-spacing: -1.3px;
+  color: #14222b;
+  max-width: 210px;
+  min-height: 72px;
+  margin: 0 0 12px;
+}
+.reference-packages .pricing-path > p {
+  min-height: 45px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 19px;
+  color: #68768a;
+}
+.reference-packages .pricing-path ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  list-style: none;
+  border-top: 1px solid #dae2e4;
+  padding: 19px 0 0;
+  margin: 0 0 23px;
+  gap: 10px;
+  font-size: 12px;
+  color: #435267;
+}
+.reference-packages .pricing-path li {
+  align-items: center;
+  gap: 12px;
+  line-height: 1.4;
+}
+.reference-packages .pricing-path li svg {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  padding: 6px;
+  flex-shrink: 0;
+  margin: 0;
+  color: #075137;
+  background: #e6f3ed;
+  stroke-width: 2.5;
+}
+.reference-packages .pricing-path > .button {
+  margin-top: auto;
+  min-height: 44px;
+  width: 100%;
+  padding: 0 12px;
+  font-size: 12px;
+  gap: 12px;
+  background: linear-gradient(110deg, #0c9863, #005239);
+  border: 1px solid #087b4e;
+  box-shadow: 0 7px 20px #17854f18;
+}
+.reference-packages .pricing-path > .button.secondary {
+  color: #1c2933;
+  border: 1px solid #7e8886;
+  background: #ffffff70;
+  box-shadow: none;
+}
+.reference-packages .pricing-path .caption {
+  font-size: 10px;
+  margin: 10px 0 0;
+  line-height: 1.4;
+  color: #718095;
+}
+.plans-reassurance {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 30px auto 0;
+  padding: 0 40px;
+}
+.plans-reassurance > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #25352e;
+  font-size: 12px;
+}
+.plans-reassurance > div + div {
+  border-left: 1px solid #d8e4de;
+  padding-left: 34px;
+}
+.plans-reassurance svg {
+  width: 45px;
+  height: 45px;
+  padding: 11px;
+  flex-shrink: 0;
+  color: #104d32;
+  background: #e4f1e9;
+  border-radius: 50%;
+}
+.plans-reassurance small {
+  display: block;
+  font-size: 10px;
+  color: #75818a;
+  margin-top: 5px;
+}
+@media (max-width: 1100px) {
+  .reference-packages > .container {
+    width: calc(100% - 56px);
+  }
+  .reference-packages .pricing-path {
+    padding: 25px 22px 20px;
+  }
+  .reference-packages .pricing-path h3 {
+    font-size: 31px;
+    min-height: 65px;
+  }
+  .reference-packages .pricing-path > p {
+    min-height: 63px;
+    font-size: 13px;
+  }
+  .plans-reassurance {
+    padding: 0;
+    gap: 20px;
+  }
+  .plans-reassurance > div + div {
+    padding-left: 20px;
+  }
+}
+@media (max-width: 800px) {
+  .reference-packages {
+    padding: 55px 0 35px;
+  }
+  .reference-packages .pricing-paths {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: auto;
+    gap: 29px;
+  }
+  .reference-packages .pricing-path {
+    padding: 26px;
+  }
+  .reference-packages .pricing-path h3 {
+    min-height: 0;
+    max-width: none;
+    font-size: 35px;
+  }
+  .reference-packages .pricing-path > p {
+    min-height: 0;
+  }
+  .reference-packages .pricing-path ul {
+    gap: 12px;
+  }
+  .plans-reassurance {
+    max-width: 520px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .plans-reassurance > div + div {
+    border-left: 0;
+    border-top: 1px solid #dae5de;
+    padding: 14px 0 0;
+  }
+  .plans-heading h2 {
+    font-size: 49px;
+  }
+  .plans-heading p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 500px) {
+  .reference-packages > .container {
+    width: calc(100% - 40px);
+  }
+  .plans-heading .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    gap: 10px;
+  }
+  .plans-heading .eyebrow::before,
+  .plans-heading .eyebrow::after {
+    width: 18px;
+  }
+  .plans-heading h2 {
+    font-size: clamp(33px, 9.4vw, 43px);
+    letter-spacing: -1.5px;
+  }
+  .plans-heading p {
+    font-size: 13px;
+  }
+  .plans-heading p br {
+    display: none;
+  }
+  .plans-heading {
+    margin-bottom: 35px;
+  }
+  .reference-packages .pricing-path {
+    padding: 24px;
+  }
+  .reference-packages .pricing-path h3 {
+    font-size: 33px;
+  }
+  .reference-packages .pricing-path .caption {
+    font-size: 9px;
+  }
+  .path-featured-badge {
+    font-size: 8px;
+    padding: 8px 13px;
+  }
+}
