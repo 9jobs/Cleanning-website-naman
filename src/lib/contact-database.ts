@@ -44,6 +44,11 @@ export class ContactRequestError extends Error {
   }
 }
 
+// Share the existing server-only TLS connection pool with the homepage form.
+export function contactDatabase() {
+  return database();
+}
+
 // Save and commit the enquiry BEFORE sending email. The lock, unique ID and lease
 // also work across separate Vercel function instances, not just one Node process.
 export async function saveContactEnquiry(

@@ -544,6 +544,27 @@
   .contact-quote-card {
     border-radius: 20px 20px 0 0;
   }
+  .contact-quote-page .contact-field :is(input, select),
+  .contact-counter input,
+  .contact-quote-extra textarea {
+    font-size: 16px;
+  }
+  .contact-quote-page .contact-field :is(input, select),
+  .contact-counter input,
+  .contact-counter button {
+    height: 44px;
+    min-height: 44px;
+  }
+  .contact-counter button {
+    flex-basis: 44px;
+  }
+  .contact-quote-extra textarea {
+    height: 80px;
+    min-height: 80px;
+  }
+  .contact-quote-submit {
+    min-height: 44px;
+  }
 }
 @media (max-width: 600px) {
   .contact-quote-card {
@@ -616,6 +637,12 @@
   }
   .contact-direct-email {
     font-size: 11px;
+  }
+}
+@media (max-width: 374px) {
+  /* Leave room for the value between the two touch-sized counter buttons. */
+  .contact-details-grid:not(.is-commercial) {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (prefers-reduced-motion: reduce) {

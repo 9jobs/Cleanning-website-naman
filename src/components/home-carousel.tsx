@@ -1,148 +1,154 @@
 "use client";
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
-import Link from "next/link";
-import { Button, Photo } from "./ui";
 
-const motionQuery = "(prefers-reduced-motion: reduce)";
-function subscribeMotion(listener: () => void) {
-  const media = window.matchMedia(motionQuery);
-  media.addEventListener("change", listener);
-  return () => media.removeEventListener("change", listener);
+import {
+  useEffect,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+} from "react";
+import { ArrowRight, Check } from "lucide-react";
+import Image from "next/image";
+import { Button } from "./ui";
+import { heroSlides } from "./hero-slides";
+import styles from "./home-carousel.module.css";
+
+const SLIDE_DURATION = 6500;
+function subscribeVisibility(listener: () => void) {
+  document.addEventListener("visibilitychange", listener);
+  return () => document.removeEventListener("visibilitychange", listener);
 }
-const readMotion = () => window.matchMedia(motionQuery).matches;
-const serverMotion = () => false;
+const readVisibility = () => document.hidden;
+const serverVisibility = () => false;
 
-const slides = [
-  {
-    image: "/images/thrive-banner-home.png",
-    alt: "Male cleaner carefully wiping a kitchen island",
-    label: "A fresher home, on your terms.",
-    detail: "Regular and one-off home cleaning",
-    href: "/services/regular-house-cleaning",
-  },
-  {
-    image: "/images/service-office.png",
-    alt: "Freshly cleaned light-filled office with tidy workstations",
-    label: "A better start to the working day.",
-    detail: "Commercial and workplace cleaning",
-    href: "/services/commercial-cleaning",
-  },
-  {
-    image: "/images/service-airbnb.png",
-    alt: "Freshly cleaned guest bedroom with neatly folded towels",
-    label: "Ready for your next arrival.",
-    detail: "Short-stay and changeover cleaning",
-    href: "/services/airbnb-cleaning",
-  },
-];
 export function HomeHero() {
-  const [active, setActive] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
   const [paused, setPaused] = useState(false);
-  const reducedMotion = useSyncExternalStore(
-    subscribeMotion,
-    readMotion,
-    serverMotion,
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const hidden = useSyncExternalStore(
+    subscribeVisibility,
+    readVisibility,
+    serverVisibility,
   );
-  const [manualPlay, setManualPlay] = useState(false);
-  const autoplay = !paused && (!reducedMotion || manualPlay);
+  const autoplay = !paused && !hovered && !focused && !hidden;
+  const slide = heroSlides[activeSlide];
+
   useEffect(() => {
     if (!autoplay) return;
-    const timer = window.setInterval(() => {
-      if (!document.hidden) setActive((index) => (index + 1) % slides.length);
-    }, 6000);
-    return () => window.clearInterval(timer);
-  }, [autoplay]);
+    // A single timeout restarts after interaction; no stacked timers.
+    const timer = window.setTimeout(() => {
+      setActiveSlide((index) => (index + 1) % heroSlides.length);
+    }, SLIDE_DURATION);
+    return () => window.clearTimeout(timer);
+  }, [activeSlide, autoplay]);
+
   return (
     <section
-      className="carousel-hero"
+      className={`carousel-hero ${styles.hero}`}
       aria-labelledby="home-title"
       aria-roledescription="carousel"
+      data-active-service={slide.id}
+      onPointerEnter={(event) => {
+        if (
+          event.pointerType === "mouse" &&
+          window.matchMedia("(hover: hover)").matches
+        )
+          setHovered(true);
+      }}
+      onPointerLeave={() => setHovered(false)}
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget))
+          setFocused(false);
+      }}
     >
       <div className="carousel-media">
-        {slides.map((slide, index) => (
+        {heroSlides.map((item, index) => (
           <div
-            key={slide.image}
-            className={`carousel-photo${active === index ? " is-active" : ""}`}
-            aria-hidden={active !== index}
+            key={item.id}
+            className={`carousel-photo ${styles.imageLayer}${activeSlide === index ? " is-active" : ""}`}
+            aria-hidden={activeSlide !== index}
+            data-active={activeSlide === index}
+            style={
+              {
+                "--hero-position": item.position,
+                "--hero-tablet-position": item.tabletPosition,
+                "--hero-mobile-position": item.mobilePosition,
+              } as CSSProperties
+            }
           >
-            <Photo
-              src={slide.image}
-              alt={slide.alt}
-              sizes="100vw"
-              priority={index === 0}
-              unoptimized
-            />
+            <div className="photo">
+              <Image
+                src={item.image}
+                alt={item.alt}
+                fill
+                sizes="100vw"
+                preload={index === 0}
+                loading={index === 0 ? undefined : "lazy"}
+                unoptimized
+              />
+            </div>
           </div>
         ))}
       </div>
       <div className="carousel-wash" aria-hidden="true" />
       <div className="container carousel-content">
-        <span className="carousel-eyebrow">
-          <span />
-          CLEAN SPACES. ROOM TO THRIVE.
-        </span>
-        <h1 id="home-title">
-          A cleaner home.
-          <br />
-          <span>More time for you.</span>
-        </h1>
-        <p>
-          Professional home and workplace cleaning, with care in every detail.
-          Find a cleaning plan that fits your space and your routine.
-        </p>
-        <div className="actions">
-          <Button href="/book">Book a Clean</Button>
-          <Button href="/pricing" secondary>
-            See our pricing
-          </Button>
-        </div>
-        <div className="carousel-benefits">
-          <span>
-            <Check size={17} />
-            Personalised cleaning plans
-          </span>
-          <span>
-            <Check size={17} />
-            Flexible appointments
-          </span>
-          <span>
-            <Check size={17} />
-            Simple online requests
-          </span>
-        </div>
-        <button
-          type="button"
-          className="carousel-accessible-toggle"
-          onClick={() => {
-            if (!autoplay) {
-              setPaused(false);
-              setManualPlay(true);
-            } else setPaused(true);
-          }}
+        <h1
+          key={`title-${slide.id}`}
+          id="home-title"
+          className={`${styles.title} ${styles.reveal}`}
         >
-          {autoplay ? "Pause banner autoplay" : "Start banner autoplay"}
-        </button>
+          {slide.titleLine1}
+          <br />
+          <span>{slide.titleLine2}</span>
+        </h1>
+        <p
+          key={`description-${slide.id}`}
+          className={`${styles.description} ${styles.reveal}`}
+        >
+          {slide.description}
+        </p>
+        <div
+          key={`actions-${slide.id}`}
+          className={`actions ${styles.actions} ${styles.reveal}`}
+        >
+          <Button href={slide.primaryHref} className={styles.primary}>
+            {slide.primaryCta}
+          </Button>
+          <a
+            href={slide.secondaryHref}
+            className="button secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${slide.secondaryCta} on WhatsApp`}
+          >
+            {slide.secondaryCta}
+            <ArrowRight size={17} />
+          </a>
+        </div>
+        <div className={`carousel-benefits ${styles.benefits}`}>
+          {slide.trustItems.map((item, index) => (
+            <span
+              key={`${slide.id}-${item}`}
+              className={styles.reveal}
+              style={
+                { "--hero-delay": `${300 + index * 70}ms` } as CSSProperties
+              }
+            >
+              <Check size={17} aria-hidden="true" />
+              {item}
+            </span>
+          ))}
+        </div>
       </div>
-      <div className="container carousel-caption-wrap">
-        <Link href={slides[active].href} className="carousel-caption">
-          <span className="carousel-caption-icon">
-            <Sparkles size={22} />
-          </span>
-          <span>
-            <strong>{slides[active].label}</strong>
-            <small>{slides[active].detail}</small>
-          </span>
-          <ArrowRight size={20} />
-        </Link>
-      </div>
-      <span
-        className="sr-only"
-        role="status"
-        aria-live={autoplay ? "off" : "polite"}
+      <button
+        type="button"
+        className={styles.pauseControl}
+        aria-pressed={paused}
+        onClick={() => setPaused((value) => !value)}
       >
-        Banner {active + 1} of {slides.length}: {slides[active].detail}
-      </span>
+        {paused ? "Start banner autoplay" : "Pause banner autoplay"}
+      </button>
     </section>
   );
 }

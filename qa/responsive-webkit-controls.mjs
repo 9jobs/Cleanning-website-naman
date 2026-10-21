@@ -1,0 +1,64 @@
+import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+import { webkit, expect } from "@playwright/test";
+
+const browser = await webkit.launch({ headless: true });
+const errors = [];
+const checks = [];
+let mockedSubmissions = 0;
+for (const [width, height] of [[320,568],[390,664],[430,740],[768,1024],[834,1194],[844,390],[1024,768]]) {
+  const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, reducedMotion: "reduce" });
+  const page = await context.newPage();
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.route("**/api/**", (route) => route.request().method() === "POST" ? route.abort() : route.continue());
+  await page.route("**/api/contact", async (route) => {
+    mockedSubmissions++;
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ reference: "12345678-1234-4234-8234-123456789abc" }) });
+  });
+  const fits = async (locator) => {
+    const r = await locator.boundingBox();
+    assert(r && r.x >= -1 && r.y >= -1 && r.x + r.width <= width + 1 && r.y + r.height <= height + 1, JSON.stringify({ width, height, box:r }));
+  };
+  await page.goto("http://localhost:4317/contact");
+  await page.getByRole("button", { name: "Open navigation", exact: true }).tap();
+  await page.waitForTimeout(250);
+  await fits(page.locator("#mobile-nav"));
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "More bedrooms", exact: true }).tap();
+  await expect(page.locator("#contact-bedrooms")).toHaveValue("3");
+  await page.locator("#contact-date").tap();
+  const calendar = page.getByRole("dialog", { name: "Choose your preferred cleaning date" });
+  await fits(calendar);
+  await calendar.getByRole("button", { name: "Next month" }).tap();
+  await calendar.locator("td button:not(:disabled)").first().tap();
+  await expect(calendar).toHaveCount(0);
+  await page.locator("#contact-name").fill("Local WebKit Layout Check");
+  await page.locator("#contact-email").fill("webkit@example.com");
+  await page.locator("#contact-phone").fill("+61 422 279 428");
+  await page.locator("#contact-service").selectOption("house-cleaning");
+  await page.locator("#contact-property").selectOption("House");
+  await page.locator("#contact-location").fill("Rosanna VIC 3084");
+  await page.getByLabel("I agree to be contacted").check();
+  await page.getByRole("button", { name: "Get My Free Quote", exact: true }).tap();
+  const confirmation = page.getByRole("dialog", { name: "Thank you. We’ve received your enquiry." });
+  await expect(confirmation).toBeVisible();
+  await fits(confirmation);
+  await confirmation.getByRole("link", { name: "Back to Home" }).tap();
+  await expect(page).toHaveURL("http://localhost:4317/");
+  await expect(page.locator("#home-title")).toBeVisible();
+  const slider = page.getByRole("slider", { name: "Compare before and after cleaning images" });
+  await slider.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(180);
+  const box = await slider.boundingBox();
+  await page.touchscreen.tap(box.x + box.width * 0.8, box.y + box.height / 2);
+  assert(Number(await slider.inputValue()) > 65, `WebKit touch slider ${width}`);
+  await page.getByRole("group", { name: "Comparison cleaning area" }).getByRole("button", { name: "Garden", exact: true }).tap();
+  await expect(slider).toHaveValue("50");
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  checks.push({ width, height, menu: true, counters: true, calendar: true, interceptedModal: true, backToHome: true, touchSlider: true });
+  await context.close();
+}
+assert.deepEqual(errors, []);
+await browser.close();
+await fs.writeFile("qa/responsive-webkit-controls-results.json", JSON.stringify({ checks, errors, mockedSubmissions, liveSubmissions: 0 }, null, 2));
+console.log(JSON.stringify({ webkitControlViewports: checks.length, mockedSubmissions, liveSubmissions: 0, errors }));

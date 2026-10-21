@@ -8,15 +8,42 @@ import {
   Crown,
   House,
   KeyRound,
+  Building2,
+  BedDouble,
+  Layers,
   Leaf,
   Sparkles,
   UsersRound,
 } from "lucide-react";
+import { services } from "@/lib/data";
 
-const plans = [
+type PricingPlan = {
+  slug: string;
+  title: string;
+  icon: typeof House;
+  description: string;
+  price: number;
+  features: string[];
+  featured?: boolean;
+  oneOff?: boolean;
+};
+
+function servicePlan(slug: string, icon: typeof House): PricingPlan {
+  const service = services.find((item) => item.slug === slug)!;
+  return {
+    slug,
+    title: service.name,
+    icon,
+    description: service.summary,
+    price: 60,
+    features: service.includes,
+  };
+}
+
+const residentialPlans: PricingPlan[] = [
   {
-    slug: "regular-house-cleaning",
-    title: "Regular House Cleaning",
+    slug: "house-cleaning",
+    title: "House Cleaning",
     icon: House,
     description:
       "Keep your home clean, fresh and comfortable with ongoing care.",
@@ -30,10 +57,10 @@ const plans = [
     ],
   },
   {
-    slug: "deep-cleaning",
+    slug: "property-cleaning",
     title: "Deep Cleaning",
     icon: Sparkles,
-    description: "A more detailed clean for a fresher, healthier home.",
+    description: "A detailed clean for built-up dirt and grime in your home.",
     price: 60,
     features: [
       "Detailed kitchen & bathroom clean",
@@ -43,38 +70,33 @@ const plans = [
       "Ideal for seasonal or one-off cleans",
     ],
     featured: true,
+    oneOff: true,
   },
   {
-    slug: "end-of-lease-cleaning",
-    title: "End of Lease Cleaning",
-    icon: KeyRound,
-    description:
-      "A thorough move-out clean to prepare your property for its next chapter.",
+    slug: "house-cleaning",
+    title: "One-Off Cleaning",
+    icon: House,
+    description: "A single-visit House Cleaning request for priority rooms.",
     price: 60,
     features: [
-      "Property-specific cleaning checklist",
-      "Kitchen, bathrooms & laundry",
-      "Vacuuming, mopping & surface care",
-      "Empty cupboards & wardrobes",
-      "Carpet and oven extras by arrangement",
+      "Choose your priority rooms",
+      "Kitchen & bathroom refresh",
+      "Dusting and surface cleaning",
+      "Vacuuming & mopping",
+      "No recurring commitment",
     ],
+    oneOff: true,
   },
+  servicePlan("property-cleaning", KeyRound),
+  servicePlan("garden-cleaning", Leaf),
+  servicePlan("carpet-cleaning", Layers),
 ];
-const refreshPlan = {
-  slug: "one-off-cleaning",
-  title: "One-off Cleaning",
-  icon: House,
-  description:
-    "A flexible refresh when your home needs a little extra attention.",
-  price: 60,
-  features: [
-    "Choose your priority rooms",
-    "Kitchen & bathroom refresh",
-    "Dusting and surface cleaning",
-    "Vacuuming & mopping",
-    "No recurring commitment",
-  ],
-};
+const commercialPlans: PricingPlan[] = [
+  servicePlan("commercial-cleaning", Building2),
+  servicePlan("office-cleaning", Building2),
+  servicePlan("construction-cleaning", Layers),
+  servicePlan("airbnb-cleaning", BedDouble),
+];
 
 export function PricingPlans({
   initial = {},
@@ -82,16 +104,16 @@ export function PricingPlans({
   initial?: Record<string, string>;
 }) {
   const [category, setCategory] = useState(
-    initial.service === "deep-cleaning" ||
-      initial.service === "one-off-cleaning"
-      ? "deep"
+    commercialPlans.some((plan) => plan.slug === initial.service)
+      ? "commercial"
       : "residential",
   );
-  const visiblePlans = category === "deep" ? [plans[1], refreshPlan] : plans;
-  function destination(path: string, slug: string) {
+  const visiblePlans =
+    category === "commercial" ? commercialPlans : residentialPlans;
+  function destination(path: string, slug: string, oneOff = false) {
     const query = new URLSearchParams(initial);
     query.set("service", slug);
-    if (slug !== "regular-house-cleaning") query.set("frequency", "One-off");
+    if (oneOff || slug !== "house-cleaning") query.set("frequency", "One-off");
     return `${path}?${query.toString()}`;
   }
   return (
@@ -105,7 +127,7 @@ export function PricingPlans({
               <br className="pricing-title-break" /> that fits your needs.
             </h1>
             <p>
-              Flexible cleaning options for homes, rentals and workplaces.
+              Cleaning plans for homes, rentals and workplaces.
               <br className="pricing-title-break" /> Select a plan or get a
               personalised quote based on your space.
             </p>
@@ -125,16 +147,16 @@ export function PricingPlans({
             </button>
             <button
               type="button"
-              aria-pressed={category === "deep"}
-              onClick={() => setCategory("deep")}
+              aria-pressed={category === "commercial"}
+              onClick={() => setCategory("commercial")}
             >
               <Sparkles size={23} />
-              Deep Cleaning
+              Commercial
             </button>
           </div>
         </div>
         <div
-          className={`pricing-plan-grid${category === "deep" ? " pricing-plan-grid--two" : ""}`}
+          className={`pricing-plan-grid${visiblePlans.length === 2 ? " pricing-plan-grid--two" : ""}`}
         >
           {visiblePlans.map((plan) => {
             const Icon = plan.icon;
@@ -142,7 +164,7 @@ export function PricingPlans({
             return (
               <article
                 className={`pricing-plan-card${featured ? " pricing-plan-card--featured" : ""}`}
-                key={plan.slug}
+                key={plan.title}
               >
                 <div className="pricing-plan-top">
                   <span className="pricing-plan-icon">
@@ -170,11 +192,8 @@ export function PricingPlans({
                   ))}
                 </ul>
                 <div className="pricing-plan-actions">
-                  <Link href={destination("/book", plan.slug)}>
-                    Book This Plan <ArrowRight size={19} />
-                  </Link>
-                  <Link href={destination("/quote", plan.slug)}>
-                    Get a Quote <ArrowRight size={19} />
+                  <Link href={destination("/book", plan.slug, plan.oneOff)}>
+                    Pay Now <ArrowRight size={19} />
                   </Link>
                 </div>
               </article>
@@ -196,7 +215,7 @@ export function PricingPlans({
             {
               icon: UsersRound,
               title: "Professional cleaning",
-              detail: "Thoughtful care for your home or workplace.",
+              detail: "Thoughtful care for your property and requirements.",
             },
           ].map((item) => (
             <div key={item.title}>
@@ -213,7 +232,7 @@ export function PricingPlans({
         <p className="pricing-plan-note">
           Every space is different. Your final quote depends on property size,
           condition and any selected extras.{" "}
-          <Link href="/quote?service=commercial-cleaning">
+          <Link href="/contact?service=commercial-cleaning">
             Need a workplace cleaning plan? Get in touch{" "}
             <ArrowRight size={14} />
           </Link>

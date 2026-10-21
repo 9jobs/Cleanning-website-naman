@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { bookingSchema, enquirySchema } from "../src/lib/validation";
 import { estimate, rates } from "../src/lib/config";
 const booking = {
-  service: "regular-house-cleaning",
+  service: "house-cleaning",
   property: "House",
   bedrooms: 2,
   bathrooms: 1,

@@ -21,16 +21,12 @@ import {
 import { Photo, Button } from "./ui";
 import { Reveal } from "./motion";
 import { testimonials } from "@/lib/config";
+import tileStyles from "./service-tiles.module.css";
+import journeyStyles from "./cleaning-journey.module.css";
 
 export function CleaningJourney() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 85%", "end 60%"],
-  });
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
   return (
-    <section ref={ref} className="section journey-section">
+    <section className={`section journey-section ${journeyStyles.section}`}>
       <div className="container">
         <Reveal>
           <div className="journey-heading">
@@ -45,23 +41,23 @@ export function CleaningJourney() {
         </Reveal>
         <div className="journey-track">
           <div className="journey-line" aria-hidden>
-            <motion.div style={{ scaleX }} />
+            <div />
           </div>
           {[
             {
               Icon: MousePointer2,
               title: "Choose your cleaning service",
-              text: "Select regular, deep, end-of-lease or commercial cleaning tailored to your space.",
+              text: "Select house, property, garden, construction or specialist cleaning.",
             },
             {
               Icon: CalendarDays,
-              title: "Select your preferred schedule",
-              text: "Pick a convenient date and time that fits your household or business routine.",
+              title: "Tell us about your space",
+              text: "Share your property type, location, condition and cleaning requirements.",
             },
             {
               Icon: Sun,
               title: "Submit your cleaning request",
-              text: "Receive a clear, personalised quote and confirmed booking for your clean.",
+              text: "Our team reviews your request and confirms the service scope and availability.",
             },
           ].map(({ Icon, title, text }, i) => (
             <Reveal key={title} delay={i * 0.12} className="journey-step">
@@ -104,15 +100,15 @@ export function ScrollStory() {
         <div className="story-photos">
           <Reveal variant="image">
             <Photo
-              src="/images/before.jpg"
-              alt="Clean, freshly prepared living space"
+              src="/images/story-property-male.webp"
+              alt="Male cleaner mopping light oak floors in a townhouse"
               className="story-main"
             />
           </Reveal>
           <motion.div className="story-inset parallax" style={{ y }}>
             <Photo
-              src="/images/blog-home.jpg"
-              alt="Professional cleaning supplies"
+              src="/images/story-garden-male.webp"
+              alt="Male cleaner sweeping a timber balcony beside potted plants"
             />
           </motion.div>
           <span className="story-photo-note">FRESH & SPOTLESS.</span>
@@ -121,17 +117,21 @@ export function ScrollStory() {
           <Reveal variant="right">
             <span className="eyebrow">PROFESSIONAL CLEANING STANDARDS</span>
             <h2>
-              From busy spaces
+              From busy properties
               <br />
-              to <motion.span style={{ opacity }}>spotless places.</motion.span>
+              to{" "}
+              <motion.span style={{ opacity }}>
+                clean, ready spaces.
+              </motion.span>
             </h2>
             <p>
-              A thoroughly cleaned home creates a healthier, more comfortable
-              environment for your family and guests.
+              Our cleaning services support homes, managed properties, outdoor
+              areas, workplaces and post-construction spaces.
             </p>
             <p>
-              Our professional cleaning services take care of routine chores and
-              heavy-duty grime so you can spend your time on what matters most.
+              Whether you need routine cleaning, a property refresh, garden
+              tidy-up or a final post-build clean, we tailor the service to your
+              space and priorities.
             </p>
             <Button href="/about" secondary>
               Learn About Our Standards
@@ -149,25 +149,25 @@ export function ScrollStory() {
 
 const demoStories = [
   {
-    label: "REGULAR HOUSE CLEANING",
+    label: "HOUSE & PROPERTY CARE",
     quote:
-      "A dependable routine that keeps your kitchen, bathrooms and floors pristine every single week.",
-    name: "Consistent Home Cleaning",
-    type: "Regular residential cleaning",
+      "Cleaning support for family homes, rental properties and vacant spaces, based on an agreed property checklist.",
+    name: "House & Property Cleaning",
+    type: "Routine or one-off property care",
   },
   {
-    label: "END OF LEASE CLEANING",
+    label: "GARDEN & OUTDOOR CLEANING",
     quote:
-      "Detailed vacate cleaning covering cupboards, appliances, skirtings and fixtures for a smooth move.",
-    name: "Comprehensive Move-Out Clean",
-    type: "End of lease cleaning",
+      "Outdoor cleaning and tidy-up requests for patios, balconies, paths and garden areas.",
+    name: "Garden Cleaning",
+    type: "Outdoor areas and light debris",
   },
   {
-    label: "COMMERCIAL & OFFICE CLEANING",
+    label: "CONSTRUCTION CLEANING",
     quote:
-      "Hygienic workplaces, sanitised meeting rooms and clean shared facilities that support your team.",
-    name: "Professional Workplace Care",
-    type: "Commercial facility cleaning",
+      "Final cleaning of agreed finished surfaces after building, renovation or maintenance work.",
+    name: "Construction Cleaning",
+    type: "Post-build and renovation cleaning",
   },
 ];
 export function ExperienceCarousel() {
@@ -257,43 +257,43 @@ export function ExperienceCarousel() {
 export function PricingPaths() {
   const plans = [
     {
-      name: "Regular House Cleaning",
-      label: "ROUTINE CLEANING",
+      name: "House & Property Cleaning",
+      label: "HOUSE & PROPERTY CLEANING",
       Icon: House,
       description:
-        "Consistent weekly, fortnightly or monthly cleaning to keep your home fresh and tidy.",
+        "Routine and detailed cleaning for homes, rentals and managed properties.",
       features: [
-        "Weekly, fortnightly or monthly visits",
-        "Kitchen, bathrooms and living areas",
-        "Vacuuming carpets and mopping floors",
+        "Kitchens, bathrooms and living areas",
+        "Routine or one-off cleaning",
+        "Property-specific cleaning checklist",
       ],
-      slug: "regular-house-cleaning",
+      slug: "property-cleaning",
     },
     {
-      name: "Deep One-Off Cleaning",
-      label: "DEEP & ONE-OFF",
+      name: "Garden & Outdoor Cleaning",
+      label: "GARDEN & OUTDOOR CLEANING",
       Icon: Sparkles,
       description:
-        "An intensive top-to-bottom clean for seasonal resets, spring cleans or special events.",
+        "Cleaning and tidy-up requests for outdoor spaces around your property.",
       features: [
-        "Skirting boards, doors and detailed dusting",
-        "Deep scrub of bathrooms, basins and tiles",
-        "Optional oven and fridge detailing",
+        "Patios, balconies and outdoor surfaces",
+        "Garden tidy-up and light debris",
+        "Outdoor-area preparation",
       ],
-      slug: "deep-cleaning",
+      slug: "garden-cleaning",
     },
     {
-      name: "End of Lease Cleaning",
-      label: "VACATE CLEANING",
+      name: "Construction Cleaning",
+      label: "CONSTRUCTION & POST-BUILD",
       Icon: KeyRound,
       description:
-        "Detailed move-out cleaning tailored to Australian real estate checklists.",
+        "Detailed cleaning after building, renovation or maintenance work.",
       features: [
-        "Inside empty cupboards, drawers and robes",
-        "Comprehensive kitchen and bathroom sanitisation",
-        "Optional carpet steam cleaning and windows",
+        "Dust and light debris removal",
+        "Surface and floor cleaning",
+        "Final presentation cleaning",
       ],
-      slug: "end-of-lease-cleaning",
+      slug: "construction-cleaning",
     },
   ];
   return (
@@ -308,7 +308,7 @@ export function PricingPaths() {
           {i === 1 && (
             <span className="path-featured-badge">
               <Star size={14} fill="currentColor" />
-              POPULAR SERVICE
+              OUTDOOR CARE
             </span>
           )}
           <div className="path-top">
@@ -332,8 +332,8 @@ export function PricingPaths() {
               </li>
             ))}
           </ul>
-          <Button href={`/pricing?service=${p.slug}`} secondary={i !== 1}>
-            View Cleaning Plan
+          <Button href={`/services/${p.slug}`} secondary={i !== 1}>
+            View Service
           </Button>
           <span className="path-corner-art" aria-hidden="true" />
         </Reveal>
@@ -358,19 +358,19 @@ export function ServiceTile({
   index?: number;
 }) {
   const badges = [
-    { label: "ROUTINE HOUSE CLEANING", Icon: House },
-    { label: "DEEP & THOROUGH CLEAN", Icon: Sparkles },
-    { label: "MOVE-OUT VACATE CLEAN", Icon: KeyRound },
-    { label: "COMMERCIAL & OFFICE", Icon: Building2 },
-    { label: "AIRBNB CHANGEOVER", Icon: BedDouble },
-    { label: "CARPET STEAM CARE", Icon: Layers },
+    { label: "HOUSE & PROPERTY CARE", Icon: House },
+    { label: "PROPERTY CARE", Icon: Sparkles },
+    { label: "GARDEN & OUTDOOR CARE", Icon: KeyRound },
+    { label: "POST-BUILD CLEANING", Icon: Building2 },
+    { label: "SHORT-STAY CLEANING", Icon: BedDouble },
+    { label: "BUSINESS PREMISES", Icon: Layers },
   ];
   const badge = badges[index] || badges[0];
   return (
     <Reveal
       variant={featured ? "image" : "up"}
       delay={index * 0.08}
-      className={`service-tile ${featured ? "service-tile-featured" : ""}`}
+      className={`service-tile ${tileStyles.tile} ${featured ? "service-tile-featured" : ""}`}
     >
       <Link href={`/services/${slug}`}>
         <Photo
@@ -387,9 +387,7 @@ export function ServiceTile({
         </div>
         <div className="service-tile-copy">
           {featured && (
-            <span className="service-tile-category">
-              REGULAR HOUSE CLEANING
-            </span>
+            <span className="service-tile-category">HOUSE & PROPERTY CARE</span>
           )}
           <h3>{title}</h3>
           <p>{description}</p>

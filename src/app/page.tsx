@@ -32,11 +32,17 @@ import {
   ServiceTile,
 } from "@/components/showcase";
 import { services } from "@/lib/data";
+import tileStyles from "@/components/service-tiles.module.css";
+import guideStyles from "@/components/home-guides.module.css";
+import { homeGuideCards } from "@/lib/home-guide-cards";
 
 export const metadata = {
-  title: "Professional Cleaning Services Australia | Thrive4 Cleaning",
+  title: {
+    absolute:
+      "Property, House, Garden & Construction Cleaning | Thrive4 Cleaning",
+  },
   description:
-    "Professional home, commercial and end of lease cleaning services tailored to your space, schedule and cleaning needs across Australia.",
+    "Thrive4 Cleaning provides professional house, property, garden, construction and commercial cleaning services.",
   alternates: { canonical: "/" },
 };
 
@@ -75,14 +81,14 @@ export default function Home() {
               <span>you can count on.</span>
             </h2>
             <p>
-              From regular house cleaning to detailed commercial cleaning, we
-              make it easier to keep your spaces clean, fresh and well
-              maintained.
+              From family homes and rental properties to gardens, workplaces and
+              construction sites, Thrive4 provides cleaning shaped around your
+              property and requirements.
             </p>
             <p>
-              Whether you need routine home upkeep, a seasonal deep clean or a
-              complete end of lease service, we deliver consistent quality with
-              clear communication from start to finish.
+              Our services cover routine upkeep, detailed property cleaning,
+              outdoor areas, move-out cleaning and post-build cleans, with clear
+              communication from enquiry through to completion.
             </p>
             <div className="actions">
               <Button href="/pricing">View Cleaning Plans</Button>
@@ -120,7 +126,7 @@ export default function Home() {
           <Reveal variant="up" className="intro-visual">
             <div className="intro-photo-frame">
               <Photo
-                src="/images/thrive-australian-team.png"
+                src="/images/thrive-australian-team.webp"
                 alt="Professional Australian cleaning team in uniform ready to clean"
                 className="reference-team-photo"
                 sizes="(max-width: 800px) 100vw, 55vw"
@@ -155,7 +161,7 @@ export default function Home() {
               </span>
             </div>
             <span className="team-photo-caption">
-              DEDICATED TO CLEANER HOMES AND WORKPLACES.
+              CARE FOR HOMES, PROPERTIES, GARDENS & SITES.
             </span>
           </Reveal>
         </div>
@@ -171,8 +177,8 @@ export default function Home() {
                 <span>service for your needs.</span>
               </h2>
               <p>
-                Compare regular maintenance, deep one-off cleans and specialised
-                end of lease cleaning to match your property.
+                Compare house and property care, garden tidy-ups and post-build
+                cleaning to find the right scope for your space.
               </p>
             </div>
           </Reveal>
@@ -195,8 +201,10 @@ export default function Home() {
             <div>
               <House size={25} />
               <span>
-                A Healthier, Cleaner Home
-                <small>More time for what matters most to you</small>
+                A Cleaner, Ready Property
+                <small>
+                  Care inside and out, shaped around your priorities
+                </small>
               </span>
             </div>
           </div>
@@ -214,8 +222,8 @@ export default function Home() {
                   for every space.
                 </h2>
                 <p>
-                  Explore flexible cleaning services for homes, offices, rental
-                  properties and short-stay accommodation.
+                  Explore cleaning for homes, properties, gardens, construction
+                  sites and workplaces.
                 </p>
               </div>
             </Reveal>
@@ -223,29 +231,26 @@ export default function Home() {
               <Button href="/services">Explore All Services</Button>
             </div>
           </div>
-          <div className="service-mosaic">
+          <div className={`service-mosaic ${tileStyles.mosaic}`}>
             {[
               services[0],
               services[1],
               services[2],
               services[3],
-              services[4],
-              services[5],
+              services.find((service) => service.slug === "airbnb-cleaning")!,
+              services.find(
+                (service) => service.slug === "commercial-cleaning",
+              )!,
             ].map((s, i) => (
               <ServiceTile
                 key={s.slug}
                 title={s.name}
-                description={s.description}
+                description={s.summary}
                 slug={s.slug}
                 image={
-                  [
-                    "/images/comparison-living-demo.png",
-                    "/images/deep.jpg",
-                    "/images/after.jpg",
-                    "/images/service-office.png",
-                    "/images/service-airbnb.png",
-                    "/images/service-carpet.png",
-                  ][i]
+                  s.slug === "airbnb-cleaning"
+                    ? s.thumbnail
+                    : `/images/service-preview-${s.slug}-v3.webp`
                 }
                 index={i}
                 featured={i === 0}
@@ -272,7 +277,7 @@ export default function Home() {
               <span>
                 High Cleaning Standards
                 <small>
-                  Thorough attention to kitchens, bathrooms and floors.
+                  Care for surfaces, outdoor areas and property details.
                 </small>
               </span>
             </div>
@@ -290,40 +295,40 @@ export default function Home() {
         <div className="container split editorial">
           <Reveal variant="image" className="editorial-image">
             <Photo
-              src="/images/lease.jpg"
-              alt="Immaculate, empty rental apartment ready for final lease inspection"
+              src="/images/end-of-lease-detail.webp"
+              alt="Professional cleaner wiping an empty wardrobe during a property clean"
               className="tall-photo"
             />
             <div className="editorial-accent" aria-hidden />
             <span className="image-editorial-label">
-              <Sun size={22} /> MOVE-OUT READY. STRESS-FREE.
+              <Sun size={22} /> PROPERTY CARE. MADE SIMPLE.
             </span>
           </Reveal>
           <div>
             <Reveal variant="right">
               <Heading
-                eyebrow="END OF LEASE CLEANING"
-                title="Moving out? Leave the cleaning to us."
-                description="Take the stress out of moving day with our comprehensive end of lease cleaning, tailored to real estate checklists and property requirements."
+                eyebrow="PROPERTY CLEANING"
+                title="A fresh start for your property."
+                description="Property Cleaning for rentals, vacant and managed properties, with agreed tasks across kitchens, bathrooms, floors, cupboards and living areas."
               />
             </Reveal>
             <Reveal delay={0.12}>
               <Checks
                 items={[
-                  "Detailed, room-by-room move-out cleaning checklist",
-                  "Inside cupboards, ovens, rangehoods and bathrooms",
-                  "Flexible appointments scheduled around your move date",
-                  "Clear written scope with optional carpet steam cleaning",
+                  "Room-by-room property cleaning",
+                  "Kitchen and bathroom detailing",
+                  "Cupboards, floors and accessible surfaces",
+                  "Optional carpet cleaning by agreement",
                 ]}
               />
             </Reveal>
             <Reveal delay={0.22}>
-              <Button href="/services/end-of-lease-cleaning">
-                Explore End of Lease Cleaning
+              <Button href="/services/property-cleaning">
+                Explore Property Cleaning
               </Button>
             </Reveal>
             <p className="editorial-footnote">
-              Professional vacate cleaning tailored to your rental property.
+              Professional cleaning tailored to your property.
             </p>
           </div>
         </div>
@@ -333,16 +338,16 @@ export default function Home() {
           <Reveal>
             <Heading
               eyebrow="WHY CHOOSE THRIVE4 CLEANING"
-              title="A More Reliable Way to Keep Your Space Clean."
+              title="Reliable cleaning for every type of property."
               center
-              description="We combine experienced cleaners, structured checklists and prompt communication to deliver dependable results every visit."
+              description="Practical cleaning for homes, properties, gardens and sites, with clear requirements and an agreed scope."
             />
           </Reveal>
           <div className="benefits-grid">
             <Reveal variant="image" className="benefit-photo">
               <Photo
-                src="/images/thrive-australian-office.png"
-                alt="Professional cleaners ready with supplies"
+                src="/images/home-benefit.webp"
+                alt="Professional male cleaner wiping a shared workplace table"
               />
               <div>
                 <span>PROFESSIONAL CLEANERS</span>
@@ -352,7 +357,8 @@ export default function Home() {
                   Dependable results.
                 </h3>
                 <p>
-                  Respect for your home, your belongings and your workplace.
+                  Care for homes, managed properties, outdoor areas and
+                  workplaces.
                 </p>
               </div>
             </Reveal>
@@ -364,8 +370,8 @@ export default function Home() {
                 schedules.
               </h3>
               <p>
-                Weekly, fortnightly, monthly or one-off cleaning arranged around
-                your busy routine.
+                Request routine, one-off, outdoor or post-build cleaning to suit
+                your property.
               </p>
               <Link href="/book">
                 Book a clean <ArrowUpRight size={19} />
@@ -379,8 +385,8 @@ export default function Home() {
                 Thorough results.
               </h3>
               <p>
-                Every clean follows a structured checklist to ensure no corner
-                or surface is overlooked.
+                Understand the areas, tasks and exclusions agreed before the
+                service begins.
               </p>
             </Reveal>
             <Reveal className="benefit-card benefit-aqua" variant="left">
@@ -430,8 +436,8 @@ export default function Home() {
             <Reveal>
               <Heading
                 eyebrow="BEFORE & AFTER CLEANING"
-                title="See What a Thorough Clean Can Do."
-                description="Explore the difference professional cleaning can make to kitchens, bathrooms and living spaces."
+                title="A closer look at cleaning, inside and out."
+                description="Explore illustrative comparisons for property, garden and post-construction cleaning."
               />
             </Reveal>
             <span className="comparison-kicker">
@@ -448,16 +454,16 @@ export default function Home() {
       <section className="section experience-section">
         <div className="container experience-grid">
           <Reveal variant="left">
-            <span className="eyebrow">CUSTOMER SATISFACTION</span>
+            <span className="eyebrow">THE CLEANING EXPERIENCE</span>
             <h2>
               Professional cleaning.
               <br />
-              <span>Consistent results.</span>
+              <span>Consistent care.</span>
             </h2>
             <p>
-              From routine home maintenance to busy office facilities, our
-              cleaning services create spaces that feel fresh, hygienic and
-              inviting.
+              From homes and rentals to gardens, commercial premises and
+              construction sites, cleaning helps prepare spaces for everyday
+              use, presentation or handover.
             </p>
             <Button href="/reviews" secondary>
               View Customer Reviews
@@ -467,7 +473,7 @@ export default function Home() {
               <span>
                 FRESH, CLEAN SPACES
                 <br />
-                FOR WORK & HOME.
+                INSIDE & OUTSIDE.
               </span>
             </div>
           </Reveal>
@@ -476,7 +482,9 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-      <section className="section container journal-section">
+      <section
+        className={`section container journal-section ${guideStyles.section}`}
+      >
         <div className="heading-row">
           <Reveal>
             <Heading
@@ -488,7 +496,7 @@ export default function Home() {
             Browse All Articles
           </Button>
         </div>
-        <ArticleCards />
+        <ArticleCards items={homeGuideCards} className={guideStyles.grid} />
       </section>
       <section className="section faq-section">
         <div className="container split faq-split">

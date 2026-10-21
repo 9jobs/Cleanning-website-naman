@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { articles } from "@/lib/data";
 import { Photo } from "@/components/ui";
 import {
@@ -9,7 +9,10 @@ import {
   CompletionCTA,
 } from "@/components/completion-sections";
 export function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.slug }));
+  return [
+    ...articles.map((a) => ({ slug: a.slug })),
+    { slug: "kitchen-reset-guide" },
+  ];
 }
 export async function generateMetadata({
   params,
@@ -17,6 +20,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  if (slug === "kitchen-reset-guide")
+    permanentRedirect("/blog/a-calm-weekly-cleaning-routine");
   const a = articles.find((a) => a.slug === slug);
   return a
     ? {
@@ -32,6 +37,8 @@ export default async function Article({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (slug === "kitchen-reset-guide")
+    permanentRedirect("/blog/a-calm-weekly-cleaning-routine");
   const a = articles.find((a) => a.slug === slug);
   if (!a) notFound();
   return (

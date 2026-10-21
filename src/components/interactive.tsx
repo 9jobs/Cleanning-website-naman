@@ -23,7 +23,7 @@ import {
 import { ServiceCard } from "./ui";
 export function QuickQuote() {
   return (
-    <form className="quick-quote" action="/pricing">
+    <form className="quick-quote" action="/contact">
       <label>
         Cleaning service
         <select name="service">
@@ -90,7 +90,15 @@ export function ServiceFilter() {
               className={category === c ? "selected" : ""}
               onClick={() => setCategory(c)}
             >
-              {c}
+              {c === "Residential"
+                ? "House Cleaning"
+                : c === "Deep Cleaning"
+                  ? "Property Cleaning"
+                  : c === "End of Lease"
+                    ? "End of Lease Cleaning"
+                    : c === "Commercial"
+                      ? "Commercial Cleaning"
+                      : c}
             </button>
           ),
         )}
@@ -164,22 +172,21 @@ export function FAQ({ compact = false }: { compact?: boolean }) {
 }
 export function Comparison() {
   const [value, setValue] = useState(50);
-  const [category, setCategory] = useState("Kitchen");
-  const image =
-    category === "Kitchen"
-      ? "kitchen"
-      : category === "Bathroom"
-        ? "bathroom"
-        : "living";
-  const source = `/images/comparison-${image}-demo.png`;
+  const [category, setCategory] = useState("Property");
+  const image = category.toLowerCase();
+  const before = `/images/comparison-${image}-before-v3.webp`;
+  const after =
+    image === "construction"
+      ? "/images/comparison-construction-after-v4.webp"
+      : `/images/comparison-${image}-after-v3.webp`;
   return (
     <div className="comparison-wrap">
       <div
         className="comparison-tabs"
         role="group"
-        aria-label="Comparison room"
+        aria-label="Comparison cleaning area"
       >
-        {["Kitchen", "Bathroom", "Living Room"].map((room) => (
+        {["Property", "Garden", "Construction"].map((room) => (
           <button
             key={room}
             className={room === category ? "selected" : ""}
@@ -194,11 +201,11 @@ export function Comparison() {
         ))}
       </div>
       <div className="comparison">
-        <div className="comparison-sheet">
+        <div className="comparison-sheet" style={{ width: "100%" }}>
           <Image
             fill
-            src={source}
-            sizes="(max-width: 700px) 200vw, 2600px"
+            src={before}
+            sizes="(max-width: 700px) 100vw, 1300px"
             alt={`Illustrative ${category.toLowerCase()} before cleaning demo`}
             style={{ objectFit: "cover" }}
           />
@@ -207,11 +214,14 @@ export function Comparison() {
           className="comparison-after"
           style={{ clipPath: `inset(0 0 0 ${value}%)` }}
         >
-          <div className="comparison-sheet comparison-sheet-after">
+          <div
+            className="comparison-sheet comparison-sheet-after"
+            style={{ width: "100%", left: 0 }}
+          >
             <Image
               fill
-              src={source}
-              sizes="(max-width: 700px) 200vw, 2600px"
+              src={after}
+              sizes="(max-width: 700px) 100vw, 1300px"
               alt={`Illustrative ${category.toLowerCase()} after cleaning demo`}
               style={{ objectFit: "cover" }}
             />
@@ -236,7 +246,8 @@ export function Comparison() {
           <SparkleMarker /> ILLUSTRATIVE BEFORE & AFTER DEMO
         </span>
         <p className="caption">
-          Illustrative room comparison. Actual cleaning outcomes depend on property condition.
+          Illustrative comparison. Actual results depend on the condition of the
+          property.
         </p>
       </div>
     </div>
@@ -288,7 +299,7 @@ export function Pricing({
 }) {
   const initialService = services.find((s) => s.slug === initial.service);
   const [category, setCategory] = useState<keyof typeof rates.base>(
-    initialService?.slug === "deep-cleaning"
+    initialService?.slug === "property-cleaning"
       ? "Deep Cleaning"
       : initialService?.slug === "end-of-lease-cleaning"
         ? "End of Lease"
@@ -323,7 +334,7 @@ export function Pricing({
     service:
       ((initialService?.category === "Commercial"
         ? "Commercial"
-        : initialService?.slug === "deep-cleaning"
+        : initialService?.slug === "property-cleaning"
           ? "Deep Cleaning"
           : initialService?.slug === "end-of-lease-cleaning"
             ? "End of Lease"
@@ -331,9 +342,9 @@ export function Pricing({
         ? initialService?.slug
         : undefined) ||
       (category === "Residential"
-        ? "regular-house-cleaning"
+        ? "house-cleaning"
         : category === "Deep Cleaning"
-          ? "deep-cleaning"
+          ? "property-cleaning"
           : category === "End of Lease"
             ? "end-of-lease-cleaning"
             : "commercial-cleaning"),
@@ -371,7 +382,10 @@ export function Pricing({
             <br />
             for your clean.
           </h2>
-          <p>Select your property details and frequency for an indicative estimate.</p>
+          <p>
+            Select your property details and frequency for an indicative
+            estimate.
+          </p>
           <label>
             Property type
             <select
@@ -564,8 +578,8 @@ export function Areas() {
           {matches.length ? (
             matches.map((a) => (
               <p key={a.postcode + a.suburb}>
-                {a.suburb}, {a.state} {a.postcode} — service available. Request an appointment for
-                confirmed scheduling.
+                {a.suburb}, {a.state} {a.postcode} — service available. Request
+                an appointment for confirmed scheduling.
               </p>
             ))
           ) : (
@@ -605,7 +619,15 @@ export function Reviews() {
               aria-pressed={filter === c}
               onClick={() => setFilter(c)}
             >
-              {c}
+              {c === "Residential"
+                ? "House Cleaning"
+                : c === "Deep Cleaning"
+                  ? "Property Cleaning"
+                  : c === "End of Lease"
+                    ? "End of Lease Cleaning"
+                    : c === "Commercial"
+                      ? "Commercial Cleaning"
+                      : c}
             </button>
           ),
         )}
@@ -657,8 +679,8 @@ export function Reviews() {
             {filter === "All services"
               ? "Verified customer reviews"
               : `${filter} reviews`}{" "}
-            haven’t been published yet. Once genuine customer feedback is approved
-            for publication, you’ll find it here.
+            haven’t been published yet. Once genuine customer feedback is
+            approved for publication, you’ll find it here.
           </p>
           <Link href="/contact" className="text-link">
             Leave feedback or enquire <ArrowRight size={16} />

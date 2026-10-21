@@ -9,3 +9,6 @@ test-results/
 playwright-report/
 qa/**/*.png
 qa/**/*.json
+qa/**/*.jpg
+qa/*next-env*.txt
+qa/*-inventory.txt

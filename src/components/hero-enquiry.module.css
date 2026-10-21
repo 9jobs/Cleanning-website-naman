@@ -1,0 +1,186 @@
+/* Scope the glass treatment to this homepage quick quote, including its controls. */
+:global(.reference-lead) .card:global(.hero-enquiry) {
+  background: linear-gradient(
+    115deg,
+    rgb(255 255 255 / 58%),
+    rgb(232 245 237 / 42%)
+  );
+  border: 1px solid rgb(255 255 255 / 92%);
+  border-radius: 0;
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
+  box-shadow:
+    0 20px 48px rgb(22 64 45 / 18%),
+    0 4px 12px rgb(22 64 45 / 7%),
+    inset 0 0 0 1px rgb(67 111 85 / 14%),
+    inset 0 1px 0 #fff;
+}
+.card:global(.hero-enquiry) :global(.lead-form-fields) label {
+  color: #173d2c;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+.card:global(.hero-enquiry) :global(.lead-input-wrap) input {
+  border-radius: 0;
+  background: rgb(255 255 255 / 94%);
+  border: 1px solid #6d9882;
+  color: #153b31;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow:
+    0 2px 6px rgb(25 60 45 / 5%),
+    inset 0 1px 0 #fff;
+}
+.card:global(.hero-enquiry) :global(.lead-input-wrap) input::placeholder {
+  color: #435f52;
+  font-weight: 400;
+  opacity: 1;
+}
+.card:global(.hero-enquiry) :global(.lead-input-wrap) > svg {
+  color: #39664f;
+}
+.card:global(.hero-enquiry) :global(.lead-input-wrap) input:focus-visible {
+  background: #fff;
+  outline: 2px solid #138451;
+  outline-offset: 2px;
+}
+.card:global(.hero-enquiry) :global(.lead-form-fields) {
+  position: relative;
+  align-items: start;
+}
+.card:global(.hero-enquiry) :global(.lead-form-fields) > :global(.button) {
+  align-self: start;
+  margin-top: 28px;
+  border-radius: 0;
+}
+.card:global(.hero-enquiry)
+  :global(.lead-input-wrap)
+  input[aria-invalid="true"] {
+  border-color: #a12b28;
+}
+.card:global(.hero-enquiry) :global(.button):disabled {
+  cursor: wait;
+  opacity: 0.78;
+}
+.card:global(.hero-enquiry) .note {
+  margin-bottom: 0;
+  color: #294c3d;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+.note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.note a {
+  color: #195338;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.fieldError {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #932c28;
+}
+.field {
+  min-width: 0;
+}
+.error {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  color: #822b28;
+  background: rgb(255 244 242 / 90%);
+  border-left: 3px solid #a9453d;
+  font-size: 13px;
+}
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.spinner {
+  animation: quick-quote-spin 1s linear infinite;
+}
+@keyframes quick-quote-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.success {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0 8px;
+  color: #195338;
+}
+.success > svg {
+  flex-shrink: 0;
+}
+.success h3 {
+  margin: 0;
+  font-size: 19px;
+}
+.success p {
+  margin: 5px 0;
+  color: #294737;
+  font-size: 14px;
+}
+.success small {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.success:focus-visible,
+.again:focus-visible {
+  outline: 2px solid #177f50;
+  outline-offset: 4px;
+}
+.again {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  padding: 10px 0;
+  color: #195338;
+  font-size: 12px;
+  text-decoration: underline;
+  flex-shrink: 0;
+}
+@media (max-width: 1150px) {
+  .card:global(.hero-enquiry) :global(.lead-input-wrap) input {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .card:global(.hero-enquiry) :global(.lead-form-fields) > :global(.button) {
+    margin-top: 2px;
+  }
+  .success {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .success > div {
+    flex: 1;
+    min-width: 0;
+  }
+  .again {
+    margin-left: 41px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  :global(.reference-lead) .card:global(.hero-enquiry) {
+    background: #f4f9f5;
+  }
+}

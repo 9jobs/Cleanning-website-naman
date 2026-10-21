@@ -16,8 +16,8 @@ import { Reveal } from "./motion";
 const highlights = [
   {
     Icon: House,
-    title: "Residential cleaning",
-    text: "Thoughtful care for the rooms you live in.",
+    title: "House & property cleaning",
+    text: "Care for homes, rentals and managed properties.",
   },
   {
     Icon: Building2,
@@ -26,13 +26,13 @@ const highlights = [
   },
   {
     Icon: CalendarDays,
-    title: "Flexible services",
-    text: "One-off visits or an ongoing routine.",
+    title: "Garden & outdoor care",
+    text: "Patios, balconies and garden-area tidy-ups.",
   },
   {
     Icon: Heart,
-    title: "Your priorities first",
-    text: "A cleaning checklist shaped around you.",
+    title: "Construction cleaning",
+    text: "A final clean after building or renovation work.",
   },
 ];
 
@@ -41,8 +41,8 @@ export function AboutPage() {
     <>
       <section className="about-masthead">
         <Photo
-          src="/images/thrive-australian-office.png"
-          alt="Male cleaning professional mopping a bright office floor"
+          src="/images/about-cover.webp"
+          alt="Two male cleaning professionals preparing equipment at a home entry"
           priority
           sizes="100vw"
           className="about-cover"
@@ -57,13 +57,13 @@ export function AboutPage() {
               <em>Room to thrive.</em>
             </h1>
             <p>
-              We help homes and workplaces feel their best with practical
-              cleaning plans, careful surface care and clear communication from
-              the first conversation.
+              We support homes, properties, gardens, workplaces and completed
+              construction sites with practical cleaning scopes and clear
+              communication.
             </p>
             <div className="actions">
               <Button href="/services">Our cleaning services</Button>
-              <Button href="/quote" secondary>
+              <Button href="/contact" secondary>
                 Get a free quote
               </Button>
             </div>
@@ -110,17 +110,17 @@ export function AboutPage() {
       <section className="section container about-story">
         <Reveal className="about-collage">
           <Photo
-            src="/images/thrive-window-cleaning.png"
-            alt="Professional squeegee and gloved hand cleaning a window"
+            src="/images/about-window-male.webp"
+            alt="Male cleaner polishing an interior glass panel and frame"
             className="collage-main"
           />
           <Photo
-            src="/images/comparison-living-demo.png"
-            alt="Freshly arranged and cleaned living room"
+            src="/images/about-garden.webp"
+            alt="Swept brick courtyard with native plants and a timber gate"
           />
           <Photo
-            src="/images/service-office.png"
-            alt="Clean office meeting space"
+            src="/images/about-office-male.webp"
+            alt="Male cleaner wiping a table in an office lounge"
           />
           <span className="collage-caption">
             <Sparkles size={20} />
@@ -135,14 +135,14 @@ export function AboutPage() {
             <em>A personal approach.</em>
           </h2>
           <p>
-            A busy household, a shared office and a property ready for new
-            tenants all need a different kind of clean. Thrive4 Cleaning starts
-            by understanding your space and what matters most to you.
+            Family homes, rental properties, gardens, workplaces and completed
+            building sites all need different care. Thrive4 starts by
+            understanding the property and the work required.
           </p>
           <p>
-            We turn those priorities into an agreed checklist, explain the scope
-            and arrange a suitable visit. From kitchen surfaces to the final
-            floor clean, the details guide the work.
+            Our services cover routine upkeep, detailed property cleaning,
+            outdoor areas, move-out cleaning and post-build cleans. An agreed
+            checklist sets out the work before a visit is confirmed.
           </p>
           <Button href="/contact">Talk to our team</Button>
         </Reveal>
@@ -198,10 +198,10 @@ export function AboutPage() {
         </div>
         <div>
           <p>
-            Tell us about your home or workplace, the service you need and your
-            preferred timing. We’ll help define the next steps.
+            Tell us about your home, property, garden, workplace or completed
+            building site. Share the cleaning requirements and preferred timing.
           </p>
-          <Button href="/quote">Build your cleaning plan</Button>
+          <Button href="/contact">Build your cleaning plan</Button>
         </div>
       </section>
     </>
@@ -210,28 +210,28 @@ export function AboutPage() {
 
 const heroImages: Record<string, { src: string; label: string }> = {
   services: {
-    src: "/images/cleaning-plans-room.png",
-    label: "HOMES · WORKPLACES · SPECIALIST CARE",
+    src: "/images/cleaning-plans-room.webp",
+    label: "HOMES · PROPERTIES · GARDENS · SITES",
   },
   pricing: {
-    src: "/images/kitchen.jpg",
+    src: "/images/kitchen.webp",
     label: "YOUR SPACE. YOUR SCOPE. YOUR QUOTE.",
   },
   areas: {
-    src: "/images/hero.jpg",
+    src: "/images/hero.webp",
     label: "LOCAL AVAILABILITY, CONFIRMED WITH YOU",
   },
   contact: {
-    src: "/images/blog-home.jpg",
+    src: "/images/blog-home.webp",
     label: "A CONVERSATION IS A GOOD START",
   },
-  quote: { src: "/images/after.jpg", label: "LET’S PLAN YOUR CLEAN" },
+  quote: { src: "/images/after.webp", label: "LET’S PLAN YOUR CLEAN" },
   careers: {
-    src: "/images/thrive-australian-office.png",
+    src: "/images/careers-cover.webp",
     label: "TAKE PRIDE IN THE DETAILS",
   },
   blog: {
-    src: "/images/blog-kitchen.jpg",
+    src: "/images/blog-kitchen.webp",
     label: "PRACTICAL CARE FOR EVERYDAY SPACES",
   },
 };
@@ -268,7 +268,7 @@ export function InnerHero({
             {kind === "services" && (
               <div className="actions">
                 <Button href="#service-directory">Find your service</Button>
-                <Link href="/quote" className="text-link">
+                <Link href="/contact" className="text-link">
                   Need a hand choosing? <ArrowRight size={17} />
                 </Link>
               </div>

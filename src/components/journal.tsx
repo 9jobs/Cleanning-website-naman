@@ -26,7 +26,10 @@ export function BlogListing() {
         </div>
       </div>
       <div className="tabs" role="group" aria-label="Filter cleaning articles">
-        {["All guides", "Home care", "Moving", "Cleaning tips"].map((c) => (
+        {[
+          "All guides",
+          ...new Set(articles.map((article) => article.category)),
+        ].map((c) => (
           <button
             key={c}
             className={category === c ? "selected" : ""}
@@ -59,7 +62,8 @@ export function BlogListing() {
           ))}
       </div>
       <p className="caption newsletter-note">
-        Practical cleaning guides and maintenance advice from the Thrive4 Cleaning team.
+        Practical cleaning guides and maintenance advice from the Thrive4
+        Cleaning team.
       </p>
     </>
   );

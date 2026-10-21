@@ -20,7 +20,7 @@ import {
   type Booking,
 } from "@/lib/validation";
 const defaults: Booking = {
-  service: "regular-house-cleaning",
+  service: "house-cleaning",
   property: "House",
   bedrooms: 2,
   bathrooms: 1,
@@ -643,7 +643,9 @@ export function EnquiryForm({
 }: {
   kind?: EnquiryFields["kind"];
   postcode?: string;
-  initial?: Partial<Pick<EnquiryFields, "name" | "email" | "phone" | "service">>;
+  initial?: Partial<
+    Pick<EnquiryFields, "name" | "email" | "phone" | "service">
+  >;
 }) {
   const {
     register,
@@ -658,7 +660,7 @@ export function EnquiryForm({
       phone: initial.phone || "",
       service: services.some((service) => service.slug === initial.service)
         ? initial.service
-        : "regular-house-cleaning",
+        : "house-cleaning",
       postcode,
       message: "",
       consent: false,

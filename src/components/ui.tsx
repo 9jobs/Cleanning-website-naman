@@ -55,24 +55,24 @@ export function PageHero({
   kind?: string;
 }) {
   const images: Record<string, { src: string; label: string }> = {
-    about: { src: "/images/regular.jpg", label: "RELIABLE CLEANING SERVICES" },
+    about: { src: "/images/regular.webp", label: "RELIABLE CLEANING SERVICES" },
     services: {
-      src: "/images/lease.jpg",
+      src: "/images/lease.webp",
       label: "CLEANING FOR HOMES & WORKPLACES",
     },
     pricing: {
-      src: "/images/kitchen.jpg",
+      src: "/images/kitchen.webp",
       label: "TRANSPARENT CLEANING PRICING",
     },
     contact: {
-      src: "/images/blog-home.jpg",
+      src: "/images/blog-home.webp",
       label: "SPEAK WITH OUR CLEANING TEAM",
     },
     careers: {
-      src: "/images/team.jpg",
+      src: "/images/team.webp",
       label: "JOIN OUR PROFESSIONAL TEAM",
     },
-    blog: { src: "/images/airbnb.jpg", label: "CLEANING TIPS & GUIDES" },
+    blog: { src: "/images/airbnb.webp", label: "CLEANING TIPS & GUIDES" },
   };
   const image = images[kind];
   return (
@@ -165,11 +165,11 @@ export function ServiceCard({
   return (
     <Reveal delay={(index % 3) * 0.08} className="card service-card">
       <Link href={`/services/${service.slug}`}>
-        <Photo src={service.image} alt={service.name} />
+        <Photo src={service.thumbnail} alt={service.name} />
         <div className="card-body">
           <span className="mini-label">{service.category}</span>
           <h3>{service.name}</h3>
-          <p>{service.description}</p>
+          <p>{service.summary}</p>
           <span className="text-link">
             Explore service <ArrowRight size={16} />
           </span>
@@ -178,15 +178,23 @@ export function ServiceCard({
     </Reveal>
   );
 }
-export function ArticleCards({ exclude }: { exclude?: string } = {}) {
+export function ArticleCards({
+  exclude,
+  items = articles,
+  className = "",
+}: {
+  exclude?: string;
+  items?: ((typeof articles)[number] & { imageAlt?: string })[];
+  className?: string;
+} = {}) {
   return (
-    <div className="grid three">
-      {articles
+    <div className={`grid three ${className}`}>
+      {items
         .filter((a) => a.slug !== exclude)
         .map((a, i) => (
           <Reveal key={a.slug} delay={i * 0.08} className="card article-card">
             <Link href={`/blog/${a.slug}`}>
-              <Photo src={a.image} alt={a.title} />
+              <Photo src={a.image} alt={a.imageAlt || a.title} />
               <div className="card-body">
                 <span className="mini-label">
                   {a.category} <span>· {a.read}</span>
@@ -210,14 +218,14 @@ export function CTA() {
         <div className="cta">
           <Sparkles size={30} />
           <span className="eyebrow">READY FOR A CLEANER SPACE?</span>
-          <h2>Ready for a cleaner home or workplace?</h2>
+          <h2>Ready for a cleaner property, inside and out?</h2>
           <p>
             Tell us what cleaning service you need, and request a personalised
             quote.
           </p>
           <div className="actions">
             <Button href="/book">Book a Clean</Button>
-            <Button href="/quote" secondary>
+            <Button href="/contact" secondary>
               Get a Free Quote
             </Button>
           </div>

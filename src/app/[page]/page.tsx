@@ -9,14 +9,12 @@ import {
 } from "@/components/completion-interactive";
 import {
   HelpPageBody,
-  ContactCompletion,
-  BookingCompletion,
   CareerCompletion,
 } from "@/components/completion-sections";
 import { PricingPlans } from "@/components/pricing-plans";
 import { AboutPage, InnerHero } from "@/components/inner-pages";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { CTA } from "@/components/ui";
 import { submissionsReady } from "@/lib/server";
 
@@ -28,19 +26,19 @@ const pages: Record<
     title: "Care for your space. Room to thrive.",
     eyebrow: "Who We Are",
     description:
-      "Learn more about Thrive4 Cleaning, our commitment to high cleaning standards, and our reliable residential and commercial cleaning services across Australia.",
+      "Learn more about Thrive4 Cleaning, our commitment to high cleaning standards, and our house, property, garden, construction and commercial cleaning services.",
   },
   services: {
     title: "Professional Cleaning for Every Space.",
     eyebrow: "Our Services",
     description:
-      "Explore flexible cleaning services for homes, offices, rental properties and short-stay accommodation.",
+      "Explore House, Property, Garden, Construction and specialist cleaning services.",
   },
   pricing: {
     title: "Clear Pricing for Professional Cleaning Services.",
     eyebrow: "Pricing & Quotes",
     description:
-      "Compare home cleaning plans, explore service inclusions and request a personalised quote for your property.",
+      "Compare cleaning plans, explore inclusions and request a personalised quote for your property.",
   },
   areas: {
     title: "Find Professional Cleaning Services Near You.",
@@ -82,7 +80,7 @@ const pages: Record<
     title: "Practical Cleaning Guides & Expert Advice.",
     eyebrow: "Cleaning Guides & Tips",
     description:
-      "Explore practical cleaning routines, room checklists and professional maintenance advice for Australian homes and workplaces.",
+      "Explore cleaning guides for homes, rentals, gardens, post-build properties and workplaces.",
   },
   privacy: {
     title: "Privacy Policy.",
@@ -141,6 +139,10 @@ export default async function ContentPage({
   const initial = Object.fromEntries(
     Object.entries(raw).map(([k, v]) => [k, typeof v === "string" ? v : ""]),
   );
+  if (page === "book" || page === "quote") {
+    const query = new URLSearchParams(initial).toString();
+    redirect(`/contact${query ? `?${query}` : ""}`);
+  }
   const live = submissionsReady();
 
   return (
@@ -176,10 +178,6 @@ export default async function ContentPage({
           ready={contactMailReady() && contactDatabaseReady()}
         />
       )}
-      {page === "quote" && (
-        <ContactCompletion kind="quote" initial={initial} live={live} />
-      )}
-      {page === "book" && <BookingCompletion initial={initial} live={live} />}
       {page === "careers" && <CareerCompletion live={live} />}
       {page === "blog" && (
         <section className="completion finish-section">

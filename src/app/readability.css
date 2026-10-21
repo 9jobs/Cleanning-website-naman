@@ -1,0 +1,38 @@
+/* Improve secondary copy contrast without changing page compositions. */
+:root,
+.inner-site {
+  --muted: #4b6259;
+}
+
+main p,
+main small {
+  font-weight: 450;
+}
+
+.service-showcase .section-heading p,
+.services-reassurance small,
+.plans-heading p,
+.article-card p,
+.service-card p,
+.intro-promises small {
+  color: #4b6259;
+}
+
+.contact-quote-heading > p,
+.contact-quote-fields label small,
+.contact-quote-card .contact-field-hint,
+.contact-quote-card .contact-submit-note {
+  color: #526775;
+  font-weight: 500;
+}
+
+.contact-quote-card .contact-field-hint,
+.contact-quote-card .contact-submit-note {
+  font-size: 11px;
+}
+
+main input::placeholder,
+main textarea::placeholder {
+  color: #566d65;
+  opacity: 1;
+}

@@ -1,0 +1,151 @@
+/* Homepage hero only. Existing layout, colours and shared controls stay intact. */
+.hero .imageLayer {
+  transition: opacity 800ms ease-in-out;
+}
+.hero .imageLayer:global(.carousel-photo) img {
+  object-fit: cover !important;
+  object-position: var(--hero-position) !important;
+  transform-origin: center top;
+  animation: hero-ken-burns 13000ms ease-in-out infinite;
+  animation-play-state: paused;
+}
+.hero .imageLayer[data-active="true"] img {
+  animation-play-state: running;
+}
+/* Keyframes run on the first paint, including refresh; transitions do not. */
+@keyframes hero-ken-burns {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+.hero :global(.carousel-content) {
+  padding-top: 1.75em;
+}
+/* Reserve the approved copy slots, so shorter service copy never moves CTAs. */
+.hero .title {
+  min-height: 2lh;
+  --hero-delay: 80ms;
+}
+.hero .description {
+  min-height: 3.5em;
+  --hero-delay: 160ms;
+}
+.hero .actions {
+  --hero-delay: 240ms;
+}
+.hero .benefits {
+  min-height: 26px;
+}
+.hero .benefits > span {
+  color: #224a36;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 6px #ffffffb3;
+}
+.reveal {
+  animation: hero-copy-in 550ms cubic-bezier(0.2, 0.65, 0.3, 1) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pauseControl {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* Keyboard users retain a pause option without visible carousel furniture. */
+.pauseControl:focus-visible {
+  bottom: 82px;
+  left: max(var(--page-gutter), calc((100% - 1360px) / 2));
+  width: auto;
+  height: auto;
+  padding: 8px 14px;
+  clip-path: none;
+  border-radius: 24px;
+  background: white;
+  color: #177f50;
+  outline: 2px solid #177f50;
+  outline-offset: 3px;
+  z-index: 3;
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+  .hero .imageLayer:global(.carousel-photo) img {
+    object-position: var(--hero-tablet-position) !important;
+  }
+}
+@media (min-width: 901px) and (max-width: 1150px) {
+  .hero .description {
+    min-height: 5.25em;
+  }
+  .hero .benefits {
+    min-height: 62px;
+  }
+}
+@media (max-width: 900px) {
+  .hero .imageLayer:global(.carousel-photo) img {
+    object-position: var(--hero-mobile-position) !important;
+  }
+}
+@media (max-width: 600px) {
+  .hero .benefits > span {
+    font-size: 11px;
+  }
+  .hero .description {
+    min-height: 5.1em;
+  }
+  .hero .benefits {
+    min-height: 57px;
+  }
+}
+@media (max-width: 410px) {
+  .hero:not([data-active-service="house-cleaning"]) .primary {
+    padding-inline: 10px;
+  }
+}
+@media (min-width: 1800px) {
+  .hero[data-active-service="property-cleaning"] .title {
+    max-width: 750px;
+  }
+}
+@media (max-width: 380px) {
+  .hero .description {
+    min-height: 6.8em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .imageLayer {
+    transition-duration: 150ms;
+  }
+  .hero .imageLayer:global(.carousel-photo) img {
+    animation: none;
+    transform: none;
+  }
+  .reveal {
+    animation-name: hero-copy-opacity;
+    animation-duration: 150ms;
+    animation-delay: 0ms;
+  }
+}
+@keyframes hero-copy-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

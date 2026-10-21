@@ -1,0 +1,45 @@
+.section :global(.journey-heading) {
+  display: block;
+  text-align: center;
+}
+.section :global(.journey-heading) p {
+  margin-inline: auto;
+  max-width: 560px;
+}
+.section :global(.journey-step) {
+  padding-right: 0;
+  text-align: center;
+}
+.section :global(.journey-circle),
+.section :global(.journey-step) p {
+  margin-inline: auto;
+}
+.section :global(.journey-line) {
+  left: calc((100% - 140px) / 6);
+  right: calc((100% - 140px) / 6);
+  background: var(--green, #189b63);
+}
+.section :global(.journey-line) > div {
+  background: inherit;
+  transform: none;
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .section :global(.journey-line) {
+    left: calc((100% - 70px) / 6);
+    right: calc((100% - 70px) / 6);
+  }
+}
+@media (max-width: 700px) {
+  .section :global(.journey-line) {
+    left: 35px;
+    right: auto;
+    background: #189b63;
+  }
+  .section :global(.journey-step) {
+    padding-left: 98px;
+    text-align: left;
+  }
+  .section :global(.journey-heading) h2 {
+    font-size: clamp(28px, 7vw, 38px);
+  }
+}

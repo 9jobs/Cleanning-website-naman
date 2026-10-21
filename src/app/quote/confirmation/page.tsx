@@ -34,7 +34,7 @@ export default async function Confirmation({
             "Submit a cleaning quote request to receive a reference. No quote has been requested from this session."
           )}
         </p>
-        <Button href={confirmed ? "/" : "/quote"}>
+        <Button href={confirmed ? "/" : "/contact"}>
           {confirmed ? "Return to Homepage" : "Request a Quote"}
         </Button>
       </div>

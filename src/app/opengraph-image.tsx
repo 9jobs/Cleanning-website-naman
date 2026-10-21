@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-export const alt = "Thrive4 Cleaning — Professional Cleaning Services Australia";
+export const alt =
+  "Thrive4 Cleaning — House, Property, Garden & Construction Cleaning";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function OG() {
@@ -49,7 +50,7 @@ export default function OG() {
         Better Living.
       </div>
       <div style={{ fontSize: 25, marginTop: 40, display: "flex" }}>
-        Professional Cleaning for Every Space.
+        Homes. Properties. Gardens. Construction sites.
       </div>
     </div>,
     size,

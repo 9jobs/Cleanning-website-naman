@@ -62,7 +62,7 @@ export function CompletionCTA({ service }: { service?: string }) {
             </Link>
             <Link
               className="finish-button finish-button--outline"
-              href={`/quote${query}`}
+              href={`/contact${query}`}
             >
               Get a quote <ArrowRight size={18} />
             </Link>
@@ -85,7 +85,7 @@ export function RequestSteps({ service }: { service?: string }) {
           {
             Icon: MousePointer2,
             title: "Choose your service",
-            text: "Find the clean that suits your home, workplace or specialist surfaces.",
+            text: "Choose house, property, garden, construction or specialist cleaning.",
           },
           {
             Icon: ClipboardList,
@@ -130,7 +130,7 @@ export function MoveOutFeature() {
           className="finish-editorial-photo"
         >
           <Photo
-            src="/images/lease.jpg"
+            src="/images/lease.webp"
             alt="Clean kitchen surfaces ready for a property handover"
           />
           <span>MOVE-OUT CLEANING / A CLEAR CHECKLIST</span>
@@ -175,7 +175,7 @@ export function WhyCleaning() {
       <div className="finish-container finish-why">
         <Reveal variant="image" distance={28} duration={0.55}>
           <Photo
-            src="/images/thrive-window-cleaning.png"
+            src="/images/thrive-window-cleaning.webp"
             alt="A gloved hand using a squeegee on glass"
           />
           <p className="finish-small">
@@ -187,7 +187,7 @@ export function WhyCleaning() {
             <FinishHeading
               label="A LITTLE MORE CONSIDERATION"
               title="Good cleaning starts with a clear plan."
-              text="Different rooms, materials and routines need different kinds of care. Start with a conversation about what matters to you."
+              text="Different properties, outdoor areas and completed sites need different kinds of care. Start with a conversation about what matters to you."
             />
           </Reveal>
           <div className="finish-benefit-list">
@@ -243,19 +243,19 @@ export function CleaningDetailsGallery() {
         <div className="finish-detail-gallery">
           {[
             {
-              src: "/images/thrive-oven-cleaning.png",
+              src: "/images/thrive-oven-cleaning.webp",
               title: "Appliance detail",
               text: "Oven interiors and racks, with suitable methods for your appliance.",
               href: "/services/oven-cleaning",
             },
             {
-              src: "/images/thrive-window-cleaning.png",
+              src: "/images/thrive-window-cleaning.webp",
               title: "A clearer outlook",
               text: "Accessible glass and agreed window surfaces, assessed for safe access.",
               href: "/services/window-cleaning",
             },
             {
-              src: "/images/service-carpet.png",
+              src: "/images/service-carpet.webp",
               title: "Care underfoot",
               text: "Carpet methods selected for the fibres, condition and treatment needs.",
               href: "/services/carpet-cleaning",
@@ -535,7 +535,7 @@ export function CareerCompletion({ live }: { live: boolean }) {
             />
             <ul className="finish-checks">
               {[
-                "Respect for homes, workplaces and personal belongings",
+                "Respect for properties, outdoor areas and personal belongings",
                 "Clear communication and reliable attendance",
                 "Valid Australian working rights",
                 "Careful use of equipment and surface-appropriate methods",
@@ -553,8 +553,8 @@ export function CareerCompletion({ live }: { live: boolean }) {
           <Reveal variant="image" distance={28} duration={0.55}>
             <Photo
               className="finish-career-photo"
-              src="/images/thrive-window-cleaning.png"
-              alt="A cleaner carefully using a squeegee on a window"
+              src="/images/careers-detail.webp"
+              alt="Male professional carefully wiping a stair handrail"
             />
           </Reveal>
         </div>
@@ -608,7 +608,7 @@ export function ServiceCompletion({
               text={guide.audience}
             />
             <Link
-              href={`/quote?service=${service.slug}`}
+              href={`/contact?service=${service.slug}`}
               className="finish-text-link"
             >
               Discuss this service <ArrowRight size={18} />
@@ -670,7 +670,7 @@ export function ServiceCompletion({
             </p>
             <Link
               className="finish-button"
-              href={`/quote?service=${service.slug}`}
+              href={`/contact?service=${service.slug}`}
             >
               Build your service enquiry <ArrowRight size={18} />
             </Link>

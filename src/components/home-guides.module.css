@@ -1,0 +1,28 @@
+/* The home preview is a compact, even six-card grid. Full articles stay intact. */
+.section .grid :global(.article-card):nth-child(n) {
+  margin-top: 0;
+  height: 100%;
+}
+
+.section .grid :global(.article-card):nth-child(n) > a {
+  display: flex;
+  flex-direction: column;
+}
+
+.section .grid :global(.article-card):nth-child(n) :global(.photo) {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 3 / 2;
+  flex-shrink: 0;
+}
+
+.section .grid :global(.card-body) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.section .grid :global(.text-link) {
+  margin-top: auto;
+  padding-top: 14px;
+}

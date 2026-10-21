@@ -10,7 +10,7 @@ import {
   Search,
   SlidersHorizontal,
 } from "lucide-react";
-import { services, articles } from "@/lib/data";
+import { services, articles, faqs } from "@/lib/data";
 import { site, testimonials } from "@/lib/config";
 import { Photo } from "./ui";
 import { Reveal } from "./motion";
@@ -101,14 +101,14 @@ export function ServiceDiscovery({ preview = false }: { preview?: boolean }) {
           >
             <Link href={`/services/${service.slug}`}>
               <Photo
-                src={service.image}
+                src={service.thumbnail}
                 alt={`${service.name.toLowerCase()} — illustrative service photograph`}
                 sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 420px"
               />
               <div className="finish-service-copy">
                 <span className="finish-kicker">{service.category}</span>
                 <h3>{service.name}</h3>
-                <p>{service.intro}</p>
+                <p>{service.summary}</p>
                 <span className="finish-text-link">
                   Explore this clean <ArrowRight size={18} />
                 </span>
@@ -144,10 +144,10 @@ export function ServiceDiscovery({ preview = false }: { preview?: boolean }) {
           </div>
           <p>
             Routine upkeep? Choose regular house cleaning. Built-up grime?
-            Explore a deep clean. Moving out? Start with end of lease.
+            Explore a deep clean. For rentals, start with property cleaning.
             Specialist surfaces can be assessed separately.
           </p>
-          <Link href="/quote" className="finish-text-link">
+          <Link href="/contact" className="finish-text-link">
             Ask about your clean <ArrowRight size={18} />
           </Link>
         </div>
@@ -304,11 +304,11 @@ export function CoverageDirectory({ compact = false }: { compact?: boolean }) {
   );
 }
 
-const questions = [
+const appointmentQuestions = [
   {
     category: "Services",
     q: "Which cleaning service should I choose?",
-    a: "Regular house cleaning suits routine upkeep. Deep cleaning focuses on a more detailed reset, while end of lease cleaning follows your agreed move-out checklist. Specialist carpet, window and oven services have their own scope.",
+    a: "Regular house cleaning suits routine upkeep. Deep cleaning focuses on a more detailed reset, while property cleaning follows your agreed property checklist. Specialist carpet cleaning has its own scope.",
   },
   {
     category: "Services",
@@ -355,6 +355,14 @@ const questions = [
     q: "How do I request a change to my appointment?",
     a: "Contact the team with your request reference, original preferred date and the change you need. Timing, availability and any applicable terms are confirmed directly. Do not assume an appointment has changed until you receive confirmation.",
   },
+];
+
+const questions = [
+  ...faqs.map((item) => ({
+    ...item,
+    category: item.category === "Pricing" ? "Quotes" : item.category,
+  })),
+  ...appointmentQuestions.filter((item) => item.category === "Appointments"),
 ];
 
 export function HelpCentre({ compact = false }: { compact?: boolean }) {

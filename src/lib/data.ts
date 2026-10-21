@@ -1,362 +1,300 @@
-export const services = [
-  {
-    slug: "regular-house-cleaning",
-    name: "Regular House Cleaning",
-    category: "Residential",
-    image: "/images/thrive-australian-kitchen.png",
-    intro:
-      "Dependable routine cleaning to keep your home fresh, tidy and hygienic.",
-    description:
-      "Consistent weekly, fortnightly or monthly house cleaning covering kitchens, bathrooms, dusting, vacuuming and mopping.",
-    includes: [
-      "Dust and wipe all accessible surfaces, benchtops and furniture",
-      "Vacuum carpets, rugs and mop all hard floor surfaces throughout",
-      "Clean kitchen stovetop, rangehood exterior, benchtops and sink",
-      "Thoroughly sanitise bathroom basins, toilets, shower screens and mirrors",
-    ],
-    benefit:
-      "Enjoy a consistently clean home without spending your weekends doing chores.",
-    extra:
-      "Optional extras such as oven interior cleaning, fridge detailing or inside windows can be added.",
-  },
-  {
-    slug: "deep-cleaning",
-    name: "Deep Cleaning",
-    category: "Residential",
-    image: "/images/cleaning-care.png",
-    intro:
-      "A detailed, top-to-bottom clean for built-up grime and hard-to-reach areas.",
-    description:
-      "An intensive cleaning service targeting neglected corners, skirting boards, tile grout and high-touch surfaces.",
-    includes: [
-      "Detailed dusting and wipe-down of all accessible surfaces and fixtures",
-      "Wash accessible skirting boards, door frames, light switches and handles",
-      "Deep scrub and descale bathroom wall tiles, shower recesses, basins and toilets",
-      "Clean kitchen splashbacks, exterior cupboard fronts and exhaust surfaces",
-    ],
-    benefit:
-      "Restore cleanliness, freshness and hygiene to every overlooked corner of your home.",
-    extra:
-      "Interior window cleaning, oven detailing and refrigerator deep cleans are available upon request.",
-  },
-  {
-    slug: "end-of-lease-cleaning",
-    name: "End of Lease Cleaning",
-    category: "Residential",
-    image: "/images/lease.jpg",
-    intro:
-      "Comprehensive move-out cleaning aligned with Australian real estate checklists.",
-    description:
-      "Detailed vacate cleaning for rental properties to help tenants, property managers and landlords prepare spaces for final inspection.",
-    includes: [
-      "Clean inside and outside of all empty cupboards, drawers and wardrobes",
-      "Deep clean kitchen surfaces, stovetops, rangehood filters and benchtops",
-      "Scrub and sanitise bathrooms, shower screens, basins, bathtubs and toilets",
-      "Vacuum all carpets, mop hard floors and wipe accessible skirting boards",
-    ],
-    benefit:
-      "Take the stress out of moving with a structured property cleaning checklist.",
-    extra:
-      "Carpet steam cleaning, oven interior cleaning and interior windows can be quoted separately. Final bond decisions remain at the discretion of your real estate agent or landlord.",
-  },
-  {
-    slug: "commercial-cleaning",
-    name: "Commercial Cleaning",
-    category: "Commercial",
-    image: "/images/thrive-australian-office.png",
-    intro:
-      "Professional cleaning solutions tailored to your commercial facility and schedule.",
-    description:
-      "Flexible commercial cleaning for offices, retail stores, communal facilities and workplaces across Australia.",
-    includes: [
-      "Disinfect high-touch contact points, communal desks and workstations",
-      "Vacuum commercial carpets and runners, and mop hard floor surfaces",
-      "Sanitise staff kitchens, break rooms, benches and sinks",
-      "Empty standard rubbish and recycling bins and replace bin liners",
-    ],
-    benefit:
-      "Maintain a pristine, hygienic and welcoming environment for staff, clients and visitors.",
-    extra:
-      "After-hours cleaning schedules, customized scope and periodic deep cleans arranged upon request.",
-  },
-  {
-    slug: "airbnb-cleaning",
-    name: "Airbnb Cleaning",
-    category: "Commercial",
-    image: "/images/service-airbnb.png",
-    intro:
-      "Fast, reliable turnover cleaning for holiday rentals and short-stay properties.",
-    description:
-      "Thorough changeover cleaning coordinated with your booking calendar to ensure incoming guests arrive to an immaculate space.",
-    includes: [
-      "Clean and sanitise guest-facing kitchen benchtops, sinks and appliances",
-      "Scrub, disinfect and polish all bathroom fixtures, mirrors and toilets",
-      "Vacuum all flooring, mop hard surfaces and dust furniture and decor",
-      "Conduct a walkthrough and promptly report any visible property damage or maintenance issues",
-    ],
-    benefit:
-      "Keep your short-stay property guest-ready and consistently maintain positive guest reviews.",
-    extra:
-      "Linen changeovers, towel laundering and amenity restocking are arranged by prior agreement.",
-  },
-  {
-    slug: "carpet-cleaning",
-    name: "Carpet Cleaning",
-    category: "Specialist",
-    image: "/images/service-carpet.png",
-    intro:
-      "Targeted carpet care to extract embedded dirt, allergens and surface stains.",
-    description:
-      "Professional carpet cleaning using suitable hot water extraction or dry-cleaning methods tailored to your carpet fibres.",
-    includes: [
-      "Pre-inspection of carpet fibre condition, pile wear and existing stains",
-      "Targeted pre-treatment of high-traffic zones and spot stains",
-      "Deep hot-water or low-moisture extraction of agreed carpeted areas",
-      "Post-clean carpet grooming with drying and aftercare instructions",
-    ],
-    benefit:
-      "Revitalise high-traffic carpet fibres, remove allergens and prolong flooring lifespan.",
-    extra:
-      "Stain removal depends on carpet fibre type, age of stain and prior treatments; complete stain removal cannot be guaranteed.",
-  },
-  {
-    slug: "one-off-cleaning",
-    name: "One-Off Cleaning",
-    category: "Residential",
-    image: "/images/kitchen.jpg",
-    intro:
-      "A comprehensive one-time clean whenever your home needs a fresh reset.",
-    description:
-      "Flexible single-visit cleaning for spring cleans, pre-event preparation or post-event resets with no recurring commitment.",
-    includes: [
-      "Clean and wipe priority living spaces, bedrooms and dining areas",
-      "Wipe kitchen worktops, stovetops, sinks and exterior appliances",
-      "Thoroughly clean and sanitise bathroom fixtures, toilets and mirrors",
-      "Vacuum carpets and mop accessible hard floors throughout the property",
-    ],
-    benefit:
-      "Enjoy a professional home refresh on your terms without any ongoing contract.",
-    extra:
-      "Allocate extra cleaning hours for specific focus areas, appliances or internal windows.",
-  },
-  {
-    slug: "residential-cleaning",
-    name: "Residential Cleaning",
-    category: "Residential",
-    image: "/images/comparison-living-demo.png",
-    intro:
-      "Comprehensive cleaning services for houses, apartments and townhouses.",
-    description:
-      "Customised residential cleaning tailored to the layout, surface materials and specific priorities of your home.",
-    includes: [
-      "Dust all accessible furniture, surfaces, ledges and picture frames",
-      "Clean kitchen benchtops, sinks, cupboard exteriors and splashbacks",
-      "Scrub and disinfect bathroom vanities, showers, bathtubs and toilets",
-      "Vacuum all carpets, rugs and mop hard floor surfaces",
-    ],
-    benefit:
-      "A dependable cleaning plan tailored to the unique routine of your Australian household.",
-    extra:
-      "Please let our team know in advance about pets, specific surface care instructions or access requirements.",
-  },
-  {
-    slug: "office-cleaning",
-    name: "Office Cleaning",
-    category: "Commercial",
-    image: "/images/office.jpg",
-    intro:
-      "Reliable office cleaning to support a healthy and productive working environment.",
-    description:
-      "Scheduled office cleaning for desks, meeting rooms, reception areas, staff kitchens and restrooms matched to your operating hours.",
-    includes: [
-      "Wipe and sanitise clear desk surfaces, reception counters and meeting tables",
-      "Clean and sanitise communal staff kitchens, benches and food prep areas",
-      "Disinfect commercial restrooms, polish mirrors and clean hand basins",
-      "Vacuum office carpets, mop hard flooring and empty office waste bins",
-    ],
-    benefit:
-      "Support employee wellbeing and present a clean, professional workspace to your clients.",
-    extra:
-      "After-hours access protocols, security alarm handling and document confidentiality requirements are agreed in advance.",
-  },
-  {
-    slug: "window-cleaning",
-    name: "Window Cleaning",
-    category: "Specialist",
-    image: "/images/thrive-window-cleaning.png",
-    intro: "Streak-free interior and accessible exterior window cleaning.",
-    description:
-      "Professional glass cleaning for residential and commercial spaces, focusing on internal glass, window tracks and accessible panes.",
-    includes: [
-      "Safety and access assessment of all requested window surfaces",
-      "Wash interior glass panes using professional squeegee cleaning techniques",
-      "Wipe accessible internal window sills, tracks and surrounding frames",
-      "Final inspection to ensure clear, streak-free glass finishes",
-    ],
-    benefit:
-      "Maximise natural light and enhance the look of your home or commercial premises.",
-    extra:
-      "Multi-storey exterior glass, difficult-access panels and specialist safety harness work require site-specific assessment.",
-  },
-  {
-    slug: "oven-cleaning",
-    name: "Oven Cleaning",
-    category: "Specialist",
-    image: "/images/thrive-oven-cleaning.png",
-    intro:
-      "Specialised oven cleaning to remove grease, burnt carbon and baked-on grime.",
-    description:
-      "Intensive cleaning for domestic and commercial ovens, including removable wire racks, trays, glass door panels and interior walls.",
-    includes: [
-      "Inspect oven condition and verify heating elements prior to cleaning",
-      "Remove and soak wire racks, side runners and grill trays in degreaser",
-      "Deep clean interior oven walls, base, fan cover and roof",
-      "Clean and polish internal and external oven door glass and controls",
-    ],
-    benefit:
-      "Eliminate burnt food odours, reduce cooking smoke and keep your oven performing efficiently.",
-    extra:
-      "Please ensure the oven is switched off and completely cooled before the appointment. Electrical repairs and element replacements are not included.",
-  },
+import { servicePages } from "./service-pages";
+
+const serviceSummaries: Record<string, string> = {
+  "house-cleaning": "Everyday home care, planned around your routine.",
+  "property-cleaning":
+    "A fresh start for rentals, vacant and managed properties.",
+  "garden-cleaning": "A tidy-up for patios, paths and outdoor areas.",
+  "construction-cleaning":
+    "Dust and surface cleaning after building or renovation work.",
+  "end-of-lease-cleaning":
+    "Move-out cleaning with a property-specific checklist.",
+  "commercial-cleaning":
+    "Practical cleaning for workplaces and shared business spaces.",
+  "office-cleaning": "Care for desks, meeting rooms and shared office areas.",
+  "airbnb-cleaning": "Cleaning support between short-stay guest visits.",
+  "carpet-cleaning": "Carpet care tailored to its fibres and condition.",
+  "window-cleaning": "A clearer outlook for safely accessible windows.",
+  "oven-cleaning": "Detailed care for your oven and agreed components.",
+};
+
+const serviceThumbnails: Record<string, string> = {
+  "house-cleaning": "house",
+  "property-cleaning": "property",
+  "garden-cleaning": "garden",
+  "construction-cleaning": "construction",
+  "end-of-lease-cleaning": "lease",
+  "commercial-cleaning": "commercial-male",
+  "office-cleaning": "office",
+  "airbnb-cleaning": "airbnb",
+  "carpet-cleaning": "carpet",
+  "window-cleaning": "window-male",
+  "oven-cleaning": "oven",
+};
+
+const catalogue = [
+  ["house-cleaning", "House Cleaning", "Residential"],
+  ["property-cleaning", "Property Cleaning", "Residential"],
+  ["garden-cleaning", "Garden Cleaning", "Residential"],
+  ["construction-cleaning", "Construction Cleaning", "Commercial"],
+  ["commercial-cleaning", "Commercial Cleaning", "Commercial"],
+  ["office-cleaning", "Office Cleaning", "Commercial"],
+  ["airbnb-cleaning", "Airbnb Cleaning", "Commercial"],
+  ["carpet-cleaning", "Carpet Cleaning", "Specialist"],
 ];
+export const services = catalogue.map(([slug, name, category]) => {
+  const page = servicePages[slug];
+  return {
+    slug,
+    name,
+    category,
+    image: page.image,
+    thumbnail: `/images/tile-${serviceThumbnails[slug]}.webp`,
+    summary: serviceSummaries[slug],
+    intro: page.lead,
+    description: page.description,
+    includes: page.areas.flatMap((area) => area.items).slice(0, 4),
+    benefit: page.closing,
+    extra:
+      "Optional work, access and the final cleaning scope are agreed with the team.",
+  };
+});
 
 export const faqs = [
   {
     category: "Services",
-    q: "What is included in a regular house clean?",
-    a: "Regular house cleaning covers routine maintenance tasks: dusting accessible surfaces, vacuuming carpets, mopping hard floors, cleaning kitchen benchtops and stovetops, and sanitising bathroom basins, toilets and showers. An agreed checklist confirms the exact scope for your home.",
+    q: "What types of cleaning services do you provide?",
+    a: "Thrive4 offers House, Property, Garden, Construction, Commercial, Office, Airbnb and Carpet Cleaning. Share the property and work required so suitability and scope can be confirmed.",
+  },
+  {
+    category: "Services",
+    q: "Do you provide house and property cleaning?",
+    a: "Yes. House Cleaning supports routine or one-off home care. Property Cleaning is discussed for rental, vacant and managed residential properties with a property-specific checklist.",
+  },
+  {
+    category: "Services",
+    q: "Can I request garden or outdoor cleaning?",
+    a: "Yes. Describe the garden, patio, balcony or path, including surface types, access and any loose leaves or light debris. Tasks and debris handling are agreed in advance.",
+  },
+  {
+    category: "Services",
+    q: "What is included in construction cleaning?",
+    a: "The agreed scope can cover ordinary settled dust, light debris, accessible surfaces and finished floors after building or renovation work. Hazardous material handling, heavy waste disposal and specialist regulated work are not confirmed services.",
   },
   {
     category: "Booking",
-    q: "How does the booking process work?",
-    a: "Select your cleaning service, share your property details (bedrooms, bathrooms and property type), choose your preferred schedule, and submit your request. Our team reviews your request, verifies local availability, and provides a clear written quote before confirming your booking.",
+    q: "Can I request a one-off clean?",
+    a: "Yes. A single visit can be requested for the relevant service. Describe your priorities, property condition and preferred timing; no appointment is confirmed until the team agrees the arrangements.",
   },
   {
     category: "Pricing",
-    q: "How is the cleaning price calculated?",
-    a: "Pricing is calculated based on property size, number of bedrooms and bathrooms, cleaning type (regular, deep or end-of-lease), frequency, and any optional extras requested (such as oven or carpet cleaning). We provide a transparent, personalised quote before any clean begins.",
+    q: "How is pricing calculated?",
+    a: "The quote depends on the property or area, its condition, access, service scope and agreed extras. Existing published plan information is a guide; the team confirms the written quote for your requirements.",
   },
   {
     category: "Services",
-    q: "Can I request a one-off clean without a recurring contract?",
-    a: "Yes. We offer flexible one-off cleaning services for spring cleans, pre-sale preparations, post-renovation cleans or special occasions, with no ongoing commitment or contract required.",
+    q: "Do you provide cleaning for commercial properties?",
+    a: "Commercial Cleaning covers enquiries for workplaces, offices, retail and communal spaces. Explain the premises, shared facilities and operating requirements so a suitable scope can be discussed.",
   },
   {
     category: "Services",
-    q: "Are cleaning products and equipment provided?",
-    a: "Yes, our cleaning teams arrive equipped with professional cleaning supplies and equipment. If you have specific surface care requirements, delicate stone benchtops, or prefer particular eco-friendly products, please let us know when requesting your quote.",
-  },
-  {
-    category: "Services",
-    q: "How long does a cleaning service take?",
-    a: "Duration depends on property size, current condition, and the service selected. A regular two-bedroom apartment clean typically takes 2 to 3 hours, whereas a detailed deep clean or end-of-lease clean for a family house may require 4 to 8 hours. Estimated times are confirmed in your quote.",
-  },
-  {
-    category: "Services",
-    q: "What is included in an end of lease clean?",
-    a: "End of lease cleaning is a comprehensive vacate clean designed around real estate checklists. It includes cleaning inside all empty cupboards and wardrobes, detailed kitchen cleaning, scrubbing bathrooms, wiping skirting boards, and vacuuming and mopping floors throughout.",
+    q: "Can I add carpet cleaning?",
+    a: "Carpet cleaning can be requested separately or discussed alongside a relevant property clean. Surface condition, equipment and access affect what can be agreed.",
   },
   {
     category: "Booking",
-    q: "Can a cleaning appointment be rescheduled?",
-    a: "Yes. You can reschedule your cleaning appointment by contacting our team with your reference details. Please provide reasonable advance notice so our scheduling team can accommodate your preferred new date and time.",
-  },
-  {
-    category: "Services",
-    q: "How do I request additional cleaning extras?",
-    a: "You can select optional cleaning extras—such as oven cleaning, fridge cleaning, interior windows or carpet steam cleaning—directly on our booking form, or request them when speaking with our team before your clean.",
-  },
-  {
-    category: "Booking",
-    q: "How can I contact the cleaning team?",
-    a: "You can reach us through our online contact form, by requesting a quote online, or by calling or emailing our customer support team directly during business hours.",
-  },
-  {
-    category: "Services",
-    q: "Can you guarantee my bond return?",
-    a: "No professional cleaner can guarantee a bond return, as final bond decisions depend on your lease agreement, property manager inspection, and pre-existing property condition. We clean strictly according to real estate standards and will rectify any checklist items identified in your exit report.",
+    q: "How do I request a quote?",
+    a: "Choose a service and share your location, property type, size, current condition and priority tasks through the quote or contact form. The team reviews scope and availability before confirming arrangements.",
   },
   {
     category: "Areas",
     q: "Do you clean in my suburb?",
-    a: "We service selected residential and commercial areas across Australia. Enter your Australian suburb and 4-digit postcode on our Service Areas page or contact our team to confirm local service availability.",
-  },
-  {
-    category: "Pricing",
-    q: "Is the displayed estimate a final price?",
-    a: "Online estimates provide an indicative guide based on standard property configurations. The final price is confirmed in a written quote after assessing property specifics, access, and requested cleaning extras.",
+    a: "Share your suburb and postcode with the team so local availability can be confirmed. No Australia-wide availability is promised.",
   },
 ];
 
 export const articles = [
   {
     slug: "a-calm-weekly-cleaning-routine",
-    title:
-      "A Practical Weekly House Cleaning Routine for Busy Australian Homes",
+    title: "House Cleaning Checklist for Busy Homes",
     category: "Home care",
-    image: "/images/blog-home.jpg",
-    read: "4 min read",
+    image: "/images/journal-house-male.webp",
+    read: "3 min read",
     intro:
-      "Maintain a clean, comfortable home with a structured weekly routine that breaks chores into manageable steps.",
+      "A practical checklist for keeping priority rooms ready for everyday living.",
     sections: [
       [
-        "Focus on High-Traffic Living Spaces First",
-        "Start your routine where daily life happens most: kitchen benchtops, bathroom vanities, and high-traffic floor pathways. Tackling these essential areas first keeps your home functional and hygienic without feeling overwhelmed.",
+        "Start with the rooms you use most",
+        "List kitchen surfaces, bathrooms, bedrooms and living areas. Identify accessible tasks that fit your routine and note areas needing additional attention.",
       ],
       [
-        "Follow the Top-to-Bottom Cleaning Principle",
-        "Always dust ceiling fans, light fittings, shelves and benchtops before vacuuming or mopping floors. This ensures fallen dust and debris are collected when you clean the floors, avoiding double-handling.",
+        "Plan the surfaces and floors",
+        "Clear loose belongings before cleaning. Follow care instructions for the actual finishes in your home and leave delicate or uncertain surfaces for discussion.",
       ],
       [
-        "Schedule Periodic Deep Cleans",
-        "Keep routine tasks quick by setting aside larger chores—like oven degreasing, skirting board washing and window tracks—for monthly or seasonal deep cleaning appointments.",
+        "Decide on routine or one-off support",
+        "House Cleaning can be requested as ongoing upkeep or a single visit. Share room numbers, pets, access and priorities when discussing a cleaning scope.",
       ],
     ],
   },
   {
     slug: "moving-out-cleaning-checklist",
-    title: "End of Lease Cleaning Guide: Essential Room-by-Room Checklist",
-    category: "Moving",
-    image: "/images/blog-moving.jpg",
-    read: "5 min read",
+    title: "Preparing a Rental Property for End of Lease Cleaning",
+    category: "Property care",
+    image: "/images/journal-lease-male.webp",
+    read: "3 min read",
     intro:
-      "A step-by-step vacate cleaning checklist to help tenants and landlords prepare properties for final handover inspection.",
+      "Organise access, empty storage and a room-by-room checklist before the property handover.",
     sections: [
       [
-        "Review Your Condition Report & Agent Checklist",
-        "Begin with the original condition report and your agent's specific vacating checklist. Understanding the required standards upfront ensures you focus on the exact areas property managers inspect.",
+        "Gather the property checklist",
+        "Share your condition report and agent checklist so the cleaning request can be reviewed against the property requirements.",
       ],
       [
-        "Empty the Property Before Starting the Clean",
-        "Vacate cleaning is vastly more effective once furniture and personal belongings are removed. Clear every cupboard, drawer, wardrobe and pantry shelf so all surfaces can be thoroughly washed inside and out.",
+        "Arrange an empty space",
+        "Remove belongings and empty cupboards and wardrobes intended for cleaning. Tell the team about anything that will remain.",
       ],
       [
-        "Organise Specialist Cleaning Services Early",
-        "Carpet steam cleaning, professional oven cleaning and exterior glass often require dedicated equipment. Book specialist cleaning services ahead of your final key return to avoid moving-day delays.",
+        "Discuss additional work early",
+        "Carpet, window and oven cleaning can be requested separately. Scope and timing must be confirmed; cleaning does not guarantee a bond return.",
       ],
     ],
   },
   {
-    slug: "kitchen-reset-guide",
-    title:
-      "How to Deep Clean Your Kitchen: Degreasing, Sanitising & Surface Care",
-    category: "Cleaning tips",
-    image: "/images/blog-kitchen.jpg",
+    slug: "garden-outdoor-cleaning-checklist",
+    title: "Garden & Outdoor Cleaning Checklist",
+    category: "Outdoor care",
+    image: "/images/journal-garden.webp",
     read: "3 min read",
     intro:
-      "Professional techniques to remove grease, sanitise food prep areas and keep your kitchen looking pristine.",
+      "Plan a tidy-up of patios, balconies, garden paths and accessible outdoor areas.",
     sections: [
       [
-        "Clear and Pre-Treat Greasy Surfaces",
-        "Clear benchtops and remove loose crumbs before applying cleaning solutions. Allow grease-cutting agents a few minutes of dwell time on stovetops and splashbacks to break down stubborn oil splatters naturally.",
+        "Walk around the outdoor area",
+        "Note surface types, steps, gates and the locations of loose leaves, ordinary dirt or small fallen twigs. Photographs help explain the work.",
       ],
       [
-        "Match the Right Cleaner to Your Surface Type",
-        "Engineered stone, natural marble, laminate and stainless steel require specific care. Avoid abrasive scourers or acidic cleaners on delicate stone benchtops, and always test new products on an inconspicuous spot.",
+        "Define the tidy-up",
+        "Identify the areas to sweep or clean and any delicate plants or finishes. Do not assume landscaping, tree work or specialist waste handling is included.",
       ],
       [
-        "Finish With High-Touch Sanitisation",
-        "Wipe cabinet handles, fridge doors, tap fixtures and dishwasher controls with a sanitising cloth. Finish by vacuuming under kickboards and thoroughly mopping the floor.",
+        "Agree access and debris handling",
+        "Discuss how the team can enter and what will happen to light debris. Confirm suitable tasks, scope and availability before arranging a visit.",
+      ],
+    ],
+  },
+  {
+    slug: "post-construction-cleaning-scope",
+    title: "Post-Construction Cleaning: What Should Be Included?",
+    category: "Construction care",
+    image: "/images/journal-construction-male.webp",
+    read: "3 min read",
+    intro:
+      "Understand the information needed to plan cleaning after completed building work.",
+    sections: [
+      [
+        "Confirm the site is ready",
+        "Tell the team whether trades have finished and which areas have been released for cleaning. Identify access restrictions and new finishes.",
+      ],
+      [
+        "List ordinary dust and light residue",
+        "Describe settled dust, accessible surfaces and floor-cleaning requirements. Share photos and builder instructions for the materials installed.",
+      ],
+      [
+        "Make the boundaries clear",
+        "Hazardous material handling and heavy construction waste disposal are not confirmed services. Identify uncertain residue and agree a suitable cleaning scope before work begins.",
+      ],
+    ],
+  },
+  {
+    slug: "prepare-property-after-renovation",
+    title: "How to Prepare a Property After Renovation Work",
+    category: "Property care",
+    image: "/images/journal-renovation-male.webp",
+    read: "3 min read",
+    intro:
+      "Bring together finish details, access instructions and cleaning priorities after a renovation.",
+    sections: [
+      [
+        "Document the completed work",
+        "Describe the rooms renovated, installed finishes and any remaining light residue. Keep manufacturer care information available.",
+      ],
+      [
+        "Coordinate access",
+        "Confirm trades have finished and arrange a site contact, parking and entry instructions. Mention any areas that should remain untouched.",
+      ],
+      [
+        "Request a written scope",
+        "Discuss Construction Cleaning for post-work dust and presentation tasks, or Property Cleaning for a wider property checklist. The team confirms suitability and timing.",
+      ],
+    ],
+  },
+  {
+    slug: "commercial-workplace-cleaning-checklist",
+    title: "Commercial Cleaning Checklist for Workplaces",
+    category: "Workplace care",
+    image: "/images/journal-commercial.webp",
+    read: "3 min read",
+    intro:
+      "A practical starting point for discussing cleaning across shared business premises.",
+    sections: [
+      [
+        "Map the shared areas",
+        "List workstations, customer areas, staff kitchens, communal facilities and floor surfaces that form part of your premises.",
+      ],
+      [
+        "Explain the working day",
+        "Share operating hours, a site contact and preferred visit windows. Identify restricted rooms, equipment and entry procedures.",
+      ],
+      [
+        "Agree the tasks",
+        "Discuss accessible surfaces, floors and ordinary waste bins. The written scope should clarify the areas, frequency and access arrangements confirmed for the site.",
+      ],
+    ],
+  },
+  {
+    slug: "carpet-care-after-building-work",
+    title: "Carpet Care After Renovation or Construction",
+    category: "Specialist care",
+    image: "/images/journal-carpet-male.webp",
+    read: "3 min read",
+    intro:
+      "Describe carpet condition and recent work before discussing suitable cleaning care.",
+    sections: [
+      [
+        "Describe the fibres and condition",
+        "Share the carpet type if known, visible wear, dust and any stains. Explain the renovation work and previous treatments.",
+      ],
+      [
+        "Identify residue before cleaning",
+        "Tell the team about unknown residue or material left by trades. Do not assume specialist or hazardous material treatment is included.",
+      ],
+      [
+        "Discuss method and aftercare",
+        "The cleaning approach and drying advice depend on the carpet and conditions. Complete stain removal and fixed drying times cannot be promised.",
+      ],
+    ],
+  },
+  {
+    slug: "residential-window-cleaning-tips",
+    title: "Window Cleaning Tips for Residential Properties",
+    category: "Specialist care",
+    image: "/images/journal-window-male.webp",
+    read: "3 min read",
+    intro:
+      "Prepare a clear window-cleaning enquiry with pane numbers, height and access information.",
+    sections: [
+      [
+        "Count and describe the panes",
+        "Note approximate sizes, opening styles, screens and visible condition. Photos can make the requested scope easier to review.",
+      ],
+      [
+        "Prepare accessible areas",
+        "Clear items from internal sills and identify obstacles, locks and existing damage. Discuss which glass, tracks and frames are to be included.",
+      ],
+      [
+        "Confirm exterior suitability",
+        "Exterior panes depend on access and site conditions. High-rise, rope-access and specialist access capabilities are not confirmed; ask before making arrangements.",
       ],
     ],
   },

@@ -16,14 +16,16 @@ import "./carousel-hero.css";
 import "./pricing-plans.css";
 import "./completion.css";
 import "./contact-quote.css";
+import "./readability.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Thrive4 Cleaning | Professional Cleaning Services Australia",
+    default:
+      "Thrive4 Cleaning | House, Property, Garden & Construction Cleaning",
     template: "%s | Thrive4 Cleaning",
   },
   description:
-    "Professional residential, commercial and end of lease cleaning services across Australia. Request a free cleaning quote online today.",
+    "House, property, garden, construction and commercial cleaning. Request an agreed scope for your space.",
   openGraph: {
     type: "website",
     locale: "en_AU",
