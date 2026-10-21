@@ -88,8 +88,6 @@ const residentialPlans: PricingPlan[] = [
     oneOff: true,
   },
   servicePlan("property-cleaning", KeyRound),
-  servicePlan("garden-cleaning", Leaf),
-  servicePlan("carpet-cleaning", Layers),
 ];
 const commercialPlans: PricingPlan[] = [
   servicePlan("commercial-cleaning", Building2),
@@ -132,30 +130,35 @@ export function PricingPlans({
               personalised quote based on your space.
             </p>
           </div>
-          <div
-            className="pricing-plan-switch"
-            role="group"
-            aria-label="Cleaning plan category"
-          >
-            <button
-              type="button"
-              aria-pressed={category === "residential"}
-              onClick={() => setCategory("residential")}
-            >
-              <House size={23} />
-              Residential
-            </button>
-            <button
-              type="button"
-              aria-pressed={category === "commercial"}
-              onClick={() => setCategory("commercial")}
-            >
-              <Sparkles size={23} />
-              Commercial
-            </button>
-          </div>
         </div>
         <div
+          className="pricing-plan-switch"
+          role="group"
+          aria-label="Cleaning plan category"
+        >
+          <button
+            type="button"
+            aria-pressed={category === "residential"}
+            aria-controls="pricing-plan-results"
+            onClick={() => setCategory("residential")}
+          >
+            <House size={23} />
+            Residential
+          </button>
+          <button
+            type="button"
+            aria-pressed={category === "commercial"}
+            aria-controls="pricing-plan-results"
+            onClick={() => setCategory("commercial")}
+          >
+            <Sparkles size={23} />
+            Commercial
+          </button>
+        </div>
+        <div
+          id="pricing-plan-results"
+          role="region"
+          aria-label={`${category === "commercial" ? "Commercial" : "Residential"} cleaning plans`}
           className={`pricing-plan-grid${visiblePlans.length === 2 ? " pricing-plan-grid--two" : ""}`}
         >
           {visiblePlans.map((plan) => {

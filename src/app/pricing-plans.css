@@ -34,8 +34,9 @@
 }
 .pricing-plans-heading {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
+  text-align: center;
   gap: 30px;
   margin-bottom: 32px;
 }
@@ -64,16 +65,22 @@
 }
 .pricing-plan-switch {
   display: flex;
-  flex-shrink: 0;
-  gap: 12px;
-  padding-top: 37px;
+  width: min(100%, 380px);
+  gap: 6px;
+  padding: 6px;
+  margin: 0 auto 30px;
+  border: 1px solid #dfebe6;
+  border-radius: 40px;
+  background: #edf5ef;
 }
 .pricing-plan-switch button {
   display: inline-flex;
+  flex: 1;
+  min-width: 0;
   justify-content: center;
   align-items: center;
   gap: 11px;
-  padding: 14px 24px;
+  padding: 14px 18px;
   border: 1px solid #dfebe6;
   border-radius: 40px;
   background: #ffffffc9;
@@ -83,6 +90,10 @@
   transition:
     background 0.2s,
     color 0.2s;
+}
+.pricing-plan-switch button svg {
+  flex-shrink: 0;
+  color: inherit;
 }
 .pricing-plan-switch button[aria-pressed="true"] {
   background: linear-gradient(120deg, #245f4d, #124936);
@@ -304,9 +315,6 @@
   .pricing-plans-heading {
     flex-wrap: wrap;
   }
-  .pricing-plan-switch {
-    padding-top: 0;
-  }
   .pricing-plan-card {
     padding: 22px 20px;
   }
@@ -385,7 +393,7 @@
   }
   .pricing-plan-switch {
     width: 100%;
-    gap: 8px;
+    max-width: 380px;
   }
   .pricing-plan-switch button {
     flex: 1;

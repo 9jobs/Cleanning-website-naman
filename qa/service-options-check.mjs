@@ -16,10 +16,12 @@ let layoutChecks = 0;
 for (const route of ["/", "/services", "/contact", "/pricing", "/faq", "/about", "/blog", ...services.map((service) => `/services/${service.slug}`), ...articles.map((article) => `/blog/${article.slug}`)]) {
   await page.goto(`http://localhost:4317${route}`);
   await page.locator("main h1").waitFor();
+  await page.evaluate(() => document.fonts.ready);
   for (const slug of retired) await expect(page.locator(`a[href*="/services/${slug}"]`)).toHaveCount(0);
   for (const width of widths) {
     await page.setViewportSize({ width, height: 1000 });
-    await page.waitForTimeout(80);
+    await page.waitForTimeout(100);
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Overflow ${route} ${width}`);
     if (width <= 600) await expect(page.locator("header .header-actions")).toBeHidden();
     if (width >= 768) await expect(page.locator("header .header-actions")).toBeVisible();
@@ -46,8 +48,12 @@ for (const category of ["Residential", "Commercial"]) {
   await page.goto("http://localhost:4317/pricing");
   await page.getByRole("button", { name:category, exact:true }).click();
   const headings = await page.locator(".pricing-plan-card h2").allTextContents();
-  assert.equal(headings.length, category === "Residential" ? 6 : 4);
-  if (category === "Residential") assert(headings.includes("Deep Cleaning"));
+  assert.equal(headings.length, 4);
+  if (category === "Residential") {
+    assert(headings.includes("Deep Cleaning"));
+    assert(!headings.includes("Garden Cleaning") && !headings.includes("Carpet Cleaning"));
+    assert(!headings.includes("Commercial Cleaning"));
+  }
   else for (const name of ["Commercial Cleaning","Office Cleaning","Construction Cleaning","Airbnb Cleaning"]) assert(headings.includes(name));
   for (const width of widths) {
     await page.setViewportSize({ width, height:1000 });
@@ -72,6 +78,6 @@ for (const slug of retired) {
 }
 assert.deepEqual(errors, []);
 await browser.close();
-const result = { activeServices:8, retiredServices:retired, residentialPlans:6, commercialPlans:4, price:"AUD $60 / hour unchanged", layoutChecks, widths, allPlanLinksReachContact:true, liveSubmissions:0, errors };
+const result = { activeServices:8, retiredServices:retired, residentialPlans:4, commercialPlans:4, price:"AUD $60 / hour unchanged", layoutChecks, widths, allPlanLinksReachContact:true, liveSubmissions:0, errors };
 await fs.writeFile("qa/service-options-results.json",JSON.stringify(result,null,2));
 console.log(JSON.stringify(result));
