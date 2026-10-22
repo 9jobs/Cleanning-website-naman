@@ -142,7 +142,7 @@ export function ServiceDiscovery({ preview = false }: { preview?: boolean }) {
           </div>
           <p>
             Routine upkeep? Choose regular house cleaning. Built-up grime?
-            Explore a deep clean. For rentals, start with property cleaning.
+            Explore a one-off clean. For rentals, start with property cleaning.
             Specialist surfaces can be assessed separately.
           </p>
           <Link href="/contact" className="finish-text-link">
@@ -306,7 +306,7 @@ const appointmentQuestions = [
   {
     category: "Services",
     q: "Which cleaning service should I choose?",
-    a: "Regular house cleaning suits routine upkeep. Deep cleaning focuses on a more detailed reset, while property cleaning follows your agreed property checklist. One-Off Cleaning is available for a single visit.",
+    a: "Regular house cleaning suits routine upkeep. Property cleaning follows your agreed property checklist. One-Off Cleaning is available for a single visit.",
   },
   {
     category: "Services",

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
@@ -22,29 +23,22 @@ import { services } from "@/lib/data";
 import { ScrollProgress } from "./motion";
 import styles from "./navigation-menu.module.css";
 import footerStyles from "./footer.module.css";
+import logoStyles from "./logo.module.css";
 export function Logo() {
   return (
-    <Link href="/" className="logo" aria-label="Thrive4 Cleaning home">
-      <span className="logo-mark">
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 64 64"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M15 17h32M31 17v34"
-            stroke="currentColor"
-            strokeWidth="6"
-            strokeLinecap="round"
-          />
-          <path d="m45 16 3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="currentColor" />
-        </svg>
-      </span>
-      <span>
-        Thrive4<span className="logo-sub">CLEANING</span>
-      </span>
+    <Link
+      href="/"
+      className={`logo ${logoStyles.link}`}
+      aria-label="Thrive4 Cleaning home"
+    >
+      <Image
+        src="/brand/thrive4-logo.png"
+        alt="Thrive4 Cleaning"
+        width={2172}
+        height={724}
+        sizes="(max-width: 700px) 190px, 260px"
+        className={logoStyles.image}
+      />
     </Link>
   );
 }

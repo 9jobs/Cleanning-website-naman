@@ -231,7 +231,7 @@ function Section({
   );
 }
 function Extras({ slug, oven = true }: { slug: string; oven?: boolean }) {
-  const extras = ["deep-cleaning", "property-cleaning", "one-off-cleaning"]
+  const extras = ["house-cleaning", "property-cleaning", "one-off-cleaning"]
     .filter((key) => key !== slug)
     .map((key) => {
       const service = services.find((item) => item.slug === key)!;
@@ -276,7 +276,7 @@ function Hero({
     "house-cleaning",
     "property-cleaning",
     "commercial-cleaning",
-    "deep-cleaning",
+    "property-cleaning",
     "window-cleaning",
   ].includes(slug);
   return (
@@ -385,7 +385,7 @@ function Regular({ data, slug }: { data: ServicePageContent; slug: string }) {
     </>
   );
 }
-function Deep({ data, slug }: { data: ServicePageContent; slug: string }) {
+function PropertyCare({ data, slug }: { data: ServicePageContent; slug: string }) {
   return (
     <>
       <Section>
@@ -394,7 +394,7 @@ function Deep({ data, slug }: { data: ServicePageContent; slug: string }) {
             {data.description}
           </Intro>
           <div className={styles.moments}>
-            {(slug === "deep-cleaning"
+            {(slug === "property-cleaning"
               ? ["Seasonal resets", "Built-up dirt", "Detailed home care"]
               : ["Rental properties", "Vacant properties", "Managed properties"]
             ).map((text, i) => (
@@ -919,11 +919,10 @@ function Oven({ data }: { data: ServicePageContent }) {
 
 const bodies = {
   "house-cleaning": Regular,
-  "property-cleaning": Deep,
+  "property-cleaning": PropertyCare,
   "end-of-lease-cleaning": Lease,
   "commercial-cleaning": Commercial,
   "airbnb-cleaning": Airbnb,
-  "deep-cleaning": Deep,
   "one-off-cleaning": OneOff,
   "construction-cleaning": Residential,
   "office-cleaning": Office,
@@ -949,7 +948,7 @@ export function ServicePage({ service }: { service: Service }) {
         (
           {
             "house-cleaning": "regular-house-cleaning",
-            "property-cleaning": "deep-cleaning",
+            "property-cleaning": "property-cleaning",
             "one-off-cleaning": "one-off-cleaning",
             "construction-cleaning": "residential-cleaning",
           } as Record<string, string>
@@ -1044,9 +1043,9 @@ export function ServicesOverview() {
                 for your space.
               </h1>
               <p>
-                Explore House, Deep, One-Off, Property and Construction
-                Cleaning, alongside Commercial, Office and Airbnb Cleaning. Tell
-                us what needs attention.
+                Explore House, One-Off, Property and Construction Cleaning,
+                alongside Commercial, Office and Airbnb Cleaning. Tell us what
+                needs attention.
               </p>
             </div>
             <div className={styles.overviewNote}>

@@ -85,7 +85,7 @@ export function RequestSteps({ service }: { service?: string }) {
           {
             Icon: MousePointer2,
             title: "Choose your service",
-            text: "Choose house, deep, one-off, property, construction or specialist cleaning.",
+            text: "Choose house, one-off, property, construction or specialist cleaning.",
           },
           {
             Icon: ClipboardList,

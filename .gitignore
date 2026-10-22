@@ -2,7 +2,7 @@ node_modules/
 .next/
 .npm-cache/
 .env*
-!.env.example
+.local-admin/
 *.tsbuildinfo
 .vercel/
 test-results/

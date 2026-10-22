@@ -237,7 +237,7 @@ export const servicePages: Record<string, ServicePageContent> = {
         "Fridge detailing can be discussed separately. Share your appliance requirements when requesting a quote.",
       ],
     ],
-    related: ["deep-cleaning", "oven-cleaning", "window-cleaning"],
+    related: ["one-off-cleaning", "oven-cleaning", "window-cleaning"],
     closing: "Plan the clean around your move.",
   },
   "commercial-cleaning": {
@@ -305,7 +305,7 @@ export const servicePages: Record<string, ServicePageContent> = {
         "Yes. Each enquiry should describe its layout, shared facilities and cleaning priorities. The final scope is specific to the agreed site.",
       ],
     ],
-    related: ["office-cleaning", "window-cleaning", "deep-cleaning"],
+    related: ["office-cleaning", "window-cleaning", "one-off-cleaning"],
     closing: "Let’s discuss your working space.",
   },
   "airbnb-cleaning": {
@@ -518,7 +518,7 @@ export const servicePages: Record<string, ServicePageContent> = {
         "Office cleaning is specifically organised around desks, meeting rooms, reception and staff facilities. Commercial cleaning is the broader category for other business premises.",
       ],
     ],
-    related: ["commercial-cleaning", "deep-cleaning", "window-cleaning"],
+    related: ["commercial-cleaning", "one-off-cleaning", "window-cleaning"],
     closing: "Plan a clean that works for your office.",
   },
   "window-cleaning": {
@@ -662,54 +662,6 @@ export const servicePages: Record<string, ServicePageContent> = {
   },
 };
 
-servicePages["deep-cleaning"] = {
-  ...servicePages["property-cleaning"],
-  label: "DETAILED HOME CARE",
-  lead: "A detailed clean for built-up dirt and grime in your home.",
-  heading: "A fresh reset for the rooms you use every day.",
-  description:
-    "Deep Cleaning gives your home extra attention, with detailed kitchen and bathroom care, accessible skirting boards, door frames, switches and handles. Agree the priorities for a seasonal or one-off clean.",
-  areas: [
-    {
-      title: "Kitchen & bathroom",
-      items: [
-        "Detailed kitchen & bathroom clean",
-        "Attention to built-up dirt and grime",
-      ],
-    },
-    {
-      title: "Surfaces & fittings",
-      items: [
-        "Accessible skirting boards & door frames",
-        "Surfaces, switches & handles",
-      ],
-    },
-    {
-      title: "Rooms & floors",
-      items: [
-        "Dusting, vacuuming & mopping",
-        "Priority rooms agreed before the visit",
-      ],
-    },
-  ],
-  details: [
-    "Rooms and current condition",
-    "Built-up dirt and priority surfaces",
-    "Access and preferred one-off visit",
-  ],
-  questions: [
-    [
-      "When should I choose Deep Cleaning?",
-      "Choose a detailed reset for built-up dirt, seasonal cleaning or priority areas that need more attention. The team agrees the checklist before the visit.",
-    ],
-    [
-      "Is this a one-off service?",
-      "Yes. Request a single visit and share your priorities so scope and availability can be confirmed.",
-    ],
-  ],
-  related: ["house-cleaning", "one-off-cleaning", "property-cleaning"],
-  closing: "Give your home a detailed fresh start.",
-};
 servicePages["one-off-cleaning"] = {
   ...servicePages["house-cleaning"],
   label: "A SINGLE VISIT, YOUR PRIORITIES",
@@ -747,6 +699,6 @@ servicePages["one-off-cleaning"] = {
       "Request your preferred date with no recurring commitment.",
     ],
   ],
-  related: ["house-cleaning", "deep-cleaning", "property-cleaning"],
+  related: ["house-cleaning", "one-off-cleaning", "property-cleaning"],
   closing: "One visit. A fresher home.",
 };

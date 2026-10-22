@@ -91,7 +91,7 @@ export function ServiceFilter() {
           >
             {c === "Residential"
               ? "House Cleaning"
-              : c === "Deep Cleaning"
+              : c === "Property Cleaning"
                 ? "Property Cleaning"
                 : c === "End of Lease"
                   ? "End of Lease Cleaning"
@@ -298,7 +298,7 @@ export function Pricing({
   const initialService = services.find((s) => s.slug === initial.service);
   const [category, setCategory] = useState<keyof typeof rates.base>(
     initialService?.slug === "property-cleaning"
-      ? "Deep Cleaning"
+      ? "Property Cleaning"
       : initialService?.slug === "end-of-lease-cleaning"
         ? "End of Lease"
         : initialService?.category === "Commercial"
@@ -333,7 +333,7 @@ export function Pricing({
       ((initialService?.category === "Commercial"
         ? "Commercial"
         : initialService?.slug === "property-cleaning"
-          ? "Deep Cleaning"
+          ? "Property Cleaning"
           : initialService?.slug === "end-of-lease-cleaning"
             ? "End of Lease"
             : "Residential") === category
@@ -341,7 +341,7 @@ export function Pricing({
         : undefined) ||
       (category === "Residential"
         ? "house-cleaning"
-        : category === "Deep Cleaning"
+        : category === "Property Cleaning"
           ? "property-cleaning"
           : category === "End of Lease"
             ? "end-of-lease-cleaning"
@@ -618,7 +618,7 @@ export function Reviews() {
           >
             {c === "Residential"
               ? "House Cleaning"
-              : c === "Deep Cleaning"
+              : c === "Property Cleaning"
                 ? "Property Cleaning"
                 : c === "End of Lease"
                   ? "End of Lease Cleaning"

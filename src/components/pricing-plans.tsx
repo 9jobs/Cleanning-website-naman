@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,6 +16,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { services } from "@/lib/data";
+import { PRICING_HOURLY_RATE } from "@/lib/pricing";
 
 type PricingPlan = {
   slug: string;
@@ -35,7 +36,7 @@ function servicePlan(slug: string, icon: typeof House): PricingPlan {
     title: service.name,
     icon,
     description: service.summary,
-    price: 60,
+    price: PRICING_HOURLY_RATE,
     features: service.includes,
   };
 }
@@ -47,7 +48,7 @@ const residentialPlans: PricingPlan[] = [
     icon: House,
     description:
       "Keep your home clean, fresh and comfortable with ongoing care.",
-    price: 60,
+    price: PRICING_HOURLY_RATE,
     features: [
       "Kitchen & bathroom cleaning",
       "Dusting, vacuuming & mopping",
@@ -57,27 +58,11 @@ const residentialPlans: PricingPlan[] = [
     ],
   },
   {
-    slug: "deep-cleaning",
-    title: "Deep Cleaning",
-    icon: Sparkles,
-    description: "A detailed clean for built-up dirt and grime in your home.",
-    price: 60,
-    features: [
-      "Detailed kitchen & bathroom clean",
-      "Accessible skirting boards & door frames",
-      "Attention to built-up dirt and grime",
-      "Surfaces, switches & handles",
-      "Ideal for seasonal or one-off cleans",
-    ],
-    featured: true,
-    oneOff: true,
-  },
-  {
     slug: "one-off-cleaning",
     title: "One-Off Cleaning",
     icon: House,
     description: "A single-visit House Cleaning request for priority rooms.",
-    price: 60,
+    price: PRICING_HOURLY_RATE,
     features: [
       "Choose your priority rooms",
       "Kitchen & bathroom refresh",
@@ -90,8 +75,10 @@ const residentialPlans: PricingPlan[] = [
   servicePlan("property-cleaning", KeyRound),
 ];
 const commercialPlans: PricingPlan[] = [
-  servicePlan("commercial-cleaning", Building2),
-  servicePlan("office-cleaning", Building2),
+  {
+    ...servicePlan("commercial-cleaning", Building2),
+    title: "Commercial & Office Cleaning",
+  },
   servicePlan("construction-cleaning", Layers),
   servicePlan("airbnb-cleaning", BedDouble),
 ];
@@ -101,8 +88,62 @@ export function PricingPlans({
 }: {
   initial?: Record<string, string>;
 }) {
+  const [checkoutService, setCheckoutService] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState<{
+    service: string;
+    message: string;
+  } | null>(null);
+  const checkoutBusy = useRef(false);
+  const requestIds = useRef<Record<string, string>>({});
+  useEffect(() => {
+    function restoreCheckout(event: PageTransitionEvent) {
+      if (!event.persisted) return;
+      checkoutBusy.current = false;
+      requestIds.current = {};
+      setCheckoutService(null);
+      setCheckoutError(null);
+    }
+    window.addEventListener("pageshow", restoreCheckout);
+    return () => window.removeEventListener("pageshow", restoreCheckout);
+  }, []);
+  async function openCheckout(slug: string) {
+    if (checkoutBusy.current) return;
+    checkoutBusy.current = true;
+    setCheckoutService(slug);
+    setCheckoutError(null);
+    try {
+      requestIds.current[slug] ||= crypto.randomUUID();
+      const response = await fetch("/api/pricing/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service: slug,
+          requestId: requestIds.current[slug],
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok)
+        throw new Error(data.error || "Could not open checkout. Please retry.");
+      if (new URL(data.url).origin !== "https://checkout.stripe.com")
+        throw new Error("Invalid checkout link. Please retry.");
+      window.location.assign(data.url);
+    } catch (error) {
+      setCheckoutError({
+        service: slug,
+        message:
+          error instanceof Error
+            ? error.message
+            : "Checkout is unavailable. Please retry.",
+      });
+      setCheckoutService(null);
+      checkoutBusy.current = false;
+    }
+  }
   const [category, setCategory] = useState(
-    commercialPlans.some((plan) => plan.slug === initial.service)
+    services.some(
+      (service) =>
+        service.slug === initial.service && service.category === "Commercial",
+    )
       ? "commercial"
       : "residential",
   );
@@ -184,7 +225,7 @@ export function PricingPlans({
                 <p className="pricing-plan-description">{plan.description}</p>
                 <div className="pricing-plan-price">
                   <strong>AUD ${plan.price}</strong>
-                  <span>/ hour</span>
+                  <span>/ person / hour</span>
                 </div>
                 <ul>
                   {plan.features.map((feature) => (
@@ -195,9 +236,23 @@ export function PricingPlans({
                   ))}
                 </ul>
                 <div className="pricing-plan-actions">
-                  <Link href={destination("/book", plan.slug, plan.oneOff)}>
-                    Pay Now <ArrowRight size={19} />
+                  <Link
+                    href={destination("/book", plan.slug, plan.oneOff)}
+                    prefetch={false}
+                    aria-disabled={checkoutService !== null}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      void openCheckout(plan.slug);
+                    }}
+                  >
+                    {checkoutService === plan.slug
+                      ? "Opening checkout…"
+                      : "Pay Now"}{" "}
+                    <ArrowRight size={19} />
                   </Link>
+                  {checkoutError?.service === plan.slug && (
+                    <p role="alert">{checkoutError.message}</p>
+                  )}
                 </div>
               </article>
             );

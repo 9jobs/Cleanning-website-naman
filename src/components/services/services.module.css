@@ -1194,16 +1194,16 @@
 }
 
 /* Deliberate service silhouettes; the rest is a shared Services-only vocabulary. */
-.page[data-service="deep-cleaning"] .heroCopy {
+.page[data-service="property-cleaning"] .heroCopy {
   background: #fffffff5;
   padding: 32px;
   border: 1px solid #fff;
   border-radius: 20px;
 }
-.page[data-service="deep-cleaning"] .coverHero::after {
+.page[data-service="property-cleaning"] .coverHero::after {
   background: linear-gradient(90deg, #f6f8f430, #f6f8f400);
 }
-.page[data-service="deep-cleaning"] .heroBackdrop img {
+.page[data-service="property-cleaning"] .heroBackdrop img {
   object-position: 70% 62%;
 }
 .page[data-service="end-of-lease-cleaning"] .heroLayout {
@@ -1382,7 +1382,7 @@
   .page[data-service="commercial-cleaning"] .hero {
     background: #193d30;
   }
-  .page[data-service="deep-cleaning"] .heroCopy {
+  .page[data-service="property-cleaning"] .heroCopy {
     padding: 0;
     background: none;
     border: 0;

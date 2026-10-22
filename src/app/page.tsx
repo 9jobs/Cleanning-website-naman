@@ -37,10 +37,10 @@ import { homeGuideCards } from "@/lib/home-guide-cards";
 export const metadata = {
   title: {
     absolute:
-      "Property, House, Deep & Construction Cleaning | Thrive4 Cleaning",
+      "Property, House & Construction Cleaning | Thrive4 Cleaning",
   },
   description:
-    "Thrive4 Cleaning provides professional house, deep, one-off, property, construction and commercial cleaning services.",
+    "Thrive4 Cleaning provides professional house, one-off, property, construction and commercial cleaning services.",
   alternates: { canonical: "/" },
 };
 
@@ -85,7 +85,7 @@ export default function Home() {
             </p>
             <p>
               Our services cover routine upkeep, detailed property cleaning,
-              deep cleaning, one-off visits and post-build cleans, with clear
+              property cleaning, one-off visits and post-build cleans, with clear
               communication from enquiry through to completion.
             </p>
             <div className="actions">
@@ -342,7 +342,7 @@ export default function Home() {
                 schedules.
               </h3>
               <p>
-                Request routine, one-off, deep or post-build cleaning to suit
+                Request routine, one-off or post-build cleaning to suit
                 your property.
               </p>
               <Link href="/book">

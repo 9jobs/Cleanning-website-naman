@@ -20,11 +20,11 @@ import "./readability.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Thrive4 Cleaning | House, Property, Deep & Construction Cleaning",
+    default: "Thrive4 Cleaning | House, Property & Construction Cleaning",
     template: "%s | Thrive4 Cleaning",
   },
   description:
-    "House, deep, one-off, property, construction and commercial cleaning. Request an agreed scope for your space.",
+    "House, one-off, property, construction and commercial cleaning. Request an agreed scope for your space.",
   openGraph: {
     type: "website",
     locale: "en_AU",
@@ -53,7 +53,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: site.name,
               url: site.url,
-              logo: `${site.url}/brand/logo-primary.svg`,
+              logo: `${site.url}/brand/thrive4-logo.png`,
             }).replace(/</g, "\\u003c"),
           }}
         />

@@ -26,7 +26,7 @@ const highlights = [
   },
   {
     Icon: CalendarDays,
-    title: "Deep & one-off cleaning",
+    title: "One-off cleaning",
     text: "Detailed home cleaning or a single visit for priority rooms.",
   },
   {
@@ -140,8 +140,7 @@ export function AboutPage() {
             property and the work required.
           </p>
           <p>
-            Our services cover routine upkeep, detailed property cleaning, deep
-            cleaning, one-off visits and post-build cleans. An agreed checklist
+            Our services cover routine upkeep, detailed property cleaning, one-off visits and post-build cleans. An agreed checklist
             sets out the work before a visit is confirmed.
           </p>
           <Button href="/contact">Talk to our team</Button>

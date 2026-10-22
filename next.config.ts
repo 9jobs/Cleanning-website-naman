@@ -4,7 +4,10 @@ const config: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   serverExternalPackages: ["@supabase/supabase-js"],
   outputFileTracingIncludes: {
-    "/api/contact": ["./certificates/supabase-root.crt"],
+    "/*": [
+      "./certificates/supabase-root.crt",
+      "./public/brand/thrive4-logo.png",
+    ],
   },
   async headers() {
     return [

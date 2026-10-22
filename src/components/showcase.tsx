@@ -129,8 +129,7 @@ export function ScrollStory() {
               areas, workplaces and post-construction spaces.
             </p>
             <p>
-              Whether you need routine cleaning, a property refresh, a deep
-              clean or a final post-build clean, we tailor the service to your
+              Whether you need routine cleaning, a property refresh, a one-off clean or a final post-build clean, we tailor the service to your
               space and priorities.
             </p>
             <Button href="/about" secondary>
@@ -156,10 +155,10 @@ const demoStories = [
     type: "Routine or one-off property care",
   },
   {
-    label: "DEEP CLEANING",
+    label: "ONE-OFF CLEANING",
     quote:
       "Detailed kitchen, bathroom and surface care for built-up dirt and grime.",
-    name: "Deep Cleaning",
+    name: "One-Off Cleaning",
     type: "A detailed reset for your home",
   },
   {
@@ -256,12 +255,7 @@ export function ExperienceCarousel() {
 
 type HomeServiceCategory = "Residential" | "Commercial";
 const homeServiceSlugs = {
-  Residential: [
-    "house-cleaning",
-    "deep-cleaning",
-    "one-off-cleaning",
-    "property-cleaning",
-  ],
+  Residential: ["house-cleaning", "one-off-cleaning", "property-cleaning"],
   Commercial: [
     "commercial-cleaning",
     "office-cleaning",
@@ -272,7 +266,6 @@ const homeServiceSlugs = {
 const serviceIcons: Record<string, typeof House> = {
   "house-cleaning": House,
   "property-cleaning": Sparkles,
-  "deep-cleaning": Sparkles,
   "one-off-cleaning": House,
   "commercial-cleaning": Building2,
   "office-cleaning": Building2,
@@ -381,7 +374,9 @@ export function PricingPaths() {
             {i === 1 && (
               <span className="path-featured-badge">
                 <Star size={14} fill="currentColor" />
-                {category === "Residential" ? "DEEP CLEAN" : "WORKPLACE CARE"}
+                {category === "Residential"
+                  ? "PROPERTY CARE"
+                  : "WORKPLACE CARE"}
               </span>
             )}
             <div className="path-top">

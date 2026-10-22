@@ -1,6 +1,7 @@
 .git
 .vercel
 .env*
+.local-admin
 node_modules
 .next
 .npm-cache

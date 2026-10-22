@@ -2,7 +2,6 @@ import { servicePages } from "./service-pages";
 
 const serviceSummaries: Record<string, string> = {
   "house-cleaning": "Everyday home care, planned around your routine.",
-  "deep-cleaning": "A detailed clean for built-up dirt and grime in your home.",
   "one-off-cleaning":
     "A single-visit House Cleaning request for priority rooms.",
   "property-cleaning":
@@ -22,7 +21,6 @@ const serviceSummaries: Record<string, string> = {
 const serviceThumbnails: Record<string, string> = {
   "house-cleaning": "house",
   "property-cleaning": "property",
-  "deep-cleaning": "property",
   "one-off-cleaning": "house",
   "construction-cleaning": "construction",
   "end-of-lease-cleaning": "lease",
@@ -35,7 +33,6 @@ const serviceThumbnails: Record<string, string> = {
 
 const catalogue = [
   ["house-cleaning", "House Cleaning", "Residential"],
-  ["deep-cleaning", "Deep Cleaning", "Residential"],
   ["one-off-cleaning", "One-Off Cleaning", "Residential"],
   ["property-cleaning", "Property Cleaning", "Residential"],
   ["construction-cleaning", "Construction Cleaning", "Commercial"],
@@ -65,7 +62,7 @@ export const faqs = [
   {
     category: "Services",
     q: "What types of cleaning services do you provide?",
-    a: "Thrive4 offers House, Deep, One-Off, Property, Commercial, Office, Construction and Airbnb Cleaning. Share the property and work required so suitability and scope can be confirmed.",
+    a: "Thrive4 offers House, One-Off, Property, Commercial, Office, Construction and Airbnb Cleaning. Share the property and work required so suitability and scope can be confirmed.",
   },
   {
     category: "Services",

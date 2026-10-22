@@ -36,7 +36,7 @@ export const rates = {
   approved: false,
   base: {
     Residential: 0,
-    "Deep Cleaning": 0,
+    "Property Cleaning": 0,
     "End of Lease": 0,
     Commercial: 0,
   },

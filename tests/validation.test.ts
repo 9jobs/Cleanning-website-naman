@@ -62,7 +62,7 @@ test("enquiries require meaningful content", () =>
       name: "Jamie",
       email: "jamie@example.com",
       phone: "0412345678",
-      service: "deep-cleaning",
+      service: "property-cleaning",
       postcode: "3000",
       message: "hi",
       consent: true,
@@ -89,7 +89,7 @@ test("configured estimate responds to rooms, extras and frequency", () => {
 test("current residential and commercial services are bookable, retired services are rejected", () => {
   for (const service of [
     "house-cleaning",
-    "deep-cleaning",
+
     "one-off-cleaning",
     "property-cleaning",
     "commercial-cleaning",
@@ -103,7 +103,11 @@ test("current residential and commercial services are bookable, retired services
       service,
     );
   }
-  for (const service of ["garden-cleaning", "carpet-cleaning"]) {
+  for (const service of [
+    "deep-cleaning",
+    "garden-cleaning",
+    "carpet-cleaning",
+  ]) {
     assert.equal(
       bookingSchema.safeParse({ ...booking, service }).success,
       false,

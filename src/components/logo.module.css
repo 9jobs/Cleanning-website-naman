@@ -1,0 +1,39 @@
+.link:global(.logo) {
+  display: inline-flex;
+  width: 240px;
+  max-width: 100%;
+  flex-shrink: 0;
+  gap: 0;
+  line-height: 0;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+}
+:global(footer) .link:global(.logo) {
+  width: 260px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+@media (max-width: 1100px) {
+  .link:global(.logo) {
+    width: 210px;
+  }
+}
+@media (max-width: 700px) {
+  .link:global(.logo) {
+    width: 190px;
+  }
+  :global(footer) .link:global(.logo) {
+    width: 240px;
+  }
+}
+@media (max-width: 359px) {
+  .link:global(.logo) {
+    width: 165px;
+  }
+}
