@@ -14,10 +14,16 @@ Run scripts/migrate-admin.mjs with the existing site's local migration credentia
 
 ## Payments and email
 
-Only the dedicated Thrive4 sandbox key is used. Every Stripe operation verifies the pinned Thrive4 account; live keys and connected-account routing are refused. Pricing is AUD 70 per person-hour with server-owned amounts. Historical AUD 60 receipts remain readable. Deep Cleaning is unavailable for new bookings/checkouts. Payments are one-time test payments; no real money, subscriptions, automatic scheduling or fulfillment is enabled.
+Stripe modes use separate dedicated Thrive4 accounts and credentials. Every Stripe operation verifies the matching pinned account; connected-account routing and shared 9Jobs credentials are refused. Pricing is AUD 70 per person-hour with server-owned amounts. Historical AUD 60 receipts remain readable. Deep Cleaning is unavailable for new bookings/checkouts. Payments are one-time payments. Sandbox mode collects no real money. No subscriptions, automatic scheduling or fulfillment is enabled.
 
 Online invoice Checkout returns to a public payment confirmation using an unguessable Checkout reference. Receipt/PDF access verifies the account, completed payment, saved invoice revision, currency and exact amount. The query string alone cannot confirm a payment. Payment status is reconciled on reads; there is no fulfillment webhook. Email uses server-only SMTP configuration and a hosted HTTPS logo, without image attachments. SMTP acceptance is distinct from inbox delivery.
 
 ## Checks
 
 Run npm test, npm run typecheck, npm run lint and npm run build. qa/admin-online-check.ts verifies the restricted role, persistent login/logout, invoice CRUD, revision conflicts and history against a temporary database record; it sends no emails or payments. Live release checks must cover login enforcement, credentials absent from client assets, saved invoices, pricing, and payment document endpoints. Browser auto-downloads may need permission; manual PDF buttons remain available.
+
+## Live activation and webhooks
+
+THRIVE4_STRIPE_MODE=live selects the dedicated restricted live key; sandbox credentials remain separate for historical records. Never activate until the key can retrieve the pinned Thrive4 live account and the account has charges enabled. Restricted-key permissions required are Accounts Read, Checkout Sessions Write, Payment Intents Read, Charges Read and Webhook Endpoints Read/Write for automated endpoint setup. scripts/configure-live-stripe.mjs verifies the account and business identity before any Stripe write, configures only this website webhook, and transfers production secrets via stdin. It sets the activation flag last. Missing permissions must be corrected in Stripe by the account owner; do not remove the account guard to bypass them.
+
+POST /api/stripe/webhook validates the exact raw body with the endpoint signing secret, constant-time HMAC comparison and a five-minute timestamp tolerance. Only relevant live Thrive4 Checkout events are processed. A private unique event ledger and transaction make retries idempotent. The handler retrieves authoritative Stripe state before updating invoice payment status; failed processing returns a retryable error. Unrelated events are acknowledged without changing invoices. Completed live invoices cannot be altered or deleted through local record management.

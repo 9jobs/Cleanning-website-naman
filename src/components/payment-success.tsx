@@ -183,7 +183,9 @@ export function PaymentSuccess({
               {busy ? "Preparing your PDFs…" : downloadState}
             </p>
             <span className={styles.testBadge}>
-              STRIPE TEST MODE · NO REAL MONEY COLLECTED
+              {payment.live
+                ? "SECURE PAYMENT · VERIFIED BY STRIPE"
+                : "STRIPE TEST MODE · NO REAL MONEY COLLECTED"}
             </span>
             <Link href={back} className={styles.back}>
               {reference.invoiceId ? "Back to invoice" : "Back to pricing"}
@@ -290,7 +292,9 @@ export function PaymentSuccess({
               <footer className={styles.paperFooter}>
                 <strong>Thank you for choosing Thrive4 Cleaning.</strong>
                 <p>
-                  Stripe test document. No real money was collected.
+                  {payment.live
+                    ? "Your payment has been received."
+                    : "Stripe test document. No real money was collected."}
                   <br />
                   Appointment scheduling is confirmed separately.
                 </p>

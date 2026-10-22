@@ -1,6 +1,6 @@
 import { services } from "../data";
 import { escapeHtml } from "./model";
-import { stripeTestReady } from "./stripe";
+import { stripeTestReady, stripeLiveMode } from "./stripe";
 import { invoiceMailReady } from "./email";
 
 export function adminShell(view: "create" | "review") {
@@ -10,6 +10,7 @@ export function adminShell(view: "create" | "review") {
     view,
     mailReady: invoiceMailReady(),
     stripeTestReady: stripeTestReady(),
+    stripeLive: stripeLiveMode(),
     services: services.map(({ slug, name }) => ({ slug, name })),
   }).replace(/</g, "\\u003c");
   const icon = (name: string) =>
@@ -25,7 +26,7 @@ export function adminShell(view: "create" | "review") {
   <main id="workspace" tabindex="-1"><div id="app-content"><div class="loading-state">Loading your invoice workspace…</div></div></main><footer class="admin-footer"><span>THRIVE4 CLEANING</span><span>A little less admin. A little more room to thrive.</span></footer></div></div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   <dialog id="payment-result-dialog" aria-labelledby="payment-result-title"><form method="dialog"><div class="payment-confetti" aria-hidden="true"><i style="--piece:0"></i><i style="--piece:1"></i><i style="--piece:2"></i><i style="--piece:3"></i><i style="--piece:4"></i><i style="--piece:5"></i><i style="--piece:6"></i><i style="--piece:7"></i><i style="--piece:8"></i><i style="--piece:9"></i><i style="--piece:10"></i><i style="--piece:11"></i><i style="--piece:12"></i><i style="--piece:13"></i><i style="--piece:14"></i><i style="--piece:15"></i><i style="--piece:16"></i><i style="--piece:17"></i><i style="--piece:18"></i><i style="--piece:19"></i></div><div class="dialog-symbol" id="payment-result-symbol">✓</div><h2 id="payment-result-title">Payment successful</h2><p id="payment-result-message"></p><div id="payment-document-actions" hidden><div class="payment-document-links"><a class="btn secondary small" id="payment-invoice-download" download>Invoice PDF</a><a class="btn secondary small" id="payment-receipt-download" download>Receipt PDF</a><a class="btn secondary small" id="payment-view-receipt">View receipt</a></div><p id="payment-download-status" role="status"></p></div><div class="dialog-actions"><button class="btn primary" value="close">Done</button></div></form></dialog>
-  <dialog id="send-dialog" aria-labelledby="send-title"><form method="dialog"><div class="dialog-symbol">↗</div><h2 id="send-title">Send this invoice?</h2><p>The branded HTML invoice will be emailed to <strong id="send-recipient"></strong>.</p><div class="notice">This is a <strong>test invoice</strong>. ${stripeTestReady() ? "The payment link opens Thrive4 Stripe test Checkout. Use test cards only. No real money is collected." : "The payment link is a localhost preview. Stripe is not connected."} Recurring payments are not active.</div><div id="send-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button class="btn secondary" value="cancel">Cancel</button><button class="btn primary" id="confirm-send" type="button">Send invoice email <span>↗</span></button></div></form></dialog>
+  <dialog id="send-dialog" aria-labelledby="send-title"><form method="dialog"><div class="dialog-symbol">↗</div><h2 id="send-title">Send this invoice?</h2><p>The branded HTML invoice will be emailed to <strong id="send-recipient"></strong>.</p><div class="notice">This is a <strong>${stripeLiveMode() ? "cleaning invoice" : "test invoice"}</strong>. ${stripeTestReady() ? (stripeLiveMode() ? "The payment link opens secure Thrive4 Stripe Checkout." : "The payment link opens Thrive4 Stripe test Checkout. Use test cards only. No real money is collected.") : "The payment link is a localhost preview. Stripe is not connected."} Recurring payments are not active.</div><div id="send-error" class="form-error" role="alert" hidden></div><div class="dialog-actions"><button class="btn secondary" value="cancel">Cancel</button><button class="btn primary" id="confirm-send" type="button">Send invoice email <span>↗</span></button></div></form></dialog>
   <noscript><div class="noscript">Enable JavaScript to create and review local invoices.</div></noscript></body></html>`;
 }
 export function paymentPreviewShell(

@@ -120,6 +120,7 @@ export type Invoice = Omit<InvoiceInput, "hours" | "hourlyRate"> & {
   paymentToken?: string;
   checkout?: {
     accountId: string;
+    livemode?: boolean;
     sessionId: string;
     url: string;
     revision: number;

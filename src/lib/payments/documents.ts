@@ -12,6 +12,7 @@ import {
 } from "../invoices/stripe";
 
 export type PaymentDocument = {
+  live?: boolean;
   key: string;
   invoiceNumber: string;
   receiptNumber: string;
@@ -66,9 +67,11 @@ export async function getPaymentDocument(query: {
       amount: payment.amount,
       app: "thrive4-pricing-checkout",
       service: payment.serviceSlug,
+      live: payment.live,
     });
     return {
       key: payment.sessionId,
+      live: payment.live,
       ...documentReferences(payment.sessionId),
       service: payment.service,
       hours: payment.hours,
@@ -102,10 +105,16 @@ export async function getPaymentDocument(query: {
       amount: invoice.amount,
       app: "thrive4-local-invoices",
       invoiceId: invoice.id,
+      live:
+        invoice.checkout.livemode ??
+        invoice.checkout.accountId === "acct_1USt0hPqa21oiEVr",
     },
   );
   return {
     key: invoice.checkout.sessionId,
+    live:
+      invoice.checkout.livemode ??
+      invoice.checkout.accountId === "acct_1USt0hPqa21oiEVr",
     ...documentReferences(invoice.checkout.sessionId),
     invoiceNumber: invoice.number,
     service: invoice.description,

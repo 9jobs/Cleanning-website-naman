@@ -109,7 +109,7 @@ export async function paymentPdf(
     regular,
     muted,
   );
-  right("PAID / STRIPE TEST MODE", 547, 108, 9, bold);
+  right(data.live ? "PAID" : "PAID / STRIPE TEST MODE", 547, 108, 9, bold);
   rule(140);
   text("FROM", 48, 161, 8, bold, muted);
   text("Thrive4 Cleaning", 48, 180, 12, bold);
@@ -190,7 +190,9 @@ export async function paymentPdf(
   rule(714);
   text("Thank you for choosing Thrive4 Cleaning.", 48, 733, 10, bold);
   text(
-    "TEST DOCUMENT - No real money was collected. Not a tax invoice.",
+    data.live
+      ? "Payment received. Not a tax invoice."
+      : "TEST DOCUMENT - No real money was collected. Not a tax invoice.",
     48,
     754,
     9,

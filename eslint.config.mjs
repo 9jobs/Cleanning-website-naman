@@ -7,6 +7,7 @@ export default defineConfig([
   globalIgnores([
     ".next/**",
     ".npm-cache/**",
+    ".local-admin/**",
     "playwright-report/**",
     "test-results/**",
   ]),

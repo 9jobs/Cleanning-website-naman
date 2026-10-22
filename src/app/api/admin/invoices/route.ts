@@ -172,7 +172,7 @@ export async function POST(request: NextRequest) {
       }
       const invoice = findInvoice(invoices, action.id, action.revision);
       if (action.action === "generate") {
-        if (process.env.THRIVE4_STRIPE_SECRET_KEY)
+        if (stripeTestReady())
           await createStripeCheckout(invoice, requestOrigin(request));
         else generatePreviewLink(invoice);
       }
