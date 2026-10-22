@@ -57,7 +57,7 @@ const residentialPlans: PricingPlan[] = [
     ],
   },
   {
-    slug: "property-cleaning",
+    slug: "deep-cleaning",
     title: "Deep Cleaning",
     icon: Sparkles,
     description: "A detailed clean for built-up dirt and grime in your home.",
@@ -73,7 +73,7 @@ const residentialPlans: PricingPlan[] = [
     oneOff: true,
   },
   {
-    slug: "house-cleaning",
+    slug: "one-off-cleaning",
     title: "One-Off Cleaning",
     icon: House,
     description: "A single-visit House Cleaning request for priority rooms.",

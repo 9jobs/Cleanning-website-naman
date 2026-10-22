@@ -1246,12 +1246,6 @@
 .page[data-service="airbnb-cleaning"] .heroVisual {
   height: 390px;
 }
-.page[data-service="carpet-cleaning"] .heroLayout {
-  min-height: 520px;
-}
-.page[data-service="carpet-cleaning"] .heroBackdrop img {
-  object-position: 65% center;
-}
 .page[data-service="one-off-cleaning"] .heroVisual {
   order: -1;
   height: 440px;

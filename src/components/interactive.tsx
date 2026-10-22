@@ -82,26 +82,24 @@ export function ServiceFilter() {
   return (
     <>
       <div className="tabs" role="group" aria-label="Filter cleaning services">
-        {["All services", "Residential", "Commercial", "Specialist"].map(
-          (c) => (
-            <button
-              aria-pressed={category === c}
-              key={c}
-              className={category === c ? "selected" : ""}
-              onClick={() => setCategory(c)}
-            >
-              {c === "Residential"
-                ? "House Cleaning"
-                : c === "Deep Cleaning"
-                  ? "Property Cleaning"
-                  : c === "End of Lease"
-                    ? "End of Lease Cleaning"
-                    : c === "Commercial"
-                      ? "Commercial Cleaning"
-                      : c}
-            </button>
-          ),
-        )}
+        {["All services", "Residential", "Commercial"].map((c) => (
+          <button
+            aria-pressed={category === c}
+            key={c}
+            className={category === c ? "selected" : ""}
+            onClick={() => setCategory(c)}
+          >
+            {c === "Residential"
+              ? "House Cleaning"
+              : c === "Deep Cleaning"
+                ? "Property Cleaning"
+                : c === "End of Lease"
+                  ? "End of Lease Cleaning"
+                  : c === "Commercial"
+                    ? "Commercial Cleaning"
+                    : c}
+          </button>
+        ))}
       </div>
       <div className="grid three">
         {services
@@ -186,7 +184,7 @@ export function Comparison() {
         role="group"
         aria-label="Comparison cleaning area"
       >
-        {["Property", "Garden", "Construction"].map((room) => (
+        {["Property", "Construction"].map((room) => (
           <button
             key={room}
             className={room === category ? "selected" : ""}
@@ -611,26 +609,24 @@ export function Reviews() {
   return (
     <>
       <div className="tabs" role="group" aria-label="Filter reviews">
-        {["All services", "Residential", "Commercial", "Specialist"].map(
-          (c) => (
-            <button
-              key={c}
-              className={filter === c ? "selected" : ""}
-              aria-pressed={filter === c}
-              onClick={() => setFilter(c)}
-            >
-              {c === "Residential"
-                ? "House Cleaning"
-                : c === "Deep Cleaning"
-                  ? "Property Cleaning"
-                  : c === "End of Lease"
-                    ? "End of Lease Cleaning"
-                    : c === "Commercial"
-                      ? "Commercial Cleaning"
-                      : c}
-            </button>
-          ),
-        )}
+        {["All services", "Residential", "Commercial"].map((c) => (
+          <button
+            key={c}
+            className={filter === c ? "selected" : ""}
+            aria-pressed={filter === c}
+            onClick={() => setFilter(c)}
+          >
+            {c === "Residential"
+              ? "House Cleaning"
+              : c === "Deep Cleaning"
+                ? "Property Cleaning"
+                : c === "End of Lease"
+                  ? "End of Lease Cleaning"
+                  : c === "Commercial"
+                    ? "Commercial Cleaning"
+                    : c}
+          </button>
+        ))}
       </div>
       {review ? (
         <div

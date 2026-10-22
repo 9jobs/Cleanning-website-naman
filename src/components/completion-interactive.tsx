@@ -60,18 +60,16 @@ export function ServiceDiscovery({ preview = false }: { preview?: boolean }) {
             role="group"
             aria-label="Filter cleaning services"
           >
-            {["All services", "Residential", "Commercial", "Specialist"].map(
-              (item) => (
-                <button
-                  key={item}
-                  type="button"
-                  aria-pressed={category === item}
-                  onClick={() => setCategory(item)}
-                >
-                  {item}
-                </button>
-              ),
-            )}
+            {["All services", "Residential", "Commercial"].map((item) => (
+              <button
+                key={item}
+                type="button"
+                aria-pressed={category === item}
+                onClick={() => setCategory(item)}
+              >
+                {item}
+              </button>
+            ))}
           </div>
           <label className="finish-search">
             <Search size={19} />
@@ -308,7 +306,7 @@ const appointmentQuestions = [
   {
     category: "Services",
     q: "Which cleaning service should I choose?",
-    a: "Regular house cleaning suits routine upkeep. Deep cleaning focuses on a more detailed reset, while property cleaning follows your agreed property checklist. Specialist carpet cleaning has its own scope.",
+    a: "Regular house cleaning suits routine upkeep. Deep cleaning focuses on a more detailed reset, while property cleaning follows your agreed property checklist. One-Off Cleaning is available for a single visit.",
   },
   {
     category: "Services",
@@ -332,7 +330,7 @@ const appointmentQuestions = [
   },
   {
     category: "Services",
-    q: "Can I add carpet, window or oven cleaning?",
+    q: "Can I request fridge detailing or extra cleaning time?",
     a: "Optional extras can be selected in the request form or discussed in your enquiry. Equipment, access and surface condition may affect what can be included. Check the final written scope before the visit.",
   },
   {

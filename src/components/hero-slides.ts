@@ -49,28 +49,6 @@ export const heroSlides = [
     secondaryHref: teamWhatsAppHref,
   },
   {
-    id: "garden-cleaning",
-    service: "Garden",
-    titleLine1: "Outdoor spaces,",
-    titleLine2: "refreshed.",
-    description:
-      "Garden and outdoor cleaning for patios, balconies and surrounding property areas.",
-    image: "/images/hero-garden-cleaning.webp",
-    alt: "Professional cleaner sweeping fallen leaves from a garden path into a dustpan",
-    position: "center 42%",
-    tabletPosition: "65% 42%",
-    mobilePosition: "85% center",
-    trustItems: [
-      "Outdoor-area cleaning",
-      "Flexible service options",
-      "Property-focused support",
-    ],
-    primaryCta: "Request a Clean",
-    secondaryCta: "Talk to Our Team",
-    primaryHref: "/contact",
-    secondaryHref: teamWhatsAppHref,
-  },
-  {
     id: "construction-cleaning",
     service: "Construction",
     titleLine1: "Post-build cleaning.",

@@ -78,14 +78,14 @@ export const servicePages: Record<string, ServicePageContent> = {
       ],
       [
         "Are appliance interiors included?",
-        "Fridge detailing and carpet cleaning are optional requests, included only when agreed in your quote.",
+        "Fridge detailing is an optional request, included only when agreed in your quote.",
       ],
       [
         "How do I request a more detailed clean?",
         "Describe the condition and any built-up dirt. Property Cleaning can be discussed for a broader property-specific checklist.",
       ],
     ],
-    related: ["property-cleaning", "end-of-lease-cleaning", "garden-cleaning"],
+    related: ["property-cleaning", "end-of-lease-cleaning", "one-off-cleaning"],
     closing: "A home clean that fits the way you live.",
   },
   "property-cleaning": {
@@ -122,7 +122,7 @@ export const servicePages: Record<string, ServicePageContent> = {
         items: [
           "Empty cupboards and wardrobes where agreed",
           "Property-specific presentation checklist",
-          "Discuss carpet cleaning or fridge detailing extras",
+          "Discuss fridge detailing extras",
         ],
       },
     ],
@@ -207,7 +207,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     details: [
       "Property size and room numbers",
       "Your move-out date and agent’s checklist",
-      "Empty-property access and any carpet or oven extras",
+      "Empty-property access and any appliance extras",
     ],
     steps: [
       [
@@ -233,11 +233,11 @@ export const servicePages: Record<string, ServicePageContent> = {
         "Empty rooms, cupboards and wardrobes allow access to the agreed surfaces. Tell us about any items that will remain so the team can plan the clean.",
       ],
       [
-        "Are carpets and oven interiors included?",
-        "Carpet cleaning, oven interiors and interior windows can be quoted separately. Request them when sharing your property checklist.",
+        "Are appliance interiors included?",
+        "Fridge detailing can be discussed separately. Share your appliance requirements when requesting a quote.",
       ],
     ],
-    related: ["carpet-cleaning", "oven-cleaning", "window-cleaning"],
+    related: ["deep-cleaning", "oven-cleaning", "window-cleaning"],
     closing: "Plan the clean around your move.",
   },
   "commercial-cleaning": {
@@ -305,7 +305,7 @@ export const servicePages: Record<string, ServicePageContent> = {
         "Yes. Each enquiry should describe its layout, shared facilities and cleaning priorities. The final scope is specific to the agreed site.",
       ],
     ],
-    related: ["office-cleaning", "window-cleaning", "carpet-cleaning"],
+    related: ["office-cleaning", "window-cleaning", "deep-cleaning"],
     closing: "Let’s discuss your working space.",
   },
   "airbnb-cleaning": {
@@ -376,151 +376,8 @@ export const servicePages: Record<string, ServicePageContent> = {
         "No. Thrive4 Cleaning is an independent cleaning business. This service is for hosts and managers of short-stay properties.",
       ],
     ],
-    related: ["construction-cleaning", "garden-cleaning", "oven-cleaning"],
+    related: ["construction-cleaning", "one-off-cleaning", "oven-cleaning"],
     closing: "Make the next welcome a fresh one.",
-  },
-  "carpet-cleaning": {
-    label: "CARE FROM THE FIBRES UP",
-    lead: "Carpet care starts with understanding the surface.",
-    heading: "Every carpet has its own story.",
-    description:
-      "Foot traffic, spills and everyday use affect carpets differently. Tell us about the fibres, rooms and concerns so the team can review a suitable approach before agreeing the work.",
-    image: "/images/carpet-cleaning.webp",
-    alt: "Carpet-cleaning equipment working across a light carpet beside a sofa",
-    supportImage: "/images/carpet.webp",
-    supportAlt: "Cleaner using carpet equipment in a furnished living room",
-    preparation:
-      "Remove small items from the agreed carpeted areas. Ask which furniture needs moving and follow the aftercare instructions provided for the method used.",
-    areas: [
-      {
-        title: "Condition",
-        items: [
-          "Carpet type and existing wear",
-          "Visible spots and previous treatments",
-        ],
-      },
-      {
-        title: "Agreed areas",
-        items: [
-          "Rooms and approximate carpeted area",
-          "High-traffic paths and specific concerns",
-        ],
-      },
-      {
-        title: "Care plan",
-        items: [
-          "Review access and a suitable cleaning approach",
-          "Discuss drying and aftercare for your carpet",
-        ],
-      },
-    ],
-    details: [
-      "Carpet fibre or manufacturer details, if known",
-      "Photos of stains and previous treatment information",
-      "Room sizes, furniture and access restrictions",
-    ],
-    steps: [
-      [
-        "Inspect the condition",
-        "Share fibre details, wear and any visible stains.",
-      ],
-      [
-        "Agree the approach",
-        "The team confirms a suitable method and the areas to be cleaned.",
-      ],
-      [
-        "Follow the aftercare",
-        "Use the advice supplied for the carpet and cleaning method.",
-      ],
-    ],
-    questions: [
-      [
-        "Will every stain come out?",
-        "Complete stain removal cannot be guaranteed. Results depend on fibre type, stain age, previous treatments and carpet condition.",
-      ],
-      [
-        "Which cleaning method will be used?",
-        "The method must be confirmed after the carpet and its requirements have been reviewed. Describe the fibres and concerns in your enquiry.",
-      ],
-      [
-        "How long will the carpet take to dry?",
-        "Drying depends on the carpet, method and conditions. Ask the team for guidance for your particular clean rather than relying on a fixed drying time.",
-      ],
-    ],
-    related: [
-      "end-of-lease-cleaning",
-      "construction-cleaning",
-      "commercial-cleaning",
-    ],
-    closing: "Tell us what your carpet needs.",
-  },
-  "garden-cleaning": {
-    label: "GARDEN & OUTDOOR CARE",
-    lead: "A tidier outdoor space, from patio to garden path.",
-    heading: "Practical care for the areas outside your door.",
-    description:
-      "Garden Cleaning covers outdoor cleaning and tidy-up requests for gardens, patios, balconies and surrounding areas. Describe loose leaves, ordinary dirt and light debris so the team can confirm the work.",
-    image: "/images/garden-cover.webp",
-    alt: "Male cleaner sweeping a path beside a weatherboard home",
-    supportImage: "/images/garden-detail.webp",
-    supportAlt: "Male cleaner wiping an outdoor balcony balustrade",
-    preparation:
-      "Identify outdoor areas and surfaces, secure pets and explain gates, steps and access. Point out fragile plants and any material that needs assessment.",
-    areas: [
-      {
-        title: "Patios & balconies",
-        items: [
-          "Sweep accessible outdoor floor areas",
-          "Discuss ordinary dirt and surface-cleaning requirements",
-        ],
-      },
-      {
-        title: "Garden areas",
-        items: [
-          "Collect loose leaves and small fallen twigs",
-          "Tidy agreed accessible garden paths and surrounding areas",
-        ],
-      },
-      {
-        title: "Preparation",
-        items: [
-          "Agree the areas and surface-care requirements",
-          "Confirm handling arrangements for light debris",
-        ],
-      },
-    ],
-    details: [
-      "Garden, patio or balcony size and surface type",
-      "Photos of leaves, ordinary dirt or light debris",
-      "Access and debris-handling arrangements",
-    ],
-    steps: [
-      [
-        "Choose the outdoor areas",
-        "Identify the garden paths, patio or balcony needing attention.",
-      ],
-      [
-        "Describe the tidy-up",
-        "Share the condition, surface type and light debris involved.",
-      ],
-      ["Agree the visit", "The team confirms scope, access and availability."],
-    ],
-    questions: [
-      [
-        "What can Garden Cleaning include?",
-        "Outdoor sweeping, ordinary surface cleaning and tidy-up of loose leaves and light debris can be discussed. The exact areas and tasks are agreed in advance.",
-      ],
-      [
-        "Does this include landscaping or hazardous waste removal?",
-        "No such capability is confirmed. Do not assume landscaping, tree work, hazardous waste handling or specialised disposal is included.",
-      ],
-      [
-        "How should I describe the outdoor work?",
-        "Share the area, surfaces, access and photos of the material to be cleared. Debris handling and any additional work need prior agreement.",
-      ],
-    ],
-    related: ["property-cleaning", "window-cleaning", "construction-cleaning"],
-    closing: "Make room to enjoy the outdoors.",
   },
   "construction-cleaning": {
     label: "CONSTRUCTION & POST-BUILD CLEANING",
@@ -661,7 +518,7 @@ export const servicePages: Record<string, ServicePageContent> = {
         "Office cleaning is specifically organised around desks, meeting rooms, reception and staff facilities. Commercial cleaning is the broader category for other business premises.",
       ],
     ],
-    related: ["commercial-cleaning", "carpet-cleaning", "window-cleaning"],
+    related: ["commercial-cleaning", "deep-cleaning", "window-cleaning"],
     closing: "Plan a clean that works for your office.",
   },
   "window-cleaning": {
@@ -671,7 +528,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     description:
       "Window cleaning focuses on interior glass, accessible sills and tracks. Accessible exterior panes can be discussed as part of your enquiry, with access and suitability confirmed before work is agreed.",
     image: "/images/window-cleaning.webp",
-    alt: "Gloved hand using a squeegee on a window with a garden beyond",
+    alt: "Gloved hand using a squeegee on an accessible window",
     supportImage: "/images/window-detail-male.webp",
     supportAlt:
       "Male cleaner wiping accessible window tracks with a cloth and brush",
@@ -803,4 +660,93 @@ export const servicePages: Record<string, ServicePageContent> = {
     related: ["property-cleaning", "house-cleaning", "end-of-lease-cleaning"],
     closing: "A little care for a hard-working appliance.",
   },
+};
+
+servicePages["deep-cleaning"] = {
+  ...servicePages["property-cleaning"],
+  label: "DETAILED HOME CARE",
+  lead: "A detailed clean for built-up dirt and grime in your home.",
+  heading: "A fresh reset for the rooms you use every day.",
+  description:
+    "Deep Cleaning gives your home extra attention, with detailed kitchen and bathroom care, accessible skirting boards, door frames, switches and handles. Agree the priorities for a seasonal or one-off clean.",
+  areas: [
+    {
+      title: "Kitchen & bathroom",
+      items: [
+        "Detailed kitchen & bathroom clean",
+        "Attention to built-up dirt and grime",
+      ],
+    },
+    {
+      title: "Surfaces & fittings",
+      items: [
+        "Accessible skirting boards & door frames",
+        "Surfaces, switches & handles",
+      ],
+    },
+    {
+      title: "Rooms & floors",
+      items: [
+        "Dusting, vacuuming & mopping",
+        "Priority rooms agreed before the visit",
+      ],
+    },
+  ],
+  details: [
+    "Rooms and current condition",
+    "Built-up dirt and priority surfaces",
+    "Access and preferred one-off visit",
+  ],
+  questions: [
+    [
+      "When should I choose Deep Cleaning?",
+      "Choose a detailed reset for built-up dirt, seasonal cleaning or priority areas that need more attention. The team agrees the checklist before the visit.",
+    ],
+    [
+      "Is this a one-off service?",
+      "Yes. Request a single visit and share your priorities so scope and availability can be confirmed.",
+    ],
+  ],
+  related: ["house-cleaning", "one-off-cleaning", "property-cleaning"],
+  closing: "Give your home a detailed fresh start.",
+};
+servicePages["one-off-cleaning"] = {
+  ...servicePages["house-cleaning"],
+  label: "A SINGLE VISIT, YOUR PRIORITIES",
+  lead: "A single-visit House Cleaning request for priority rooms.",
+  heading: "A home clean when you need it.",
+  description:
+    "One-Off Cleaning is a single visit for the rooms and tasks you choose. Request a kitchen and bathroom refresh, dusting, surface cleaning, vacuuming and mopping without a recurring commitment.",
+  areas: [
+    {
+      title: "Your priority rooms",
+      items: ["Choose your priority rooms", "Kitchen & bathroom refresh"],
+    },
+    {
+      title: "Surfaces",
+      items: [
+        "Dusting and surface cleaning",
+        "Accessible fixtures and furniture",
+      ],
+    },
+    {
+      title: "Floors",
+      items: ["Vacuuming & mopping", "No recurring commitment"],
+    },
+  ],
+  details: [
+    "Rooms and priority tasks",
+    "Property condition and access",
+    "Your preferred visit date",
+  ],
+  steps: [
+    ["Choose your priorities", "Tell us which rooms and tasks need attention."],
+    ["Agree the checklist", "The team confirms scope, quote and access."],
+    [
+      "Plan a single visit",
+      "Request your preferred date with no recurring commitment.",
+    ],
+  ],
+  related: ["house-cleaning", "deep-cleaning", "property-cleaning"],
+  closing: "One visit. A fresher home.",
 };

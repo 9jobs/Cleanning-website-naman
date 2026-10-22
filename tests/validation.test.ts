@@ -85,3 +85,34 @@ test("configured estimate responds to rooms, extras and frequency", () => {
     Object.assign(rates, original);
   }
 });
+
+test("current residential and commercial services are bookable, retired services are rejected", () => {
+  for (const service of [
+    "house-cleaning",
+    "deep-cleaning",
+    "one-off-cleaning",
+    "property-cleaning",
+    "commercial-cleaning",
+    "office-cleaning",
+    "construction-cleaning",
+    "airbnb-cleaning",
+  ]) {
+    assert.equal(
+      bookingSchema.safeParse({ ...booking, service }).success,
+      true,
+      service,
+    );
+  }
+  for (const service of ["garden-cleaning", "carpet-cleaning"]) {
+    assert.equal(
+      bookingSchema.safeParse({ ...booking, service }).success,
+      false,
+      service,
+    );
+  }
+  assert.equal(
+    bookingSchema.safeParse({ ...booking, extras: ["Carpet cleaning"] })
+      .success,
+    false,
+  );
+});

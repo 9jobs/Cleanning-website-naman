@@ -156,18 +156,16 @@ export function ServiceDirectory({ items }: { items: DirectoryItem[] }) {
         role="group"
         aria-label="Filter cleaning services"
       >
-        {["All services", "Home & Outdoor", "Business", "Specialist"].map(
-          (label) => (
-            <button
-              key={label}
-              type="button"
-              aria-pressed={category === label}
-              onClick={() => setCategory(label)}
-            >
-              {label}
-            </button>
-          ),
-        )}
+        {["All services", "Residential", "Commercial"].map((label) => (
+          <button
+            key={label}
+            type="button"
+            aria-pressed={category === label}
+            onClick={() => setCategory(label)}
+          >
+            {label}
+          </button>
+        ))}
       </div>
       <p className={styles.filterCount} role="status">
         {filtered.length} cleaning services

@@ -85,7 +85,7 @@ export function RequestSteps({ service }: { service?: string }) {
           {
             Icon: MousePointer2,
             title: "Choose your service",
-            text: "Choose house, property, garden, construction or specialist cleaning.",
+            text: "Choose house, deep, one-off, property, construction or specialist cleaning.",
           },
           {
             Icon: ClipboardList,
@@ -146,7 +146,7 @@ export function MoveOutFeature() {
               "Agreed room-by-room vacate checklist",
               "Empty cupboards, wardrobes and accessible surfaces",
               "Kitchen, bathroom and floor cleaning",
-              "Appliance and carpet extras by arrangement",
+              "Appliance detailing by arrangement",
             ].map((item) => (
               <li key={item}>
                 <Check size={19} />
@@ -255,10 +255,10 @@ export function CleaningDetailsGallery() {
               href: "/services/window-cleaning",
             },
             {
-              src: "/images/service-carpet.webp",
-              title: "Care underfoot",
-              text: "Carpet methods selected for the fibres, condition and treatment needs.",
-              href: "/services/carpet-cleaning",
+              src: "/images/property-detail.webp",
+              title: "Detailed property care",
+              text: "A property-specific checklist for rooms, surfaces and everyday presentation.",
+              href: "/services/property-cleaning",
             },
           ].map((item, index) => (
             <Reveal

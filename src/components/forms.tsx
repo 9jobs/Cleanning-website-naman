@@ -284,7 +284,7 @@ export function BookingForm({
               [
                 "Select the cleaning service that best fits your property and cleaning requirements.",
                 "Provide your property type, number of bedrooms and bathrooms to estimate cleaning scope.",
-                "Choose optional extras such as oven detailing, fridge cleaning or carpet cleaning.",
+                "Choose optional extras such as fridge detailing or additional cleaning time.",
                 "Select your preferred date and time. Our team will verify local availability.",
                 "Enter your contact details so we can deliver your personalised cleaning quote.",
                 "Review your cleaning details and property specifications before submitting.",

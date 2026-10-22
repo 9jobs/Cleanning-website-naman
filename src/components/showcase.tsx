@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import {
   CalendarDays,
@@ -16,11 +16,11 @@ import {
   Star,
   Building2,
   BedDouble,
-  Layers,
 } from "lucide-react";
 import { Photo, Button } from "./ui";
 import { Reveal } from "./motion";
 import { testimonials } from "@/lib/config";
+import { services } from "@/lib/data";
 import tileStyles from "./service-tiles.module.css";
 import journeyStyles from "./cleaning-journey.module.css";
 
@@ -47,7 +47,7 @@ export function CleaningJourney() {
             {
               Icon: MousePointer2,
               title: "Choose your cleaning service",
-              text: "Select house, property, garden, construction or specialist cleaning.",
+              text: "Select residential or commercial cleaning for your space.",
             },
             {
               Icon: CalendarDays,
@@ -107,8 +107,8 @@ export function ScrollStory() {
           </Reveal>
           <motion.div className="story-inset parallax" style={{ y }}>
             <Photo
-              src="/images/story-garden-male.webp"
-              alt="Male cleaner sweeping a timber balcony beside potted plants"
+              src="/images/property-detail.webp"
+              alt="Clean kitchen ready for everyday use"
             />
           </motion.div>
           <span className="story-photo-note">FRESH & SPOTLESS.</span>
@@ -125,12 +125,12 @@ export function ScrollStory() {
               </motion.span>
             </h2>
             <p>
-              Our cleaning services support homes, managed properties, outdoor
+              Our cleaning services support homes, managed properties, living
               areas, workplaces and post-construction spaces.
             </p>
             <p>
-              Whether you need routine cleaning, a property refresh, garden
-              tidy-up or a final post-build clean, we tailor the service to your
+              Whether you need routine cleaning, a property refresh, a deep
+              clean or a final post-build clean, we tailor the service to your
               space and priorities.
             </p>
             <Button href="/about" secondary>
@@ -156,11 +156,11 @@ const demoStories = [
     type: "Routine or one-off property care",
   },
   {
-    label: "GARDEN & OUTDOOR CLEANING",
+    label: "DEEP CLEANING",
     quote:
-      "Outdoor cleaning and tidy-up requests for patios, balconies, paths and garden areas.",
-    name: "Garden Cleaning",
-    type: "Outdoor areas and light debris",
+      "Detailed kitchen, bathroom and surface care for built-up dirt and grime.",
+    name: "Deep Cleaning",
+    type: "A detailed reset for your home",
   },
   {
     label: "CONSTRUCTION CLEANING",
@@ -254,91 +254,165 @@ export function ExperienceCarousel() {
   );
 }
 
-export function PricingPaths() {
-  const plans = [
-    {
-      name: "House & Property Cleaning",
-      label: "HOUSE & PROPERTY CLEANING",
-      Icon: House,
-      description:
-        "Routine and detailed cleaning for homes, rentals and managed properties.",
-      features: [
-        "Kitchens, bathrooms and living areas",
-        "Routine or one-off cleaning",
-        "Property-specific cleaning checklist",
-      ],
-      slug: "property-cleaning",
-    },
-    {
-      name: "Garden & Outdoor Cleaning",
-      label: "GARDEN & OUTDOOR CLEANING",
-      Icon: Sparkles,
-      description:
-        "Cleaning and tidy-up requests for outdoor spaces around your property.",
-      features: [
-        "Patios, balconies and outdoor surfaces",
-        "Garden tidy-up and light debris",
-        "Outdoor-area preparation",
-      ],
-      slug: "garden-cleaning",
-    },
-    {
-      name: "Construction Cleaning",
-      label: "CONSTRUCTION & POST-BUILD",
-      Icon: KeyRound,
-      description:
-        "Detailed cleaning after building, renovation or maintenance work.",
-      features: [
-        "Dust and light debris removal",
-        "Surface and floor cleaning",
-        "Final presentation cleaning",
-      ],
-      slug: "construction-cleaning",
-    },
-  ];
+type HomeServiceCategory = "Residential" | "Commercial";
+const homeServiceSlugs = {
+  Residential: [
+    "house-cleaning",
+    "deep-cleaning",
+    "one-off-cleaning",
+    "property-cleaning",
+  ],
+  Commercial: [
+    "commercial-cleaning",
+    "office-cleaning",
+    "construction-cleaning",
+    "airbnb-cleaning",
+  ],
+};
+const serviceIcons: Record<string, typeof House> = {
+  "house-cleaning": House,
+  "property-cleaning": Sparkles,
+  "deep-cleaning": Sparkles,
+  "one-off-cleaning": House,
+  "commercial-cleaning": Building2,
+  "office-cleaning": Building2,
+  "construction-cleaning": KeyRound,
+  "airbnb-cleaning": BedDouble,
+};
+function homeServices(category: HomeServiceCategory) {
+  return homeServiceSlugs[category].map((slug) =>
+    services.find((service) => service.slug === slug)!,
+  );
+}
+function ServiceCategorySwitch({
+  category,
+  onChange,
+  controls,
+}: {
+  category: HomeServiceCategory;
+  onChange: (category: HomeServiceCategory) => void;
+  controls: string;
+}) {
   return (
-    <div className="pricing-paths">
-      {plans.map((p, i) => (
-        <Reveal
-          key={p.slug}
-          variant="scale"
-          delay={i * 0.1}
-          className={`pricing-path ${i === 1 ? "featured" : ""}`}
-        >
-          {i === 1 && (
-            <span className="path-featured-badge">
-              <Star size={14} fill="currentColor" />
-              OUTDOOR CARE
-            </span>
-          )}
-          <div className="path-top">
-            <span className="path-service-icon">
-              <p.Icon size={25} />
-            </span>
-            <span>0{i + 1}</span>
-          </div>
-          <span className="mini-label">{p.label}</span>
-          <h3>
-            {p.name.slice(0, p.name.lastIndexOf(" "))}
-            <br />
-            {p.name.slice(p.name.lastIndexOf(" ") + 1)}
-          </h3>
-          <p>{p.description}</p>
-          <ul>
-            {p.features.map((f) => (
-              <li key={f}>
-                <Check size={17} />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <Button href={`/services/${p.slug}`} secondary={i !== 1}>
-            View Service
-          </Button>
-          <span className="path-corner-art" aria-hidden="true" />
-        </Reveal>
+    <div
+      className={tileStyles.categorySwitch}
+      role="group"
+      aria-label="Cleaning service category"
+    >
+      {(["Residential", "Commercial"] as const).map((name) => {
+        const Icon = name === "Residential" ? House : Building2;
+        return (
+          <button
+            key={name}
+            type="button"
+            aria-pressed={category === name}
+            aria-controls={controls}
+            onClick={() => onChange(name)}
+          >
+            <Icon size={20} />
+            {name}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+export function HomeServiceMosaic() {
+  const visible = [
+    "house-cleaning",
+    "property-cleaning",
+    "construction-cleaning",
+    "airbnb-cleaning",
+    "commercial-cleaning",
+  ].map((slug) => services.find((service) => service.slug === slug)!);
+  return (
+    <div
+      className={`service-mosaic ${tileStyles.mosaic} ${tileStyles.restoredMosaic}`}
+    >
+      {visible.map((service, index) => (
+        <ServiceTile
+          key={service.slug}
+          title={service.name}
+          description={service.summary}
+          slug={service.slug}
+          image={
+            service.slug === "airbnb-cleaning"
+              ? service.thumbnail
+              : `/images/service-preview-${service.slug}-v3.webp`
+          }
+          index={index}
+          featured={index === 0}
+        />
       ))}
     </div>
+  );
+}
+export function PricingPaths() {
+  const [category, setCategory] = useState<HomeServiceCategory>("Residential");
+  const id = useId();
+  const plans = homeServices(category).map((service) => ({
+    name: service.name,
+    label: `${category.toUpperCase()} CLEANING`,
+    Icon: serviceIcons[service.slug],
+    description: service.summary,
+    features: service.includes.slice(0, 3),
+    slug: service.slug,
+  }));
+  return (
+    <>
+      <ServiceCategorySwitch
+        category={category}
+        onChange={setCategory}
+        controls={id}
+      />
+      <div
+        id={id}
+        role="region"
+        aria-label={`${category} service options`}
+        className={`pricing-paths ${tileStyles.filteredPlans} ${plans.length === 4 ? tileStyles.fourPlans : ""}`}
+      >
+        {plans.map((p, i) => (
+          <Reveal
+            key={p.slug}
+            variant="scale"
+            delay={i * 0.1}
+            className={`pricing-path ${i === 1 ? "featured" : ""}`}
+          >
+            {i === 1 && (
+              <span className="path-featured-badge">
+                <Star size={14} fill="currentColor" />
+                {category === "Residential" ? "DEEP CLEAN" : "WORKPLACE CARE"}
+              </span>
+            )}
+            <div className="path-top">
+              <span className="path-service-icon">
+                <p.Icon size={25} />
+              </span>
+              <span>0{i + 1}</span>
+            </div>
+            <span className="mini-label">{p.label}</span>
+            <h3>
+              {p.name.slice(0, p.name.lastIndexOf(" "))}
+              <br />
+              {p.name.slice(p.name.lastIndexOf(" ") + 1)}
+            </h3>
+            <p>{p.description}</p>
+            <ul>
+              {p.features.map((f) => (
+                <li key={f}>
+                  <Check size={17} />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Button href={`/services/${p.slug}`} secondary={i !== 1}>
+              View Service
+            </Button>
+            <span className="path-corner-art" aria-hidden="true" />
+          </Reveal>
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -357,15 +431,10 @@ export function ServiceTile({
   featured?: boolean;
   index?: number;
 }) {
-  const badges = [
-    { label: "HOUSE & PROPERTY CARE", Icon: House },
-    { label: "PROPERTY CARE", Icon: Sparkles },
-    { label: "GARDEN & OUTDOOR CARE", Icon: KeyRound },
-    { label: "POST-BUILD CLEANING", Icon: Building2 },
-    { label: "SHORT-STAY CLEANING", Icon: BedDouble },
-    { label: "BUSINESS PREMISES", Icon: Layers },
-  ];
-  const badge = badges[index] || badges[0];
+  const badge = {
+    label: title.toUpperCase(),
+    Icon: serviceIcons[slug] || House,
+  };
   return (
     <Reveal
       variant={featured ? "image" : "up"}
@@ -387,7 +456,7 @@ export function ServiceTile({
         </div>
         <div className="service-tile-copy">
           {featured && (
-            <span className="service-tile-category">HOUSE & PROPERTY CARE</span>
+            <span className="service-tile-category">{badge.label}</span>
           )}
           <h3>{title}</h3>
           <p>{description}</p>

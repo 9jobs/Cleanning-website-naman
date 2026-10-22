@@ -1,7 +1,7 @@
 export const site = {
   name: "Thrive4 Cleaning",
   tagline:
-    "Professional Cleaning for Homes, Properties, Gardens and Construction Sites",
+    "Professional Cleaning for Homes, Properties, Workplaces and Construction Sites",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:4317",
   phone: "+61 422 552 002",
   email: "Thrive4cleaning@gmail.com",
@@ -20,7 +20,6 @@ export const nav = [
 ];
 export const extras = [
   "Fridge cleaning",
-  "Carpet cleaning",
   "Balcony cleaning",
   "Additional cleaning time",
 ];

@@ -6,9 +6,7 @@ import { servicePages } from "@/lib/service-pages";
 
 const aliases: Record<string, string> = {
   "regular-house-cleaning": "house-cleaning",
-  "deep-cleaning": "property-cleaning",
-  "one-off-cleaning": "garden-cleaning",
-  "residential-cleaning": "construction-cleaning",
+  "residential-cleaning": "house-cleaning",
 };
 
 export function generateStaticParams() {

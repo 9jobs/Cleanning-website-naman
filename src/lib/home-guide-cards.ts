@@ -11,10 +11,6 @@ const photos: Record<string, { image: string; imageAlt: string }> = {
     imageAlt:
       "Keys on a window ledge overlooking an empty, clean rental apartment",
   },
-  "garden-outdoor-cleaning-checklist": {
-    image: "/images/guide-garden-detail.webp",
-    imageAlt: "Male cleaner gathering dry leaves from a paved garden path",
-  },
   "post-construction-cleaning-scope": {
     image: "/images/guide-build-dust.webp",
     imageAlt: "Vacuum brush removing settled building dust from a window sill",

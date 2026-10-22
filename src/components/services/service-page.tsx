@@ -231,11 +231,7 @@ function Section({
   );
 }
 function Extras({ slug, oven = true }: { slug: string; oven?: boolean }) {
-  const extras = (
-    slug === "garden-cleaning"
-      ? ["property-cleaning", "carpet-cleaning", "construction-cleaning"]
-      : ["carpet-cleaning", "property-cleaning", "garden-cleaning"]
-  )
+  const extras = ["deep-cleaning", "property-cleaning", "one-off-cleaning"]
     .filter((key) => key !== slug)
     .map((key) => {
       const service = services.find((item) => item.slug === key)!;
@@ -244,24 +240,12 @@ function Extras({ slug, oven = true }: { slug: string; oven?: boolean }) {
   return (
     <div className={styles.extrasLayout}>
       <div>
-        <Intro
-          label="BY PRIOR ARRANGEMENT"
-          title={
-            slug === "garden-cleaning"
-              ? "Care around the wider property."
-              : "Make the scope your own."
-          }
-        >
+        <Intro label="BY PRIOR ARRANGEMENT" title="Make the scope your own.">
           Optional work is agreed separately.
-          {oven &&
-            slug !== "garden-cleaning" &&
-            " Fridge detailing can also be discussed with the team. For a wider property checklist, explore Property Cleaning."}
+          {oven && " Fridge detailing can also be discussed with the team."}
         </Intro>
         <Link href={`/contact?service=${slug}`} className={styles.textLink}>
-          {slug === "garden-cleaning"
-            ? "Discuss the outdoor scope"
-            : "Discuss your extras"}{" "}
-          <ArrowRight size={17} aria-hidden="true" />
+          Discuss your extras <ArrowRight size={17} aria-hidden="true" />
         </Link>
       </div>
       <div className={styles.extras}>
@@ -292,7 +276,7 @@ function Hero({
     "house-cleaning",
     "property-cleaning",
     "commercial-cleaning",
-    "carpet-cleaning",
+    "deep-cleaning",
     "window-cleaning",
   ].includes(slug);
   return (
@@ -401,23 +385,19 @@ function Regular({ data, slug }: { data: ServicePageContent; slug: string }) {
     </>
   );
 }
-function Deep({ data }: { data: ServicePageContent }) {
+function Deep({ data, slug }: { data: ServicePageContent; slug: string }) {
   return (
     <>
       <Section>
         <div className={styles.deepIntro}>
-          <Intro
-            label="RENTAL, VACANT & MANAGED PROPERTIES"
-            title={data.heading}
-          >
+          <Intro label={data.label} title={data.heading}>
             {data.description}
           </Intro>
           <div className={styles.moments}>
-            {[
-              "Rental properties",
-              "Vacant properties",
-              "Managed properties",
-            ].map((text, i) => (
+            {(slug === "deep-cleaning"
+              ? ["Seasonal resets", "Built-up dirt", "Detailed home care"]
+              : ["Rental properties", "Vacant properties", "Managed properties"]
+            ).map((text, i) => (
               <div key={text}>
                 <span>0{i + 1}</span>
                 <h3>{text}</h3>
@@ -621,86 +601,27 @@ function Airbnb({ data }: { data: ServicePageContent }) {
     </>
   );
 }
-function Carpet({ data }: { data: ServicePageContent }) {
-  return (
-    <>
-      <Section>
-        <div className={styles.twoColumns}>
-          <Intro label="LOOK AT THE CONDITION FIRST" title={data.heading}>
-            {data.description}
-          </Intro>
-          <Details
-            data={data}
-            title="Tell us about the fibres, not just the floor area."
-          />
-        </div>
-      </Section>
-      <Section sage id="cleaning-scope">
-        <div className={styles.carpetProcess}>
-          <Photo src={data.supportImage} alt={data.supportAlt} />
-          <div>
-            <Intro label="A CAREFUL START" title="Inspect. Agree. Care." />
-            <Process data={data} vertical />
-          </div>
-        </div>
-      </Section>
-      <Section>
-        <div className={styles.concerns}>
-          {data.areas.map((area, i) => (
-            <article key={area.title}>
-              <span className={styles.number}>0{i + 1}</span>
-              <h3>{area.title}</h3>
-              <Checks items={area.items} />
-            </article>
-          ))}
-        </div>
-      </Section>
-      <Section sage>
-        <div className={styles.twoColumns}>
-          <Preparation
-            text={data.preparation}
-            title="Prepare the carpeted areas"
-          />
-          <div>
-            <Intro
-              label="AFTER THE CLEAN"
-              title="Follow the care advice for your carpet."
-            >
-              Drying and use of the room depend on the carpet, cleaning method
-              and conditions. Ask the team for guidance before placing items
-              back.
-            </Intro>
-            <p className={styles.scopeNote}>
-              Complete stain removal and fixed drying times cannot be
-              guaranteed.
-            </p>
-          </div>
-        </div>
-      </Section>
-    </>
-  );
-}
 function OneOff({ data, slug }: { data: ServicePageContent; slug: string }) {
   return (
     <>
       <Section sage>
         <div className={styles.headingRow}>
-          <Intro label="CARE FOR OUTDOOR SPACES" title={data.heading} />
+          <Intro label="A SINGLE VISIT FOR YOUR HOME" title={data.heading} />
           <p>{data.description}</p>
         </div>
         <div className={styles.occasionCards}>
           {[
             [
-              "Patios & balconies",
-              "Prepare accessible outdoor seating and floor areas.",
+              "Kitchen & bathrooms",
+              "Refresh your kitchen surfaces and bathroom fixtures.",
             ],
             [
-              "Garden paths",
-              "Discuss loose leaves, dirt and light debris on paths.",
+              "Living areas",
+              "Dust accessible surfaces and vacuum or mop floors.",
             ],
             [
-              "A planned tidy-up",
-              "Agree the outdoor areas and debris handling before the visit.",
+              "Your priority rooms",
+              "Choose the rooms and tasks that matter, without a recurring commitment.",
             ],
           ].map(([title, text], i) => (
             <article key={title}>
@@ -716,7 +637,7 @@ function OneOff({ data, slug }: { data: ServicePageContent; slug: string }) {
           <div>
             <Intro
               label="YOU SET THE PRIORITIES"
-              title="Start with the outdoor areas that matter most."
+              title="Start with the rooms that matter most."
             />
             <Preparation text={data.preparation} />
           </div>
@@ -1002,8 +923,8 @@ const bodies = {
   "end-of-lease-cleaning": Lease,
   "commercial-cleaning": Commercial,
   "airbnb-cleaning": Airbnb,
-  "carpet-cleaning": Carpet,
-  "garden-cleaning": OneOff,
+  "deep-cleaning": Deep,
+  "one-off-cleaning": OneOff,
   "construction-cleaning": Residential,
   "office-cleaning": Office,
   "window-cleaning": Windows,
@@ -1029,7 +950,7 @@ export function ServicePage({ service }: { service: Service }) {
           {
             "house-cleaning": "regular-house-cleaning",
             "property-cleaning": "deep-cleaning",
-            "garden-cleaning": "one-off-cleaning",
+            "one-off-cleaning": "one-off-cleaning",
             "construction-cleaning": "residential-cleaning",
           } as Record<string, string>
         )[service.slug] || service.slug
@@ -1123,15 +1044,15 @@ export function ServicesOverview() {
                 for your space.
               </h1>
               <p>
-                Explore House, Property, Garden and Construction Cleaning,
-                alongside workplace and specialist services. Tell us what needs
-                attention.
+                Explore House, Deep, One-Off, Property and Construction
+                Cleaning, alongside Commercial, Office and Airbnb Cleaning. Tell
+                us what needs attention.
               </p>
             </div>
             <div className={styles.overviewNote}>
               <Sparkles size={32} strokeWidth={1.4} aria-hidden="true" />
               <p>
-                Homes. Gardens. Workplaces. Sites.
+                Homes. Properties. Workplaces. Sites.
                 <br />
                 <strong>A scope shaped around you.</strong>
               </p>
@@ -1153,9 +1074,9 @@ export function ServicesOverview() {
             lead: service.summary,
             category:
               service.category === "Residential"
-                ? "Home & Outdoor"
+                ? "Residential"
                 : service.category === "Commercial"
-                  ? "Business"
+                  ? "Commercial"
                   : "Specialist",
           }))}
         />
@@ -1166,7 +1087,7 @@ export function ServicesOverview() {
             label="NOT SURE WHERE TO START?"
             title="Tell us about the space."
           >
-            Share the property or outdoor area, its condition and the tasks that
+            Share the property or workplace, its condition and the tasks that
             matter. The team can help clarify a suitable cleaning scope.
           </Intro>
           <Action href="/contact">Discuss your requirements</Action>

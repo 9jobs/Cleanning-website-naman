@@ -26,8 +26,8 @@ const highlights = [
   },
   {
     Icon: CalendarDays,
-    title: "Garden & outdoor care",
-    text: "Patios, balconies and garden-area tidy-ups.",
+    title: "Deep & one-off cleaning",
+    text: "Detailed home cleaning or a single visit for priority rooms.",
   },
   {
     Icon: Heart,
@@ -57,7 +57,7 @@ export function AboutPage() {
               <em>Room to thrive.</em>
             </h1>
             <p>
-              We support homes, properties, gardens, workplaces and completed
+              We support homes, properties, workplaces and completed
               construction sites with practical cleaning scopes and clear
               communication.
             </p>
@@ -115,8 +115,8 @@ export function AboutPage() {
             className="collage-main"
           />
           <Photo
-            src="/images/about-garden.webp"
-            alt="Swept brick courtyard with native plants and a timber gate"
+            src="/images/property-detail.webp"
+            alt="Clean apartment kitchenette with open empty cupboards"
           />
           <Photo
             src="/images/about-office-male.webp"
@@ -135,14 +135,14 @@ export function AboutPage() {
             <em>A personal approach.</em>
           </h2>
           <p>
-            Family homes, rental properties, gardens, workplaces and completed
-            building sites all need different care. Thrive4 starts by
-            understanding the property and the work required.
+            Family homes, rental properties, workplaces and completed building
+            sites all need different care. Thrive4 starts by understanding the
+            property and the work required.
           </p>
           <p>
-            Our services cover routine upkeep, detailed property cleaning,
-            outdoor areas, move-out cleaning and post-build cleans. An agreed
-            checklist sets out the work before a visit is confirmed.
+            Our services cover routine upkeep, detailed property cleaning, deep
+            cleaning, one-off visits and post-build cleans. An agreed checklist
+            sets out the work before a visit is confirmed.
           </p>
           <Button href="/contact">Talk to our team</Button>
         </Reveal>
@@ -198,8 +198,8 @@ export function AboutPage() {
         </div>
         <div>
           <p>
-            Tell us about your home, property, garden, workplace or completed
-            building site. Share the cleaning requirements and preferred timing.
+            Tell us about your home, property, workplace or completed building
+            site. Share the cleaning requirements and preferred timing.
           </p>
           <Button href="/contact">Build your cleaning plan</Button>
         </div>
@@ -211,7 +211,7 @@ export function AboutPage() {
 const heroImages: Record<string, { src: string; label: string }> = {
   services: {
     src: "/images/cleaning-plans-room.webp",
-    label: "HOMES · PROPERTIES · GARDENS · SITES",
+    label: "HOMES · PROPERTIES · WORKPLACES · SITES",
   },
   pricing: {
     src: "/images/kitchen.webp",

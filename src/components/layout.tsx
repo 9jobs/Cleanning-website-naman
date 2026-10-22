@@ -113,7 +113,7 @@ export function Header() {
     <>
       <ScrollProgress />
       <div className="announcement">
-        Cleaning for Homes, Properties, Gardens & Sites ·{" "}
+        Cleaning for Homes, Properties, Workplaces & Sites ·{" "}
         <Link href="/services">
           Explore Cleaning Services <ArrowUpRight size={13} />
         </Link>
@@ -269,7 +269,7 @@ export function Footer() {
               </span>
             </div>
             <p>
-              Cleaning for homes, properties, gardens and sites.
+              Cleaning for homes, properties, workplaces and sites.
               <br />
               Practical care inside and out, with an agreed scope.
             </p>

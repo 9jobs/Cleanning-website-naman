@@ -26,13 +26,13 @@ const pages: Record<
     title: "Care for your space. Room to thrive.",
     eyebrow: "Who We Are",
     description:
-      "Learn more about Thrive4 Cleaning, our commitment to high cleaning standards, and our house, property, garden, construction and commercial cleaning services.",
+      "Learn more about Thrive4 Cleaning, our commitment to high cleaning standards, and our house, deep, one-off, property, construction and commercial cleaning services.",
   },
   services: {
     title: "Professional Cleaning for Every Space.",
     eyebrow: "Our Services",
     description:
-      "Explore House, Property, Garden, Construction and specialist cleaning services.",
+      "Explore House, Deep, One-Off, Property, Construction and specialist cleaning services.",
   },
   pricing: {
     title: "Clear Pricing for Professional Cleaning Services.",
@@ -80,7 +80,7 @@ const pages: Record<
     title: "Practical Cleaning Guides & Expert Advice.",
     eyebrow: "Cleaning Guides & Tips",
     description:
-      "Explore cleaning guides for homes, rentals, gardens, post-build properties and workplaces.",
+      "Explore cleaning guides for homes, rentals, post-build properties and workplaces.",
   },
   privacy: {
     title: "Privacy Policy.",

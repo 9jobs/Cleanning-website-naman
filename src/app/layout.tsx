@@ -20,12 +20,11 @@ import "./readability.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default:
-      "Thrive4 Cleaning | House, Property, Garden & Construction Cleaning",
+    default: "Thrive4 Cleaning | House, Property, Deep & Construction Cleaning",
     template: "%s | Thrive4 Cleaning",
   },
   description:
-    "House, property, garden, construction and commercial cleaning. Request an agreed scope for your space.",
+    "House, deep, one-off, property, construction and commercial cleaning. Request an agreed scope for your space.",
   openGraph: {
     type: "website",
     locale: "en_AU",

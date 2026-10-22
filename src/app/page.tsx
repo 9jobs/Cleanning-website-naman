@@ -29,20 +29,18 @@ import {
   ScrollStory,
   ExperienceCarousel,
   PricingPaths,
-  ServiceTile,
+  HomeServiceMosaic,
 } from "@/components/showcase";
-import { services } from "@/lib/data";
-import tileStyles from "@/components/service-tiles.module.css";
 import guideStyles from "@/components/home-guides.module.css";
 import { homeGuideCards } from "@/lib/home-guide-cards";
 
 export const metadata = {
   title: {
     absolute:
-      "Property, House, Garden & Construction Cleaning | Thrive4 Cleaning",
+      "Property, House, Deep & Construction Cleaning | Thrive4 Cleaning",
   },
   description:
-    "Thrive4 Cleaning provides professional house, property, garden, construction and commercial cleaning services.",
+    "Thrive4 Cleaning provides professional house, deep, one-off, property, construction and commercial cleaning services.",
   alternates: { canonical: "/" },
 };
 
@@ -81,13 +79,13 @@ export default function Home() {
               <span>you can count on.</span>
             </h2>
             <p>
-              From family homes and rental properties to gardens, workplaces and
+              From family homes and rental properties to workplaces and
               construction sites, Thrive4 provides cleaning shaped around your
               property and requirements.
             </p>
             <p>
               Our services cover routine upkeep, detailed property cleaning,
-              outdoor areas, move-out cleaning and post-build cleans, with clear
+              deep cleaning, one-off visits and post-build cleans, with clear
               communication from enquiry through to completion.
             </p>
             <div className="actions">
@@ -161,7 +159,7 @@ export default function Home() {
               </span>
             </div>
             <span className="team-photo-caption">
-              CARE FOR HOMES, PROPERTIES, GARDENS & SITES.
+              CARE FOR HOMES, PROPERTIES, WORKPLACES & SITES.
             </span>
           </Reveal>
         </div>
@@ -177,8 +175,8 @@ export default function Home() {
                 <span>service for your needs.</span>
               </h2>
               <p>
-                Compare house and property care, garden tidy-ups and post-build
-                cleaning to find the right scope for your space.
+                Choose residential or commercial cleaning to find the right
+                service for your space.
               </p>
             </div>
           </Reveal>
@@ -222,8 +220,8 @@ export default function Home() {
                   for every space.
                 </h2>
                 <p>
-                  Explore cleaning for homes, properties, gardens, construction
-                  sites and workplaces.
+                  Explore cleaning for homes, properties, construction sites and
+                  workplaces.
                 </p>
               </div>
             </Reveal>
@@ -231,32 +229,7 @@ export default function Home() {
               <Button href="/services">Explore All Services</Button>
             </div>
           </div>
-          <div className={`service-mosaic ${tileStyles.mosaic}`}>
-            {[
-              services[0],
-              services[1],
-              services[2],
-              services[3],
-              services.find((service) => service.slug === "airbnb-cleaning")!,
-              services.find(
-                (service) => service.slug === "commercial-cleaning",
-              )!,
-            ].map((s, i) => (
-              <ServiceTile
-                key={s.slug}
-                title={s.name}
-                description={s.summary}
-                slug={s.slug}
-                image={
-                  s.slug === "airbnb-cleaning"
-                    ? s.thumbnail
-                    : `/images/service-preview-${s.slug}-v3.webp`
-                }
-                index={i}
-                featured={i === 0}
-              />
-            ))}
-          </div>
+          <HomeServiceMosaic />
           <div className="services-reassurance">
             <div>
               <House size={25} />
@@ -277,7 +250,7 @@ export default function Home() {
               <span>
                 High Cleaning Standards
                 <small>
-                  Care for surfaces, outdoor areas and property details.
+                  Care for surfaces, living areas and property details.
                 </small>
               </span>
             </div>
@@ -318,7 +291,7 @@ export default function Home() {
                   "Room-by-room property cleaning",
                   "Kitchen and bathroom detailing",
                   "Cupboards, floors and accessible surfaces",
-                  "Optional carpet cleaning by agreement",
+                  "Priority rooms and tasks agreed in advance",
                 ]}
               />
             </Reveal>
@@ -340,7 +313,7 @@ export default function Home() {
               eyebrow="WHY CHOOSE THRIVE4 CLEANING"
               title="Reliable cleaning for every type of property."
               center
-              description="Practical cleaning for homes, properties, gardens and sites, with clear requirements and an agreed scope."
+              description="Practical cleaning for homes, properties, workplaces and sites, with clear requirements and an agreed scope."
             />
           </Reveal>
           <div className="benefits-grid">
@@ -357,8 +330,7 @@ export default function Home() {
                   Dependable results.
                 </h3>
                 <p>
-                  Care for homes, managed properties, outdoor areas and
-                  workplaces.
+                  Care for homes, managed properties, offices and workplaces.
                 </p>
               </div>
             </Reveal>
@@ -370,7 +342,7 @@ export default function Home() {
                 schedules.
               </h3>
               <p>
-                Request routine, one-off, outdoor or post-build cleaning to suit
+                Request routine, one-off, deep or post-build cleaning to suit
                 your property.
               </p>
               <Link href="/book">
@@ -437,7 +409,7 @@ export default function Home() {
               <Heading
                 eyebrow="BEFORE & AFTER CLEANING"
                 title="A closer look at cleaning, inside and out."
-                description="Explore illustrative comparisons for property, garden and post-construction cleaning."
+                description="Explore illustrative comparisons for property and post-construction cleaning."
               />
             </Reveal>
             <span className="comparison-kicker">
@@ -461,9 +433,9 @@ export default function Home() {
               <span>Consistent care.</span>
             </h2>
             <p>
-              From homes and rentals to gardens, commercial premises and
-              construction sites, cleaning helps prepare spaces for everyday
-              use, presentation or handover.
+              From homes and rentals to commercial premises and construction
+              sites, cleaning helps prepare spaces for everyday use,
+              presentation or handover.
             </p>
             <Button href="/reviews" secondary>
               View Customer Reviews

@@ -211,8 +211,8 @@ export function ContactQuotePage({
               starts here.
             </h2>
             <p>
-              Speak with our team about cleaning your property, garden,
-              workplace or completed building site.
+              Speak with our team about cleaning your property, workplace or
+              completed building site.
             </p>
             <div className="contact-info-links">
               <a href={`mailto:${site.email}`}>

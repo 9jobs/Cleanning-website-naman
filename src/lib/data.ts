@@ -2,9 +2,11 @@ import { servicePages } from "./service-pages";
 
 const serviceSummaries: Record<string, string> = {
   "house-cleaning": "Everyday home care, planned around your routine.",
+  "deep-cleaning": "A detailed clean for built-up dirt and grime in your home.",
+  "one-off-cleaning":
+    "A single-visit House Cleaning request for priority rooms.",
   "property-cleaning":
     "A fresh start for rentals, vacant and managed properties.",
-  "garden-cleaning": "A tidy-up for patios, paths and outdoor areas.",
   "construction-cleaning":
     "Dust and surface cleaning after building or renovation work.",
   "end-of-lease-cleaning":
@@ -13,7 +15,6 @@ const serviceSummaries: Record<string, string> = {
     "Practical cleaning for workplaces and shared business spaces.",
   "office-cleaning": "Care for desks, meeting rooms and shared office areas.",
   "airbnb-cleaning": "Cleaning support between short-stay guest visits.",
-  "carpet-cleaning": "Carpet care tailored to its fibres and condition.",
   "window-cleaning": "A clearer outlook for safely accessible windows.",
   "oven-cleaning": "Detailed care for your oven and agreed components.",
 };
@@ -21,26 +22,26 @@ const serviceSummaries: Record<string, string> = {
 const serviceThumbnails: Record<string, string> = {
   "house-cleaning": "house",
   "property-cleaning": "property",
-  "garden-cleaning": "garden",
+  "deep-cleaning": "property",
+  "one-off-cleaning": "house",
   "construction-cleaning": "construction",
   "end-of-lease-cleaning": "lease",
   "commercial-cleaning": "commercial-male",
   "office-cleaning": "office",
   "airbnb-cleaning": "airbnb",
-  "carpet-cleaning": "carpet",
   "window-cleaning": "window-male",
   "oven-cleaning": "oven",
 };
 
 const catalogue = [
   ["house-cleaning", "House Cleaning", "Residential"],
+  ["deep-cleaning", "Deep Cleaning", "Residential"],
+  ["one-off-cleaning", "One-Off Cleaning", "Residential"],
   ["property-cleaning", "Property Cleaning", "Residential"],
-  ["garden-cleaning", "Garden Cleaning", "Residential"],
   ["construction-cleaning", "Construction Cleaning", "Commercial"],
   ["commercial-cleaning", "Commercial Cleaning", "Commercial"],
   ["office-cleaning", "Office Cleaning", "Commercial"],
   ["airbnb-cleaning", "Airbnb Cleaning", "Commercial"],
-  ["carpet-cleaning", "Carpet Cleaning", "Specialist"],
 ];
 export const services = catalogue.map(([slug, name, category]) => {
   const page = servicePages[slug];
@@ -64,17 +65,12 @@ export const faqs = [
   {
     category: "Services",
     q: "What types of cleaning services do you provide?",
-    a: "Thrive4 offers House, Property, Garden, Construction, Commercial, Office, Airbnb and Carpet Cleaning. Share the property and work required so suitability and scope can be confirmed.",
+    a: "Thrive4 offers House, Deep, One-Off, Property, Commercial, Office, Construction and Airbnb Cleaning. Share the property and work required so suitability and scope can be confirmed.",
   },
   {
     category: "Services",
     q: "Do you provide house and property cleaning?",
     a: "Yes. House Cleaning supports routine or one-off home care. Property Cleaning is discussed for rental, vacant and managed residential properties with a property-specific checklist.",
-  },
-  {
-    category: "Services",
-    q: "Can I request garden or outdoor cleaning?",
-    a: "Yes. Describe the garden, patio, balcony or path, including surface types, access and any loose leaves or light debris. Tasks and debris handling are agreed in advance.",
   },
   {
     category: "Services",
@@ -95,11 +91,6 @@ export const faqs = [
     category: "Services",
     q: "Do you provide cleaning for commercial properties?",
     a: "Commercial Cleaning covers enquiries for workplaces, offices, retail and communal spaces. Explain the premises, shared facilities and operating requirements so a suitable scope can be discussed.",
-  },
-  {
-    category: "Services",
-    q: "Can I add carpet cleaning?",
-    a: "Carpet cleaning can be requested separately or discussed alongside a relevant property clean. Surface condition, equipment and access affect what can be agreed.",
   },
   {
     category: "Booking",
@@ -156,30 +147,7 @@ export const articles = [
       ],
       [
         "Discuss additional work early",
-        "Carpet, window and oven cleaning can be requested separately. Scope and timing must be confirmed; cleaning does not guarantee a bond return.",
-      ],
-    ],
-  },
-  {
-    slug: "garden-outdoor-cleaning-checklist",
-    title: "Garden & Outdoor Cleaning Checklist",
-    category: "Outdoor care",
-    image: "/images/journal-garden.webp",
-    read: "3 min read",
-    intro:
-      "Plan a tidy-up of patios, balconies, garden paths and accessible outdoor areas.",
-    sections: [
-      [
-        "Walk around the outdoor area",
-        "Note surface types, steps, gates and the locations of loose leaves, ordinary dirt or small fallen twigs. Photographs help explain the work.",
-      ],
-      [
-        "Define the tidy-up",
-        "Identify the areas to sweep or clean and any delicate plants or finishes. Do not assume landscaping, tree work or specialist waste handling is included.",
-      ],
-      [
-        "Agree access and debris handling",
-        "Discuss how the team can enter and what will happen to light debris. Confirm suitable tasks, scope and availability before arranging a visit.",
+        "Discuss priority rooms, appliance detailing and handover timing with the team. Scope and timing must be confirmed; cleaning does not guarantee a bond return.",
       ],
     ],
   },
@@ -249,29 +217,6 @@ export const articles = [
       [
         "Agree the tasks",
         "Discuss accessible surfaces, floors and ordinary waste bins. The written scope should clarify the areas, frequency and access arrangements confirmed for the site.",
-      ],
-    ],
-  },
-  {
-    slug: "carpet-care-after-building-work",
-    title: "Carpet Care After Renovation or Construction",
-    category: "Specialist care",
-    image: "/images/journal-carpet-male.webp",
-    read: "3 min read",
-    intro:
-      "Describe carpet condition and recent work before discussing suitable cleaning care.",
-    sections: [
-      [
-        "Describe the fibres and condition",
-        "Share the carpet type if known, visible wear, dust and any stains. Explain the renovation work and previous treatments.",
-      ],
-      [
-        "Identify residue before cleaning",
-        "Tell the team about unknown residue or material left by trades. Do not assume specialist or hazardous material treatment is included.",
-      ],
-      [
-        "Discuss method and aftercare",
-        "The cleaning approach and drying advice depend on the carpet and conditions. Complete stain removal and fixed drying times cannot be promised.",
       ],
     ],
   },
