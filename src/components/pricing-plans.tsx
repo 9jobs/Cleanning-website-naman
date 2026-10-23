@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -17,6 +17,7 @@ import {
 import { publicServices as services } from "@/lib/data";
 import { PRICING_HOURLY_RATE } from "@/lib/pricing";
 import styles from "./pricing-plans.module.css";
+import { PricingBookingModal } from "./pricing-booking-modal";
 
 type PricingPlan = {
   slug: string;
@@ -88,57 +89,7 @@ export function PricingPlans({
 }: {
   initial?: Record<string, string>;
 }) {
-  const [checkoutService, setCheckoutService] = useState<string | null>(null);
-  const [checkoutError, setCheckoutError] = useState<{
-    service: string;
-    message: string;
-  } | null>(null);
-  const checkoutBusy = useRef(false);
-  const requestIds = useRef<Record<string, string>>({});
-  useEffect(() => {
-    function restoreCheckout(event: PageTransitionEvent) {
-      if (!event.persisted) return;
-      checkoutBusy.current = false;
-      requestIds.current = {};
-      setCheckoutService(null);
-      setCheckoutError(null);
-    }
-    window.addEventListener("pageshow", restoreCheckout);
-    return () => window.removeEventListener("pageshow", restoreCheckout);
-  }, []);
-  async function openCheckout(slug: string) {
-    if (checkoutBusy.current) return;
-    checkoutBusy.current = true;
-    setCheckoutService(slug);
-    setCheckoutError(null);
-    try {
-      requestIds.current[slug] ||= crypto.randomUUID();
-      const response = await fetch("/api/pricing/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service: slug,
-          requestId: requestIds.current[slug],
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.error || "Could not open checkout. Please retry.");
-      if (new URL(data.url).origin !== "https://checkout.stripe.com")
-        throw new Error("Invalid checkout link. Please retry.");
-      window.location.assign(data.url);
-    } catch (error) {
-      setCheckoutError({
-        service: slug,
-        message:
-          error instanceof Error
-            ? error.message
-            : "Checkout is unavailable. Please retry.",
-      });
-      setCheckoutService(null);
-      checkoutBusy.current = false;
-    }
-  }
+  const [bookingPlan, setBookingPlan] = useState<PricingPlan | null>(null);
   const visiblePlans = residentialPlans;
   function destination(path: string, slug: string, oneOff = false) {
     const query = new URLSearchParams(initial);
@@ -151,11 +102,6 @@ export function PricingPlans({
       className={`pricing-plans ${styles.plans}`}
       aria-labelledby="pricing-plans-title"
     >
-      <div className={styles.sparkles} aria-hidden="true">
-        <span>✦</span>
-        <span>✦</span>
-        <span>✦</span>
-      </div>
       <div className="container pricing-plans-inner">
         <div className="pricing-plans-heading">
           <div>
@@ -210,9 +156,9 @@ export function PricingPlans({
                     aria-hidden="true"
                   />
                   <div>
-                    <strong>Booking charge (Non-refundable)</strong>
+                    <strong>Service Rate / Booking Charges (Non-refundable)</strong>
                     <p>
-                      This amount will be deducted from your final service
+                      This amount will be adjusted against your final service
                       payment.
                     </p>
                   </div>
@@ -229,20 +175,13 @@ export function PricingPlans({
                   <Link
                     href={destination("/book", plan.slug, plan.oneOff)}
                     prefetch={false}
-                    aria-disabled={checkoutService !== null}
                     onClick={(event) => {
                       event.preventDefault();
-                      void openCheckout(plan.slug);
+                      setBookingPlan(plan);
                     }}
                   >
-                    {checkoutService === plan.slug
-                      ? "Opening checkout…"
-                      : "Pay Now"}{" "}
-                    <ArrowRight size={19} />
+                    Book Now <ArrowRight size={19} />
                   </Link>
-                  {checkoutError?.service === plan.slug && (
-                    <p role="alert">{checkoutError.message}</p>
-                  )}
                 </div>
               </article>
             );
@@ -283,6 +222,13 @@ export function PricingPlans({
           ))}
         </div>
       </div>
+      {bookingPlan && (
+        <PricingBookingModal
+          service={bookingPlan.slug}
+          title={bookingPlan.title}
+          onClose={() => setBookingPlan(null)}
+        />
+      )}
     </section>
   );
 }

@@ -5,6 +5,7 @@ import { Info } from "lucide-react";
 import { Button } from "@/components/ui";
 import { getPaymentDocument } from "@/lib/payments/documents";
 import { PaymentSuccess } from "@/components/payment-success";
+import { notifyPaidPricingBooking } from "@/lib/pricing-booking-server";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Test Payment Status",
@@ -29,10 +30,17 @@ export default async function PaymentConfirmation({
   } catch {
     /* No success claims from query parameters or failed verification. */
   }
-  if (payment)
+  if (payment) {
+    // A verified return is a fallback; webhooks also notify when this page is never opened.
+    try {
+      await notifyPaidPricingBooking(session_id);
+    } catch {
+      console.error("Paid pricing booking notification pending webhook retry");
+    }
     return (
       <PaymentSuccess payment={payment} reference={{ sessionId: session_id }} />
     );
+  }
   return (
     <section className="container status-screen">
       <div className="panel">

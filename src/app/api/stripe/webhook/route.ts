@@ -5,6 +5,7 @@ import {
   verifyWebhookSignature,
 } from "@/lib/invoices/webhook";
 import { InvoiceError } from "@/lib/invoices/store";
+import { processPricingBookingEvent } from "@/lib/pricing-booking-server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export async function POST(request: NextRequest) {
@@ -49,7 +50,13 @@ export async function POST(request: NextRequest) {
       signature,
       secret,
     );
-    const result = await processStripeWebhook(event);
+    const metadata = event.data.object.metadata as
+      Record<string, string> | undefined;
+    const result =
+      metadata?.app === "thrive4-pricing-checkout" &&
+      metadata?.booking_version === "1"
+        ? await processPricingBookingEvent(event)
+        : await processStripeWebhook(event);
     return Response.json(
       { received: true, ...result },
       { headers: privateHeaders },

@@ -1,4 +1,8 @@
 import type { Invoice } from "./model";
+import {
+  pricingBookingDetailsSchema,
+  type PricingBookingDetails,
+} from "../pricing-booking-validation";
 import { InvoiceError } from "./store";
 import { services } from "../data";
 import {
@@ -279,6 +283,7 @@ export async function createPricingCheckout(
   service: string,
   requestId: string,
   origin: string,
+  booking?: PricingBookingDetails,
 ) {
   const selected = services.find((item) => item.slug === service);
   if (!selected || !pricingServices.some((slug) => slug === service))
@@ -302,6 +307,13 @@ export async function createPricingCheckout(
     success_url: `${origin}/pricing/confirmation?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/pricing?service=${encodeURIComponent(service)}`,
   });
+  if (booking) {
+    const details = pricingBookingDetailsSchema.parse(booking);
+    fields.set("customer_email", details.email);
+    fields.set("metadata[booking_version]", "1");
+    for (const [key, value] of Object.entries(details))
+      fields.set(`metadata[booking_${key}]`, value);
+  }
   const session = await call<Session>(
     "checkout/sessions",
     fields,
@@ -331,7 +343,11 @@ export async function verifyPricingPayment(id: string) {
   await verifyThrive4Account(live);
   const session = await call<
     Omit<Session, "metadata"> & {
-      metadata: { app?: string; service?: string };
+      metadata: {
+        app?: string;
+        service?: string;
+        [key: string]: string | undefined;
+      };
       customer_details?: { name?: string; email?: string };
       created?: number;
     }
@@ -389,6 +405,16 @@ export async function verifyPricingPayment(id: string) {
     paymentIntentId: session.payment_intent,
     customerName: session.customer_details?.name || "Customer",
     customerEmail: session.customer_details?.email || "",
+    booking:
+      session.metadata.booking_version === "1"
+        ? pricingBookingDetailsSchema.parse(
+            Object.fromEntries(
+              ["name", "email", "phone", "address", "date", "time"].map(
+                (key) => [key, session.metadata[`booking_${key}`]],
+              ),
+            ),
+          )
+        : undefined,
   };
 }
 export async function invoiceForCheckout(id: string) {

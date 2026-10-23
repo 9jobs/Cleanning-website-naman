@@ -7,20 +7,9 @@
     linear-gradient(150deg, #ffffff, #fbfefc 65%, #f3faf5);
 }
 
-.plans.plans::before {
-  width: 270px;
-  height: 390px;
-  left: -190px;
-  top: 110px;
-  background: #dff3e580;
-}
-
+.plans.plans::before,
 .plans.plans::after {
-  width: 350px;
-  height: 530px;
-  right: -245px;
-  top: -60px;
-  background: #e8f5e9a1;
+  content: none;
 }
 
 .plans :global(.pricing-plans-inner) {
@@ -264,33 +253,6 @@
   color: #43566a;
   font-size: 14px;
   line-height: 1.4;
-}
-
-.sparkles {
-  position: absolute;
-  pointer-events: none;
-  inset: 0;
-  z-index: -1;
-  color: #d7f0d8;
-}
-.sparkles span {
-  position: absolute;
-  font-size: 56px;
-  line-height: 1;
-}
-.sparkles span:first-child {
-  left: 5%;
-  top: 9%;
-}
-.sparkles span:nth-child(2) {
-  left: 1%;
-  bottom: 8%;
-  font-size: 45px;
-}
-.sparkles span:last-child {
-  right: 1%;
-  bottom: 12%;
-  font-size: 48px;
 }
 
 @media (min-width: 901px) and (max-width: 1250px) {
