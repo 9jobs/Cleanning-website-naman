@@ -39,7 +39,7 @@ export const metadata = {
     absolute: "Residential Cleaning Services | Thrive4 Cleaning Australia",
   },
   description:
-    "Thrive4 Cleaning provides professional residential cleaning for homes, apartments, rentals, move-in and move-out properties and short-stay accommodation.",
+    "Thrive4 Cleaning provides professional residential cleaning for homes, apartments, residential properties and short-stay accommodation.",
   alternates: { canonical: "/" },
 };
 
@@ -83,7 +83,7 @@ export default function Home() {
               your home, schedule and priorities.
             </p>
             <p>
-              Choose regular care, a one-off refresh, move-in or move-out
+              Choose regular care, a one-off refresh, apartment or property
               cleaning, with a clear scope agreed before the service begins.
             </p>
             <div className="actions">
@@ -277,9 +277,9 @@ export default function Home() {
           <div>
             <Reveal variant="right">
               <Heading
-                eyebrow="MOVE-IN / MOVE-OUT CLEANING"
-                title="Moving home? We’ll handle the clean."
-                description="Whether you are moving in or preparing to move out, Thrive4 can help clean the residential spaces that matter before your next chapter begins."
+                eyebrow="RESIDENTIAL PROPERTY CLEANING"
+                title="Your property, refreshed with care."
+                description="Thrive4 can help refresh the residential rooms and surfaces that matter, with a checklist agreed around your property."
               />
             </Reveal>
             <Reveal delay={0.12}>
@@ -293,12 +293,12 @@ export default function Home() {
               />
             </Reveal>
             <Reveal delay={0.22}>
-              <Button href="/services/move-in-cleaning">
-                Explore Move-In Cleaning
+              <Button href="/services/property-cleaning">
+                Explore Property Cleaning
               </Button>
             </Reveal>
             <p className="editorial-footnote">
-              A checklist shaped around your next move.
+              A checklist shaped around your property.
             </p>
           </div>
         </div>
@@ -428,7 +428,7 @@ export default function Home() {
               <span>A simpler routine.</span>
             </h2>
             <p>
-              From everyday house cleaning to apartment, move-in and short-stay
+              From everyday house cleaning to apartment, property and short-stay
               services, Thrive4 helps keep residential spaces fresh, comfortable
               and ready to enjoy.
             </p>

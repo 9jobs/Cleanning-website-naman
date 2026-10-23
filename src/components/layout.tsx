@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { nav, site } from "@/lib/config";
-import { services } from "@/lib/data";
+import { publicServices as services } from "@/lib/data";
 import { ScrollProgress } from "./motion";
 import styles from "./navigation-menu.module.css";
 import footerStyles from "./footer.module.css";

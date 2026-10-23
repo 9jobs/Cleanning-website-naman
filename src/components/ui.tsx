@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { Reveal } from "./motion";
-import { services, articles } from "@/lib/data";
+import { publicServices as services, articles } from "@/lib/data";
 export function Button({
   href,
   children,

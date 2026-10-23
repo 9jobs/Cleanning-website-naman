@@ -2,7 +2,7 @@ import "server-only";
 import { createHmac } from "node:crypto";
 import { contactDatabase, ContactRequestError } from "./contact-database";
 import { contactTransport } from "./contact-mail";
-import { services } from "./data";
+import { publicServices as services } from "./data";
 import type { PromoFields } from "./promo-validation";
 
 // Public promotion configuration stays on the server. No payment discounts are applied.

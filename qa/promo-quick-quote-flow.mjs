@@ -28,7 +28,7 @@ for (const width of [320, 390, 768, 1024, 1440, 1920]) {
   await form.scrollIntoViewIfNeeded();
   await page.screenshot({ path: `qa/quick-quote-inline-${width}.png` });
   await form
-    .getByRole("button", { name: "Get Promo Code", exact: false })
+    .getByRole("button", { name: "Reveal Promo Code", exact: false })
     .click();
   const dialog = page.getByRole("dialog");
   await dialog.waitFor({ state: "visible" });
@@ -77,7 +77,7 @@ await form
   .getByLabel("Cleaning service", { exact: false })
   .selectOption("house-cleaning");
 await form
-  .getByRole("button", { name: "Get Promo Code", exact: false })
+  .getByRole("button", { name: "Reveal Promo Code", exact: false })
   .click();
 const dialog = page.getByRole("dialog");
 await dialog.getByRole("button", { name: "Copy Code", exact: true }).click();

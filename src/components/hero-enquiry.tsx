@@ -318,7 +318,7 @@ export function HeroEnquiry() {
               onClick={() => setPromoOpen(true)}
               aria-haspopup="dialog"
             >
-              Get Promo Code <ArrowRight size={16} aria-hidden="true" />
+              Reveal Promo Code <ArrowRight size={16} aria-hidden="true" />
             </button>
             <button
               type="button"

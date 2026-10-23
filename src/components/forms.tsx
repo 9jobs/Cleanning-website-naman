@@ -11,7 +11,7 @@ import {
   Upload,
   ShieldCheck,
 } from "lucide-react";
-import { services } from "@/lib/data";
+import { publicServices as services } from "@/lib/data";
 import { extras, frequencies } from "@/lib/config";
 import {
   bookingSchema,

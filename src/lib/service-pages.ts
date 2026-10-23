@@ -266,8 +266,8 @@ export const servicePages: Record<string, ServicePageContent> = {
         "This service is for the interior of your residential apartment or unit. Building common areas are outside the scope.",
       ],
       [
-        "Can I include the balcony?",
-        "Accessible residential balconies can be discussed as Balcony / Patio Cleaning. Confirm surfaces and access with the team.",
+        "Which indoor areas can I include?",
+        "Share the indoor rooms and accessible surfaces you want included in your apartment cleaning checklist.",
       ],
     ],
     related: ["house-cleaning", "balcony-patio-cleaning", "move-in-cleaning"],
@@ -345,8 +345,8 @@ export const servicePages: Record<string, ServicePageContent> = {
         "Yes. Tell us which rooms are occupied and which surfaces will be accessible so the scope can be agreed.",
       ],
       [
-        "Is this the same as a move-out clean?",
-        "Property Cleaning can support an ongoing rental or vacant home. End of Lease / Move-Out Cleaning focuses on preparing to leave a rental, using your property checklist.",
+        "How is the property checklist agreed?",
+        "Property Cleaning can support an occupied rental or vacant residential home, with the checklist agreed around its rooms and condition.",
       ],
     ],
     related: ["move-in-cleaning", "end-of-lease-cleaning", "house-cleaning"],

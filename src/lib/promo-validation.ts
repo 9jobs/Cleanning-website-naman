@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { services } from "./data";
+import { publicServices as services } from "./data";
 import { postcodeSchema } from "./validation";
 
 // Match the services currently offered in the website navigation.

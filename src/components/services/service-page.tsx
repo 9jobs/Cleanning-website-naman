@@ -17,7 +17,7 @@ import {
   Clock3,
   ChevronRight,
 } from "lucide-react";
-import { services } from "@/lib/data";
+import { publicServices as services } from "@/lib/data";
 import {
   servicePages,
   type ServicePageContent,

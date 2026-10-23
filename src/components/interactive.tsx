@@ -11,7 +11,7 @@ import {
   SlidersHorizontal,
   MessageCircle,
 } from "lucide-react";
-import { services, faqs } from "@/lib/data";
+import { publicServices as services, faqs } from "@/lib/data";
 import {
   extras,
   frequencies,

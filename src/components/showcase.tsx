@@ -17,7 +17,7 @@ import {
 import { Photo, Button } from "./ui";
 import { Reveal } from "./motion";
 import { testimonials } from "@/lib/config";
-import { services } from "@/lib/data";
+import { publicServices as services } from "@/lib/data";
 import tileStyles from "./service-tiles.module.css";
 import journeyStyles from "./cleaning-journey.module.css";
 

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { services, articles } from "@/lib/data";
+import { publicServices as services, articles } from "@/lib/data";
 import { site } from "@/lib/config";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

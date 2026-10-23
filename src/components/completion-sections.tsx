@@ -12,7 +12,7 @@ import {
   Phone,
   Sparkles,
 } from "lucide-react";
-import { services, articles } from "@/lib/data";
+import { publicServices as services, articles } from "@/lib/data";
 import { serviceGuides } from "@/lib/completion-content";
 import { site } from "@/lib/config";
 import { BookingForm, EnquiryForm } from "./forms";
@@ -133,17 +133,17 @@ export function MoveOutFeature() {
             src="/images/lease.webp"
             alt="Clean kitchen surfaces ready for a property handover"
           />
-          <span>MOVE-OUT CLEANING / A CLEAR CHECKLIST</span>
+          <span>PROPERTY CLEANING / A CLEAR CHECKLIST</span>
         </Reveal>
         <Reveal variant="right" distance={28} duration={0.55}>
           <FinishHeading
-            label="END OF LEASE CLEANING"
-            title="Make room for your next chapter."
-            text="Moving comes with enough to organise. Share your property details, handover date and agent checklist so the clean can be planned around your move."
+            label="PROPERTY CLEANING"
+            title="Refresh your residential property."
+            text="Share your property details and priority rooms so the cleaning checklist can be planned around your needs."
           />
           <ul className="finish-checks">
             {[
-              "Agreed room-by-room vacate checklist",
+              "Agreed room-by-room property checklist",
               "Empty cupboards, wardrobes and accessible surfaces",
               "Kitchen, bathroom and floor cleaning",
               "Appliance detailing by arrangement",
@@ -154,15 +154,12 @@ export function MoveOutFeature() {
               </li>
             ))}
           </ul>
-          <Link
-            className="finish-button"
-            href="/services/end-of-lease-cleaning"
-          >
-            Explore move-out cleaning <ArrowRight size={18} />
+          <Link className="finish-button" href="/services/property-cleaning">
+            Explore property cleaning <ArrowRight size={18} />
           </Link>
           <p className="finish-small">
-            Cleaning follows the agreed scope. Bond outcomes remain with the
-            property manager or landlord.
+            Cleaning follows the agreed residential scope and confirmed access
+            arrangements.
           </p>
         </Reveal>
       </div>

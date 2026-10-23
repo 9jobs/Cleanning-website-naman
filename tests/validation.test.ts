@@ -93,11 +93,7 @@ test("only residential services are bookable, retired services are rejected", ()
     "one-off-cleaning",
     "property-cleaning",
     "apartment-cleaning",
-    "move-in-cleaning",
-    "end-of-lease-cleaning",
     "airbnb-cleaning",
-    "bedroom-living-area-cleaning",
-    "balcony-patio-cleaning",
   ]) {
     assert.equal(
       bookingSchema.safeParse({ ...booking, service }).success,
@@ -106,6 +102,10 @@ test("only residential services are bookable, retired services are rejected", ()
     );
   }
   for (const service of [
+    "move-in-cleaning",
+    "end-of-lease-cleaning",
+    "bedroom-living-area-cleaning",
+    "balcony-patio-cleaning",
     "commercial-cleaning",
     "office-cleaning",
     "construction-cleaning",

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { services } from "./data";
+import { publicServices as services } from "./data";
 import { extras, frequencies } from "./config";
 export const serviceSchema = z
   .string()

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
-import { services } from "@/lib/data";
+import { publicServices as services } from "@/lib/data";
 import { ServicePage } from "@/components/services/service-page";
 import { servicePages } from "@/lib/service-pages";
+
+export const dynamicParams = false;
 
 const aliases: Record<string, string> = {
   "regular-house-cleaning": "house-cleaning",

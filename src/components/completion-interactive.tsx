@@ -10,7 +10,7 @@ import {
   Search,
   SlidersHorizontal,
 } from "lucide-react";
-import { services, articles, faqs } from "@/lib/data";
+import { publicServices as services, articles, faqs } from "@/lib/data";
 import { site, testimonials } from "@/lib/config";
 import { Photo } from "./ui";
 import { Reveal } from "./motion";

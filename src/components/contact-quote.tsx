@@ -19,7 +19,7 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import { services } from "@/lib/data";
+import { publicServices as services } from "@/lib/data";
 import { frequencies, site } from "@/lib/config";
 import { australianDate } from "@/lib/validation";
 import {

@@ -11,7 +11,7 @@ import {
   Leaf,
   UsersRound,
 } from "lucide-react";
-import { services } from "@/lib/data";
+import { publicServices as services } from "@/lib/data";
 import { PRICING_HOURLY_RATE } from "@/lib/pricing";
 
 type PricingPlan = {

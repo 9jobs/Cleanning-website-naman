@@ -18,11 +18,7 @@ export const nav = [
   ["Pricing", "/pricing"],
   ["Contact", "/contact"],
 ];
-export const extras = [
-  "Fridge cleaning",
-  "Balcony cleaning",
-  "Additional cleaning time",
-];
+export const extras = ["Fridge cleaning", "Additional cleaning time"];
 export const frequencies = ["Weekly", "Fortnightly", "Monthly", "One-off"];
 export const testimonials: {
   name: string;

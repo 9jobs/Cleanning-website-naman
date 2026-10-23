@@ -66,11 +66,22 @@ export const services = catalogue.map(([slug, name, category]) => {
   };
 });
 
+// Keep historical invoice service validation intact; public pages use this list.
+export const publicServices = services.filter((service) =>
+  [
+    "house-cleaning",
+    "one-off-cleaning",
+    "apartment-cleaning",
+    "property-cleaning",
+    "airbnb-cleaning",
+  ].includes(service.slug),
+);
+
 export const faqs = [
   {
     category: "Services",
     q: "What residential cleaning services do you provide?",
-    a: "Choose Regular House Cleaning, One-Off Cleaning, Apartment Cleaning, Property Cleaning, Move-In Cleaning, End of Lease / Move-Out Cleaning, Airbnb / Short-Stay Cleaning, Bedroom & Living Area Cleaning or Balcony / Patio Cleaning. Scope and availability are confirmed for your home.",
+    a: "Choose Regular House Cleaning, One-Off Cleaning, Apartment Cleaning, Property Cleaning or Airbnb / Short-Stay Cleaning. Scope and availability are confirmed for your home.",
   },
   {
     category: "Services",
@@ -89,13 +100,13 @@ export const faqs = [
   },
   {
     category: "Services",
-    q: "Do you provide move-in cleaning?",
-    a: "Yes. Move-In Cleaning helps prepare residential kitchens, bathrooms, empty storage and floors before you settle in. Confirm key access and utilities before the visit.",
+    q: "Do you provide property cleaning?",
+    a: "Yes. Property Cleaning covers agreed kitchens, bathrooms, storage and floors in residential properties. Confirm access and utilities before the visit.",
   },
   {
     category: "Services",
-    q: "What is included in move-out cleaning?",
-    a: "Tasks are agreed around your rental home, condition report and agent checklist. Empty rooms, kitchen and bathroom care, accessible storage and floors can be discussed. Cleaning does not guarantee a bond return.",
+    q: "What is included in property cleaning?",
+    a: "The residential checklist can cover kitchen and bathroom care, accessible storage, rooms and floors. Tasks and access are agreed before the visit.",
   },
   {
     category: "Services",
@@ -104,13 +115,13 @@ export const faqs = [
   },
   {
     category: "Services",
-    q: "Can I request bedroom and living area cleaning?",
+    q: "Can regular cleaning include bedrooms and living areas?",
     a: "Yes. Choose the bedrooms, lounge or dining spaces and the accessible surfaces and floors you want included.",
   },
   {
     category: "Services",
-    q: "Do you clean balconies and patios?",
-    a: "Accessible residential balconies and patios can be assessed. Share surface materials, drainage and building requirements. Specialist pressure washing is not assumed.",
+    q: "Can I request a focused one-off clean?",
+    a: "Choose One-Off Cleaning and share your priority rooms. The team confirms suitable tasks, access and availability before the visit.",
   },
   {
     category: "Pricing",
@@ -134,7 +145,7 @@ export const faqs = [
   },
 ];
 
-export const articles = [
+const articleCatalogue = [
   {
     slug: "a-calm-weekly-cleaning-routine",
     title: "A Simple Weekly House Cleaning Checklist",
@@ -225,8 +236,8 @@ export const articles = [
         "Share lift access, entry codes, visitor parking and building rules. Cleaning inside the apartment is separate from the building’s shared corridors or facilities.",
       ],
       [
-        "Discuss outdoor areas separately",
-        "Mention an accessible balcony when requesting your quote. Share its surface materials and drainage requirements so Balcony / Patio Cleaning can be assessed.",
+        "Describe the indoor rooms",
+        "Share your apartment layout and the indoor rooms needing attention so the cleaning scope can be assessed.",
       ],
     ],
   },
@@ -321,7 +332,7 @@ export const articles = [
       ],
       [
         "Choose the help you need",
-        "Bedroom & Living Area Cleaning can focus on selected rooms. Regular House Cleaning can include living spaces alongside kitchens and bathrooms. Confirm the tasks and time before booking.",
+        "Regular House Cleaning can include selected living spaces alongside kitchens and bathrooms. Confirm the tasks and time before booking.",
       ],
     ],
   },
@@ -397,3 +408,12 @@ export const articles = [
     ],
   },
 ];
+
+export const articles = articleCatalogue.filter(
+  (article) =>
+    ![
+      "moving-out-cleaning-checklist",
+      "prepare-home-move-in-clean",
+      "balcony-patio-cleaning-checklist",
+    ].includes(article.slug),
+);
