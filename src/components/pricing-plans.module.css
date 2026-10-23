@@ -1,0 +1,493 @@
+/* Only the pricing comparison receives this reference-inspired treatment. */
+.plans.plans:global(.pricing-plans) {
+  padding: 64px 0 76px;
+  background:
+    radial-gradient(ellipse at 2% 24%, #e5f5e9a6, transparent 35%),
+    radial-gradient(ellipse at 98% 65%, #e3f5e6b3, transparent 35%),
+    linear-gradient(150deg, #ffffff, #fbfefc 65%, #f3faf5);
+}
+
+.plans.plans::before {
+  width: 270px;
+  height: 390px;
+  left: -190px;
+  top: 110px;
+  background: #dff3e580;
+}
+
+.plans.plans::after {
+  width: 350px;
+  height: 530px;
+  right: -245px;
+  top: -60px;
+  background: #e8f5e9a1;
+}
+
+.plans :global(.pricing-plans-inner) {
+  width: min(1200px, calc(100% - 96px));
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.plans :global(.pricing-plans-heading) {
+  margin-bottom: 36px;
+}
+
+.plans.plans :global(.pricing-plans-heading) h1 {
+  font-size: clamp(32px, 3.2vw, 48px);
+  line-height: 1.16;
+  letter-spacing: -0.045em;
+  color: #091524;
+  margin-bottom: 17px;
+}
+
+.headingAccent {
+  color: #07583f;
+  white-space: nowrap;
+}
+
+.plans.plans :global(.pricing-plans-heading) p {
+  max-width: 1000px;
+  margin-inline: auto;
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.4;
+  color: #43546a;
+}
+
+.plans :global(.pricing-plans-heading) p strong {
+  color: #0c1729;
+  font-weight: 750;
+}
+
+.plans :global(.pricing-plan-grid) {
+  gap: 28px;
+}
+
+.plans :global(.pricing-plan-card) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 26px 28px 24px;
+  border: 1px solid #a8d9be;
+  border-radius: 0;
+  background: linear-gradient(150deg, #fff, #fcfefc);
+  box-shadow:
+    0 14px 34px #174e3820,
+    0 3px 8px #174e3810;
+}
+
+.plans :global(.pricing-plan-card)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  top: 8px;
+  right: 8px;
+  width: 49%;
+  height: 190px;
+  border-radius: 0 0 0 100%;
+  background-image:
+    linear-gradient(90deg, #fffffff5, #ffffff60 72%),
+    url("/images/comparison-living-demo.png");
+  background-size: cover;
+  background-position: right center;
+  mask-image: linear-gradient(#000 82%, transparent);
+  opacity: 0.95;
+}
+
+.plans :global(.pricing-plan-card):nth-child(2)::before {
+  background-image:
+    linear-gradient(90deg, #fffffff5, #ffffff60 72%),
+    url("/images/kitchen.webp");
+  background-position: 60% center;
+}
+
+.plans :global(.pricing-plan-card):nth-child(3)::before {
+  background-image:
+    linear-gradient(90deg, #fffffff5, #ffffff60 72%),
+    url("/images/after-property-cleaning.webp");
+  background-position: 85% center;
+}
+
+.plans :global(.pricing-plan-top) {
+  min-height: 60px;
+}
+
+.plans :global(.pricing-plan-icon) {
+  width: 52px;
+  height: 52px;
+  background: #e6f6eb;
+  color: #06723b;
+}
+
+.plans.plans :global(.pricing-plan-card) h2 {
+  font-size: clamp(21px, 1.56vw, 24px);
+  color: #0b1729;
+  margin: 1px 0 7px;
+}
+
+.plans :global(.pricing-plan-price) {
+  padding: 0;
+  margin: 12px 0 10px;
+  background: transparent;
+}
+
+.plans :global(.pricing-plan-price) strong {
+  font-size: clamp(36px, 2.7vw, 42px);
+  color: #064c39;
+  line-height: 1.1;
+}
+
+.plans
+  :global(.pricing-plan-card):nth-child(2)
+  :global(.pricing-plan-price)
+  strong {
+  color: #0b1d29;
+}
+
+.plans :global(.pricing-plan-price) > span {
+  color: #5d6c7d;
+  font-size: 16px;
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+.plans :global(.pricing-plan-card) ul {
+  gap: 8px;
+  margin: 0 -10px 8px 18px;
+  min-height: 136px;
+}
+
+.plans :global(.pricing-plan-card) li {
+  gap: 12px;
+  color: #394d61;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.4;
+}
+
+.plans :global(.pricing-plan-card) li svg {
+  padding: 2px;
+  border-radius: 50%;
+  color: #08773a;
+  background: #ddf3df;
+  stroke-width: 3;
+}
+
+.plans :global(.pricing-plan-actions) a:first-child {
+  min-height: 52px;
+  background: linear-gradient(110deg, #07573f, #07835b);
+  border-color: #087249;
+  font-size: 18px;
+  box-shadow: 0 6px 14px #0869420b;
+}
+
+.plans :global(.pricing-plan-actions) {
+  margin-inline: -10px;
+}
+
+.bookingCharge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  min-height: 80px;
+  margin: 0 0 16px;
+  border-radius: 14px;
+  background: #edf8f1f0;
+  color: #075338;
+}
+
+.bookingCharge > svg {
+  flex-shrink: 0;
+  color: #078038;
+}
+
+.bookingCharge strong {
+  display: block;
+  font-size: 16px;
+  line-height: 1.35;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.plans.plans .bookingCharge p {
+  margin: 1px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #43566a;
+}
+
+.plans :global(.pricing-plan-trust) {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-color: #d1e9dc;
+  background: #ffffffeb;
+  padding: 20px 28px;
+  min-height: 120px;
+  border-radius: 24px;
+  margin-top: 22px;
+  box-shadow: 0 12px 35px #176a3a08;
+}
+
+.plans :global(.pricing-plan-trust) > div {
+  padding-inline: 18px;
+  gap: 18px;
+}
+
+.plans :global(.pricing-plan-trust) > div:first-child {
+  padding-left: 0;
+}
+.plans :global(.pricing-plan-trust) > div:last-child {
+  padding-right: 0;
+}
+.plans :global(.pricing-plan-trust) > div:not(:first-child)::before {
+  height: 84px;
+}
+
+.plans :global(.pricing-plan-trust) > div > span {
+  width: 64px;
+  height: 64px;
+  background: #e5f5e9;
+  color: #07813f;
+}
+
+.plans :global(.pricing-plan-trust) strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 650;
+  color: #0b1729;
+  letter-spacing: -0.035em;
+}
+
+.plans.plans :global(.pricing-plan-trust) p {
+  color: #43566a;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.sparkles {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  z-index: -1;
+  color: #d7f0d8;
+}
+.sparkles span {
+  position: absolute;
+  font-size: 56px;
+  line-height: 1;
+}
+.sparkles span:first-child {
+  left: 5%;
+  top: 9%;
+}
+.sparkles span:nth-child(2) {
+  left: 1%;
+  bottom: 8%;
+  font-size: 45px;
+}
+.sparkles span:last-child {
+  right: 1%;
+  bottom: 12%;
+  font-size: 48px;
+}
+
+@media (min-width: 901px) and (max-width: 1250px) {
+  .plans :global(.pricing-plan-trust) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .plans :global(.pricing-plan-trust) > div:nth-child(3) {
+    padding-left: 0;
+  }
+  .plans :global(.pricing-plan-trust) > div:nth-child(3)::before {
+    display: none;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1150px) {
+  .plans :global(.pricing-plan-grid) {
+    gap: 16px;
+  }
+  .plans :global(.pricing-plan-card) {
+    padding: 22px 18px 18px;
+  }
+  .plans :global(.pricing-plan-trust) {
+    padding: 20px;
+  }
+  .plans :global(.pricing-plan-trust) > div > span {
+    width: 48px;
+    height: 48px;
+  }
+  .bookingCharge {
+    padding: 12px;
+    gap: 12px;
+    min-height: 112px;
+  }
+  .bookingCharge strong,
+  .plans.plans .bookingCharge p {
+    font-size: 14px;
+  }
+  .plans :global(.pricing-plan-card) ul {
+    margin-inline: 0;
+    min-height: 180px;
+  }
+  .plans :global(.pricing-plan-card) li {
+    gap: 10px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .plans.plans:global(.pricing-plans) {
+    padding: 48px 0 56px;
+  }
+  .plans :global(.pricing-plans-inner) {
+    width: calc(100% - 40px);
+  }
+  .plans :global(.pricing-plan-grid) {
+    gap: 20px;
+  }
+  .plans :global(.pricing-plan-card) {
+    padding: 24px;
+  }
+  .plans :global(.pricing-plan-trust) {
+    max-width: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .plans :global(.pricing-plan-trust) > div {
+    padding: 0;
+    gap: 14px;
+  }
+  .plans :global(.pricing-plan-trust) > div > span {
+    width: 54px;
+    height: 54px;
+  }
+  .plans :global(.pricing-title-break) {
+    display: none;
+  }
+  .plans :global(.pricing-plan-card) ul {
+    margin-inline: 0;
+  }
+  .bookingCharge {
+    gap: 14px;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .plans :global(.pricing-plan-grid) > :last-child:nth-child(odd) {
+    width: calc((100% - 20px) / 2);
+  }
+  .bookingCharge {
+    min-height: 112px;
+    padding: 12px;
+    gap: 12px;
+  }
+  .bookingCharge strong,
+  .plans.plans .bookingCharge p {
+    font-size: 14px;
+  }
+  .plans :global(.pricing-plan-card) ul {
+    min-height: 180px;
+  }
+  .plans :global(.pricing-plan-card) li {
+    font-size: 15px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 599px) {
+  .plans.plans:global(.pricing-plans) {
+    padding: 40px 0 48px;
+  }
+  .plans :global(.pricing-plans-inner) {
+    width: calc(100% - 40px);
+  }
+  .plans :global(.pricing-plans-heading) {
+    margin-bottom: 24px;
+  }
+  .plans :global(.pricing-plan-card) {
+    padding: 22px 20px 20px;
+  }
+  .plans :global(.pricing-plan-trust) {
+    padding: 22px 20px;
+    grid-template-columns: 1fr;
+  }
+  .plans.plans :global(.pricing-plans-heading) h1 {
+    font-size: clamp(29px, 7.5vw, 38px);
+  }
+  .plans :global(.pricing-plan-card) ul {
+    min-height: 0;
+    margin-bottom: 22px;
+  }
+  .bookingCharge {
+    padding: 14px;
+    gap: 14px;
+  }
+  .bookingCharge strong,
+  .plans.plans .bookingCharge p {
+    font-size: 14px;
+  }
+  .plans :global(.pricing-plan-card)::before {
+    width: 56%;
+    opacity: 0.65;
+  }
+}
+
+/* Directional entrance effects stay within this pricing section. */
+.plans :global(.pricing-plans-heading),
+.plans :global(.pricing-plan-card),
+.plans :global(.pricing-plan-trust) {
+  animation: reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.plans :global(.pricing-plans-heading) {
+  --reveal-x: 0px;
+  --reveal-y: -20px;
+}
+
+.plans :global(.pricing-plan-card):nth-child(1) {
+  --reveal-x: -24px;
+  --reveal-y: 0px;
+  animation-delay: 100ms;
+}
+
+.plans :global(.pricing-plan-card):nth-child(2) {
+  --reveal-x: 0px;
+  --reveal-y: 24px;
+  animation-delay: 180ms;
+}
+
+.plans :global(.pricing-plan-card):nth-child(3) {
+  --reveal-x: 24px;
+  --reveal-y: 0px;
+  animation-delay: 260ms;
+}
+
+.plans :global(.pricing-plan-trust) {
+  --reveal-x: 0px;
+  --reveal-y: 20px;
+  animation-delay: 340ms;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--reveal-x, 0px), var(--reveal-y, 20px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plans :global(.pricing-plans-heading),
+  .plans :global(.pricing-plan-card),
+  .plans :global(.pricing-plan-trust) {
+    animation: none;
+  }
+}

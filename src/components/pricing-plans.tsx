@@ -4,15 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
+  Building2,
+  CalendarCheck,
   Check,
+  CircleDollarSign,
+  CreditCard,
   Crown,
+  Headphones,
   House,
-  KeyRound,
-  Leaf,
-  UsersRound,
+  ShieldCheck,
 } from "lucide-react";
 import { publicServices as services } from "@/lib/data";
 import { PRICING_HOURLY_RATE } from "@/lib/pricing";
+import styles from "./pricing-plans.module.css";
 
 type PricingPlan = {
   slug: string;
@@ -43,7 +47,7 @@ const residentialPlans: PricingPlan[] = [
     title: "Regular House Cleaning",
     icon: House,
     description:
-      "Stay on top of everyday upkeep with visits that fit your household routine.",
+      "Keep your home fresh, clean and comfortable with our regular cleaning service.",
     price: PRICING_HOURLY_RATE,
     features: [
       "Fortnightly or monthly visits",
@@ -55,9 +59,8 @@ const residentialPlans: PricingPlan[] = [
   {
     slug: "one-off-cleaning",
     title: "One-Off Cleaning",
-    icon: House,
-    description:
-      "Plan a focused reset after a busy period or ahead of a special occasion.",
+    icon: CalendarCheck,
+    description: "Perfect for a deep clean or a special occasion.",
     price: PRICING_HOURLY_RATE,
     features: [
       "One appointment, no ongoing plan",
@@ -68,9 +71,8 @@ const residentialPlans: PricingPlan[] = [
     oneOff: true,
   },
   {
-    ...servicePlan("property-cleaning", KeyRound),
-    description:
-      "Prepare a rental or vacant home for its next use with a property-specific checklist.",
+    ...servicePlan("property-cleaning", Building2),
+    description: "Prepare a rental or vacant property with a detailed clean.",
     features: [
       "Fortnightly or monthly visits",
       "Bedroom and living room cleaning",
@@ -145,19 +147,29 @@ export function PricingPlans({
     return `${path}?${query.toString()}`;
   }
   return (
-    <section className="pricing-plans" aria-labelledby="pricing-plans-title">
+    <section
+      className={`pricing-plans ${styles.plans}`}
+      aria-labelledby="pricing-plans-title"
+    >
+      <div className={styles.sparkles} aria-hidden="true">
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+      </div>
       <div className="container pricing-plans-inner">
         <div className="pricing-plans-heading">
           <div>
-            <span className="pricing-plans-eyebrow">OUR CLEANING PLANS</span>
             <h1 id="pricing-plans-title">
-              Choose a cleaning plan
-              <br className="pricing-title-break" /> that fits your needs.
+              Find the right{" "}
+              <span className={styles.headingAccent}>cleaning plan</span> for
+              your space.
             </h1>
             <p>
-              Cleaning plans for homes and residential rentals.
-              <br className="pricing-title-break" /> Select a plan or get a
-              personalised quote based on your space.
+              Choose a plan for your home or rental. Pay a small booking charge
+              to confirm your booking,
+              <br className="pricing-title-break" /> This amount is{" "}
+              <strong>non-refundable</strong> and will be{" "}
+              <strong>deducted from your final service payment.</strong>
             </p>
           </div>
         </div>
@@ -187,10 +199,23 @@ export function PricingPlans({
                   )}
                 </div>
                 <h2>{plan.title}</h2>
-                <p className="pricing-plan-description">{plan.description}</p>
                 <div className="pricing-plan-price">
-                  <strong>AUD ${plan.price}</strong>
+                  <strong>AUD {plan.price}</strong>
                   <span>/ person / hour</span>
+                </div>
+                <div className={styles.bookingCharge}>
+                  <CalendarCheck
+                    size={34}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <strong>Booking charge (Non-refundable)</strong>
+                    <p>
+                      This amount will be deducted from your final service
+                      payment.
+                    </p>
+                  </div>
                 </div>
                 <ul>
                   {plan.features.map((feature) => (
@@ -226,24 +251,29 @@ export function PricingPlans({
         <div className="pricing-plan-trust">
           {[
             {
-              icon: House,
-              title: "Transparent pricing",
-              detail: "Your scope and quote confirmed upfront.",
+              icon: CircleDollarSign,
+              title: `AUD ${PRICING_HOURLY_RATE} / person / hour`,
+              detail: "Transparent pricing",
             },
             {
-              icon: Leaf,
+              icon: ShieldCheck,
+              title: "Non-refundable booking charge",
+              detail: "Deducted from your final payment",
+            },
+            {
+              icon: CreditCard,
+              title: "Secure online booking",
+              detail: "Safe and easy payments",
+            },
+            {
+              icon: Headphones,
               title: "Flexible scheduling",
-              detail: "Choose a visit that fits your routine.",
-            },
-            {
-              icon: UsersRound,
-              title: "Professional cleaning",
-              detail: "Thoughtful care for your property and requirements.",
+              detail: "Book at your convenience",
             },
           ].map((item) => (
             <div key={item.title}>
               <span>
-                <item.icon size={29} strokeWidth={1.6} />
+                <item.icon size={35} strokeWidth={1.8} aria-hidden="true" />
               </span>
               <div>
                 <strong>{item.title}</strong>
@@ -252,14 +282,6 @@ export function PricingPlans({
             </div>
           ))}
         </div>
-        <p className="pricing-plan-note">
-          Every space is different. Your final quote depends on property size,
-          condition and any selected extras.{" "}
-          <Link href="/contact">
-            Need a personalised home cleaning plan? Get in touch{" "}
-            <ArrowRight size={14} />
-          </Link>
-        </p>
       </div>
     </section>
   );
