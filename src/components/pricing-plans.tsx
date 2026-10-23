@@ -46,11 +46,10 @@ const residentialPlans: PricingPlan[] = [
       "Stay on top of everyday upkeep with visits that fit your household routine.",
     price: PRICING_HOURLY_RATE,
     features: [
-      "Scheduled weekly or fortnightly visits",
-      "Day-to-day kitchen and bathroom upkeep",
-      "Bedroom and lounge maintenance",
+      "Fortnightly or monthly visits",
+      "Bedroom and living room cleaning",
+      "Kitchen cleaning",
       "Dusting, vacuuming and floor mopping",
-      "Optional add-ons by arrangement",
     ],
   },
   {
@@ -62,10 +61,9 @@ const residentialPlans: PricingPlan[] = [
     price: PRICING_HOURLY_RATE,
     features: [
       "One appointment, no ongoing plan",
-      "Focus on the areas you choose",
-      "Extra attention for built-up dirt",
-      "Benches, fixtures and reachable surfaces",
-      "Scope confirmed before the visit",
+      "Bedroom and living room cleaning",
+      "Kitchen cleaning",
+      "Dusting, vacuuming and floor mopping",
     ],
     oneOff: true,
   },
@@ -74,10 +72,11 @@ const residentialPlans: PricingPlan[] = [
     description:
       "Prepare a rental or vacant home for its next use with a property-specific checklist.",
     features: [
-      "Suitable for occupied or vacant rentals",
-      "Empty cupboards by prior agreement",
-      "Room-by-room presentation checklist",
-      "Access planned with the owner or agent",
+      "Fortnightly or monthly visits",
+      "Bedroom and living room cleaning",
+      "Kitchen cleaning",
+      "Dusting, vacuuming and floor mopping",
+      "Bathroom cleaning",
     ],
   },
 ];

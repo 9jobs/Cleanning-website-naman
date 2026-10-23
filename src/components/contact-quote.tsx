@@ -30,6 +30,15 @@ import { ContactDatePicker } from "./contact-date-picker";
 import { ContactSuccessDialog } from "./contact-success-dialog";
 
 const businessEmail = "Thrive4cleaning@gmail.com";
+const contactServices = services.filter((service) =>
+  [
+    "house-cleaning",
+    "one-off-cleaning",
+    "apartment-cleaning",
+    "property-cleaning",
+    "airbnb-cleaning",
+  ].includes(service.slug),
+);
 export function ContactQuotePage({
   initial = {},
   ready,
@@ -52,7 +61,9 @@ export function ContactQuotePage({
       name: initial.name || "",
       email: initial.email || "",
       phone: initial.phone || "",
-      service: services.some((service) => service.slug === initial.service)
+      service: contactServices.some(
+        (service) => service.slug === initial.service,
+      )
         ? initial.service
         : "",
       property: "" as ContactFields["property"],
@@ -322,7 +333,7 @@ export function ContactQuotePage({
                         {...accessibility("service")}
                       >
                         <option value="">Select a service</option>
-                        {services.map((item) => (
+                        {contactServices.map((item) => (
                           <option key={item.slug} value={item.slug}>
                             {item.name}
                           </option>

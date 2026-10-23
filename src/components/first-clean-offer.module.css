@@ -1,80 +1,148 @@
 .banner {
   position: relative;
+  height: 52px;
+  padding-right: 46px;
+  color: #ffffff;
+  background: linear-gradient(110deg, #064e36, #0b8052, #064e36);
+  border-bottom: 1px solid #acd9b7;
+  box-shadow: 0 3px 12px #064e3626;
+}
+.trigger {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px 20px;
-  padding: 10px 56px;
-  min-height: 52px;
-  background: linear-gradient(100deg, #e7f6e9, #ccebd5, #e7f6e9);
-  color: #134a34;
-  border-bottom: 1px solid #a9d4b7;
+  width: 100%;
+  height: 100%;
+  gap: 16px;
+  padding: 0 12px 0 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
 }
-.badge {
+.viewport {
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 24px,
+    #000 calc(100% - 24px),
+    transparent
+  );
+}
+.track {
+  display: flex;
+  width: max-content;
+  animation: offer-scroll 42s linear infinite;
+}
+.group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 64px;
+  padding-right: 64px;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.group > span {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  padding: 9px 18px;
-  max-width: 100%;
-  white-space: nowrap;
-  border: 1px solid #ffffff80;
-  border-radius: 999px;
-  background: #086440;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.4;
-  box-shadow:
-    0 5px 16px #08644033,
-    0 0 0 3px #ffffff40;
 }
-.message {
-  min-width: 0;
-  max-width: 100%;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
+.group strong {
+  font-weight: 800;
+  color: #dcffb4;
+}
+.cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 999px;
+  padding: 8px 15px;
+  background: #e0f8d5;
+  color: #064e36;
+  font-size: 12px;
+  font-weight: 750;
+  box-shadow: 0 2px 12px #001d3450;
+}
+.banner:hover .track,
+.banner:focus-within .track {
+  animation-play-state: paused;
 }
 .close {
   position: absolute;
-  right: 13px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 4px;
+  top: 6px;
   display: grid;
   place-items: center;
   width: 40px;
   height: 40px;
   padding: 0;
-  background: transparent;
   border: 0;
-  color: #145636;
+  color: inherit;
+  background: transparent;
   cursor: pointer;
+  border-radius: 6px;
 }
+.trigger:focus-visible,
 .close:focus-visible {
-  outline: 2px solid #086440;
-  outline-offset: 2px;
-  border-radius: 5px;
+  outline: 2px solid #dfffba;
+  outline-offset: -3px;
+}
+@keyframes offer-scroll {
+  to {
+    transform: translateX(-50%);
+  }
 }
 @media (max-width: 600px) {
   .banner {
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 46px;
-    text-align: center;
+    height: 48px;
+    padding-right: 38px;
   }
-  .badge {
-    font-size: clamp(11px, 3.3vw, 13px);
-    padding: 8px 11px;
-    gap: 6px;
+  .trigger {
+    gap: 3px;
+    padding-right: 2px;
   }
-  .message {
-    font-size: 12px;
-    line-height: 1.5;
+  .cta {
+    padding: 8px 10px;
+    font-size: 11px;
   }
   .close {
-    right: 3px;
-    top: 6px;
-    transform: none;
+    top: 4px;
+    right: 0;
+    width: 36px;
   }
+  .group {
+    font-size: 12px;
+    gap: 38px;
+    padding-right: 38px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    width: 100%;
+  }
+  .group {
+    white-space: normal;
+    width: 100%;
+    padding: 0 12px;
+  }
+  .group > span:not(:first-child),
+  .group[aria-hidden="true"] {
+    display: none;
+  }
+  .group > span {
+    line-height: 1.25;
+  }
+  .viewport {
+    mask-image: none;
+  }
+}
+/* The offer remains visible; it can no longer be dismissed. */
+.banner {
+  padding-right: 0;
 }

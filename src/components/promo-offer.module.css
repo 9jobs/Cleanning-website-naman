@@ -1,0 +1,1083 @@
+.dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(580px, calc(100% - 28px));
+  max-width: 580px;
+  height: fit-content;
+  max-height: calc(100dvh - 28px);
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overscroll-behavior: contain;
+  border: 1px solid #d9e9e0;
+  border-radius: 5px;
+  color: #102a28;
+  background: #fff;
+  box-shadow: 0 25px 90px #062e3166;
+  animation: reveal 0.25s ease-out both;
+}
+.dialog::backdrop {
+  background: #062b306b;
+  backdrop-filter: blur(6px);
+  animation: dim 0.25s ease-out both;
+}
+.content {
+  padding: 22px 26px 16px;
+  position: relative;
+}
+.close {
+  position: sticky;
+  top: 10px;
+  float: right;
+  margin: 10px 10px -42px 0;
+  z-index: 4;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid #d2e3da;
+  background: #fffffff0;
+  color: #102a28;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #123c3012;
+}
+.intro {
+  position: relative;
+  isolation: isolate;
+  margin: -22px -26px 0;
+  padding: 25px 26px 12px;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 28% -45%,
+    #d6ede1 0%,
+    #f6fbf8 55%,
+    #fff 72%
+  );
+}
+.headerArt {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 0;
+  width: 43%;
+  height: 100%;
+  background: url("/images/promo-welcome-towels-v1.webp") 65% 72% / cover
+    no-repeat;
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 60%),
+    linear-gradient(to bottom, #000 75%, transparent);
+  mask-composite: intersect;
+  opacity: 0.9;
+}
+.offerTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 15px;
+}
+.reward {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, #087a50, #004c34);
+  border-radius: 13px;
+  box-shadow: inset 0 0 0 1px #ffffff28;
+  animation: sparkle 0.65s ease-out both;
+}
+.dialog p {
+  margin: 8px 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.dialog .eyebrow {
+  margin: 0;
+  background: #e5f5eced;
+  padding: 9px 12px;
+  border-radius: 10px;
+  color: #004c34;
+  letter-spacing: 0.14em;
+  font-size: 10px;
+  font-weight: 750;
+}
+.dialog h2 {
+  margin: 0 0 9px;
+  font-size: 35px;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+.intro h2 {
+  max-width: 88%;
+}
+.dialog h2 em {
+  display: block;
+  color: #006642;
+  font-size: 1.2em;
+  font-style: normal;
+  white-space: nowrap;
+  letter-spacing: -0.04em;
+}
+.dialog .subheading {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 6px 0 10px;
+}
+.intro > p:last-child {
+  max-width: 81%;
+  color: #5e6970;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+.codeCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px dashed #7ab99a;
+  border-radius: 9px;
+  background: linear-gradient(110deg, #eaf8f0, #f6fbf8);
+}
+.codeCard > div {
+  flex: 1;
+  min-width: 0;
+}
+.codeCard > div > span {
+  display: block;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+.codeCard strong {
+  display: block;
+  margin-top: 3px;
+  color: #005a3a;
+  font-size: 29px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  user-select: all;
+}
+.codeCard .codeIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #d0f0df;
+  color: #006743;
+}
+.codeCard .secondary {
+  flex-shrink: 0;
+  background: #fff;
+  border-color: #5aa687;
+  border-radius: 8px;
+}
+.dialog .copyStatus {
+  margin: 7px 2px 12px;
+  font-size: 10px;
+  color: #6a7580;
+  min-height: 15px;
+}
+.form {
+  margin-top: 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 11px 14px;
+}
+.full {
+  grid-column: 1 / -1;
+}
+.dialog label {
+  display: block;
+  margin: 0;
+  color: #132b32;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.dialog .optional {
+  color: #7a8389;
+  font-size: 10px;
+  font-weight: 400;
+}
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  margin-top: 5px;
+}
+.inputWrap > svg {
+  position: absolute;
+  left: 12px;
+  color: #67737b;
+  pointer-events: none;
+  z-index: 1;
+}
+.dialog input,
+.dialog select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  height: 42px;
+  min-height: 42px;
+  padding: 8px 10px 8px 36px;
+  border: 1px solid #c8ced2;
+  border-radius: 6px;
+  background: #fff;
+  color: #18332f;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 400;
+}
+.dialog input::placeholder {
+  color: #838c94;
+  opacity: 1;
+}
+.dialog input[aria-invalid="true"] {
+  border-color: #ab342b;
+}
+.applyRow {
+  display: flex;
+  gap: 9px;
+  align-items: stretch;
+  margin-top: 5px;
+}
+.applyRow .inputWrap {
+  margin: 0;
+  flex: 1;
+}
+.primary,
+.secondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 13px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.primary {
+  width: 100%;
+  margin-top: 14px;
+  color: #fff;
+  background: linear-gradient(110deg, #0d8256, #004b35);
+  border: 1px solid #076340;
+  min-height: 45px;
+  font-size: 15px;
+  box-shadow: 0 5px 14px #08644020;
+}
+.secondary {
+  border: 1px solid #8dbda7;
+  color: #005a3a;
+  background: #f3f9f6;
+}
+.applyRow .secondary {
+  min-width: 74px;
+}
+.dialog button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+.dialog :is(button, a, input, select):focus-visible {
+  outline: 3px solid #148b60;
+  outline-offset: 2px;
+}
+.dialog .privacy {
+  text-align: center;
+  font-size: 9px;
+  color: #587466;
+  margin: 7px 0 0;
+}
+.privacy a {
+  text-decoration: underline;
+}
+.dialog .error {
+  display: block;
+  color: #a42c25;
+  font-size: 11px;
+}
+.dialog .valid {
+  color: #086440;
+  font-size: 11px;
+}
+.dialog :is(.error, .valid):empty {
+  display: none;
+}
+.trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.successDialog {
+  width: min(880px, calc(100% - 28px));
+  max-width: 880px;
+  border-radius: 19px;
+}
+.successDialog .content {
+  padding: 0;
+}
+.successLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.3fr);
+}
+.successVisual {
+  position: relative;
+  min-width: 0;
+  background: linear-gradient(150deg, #dbf6e6, #f5fcf8 66%, #fff);
+  border-radius: 18px 50% 44% 18px;
+  padding: 15px 10px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.successImage {
+  display: block;
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  object-position: center 54%;
+  mask-image: linear-gradient(to bottom, #000 82%, transparent);
+  border-radius: 14px;
+}
+.steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 2px 9px 0;
+  position: relative;
+}
+.steps:before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background: #b6e3cf;
+  top: 21px;
+  left: 14%;
+  right: 14%;
+}
+.steps > div {
+  position: relative;
+  text-align: center;
+  flex: 1;
+}
+.steps span {
+  display: grid;
+  place-items: center;
+  margin: auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #d5f5e5;
+  color: #006743;
+}
+.steps p {
+  font-size: 10px;
+  line-height: 1.3;
+  margin-top: 7px;
+  color: #112d32;
+  font-weight: 600;
+}
+.successCopy {
+  min-width: 0;
+  padding: 42px 28px 30px 22px;
+}
+.dialog .received {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #f0f9f4;
+  color: #006743;
+  padding: 8px 13px;
+  border-radius: 99px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  font-weight: 750;
+  margin: 0 0 17px;
+}
+.received svg {
+  color: #fff;
+  background: #006743;
+  padding: 2px;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+}
+.successCopy h2 {
+  font-size: 35px;
+  line-height: 1.1;
+  margin: 0 0 15px;
+}
+.successCopy h2 em {
+  display: inline;
+  font-size: inherit;
+}
+.successCopy > p:not(.received) {
+  color: #566872;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.successCopy .codeCard {
+  margin: 23px 0 16px;
+  gap: 10px;
+  padding: 12px;
+}
+.successCopy .codeCard .codeIcon {
+  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+}
+.successCopy .codeCard strong {
+  font-size: 29px;
+}
+.successCopy .codeCard .secondary {
+  font-size: 11px;
+  padding: 8px;
+}
+.dialog .confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 15px 0 22px;
+}
+.confirmation > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #348b73;
+}
+.successActions {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 11px;
+}
+.successActions .primary {
+  margin: 0;
+  font-size: 14px;
+}
+.successActions .secondary {
+  font-size: 14px;
+  background: white;
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes dim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes sparkle {
+  from {
+    transform: scale(0.8) rotate(-8deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+@media (max-width: 600px) {
+  .dialog {
+    width: calc(100% - 20px);
+    max-height: calc(100dvh - 20px);
+  }
+  .content {
+    padding: 18px 18px 14px;
+  }
+  .intro {
+    margin: -18px -18px 0;
+    padding: 22px 18px 10px;
+  }
+  .offerTop {
+    gap: 9px;
+    margin-bottom: 13px;
+  }
+  .dialog .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    padding: 8px;
+  }
+  .reward {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  .dialog h2 {
+    font-size: 30px;
+  }
+  .dialog .subheading {
+    font-size: 13px;
+  }
+  .intro > p:last-child {
+    max-width: 94%;
+    font-size: 11px;
+  }
+  .headerArt {
+    width: 46%;
+    opacity: 0.5;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .dialog input,
+  .dialog select {
+    font-size: 16px;
+    height: 43px;
+  }
+  .codeCard {
+    gap: 8px;
+    padding: 10px;
+  }
+  .codeCard .codeIcon {
+    width: 31px;
+    height: 31px;
+  }
+  .codeCard strong {
+    font-size: 25px;
+  }
+  .codeCard .secondary {
+    padding: 8px;
+    font-size: 10px;
+    gap: 5px;
+  }
+  .successLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .successVisual {
+    padding: 0 15px 10px;
+    border-radius: 18px 18px 35% 35%;
+  }
+  .successImage {
+    height: 190px;
+    object-fit: contain;
+  }
+  .steps {
+    max-width: 320px;
+    width: 100%;
+    align-self: center;
+  }
+  .steps span {
+    width: 33px;
+    height: 33px;
+  }
+  .steps:before {
+    top: 16px;
+  }
+  .steps p {
+    font-size: 9px;
+  }
+  .successCopy {
+    padding: 20px 20px 24px;
+  }
+  .successCopy h2 {
+    font-size: 29px;
+  }
+  .dialog .received {
+    margin-bottom: 12px;
+  }
+  .successCopy .codeCard {
+    margin-top: 16px;
+  }
+  .successCopy .codeCard strong {
+    font-size: 25px;
+  }
+  .successCopy .codeCard .codeIcon {
+    width: 34px;
+    height: 34px;
+  }
+  .successCopy .codeCard .secondary {
+    font-size: 10px;
+  }
+  .successActions .primary,
+  .successActions .secondary {
+    font-size: 12px;
+  }
+}
+@media (min-width: 601px) and (max-width: 760px) {
+  .successLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .successVisual {
+    padding: 0 15px 10px;
+    border-radius: 18px 18px 35% 35%;
+  }
+  .successImage {
+    height: 190px;
+    object-fit: contain;
+  }
+  .steps {
+    max-width: 320px;
+    width: 100%;
+    align-self: center;
+  }
+  .successCopy {
+    padding: 20px 24px 24px;
+  }
+}
+@media (max-width: 380px) {
+  .intro h2 {
+    max-width: 100%;
+    font-size: 28px;
+  }
+  .codeCard .codeIcon {
+    display: none;
+  }
+  .codeCard strong {
+    font-size: 23px;
+  }
+  .successCopy .codeCard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .successCopy .codeCard .secondary {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dialog,
+  .dialog::backdrop,
+  .reward {
+    animation: none;
+  }
+}
+/* Compact square promotional cards; all overrides are local to this modal. */
+@media (min-width: 601px) {
+  .dialog {
+    width: min(600px, calc(100% - 28px));
+    max-width: 600px;
+    height: fit-content;
+    border-radius: 10px;
+  }
+  .content {
+    padding: 16px 22px 12px;
+  }
+  .intro {
+    margin: -16px -22px 0;
+    padding: 14px 22px 6px;
+  }
+  .offerTop {
+    gap: 10px;
+    margin-bottom: 9px;
+  }
+  .reward {
+    width: 33px;
+    height: 33px;
+    border-radius: 9px;
+  }
+  .dialog .eyebrow {
+    font-size: 9px;
+    padding: 7px 10px;
+  }
+  .dialog h2 {
+    font-size: 27px;
+    margin-bottom: 6px;
+  }
+  .intro h2 em {
+    display: inline;
+    font-size: 1.13em;
+  }
+  .intro h2 {
+    max-width: 90%;
+  }
+  .dialog .subheading {
+    font-size: 12px;
+    margin: 5px 0;
+  }
+  .intro > p:last-child {
+    font-size: 11px;
+    max-width: 81%;
+  }
+  .codeCard {
+    padding: 8px 12px;
+    margin-top: 7px;
+  }
+  .codeCard strong {
+    font-size: 25px;
+  }
+  .codeCard .codeIcon {
+    width: 34px;
+    height: 34px;
+  }
+  .dialog .copyStatus {
+    margin: 5px 0 8px;
+    font-size: 9px;
+  }
+  .grid {
+    gap: 6px 12px;
+  }
+  .dialog input,
+  .dialog select {
+    height: 38px;
+    min-height: 38px;
+  }
+  .primary {
+    margin-top: 8px;
+    min-height: 42px;
+  }
+  .dialog .privacy {
+    margin-top: 5px;
+  }
+  .successDialog {
+    width: min(540px, calc(100% - 28px));
+    max-width: 540px;
+    height: min(540px, calc(100dvh - 28px));
+  }
+  .successLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .successVisual {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 8px 20px 0;
+    border-radius: 9px 9px 35% 35%;
+  }
+  .successImage {
+    height: 145px;
+    object-fit: contain;
+  }
+  .steps {
+    width: auto;
+    margin: 0;
+  }
+  .steps span {
+    width: 32px;
+    height: 32px;
+  }
+  .steps:before {
+    top: 16px;
+  }
+  .steps p {
+    font-size: 9px;
+  }
+  .successCopy {
+    padding: 12px 24px 20px;
+  }
+  .dialog .received {
+    font-size: 9px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+  }
+  .successCopy h2 {
+    font-size: 27px;
+    margin-bottom: 8px;
+  }
+  .successCopy > p:not(.received) {
+    font-size: 12px;
+  }
+  .successCopy .codeCard {
+    margin: 12px 0;
+    padding: 9px 12px;
+  }
+  .successCopy .codeCard strong {
+    font-size: 25px;
+  }
+  .dialog .confirmation {
+    margin: 10px 0 14px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 600px) {
+  .intro {
+    padding-top: 18px;
+  }
+  .offerTop {
+    margin-bottom: 9px;
+  }
+  .intro h2 {
+    max-width: 100%;
+    font-size: 25px;
+  }
+  .intro h2 em {
+    font-size: 1.1em;
+  }
+  .dialog .subheading {
+    font-size: 12px;
+  }
+  .intro > p:last-child {
+    font-size: 10px;
+  }
+  .successImage {
+    height: 130px;
+  }
+  .steps span {
+    width: 28px;
+    height: 28px;
+  }
+  .steps:before {
+    top: 14px;
+  }
+  .successVisual {
+    padding-bottom: 5px;
+  }
+  .successCopy {
+    padding: 14px 20px 18px;
+  }
+  .successCopy h2 {
+    font-size: 25px;
+  }
+  .successCopy > p:not(.received) {
+    font-size: 12px;
+  }
+  .successCopy .codeCard {
+    margin-top: 10px;
+  }
+}
+/* Code-first entry from the existing quick quote badge. */
+.dialog.codeDialog {
+  width: min(640px, calc(100% - 28px));
+  max-width: 640px;
+  height: fit-content;
+  border-radius: 10px;
+}
+.codeDialog .content {
+  padding: 0;
+}
+.codeLayout {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+}
+.giftVisual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 30px 15px;
+  color: #00724b;
+  background: radial-gradient(ellipse at center, #c3f1d9, #f3fcf7 75%);
+  border-radius: 9px 50% 50% 9px;
+}
+.giftVisual > svg:first-child {
+  color: #c5a02f;
+}
+.giftVisual > svg:nth-child(2) {
+  stroke-width: 1.4;
+  filter: drop-shadow(0 8px 7px #0066402b);
+}
+.giftVisual > span {
+  font-weight: 800;
+  font-size: 23px;
+  background: #fff;
+  padding: 7px 12px;
+  border-radius: 9px;
+  box-shadow: 0 5px 16px #0066401c;
+  transform: rotate(-8deg);
+}
+.codeCopy {
+  min-width: 0;
+  padding: 35px 25px 25px 20px;
+}
+.codeCopy .eyebrow {
+  display: inline-block;
+  margin-bottom: 13px;
+  font-size: 8px;
+}
+.codeCopy h2 {
+  font-size: 26px;
+}
+.codeCopy h2 em {
+  display: inline;
+  font-size: inherit;
+}
+.codeCopy .codeCard {
+  margin: 15px 0;
+}
+.codeCopy form {
+  margin: 14px 0 0;
+}
+.dialog .codeHint {
+  font-size: 11px;
+  color: #587466;
+  margin: 12px 0;
+}
+@media (max-width: 600px) {
+  .codeLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .giftVisual {
+    flex-direction: row;
+    gap: 18px;
+    padding: 16px 40px 12px 15px;
+    border-radius: 9px 9px 40% 40%;
+  }
+  .giftVisual > svg:nth-child(2) {
+    width: 52px;
+    height: 52px;
+  }
+  .giftVisual > span {
+    font-size: 18px;
+  }
+  .codeCopy {
+    padding: 18px 20px 22px;
+  }
+}
+/* Matching reward cards with distinct code and confirmation treatments. */
+.dialog.codeDialog {
+  width: min(620px, calc(100% - 24px));
+  max-width: 620px;
+  border-radius: 16px;
+  border-color: #c9e6d8;
+}
+.codeDialog .codeLayout {
+  grid-template-columns: 155px minmax(0, 1fr);
+}
+.codeDialog .giftVisual {
+  border-radius: 15px 48% 48% 15px;
+  background: radial-gradient(ellipse at center, #bcf0d6, #f1fbf6 75%);
+}
+.codeDialog .codeCopy {
+  padding: 30px 25px 24px 18px;
+}
+.codeDialog .codeCopy h2 {
+  font-size: 27px;
+  line-height: 1.12;
+}
+.codeDialog .codeCopy .codeCard {
+  border-style: solid;
+  border-color: #b8dece;
+  border-radius: 11px;
+  background: linear-gradient(110deg, #e0f6e9, #f8fcfa);
+  padding: 13px;
+}
+.codeActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 17px;
+}
+.codeActions .primary {
+  margin: 0;
+  flex: 1;
+  min-height: 42px;
+}
+.codeActions .secondary {
+  min-width: 85px;
+}
+.dialog.successDialog {
+  width: min(720px, calc(100% - 24px));
+  max-width: 720px;
+  height: fit-content;
+  border-radius: 17px;
+}
+.successDialog .successCopy {
+  padding: 32px 23px 25px 18px;
+}
+.successDialog .successCopy h2 {
+  font-size: 29px;
+  margin: 0 0 12px;
+}
+.successDialog .successCopy > p:not(.received) {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.successDialog .successVisual {
+  border-radius: 16px 45% 35% 16px;
+  padding: 16px 8px;
+  background: linear-gradient(145deg, #ccefdc, #effaf4 75%, #fff);
+}
+.successDialog .successImage {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.successDialog .steps {
+  width: auto;
+  margin: 3px 5px 0;
+  gap: 4px;
+}
+.successDialog .steps p {
+  font-size: 8px;
+}
+.successDialog .successCopy .codeCard {
+  margin: 16px 0 13px;
+  border-style: solid;
+  border-color: #c2e4d3;
+}
+.successDialog .confirmation {
+  font-size: 11px;
+  margin: 10px 0 18px;
+}
+@media (min-width: 701px) {
+  .successDialog .successLayout {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
+  }
+  .successDialog .successVisual {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+@media (max-width: 700px) {
+  .successDialog .successLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .successDialog .successVisual {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+    padding: 12px 16px 6px;
+    border-radius: 16px 16px 30% 30%;
+  }
+  .successDialog .successImage {
+    height: 120px;
+    object-fit: contain;
+  }
+  .successDialog .successCopy {
+    padding: 18px 20px 23px;
+  }
+  .successDialog .successCopy h2 {
+    font-size: 26px;
+  }
+  .successDialog .steps {
+    margin: 0;
+  }
+}
+@media (max-width: 600px) {
+  .codeDialog .codeLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .codeDialog .giftVisual {
+    border-radius: 15px 15px 40% 40%;
+    padding: 15px 35px 12px 15px;
+  }
+  .codeDialog .codeCopy {
+    padding: 18px 20px 22px;
+  }
+  .codeDialog .codeCopy h2 {
+    font-size: 24px;
+  }
+}

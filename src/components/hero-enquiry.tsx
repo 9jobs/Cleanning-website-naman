@@ -5,69 +5,116 @@ import Link from "next/link";
 import {
   ArrowRight,
   Check,
-  CheckCircle2,
+  House,
   LoaderCircle,
   UserRound,
   Mail,
   Phone,
   Sparkles,
+  Tag,
 } from "lucide-react";
-import { quickQuoteFieldsSchema } from "@/lib/quick-quote-validation";
+import { promoFieldsSchema, promoServices } from "@/lib/promo-validation";
 import styles from "./hero-enquiry.module.css";
+import { PromoOfferModal } from "./promo-offer-modal";
 
-type FieldName = "name" | "email" | "phone";
+const quoteSchema = promoFieldsSchema.extend({
+  service: promoFieldsSchema.shape.service.refine(
+    Boolean,
+    "Choose a cleaning service",
+  ),
+});
+type FieldName = "name" | "email" | "phone" | "service" | "code";
+
 export function HeroEnquiry() {
+  const [promoOpen, setPromoOpen] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [code, setCode] = useState("");
+  const [applied, setApplied] = useState("");
+  const [checking, setChecking] = useState(false);
+  const [codeMessage, setCodeMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [fields, setFields] = useState<Partial<Record<FieldName, string>>>({});
-  const [reference, setReference] = useState("");
   const pending = useRef(false);
-  const request = useRef<{ id: string; snapshot: string } | null>(null);
+  const checkingRef = useRef(false);
+  const codeVersion = useRef(0);
   const formRef = useRef<HTMLFormElement>(null);
-  const successRef = useRef<HTMLDivElement>(null);
+
+  async function applyCode() {
+    if (checkingRef.current) return;
+    checkingRef.current = true;
+    setChecking(true);
+    setCodeMessage("");
+    setApplied("");
+    const version = codeVersion.current;
+    try {
+      const response = await fetch("/api/promo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "verify", code }),
+      });
+      const result = await response.json();
+      if (version !== codeVersion.current) return;
+      if (!response.ok || !result.recognised)
+        throw new Error(result.error || "Please check your promo code.");
+      setApplied(code.trim().toUpperCase());
+      setFields((current) => ({ ...current, code: undefined }));
+      setCodeMessage(
+        "Promo code recognised. Your first-booking offer eligibility will be confirmed by our team.",
+      );
+    } catch (reason) {
+      if (version === codeVersion.current)
+        setCodeMessage(
+          reason instanceof Error
+            ? reason.message
+            : "Unable to verify the code. Please retry.",
+        );
+    } finally {
+      checkingRef.current = false;
+      setChecking(false);
+    }
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (pending.current) return;
-    const values = Object.fromEntries(new FormData(event.currentTarget));
-    const parsed = quickQuoteFieldsSchema.safeParse({
-      ...values,
-      consent: true,
-    });
-    setFields({});
     setError("");
+    setFields({});
+    const parsed = quoteSchema.safeParse(
+      Object.fromEntries(new FormData(event.currentTarget)),
+    );
     if (!parsed.success) {
-      const errors: Partial<Record<FieldName, string>> = {};
-      parsed.error.issues.forEach((issue) => {
-        const name = issue.path[0] as FieldName;
-        if (["name", "email", "phone"].includes(name))
-          errors[name] = issue.message;
-      });
+      const errors = Object.fromEntries(
+        Object.entries(parsed.error.flatten().fieldErrors).map(
+          ([key, messages]) => [key, messages?.[0]],
+        ),
+      );
       setFields(errors);
       const first = Object.keys(errors)[0];
-      if (first)
-        (
-          formRef.current?.elements.namedItem(first) as HTMLInputElement
-        )?.focus();
-      else setError("Please check your details and try again.");
+      (
+        formRef.current?.elements.namedItem(first) as HTMLElement | null
+      )?.focus();
       return;
     }
-    const snapshot = JSON.stringify(parsed.data);
-    if (!request.current || request.current.snapshot !== snapshot)
-      request.current = { id: crypto.randomUUID(), snapshot };
+    if (applied !== parsed.data.code) {
+      setCodeMessage(
+        "Please click Apply to verify your promo code before submitting.",
+      );
+      formRef.current
+        ?.querySelector<HTMLInputElement>('[name="code"]')
+        ?.focus();
+      return;
+    }
     pending.current = true;
     setBusy(true);
     try {
-      const response = await fetch("/api/quick-quote", {
+      const response = await fetch("/api/promo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...parsed.data,
-          submissionId: request.current.id,
-        }),
+        body: JSON.stringify(parsed.data),
       });
       const result = await response.json();
-      if (!response.ok) {
+      if (!response.ok || !result.accepted) {
         if (result.fields)
           setFields(
             Object.fromEntries(
@@ -77,20 +124,19 @@ export function HeroEnquiry() {
             ),
           );
         throw new Error(
-          result.error || "We couldn’t send your request. Please try again.",
+          result.error || "We couldn't confirm your enquiry. Please retry.",
         );
       }
-      if (typeof result.reference !== "string" || !result.reference)
-        throw new Error(
-          "We couldn’t confirm your request. Please retry with the same details.",
-        );
-      setReference(result.reference);
-      requestAnimationFrame(() => successRef.current?.focus());
+      setSuccessOpen(true);
+      formRef.current?.reset();
+      setCode("");
+      setApplied("");
+      setCodeMessage("");
     } catch (failure) {
       setError(
         failure instanceof Error
           ? failure.message
-          : "We couldn’t send your request. Please try again or email us directly.",
+          : "We couldn't send your request. Please try again.",
       );
     } finally {
       pending.current = false;
@@ -98,14 +144,6 @@ export function HeroEnquiry() {
     }
   }
 
-  function inputAccessibility(name: FieldName) {
-    return {
-      "aria-invalid": !!fields[name],
-      "aria-describedby": fields[name]
-        ? `quick-quote-${name}-error`
-        : undefined,
-    };
-  }
   function fieldError(name: FieldName) {
     return fields[name] ? (
       <small className={styles.fieldError} id={`quick-quote-${name}-error`}>
@@ -113,16 +151,31 @@ export function HeroEnquiry() {
       </small>
     ) : null;
   }
+  function accessibility(name: FieldName) {
+    return {
+      "aria-invalid": Boolean(fields[name]),
+      "aria-describedby": fields[name]
+        ? `quick-quote-${name}-error`
+        : undefined,
+    };
+  }
+
   return (
     <div className={`hero-enquiry ${styles.card}`}>
       <div className="lead-form-heading">
         <div>
           <div className={styles.offerLine}>
             <span className="eyebrow">REQUEST A CLEANING QUOTE</span>
-            <span className={styles.offerBadge}>
+            <button
+              type="button"
+              className={styles.offerBadge}
+              aria-label="Get your 10% promo code"
+              aria-haspopup="dialog"
+              onClick={() => setPromoOpen(true)}
+            >
               <Sparkles size={15} aria-hidden="true" />
               10% OFF FIRST CLEAN
-            </span>
+            </button>
           </div>
           <h2>Get a quick cleaning quote.</h2>
           <p className={styles.offerCopy}>
@@ -130,128 +183,171 @@ export function HeroEnquiry() {
           </p>
         </div>
       </div>
-      {reference ? (
-        <div
-          className={styles.success}
-          ref={successRef}
-          role="status"
-          tabIndex={-1}
-        >
-          <CheckCircle2 size={25} aria-hidden="true" />
-          <div>
-            <h3>Your quote request has been received.</h3>
-            <p>Thank you. We’ll contact you to discuss your cleaning needs.</p>
-            <small>
-              Reference: <span>{reference}</span>
-            </small>
-          </div>
-          <button
-            type="button"
-            className={styles.again}
-            onClick={() => {
-              setReference("");
-              request.current = null;
-              requestAnimationFrame(() =>
-                (
-                  formRef.current?.elements.namedItem(
-                    "name",
-                  ) as HTMLInputElement
-                )?.focus(),
-              );
-            }}
-          >
-            Send another request <ArrowRight size={16} aria-hidden="true" />
-          </button>
-        </div>
-      ) : (
-        <>
-          <form
-            ref={formRef}
-            onSubmit={submit}
-            className="lead-form-fields"
-            noValidate
-            aria-busy={busy}
-            aria-label="Quick cleaning quote"
-          >
-            <div className={styles.field}>
-              <label>
-                First name
+      {promoOpen && (
+        <PromoOfferModal
+          initialView="code"
+          onCodeClaimed={(value) => {
+            codeVersion.current++;
+            setCode(value);
+            setApplied("");
+            setCodeMessage("");
+          }}
+          onClose={() => setPromoOpen(false)}
+        />
+      )}
+      {successOpen && (
+        <PromoOfferModal
+          initialView="success"
+          onClose={() => setSuccessOpen(false)}
+        />
+      )}
+      <form
+        ref={formRef}
+        onSubmit={submit}
+        className={styles.quoteForm}
+        noValidate
+        aria-busy={busy}
+        aria-label="Quick cleaning quote"
+      >
+        <div className={styles.contactRow}>
+          {(
+            [
+              {
+                name: "name",
+                label: "Full name",
+                placeholder: "Enter your full name",
+                type: "text",
+                autoComplete: "name",
+                Icon: UserRound,
+              },
+              {
+                name: "email",
+                label: "Email address",
+                placeholder: "you@example.com",
+                type: "email",
+                autoComplete: "email",
+                Icon: Mail,
+              },
+              {
+                name: "phone",
+                label: "Phone number",
+                placeholder: "04xx xxx xxx",
+                type: "tel",
+                autoComplete: "tel",
+                Icon: Phone,
+              },
+            ] as const
+          ).map(({ Icon, ...field }) => (
+            <div className={styles.field} key={field.name}>
+              <label htmlFor={`quick-${field.name}`}>
+                {field.label} *
                 <span className="lead-input-wrap">
-                  <UserRound size={20} aria-hidden="true" />
+                  <Icon size={20} aria-hidden="true" />
                   <input
-                    name="name"
-                    autoComplete="given-name"
-                    placeholder="Your first name"
-                    minLength={2}
-                    maxLength={80}
+                    id={`quick-${field.name}`}
+                    name={field.name}
+                    type={field.type}
+                    autoComplete={field.autoComplete}
+                    placeholder={field.placeholder}
+                    maxLength={
+                      field.name === "name"
+                        ? 150
+                        : field.name === "email"
+                          ? 200
+                          : 32
+                    }
                     required
                     readOnly={busy}
-                    {...inputAccessibility("name")}
+                    {...accessibility(field.name)}
                   />
                 </span>
               </label>
-              {fieldError("name")}
+              {fieldError(field.name)}
             </div>
-            <div className={styles.field}>
-              <label>
-                Email address
-                <span className="lead-input-wrap">
-                  <Mail size={20} aria-hidden="true" />
-                  <input
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@example.com"
-                    maxLength={200}
-                    required
-                    readOnly={busy}
-                    {...inputAccessibility("email")}
-                  />
-                </span>
-              </label>
-              {fieldError("email")}
-            </div>
-            <div className={styles.field}>
-              <label>
-                Phone number
-                <span className="lead-input-wrap">
-                  <Phone size={20} aria-hidden="true" />
-                  <input
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel"
-                    placeholder="04xx xxx xxx"
-                    maxLength={20}
-                    required
-                    readOnly={busy}
-                    {...inputAccessibility("phone")}
-                  />
-                </span>
-              </label>
-              {fieldError("phone")}
-            </div>
-            <label className={styles.honeypot} aria-hidden="true">
-              Leave this field empty
-              <input name="website" tabIndex={-1} autoComplete="off" />
+          ))}
+          <div className={styles.field}>
+            <label htmlFor="quick-service">
+              Cleaning service *
+              <span className="lead-input-wrap">
+                <House size={20} aria-hidden="true" />
+                <select
+                  id="quick-service"
+                  name="service"
+                  required
+                  disabled={busy}
+                  defaultValue=""
+                  {...accessibility("service")}
+                >
+                  <option value="">Select a cleaning service</option>
+                  {promoServices.map((service) => (
+                    <option key={service.slug} value={service.slug}>
+                      {service.name}
+                    </option>
+                  ))}
+                </select>
+              </span>
             </label>
-            <button className="button" type="submit" disabled={busy}>
-              {busy ? (
-                <>
-                  Sending your request…{" "}
-                  <LoaderCircle
-                    className={styles.spinner}
-                    size={18}
-                    aria-hidden="true"
-                  />
-                </>
-              ) : (
-                <>
-                  Get My 10% Off Quote{" "}
-                  <ArrowRight size={18} aria-hidden="true" />
-                </>
-              )}
+            {fieldError("service")}
+          </div>
+        </div>
+        <div className={styles.field}>
+          <label htmlFor="quick-code">Promo code *</label>
+          <div className={styles.codeRow}>
+            <span className="lead-input-wrap">
+              <Tag size={20} aria-hidden="true" />
+              <input
+                id="quick-code"
+                name="code"
+                value={code}
+                onChange={(event) => {
+                  codeVersion.current++;
+                  setCode(event.target.value);
+                  setApplied("");
+                  setCodeMessage("");
+                }}
+                placeholder="Enter promo code"
+                maxLength={40}
+                readOnly={busy}
+                required
+                {...accessibility("code")}
+              />
+            </span>
+            <button
+              type="button"
+              className={styles.promoAction}
+              onClick={() => setPromoOpen(true)}
+              aria-haspopup="dialog"
+            >
+              Get Promo Code <ArrowRight size={16} aria-hidden="true" />
             </button>
-          </form>
+            <button
+              type="button"
+              className={styles.promoAction}
+              onClick={applyCode}
+              disabled={checking || busy}
+            >
+              {checking ? "Checking…" : "Apply Now"}
+            </button>
+          </div>
+          {fieldError("code")}
+        </div>
+        {applied && (
+          <p className={styles.appliedNote} role="status">
+            <Check size={15} aria-hidden="true" />
+            <strong>Promo code applied!</strong> Eligibility will be confirmed
+            by our team.
+          </p>
+        )}
+        {codeMessage && !applied && (
+          <p className={styles.fieldError} role="status">
+            {codeMessage}
+          </p>
+        )}
+        <label className={styles.honeypot} aria-hidden="true">
+          Leave this field empty
+          <input name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+        <div className={styles.submitRow}>
           <p className={`lead-form-note ${styles.note}`}>
             <Check size={15} aria-hidden="true" />
             <span>
@@ -259,16 +355,32 @@ export function HeroEnquiry() {
               enquiry. <Link href="/privacy">Privacy notice</Link>.
             </span>
           </p>
-          <p className={styles.offerTerms}>
-            Offer applies to first-time residential cleaning bookings.
+          <button className="button" type="submit" disabled={busy}>
+            {busy ? (
+              <>
+                Sending your request…{" "}
+                <LoaderCircle
+                  className={styles.spinner}
+                  size={18}
+                  aria-hidden="true"
+                />
+              </>
+            ) : (
+              <>
+                Get My 10% Off Quote <ArrowRight size={18} aria-hidden="true" />
+              </>
+            )}
+          </button>
+        </div>
+        <p className={styles.offerTerms}>
+          Offer applies to first-time residential cleaning bookings.
+        </p>
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
           </p>
-          {error && (
-            <p className={styles.error} role="alert">
-              {error}
-            </p>
-          )}
-        </>
-      )}
+        )}
+      </form>
     </div>
   );
 }
