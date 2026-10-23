@@ -175,7 +175,7 @@ function Preparation({
 }
 function Details({
   data,
-  title = "A few details make a better plan.",
+  title = data.detailsHeading,
 }: {
   data: ServicePageContent;
   title?: string;
@@ -240,7 +240,10 @@ function Extras({ slug, oven = true }: { slug: string; oven?: boolean }) {
   return (
     <div className={styles.extrasLayout}>
       <div>
-        <Intro label="BY PRIOR ARRANGEMENT" title="Make the scope your own.">
+        <Intro
+          label="BY PRIOR ARRANGEMENT"
+          title={servicePages[slug].extrasHeading}
+        >
           Optional work is agreed separately.
           {oven && " Fridge detailing can also be discussed with the team."}
         </Intro>
@@ -298,11 +301,7 @@ function Hero({
             <span className={styles.kicker}>{data.label}</span>
             <h1>{service.name}</h1>
             <p className={styles.heroLead}>{data.lead}</p>
-            <p className={styles.heroDescription}>
-              {slug === "house-cleaning"
-                ? "Dependable routine care for kitchens, bathrooms and everyday living spaces. Tell us what a fresh home looks like for you."
-                : data.description}
-            </p>
+            <p className={styles.heroDescription}>{data.heroDescription}</p>
             <div className={styles.actions}>
               <Action href={`/book?service=${slug}`}>Request a Clean</Action>
               <Action href={`/contact?service=${slug}`} secondary>
@@ -358,25 +357,16 @@ function Regular({ data, slug }: { data: ServicePageContent; slug: string }) {
       </Section>
       <Section sage id="cleaning-scope">
         <div className={styles.headingRow}>
-          <Intro
-            label="THE AREAS WE CARE FOR"
-            title="What your house clean can include."
-          />
-          <p>
-            Room-based care for the accessible areas of your home. Your agreed
-            checklist confirms the tasks for each visit.
-          </p>
+          <Intro label="THE AREAS WE CARE FOR" title={data.scopeHeading} />
+          <p>{data.scopeNote}</p>
         </div>
         <AreaCards areas={data.areas} />
       </Section>
       <Section>
-        <Extras slug={slug} />
+        <Extras slug={slug} oven={slug !== "balcony-patio-cleaning"} />
       </Section>
       <Section sage>
-        <Intro
-          label="A CLEAR WAY TO GET STARTED"
-          title="Three steps towards a fresher space."
-        />
+        <Intro label="A CLEAR WAY TO GET STARTED" title={data.processHeading} />
         <Process data={data} />
       </Section>
       <Section>
@@ -385,7 +375,13 @@ function Regular({ data, slug }: { data: ServicePageContent; slug: string }) {
     </>
   );
 }
-function PropertyCare({ data, slug }: { data: ServicePageContent; slug: string }) {
+function PropertyCare({
+  data,
+  slug,
+}: {
+  data: ServicePageContent;
+  slug: string;
+}) {
   return (
     <>
       <Section>
@@ -396,7 +392,13 @@ function PropertyCare({ data, slug }: { data: ServicePageContent; slug: string }
           <div className={styles.moments}>
             {(slug === "property-cleaning"
               ? ["Seasonal resets", "Built-up dirt", "Detailed home care"]
-              : ["Rental properties", "Vacant properties", "Managed properties"]
+              : slug === "move-in-cleaning"
+                ? ["Before furniture arrives", "Empty rooms", "A fresh start"]
+                : [
+                    "Rental properties",
+                    "Vacant properties",
+                    "Managed properties",
+                  ]
             ).map((text, i) => (
               <div key={text}>
                 <span>0{i + 1}</span>
@@ -409,10 +411,7 @@ function PropertyCare({ data, slug }: { data: ServicePageContent; slug: string }
       <Section sage id="cleaning-scope">
         <div className={styles.tabLayout}>
           <div>
-            <Intro
-              label="DETAIL BY DETAIL"
-              title="Choose an area. See the focus."
-            />
+            <Intro label="DETAIL BY DETAIL" title={data.scopeHeading} />
             <Photo src={data.supportImage} alt={data.supportAlt} />
           </div>
           <RoomTabs areas={data.areas} />
@@ -430,7 +429,7 @@ function PropertyCare({ data, slug }: { data: ServicePageContent; slug: string }
       <Section sage>
         <Intro
           label="YOUR PROPERTY CLEAN, PLANNED"
-          title="From condition to clear scope."
+          title={data.processHeading}
         />
         <Process data={data} />
       </Section>
@@ -482,7 +481,7 @@ function Lease({ data, slug }: { data: ServicePageContent; slug: string }) {
       <Section>
         <Intro
           label="FROM ENQUIRY TO CONFIRMATION"
-          title="A practical plan for moving day."
+          title={data.processHeading}
         />
         <Process data={data} />
         <p className={styles.scopeNote}>
@@ -579,10 +578,7 @@ function Airbnb({ data }: { data: ServicePageContent }) {
       <Section>
         <div className={styles.twoColumns}>
           <div>
-            <Intro
-              label="PREPARE THE TURNOVER"
-              title="A clear handover helps everyone."
-            />
+            <Intro label="PREPARE THE TURNOVER" title={data.processHeading} />
             <Process data={data} vertical />
           </div>
           <div className={styles.instructionPanel}>
@@ -659,7 +655,7 @@ function OneOff({ data, slug }: { data: ServicePageContent; slug: string }) {
         <div className={styles.processDivider}>
           <Intro
             label="A SINGLE CLEANING REQUEST"
-            title="A simple way to plan the visit."
+            title={data.processHeading}
           />
           <Process data={data} />
         </div>
@@ -919,6 +915,10 @@ function Oven({ data }: { data: ServicePageContent }) {
 
 const bodies = {
   "house-cleaning": Regular,
+  "apartment-cleaning": Regular,
+  "move-in-cleaning": PropertyCare,
+  "bedroom-living-area-cleaning": Regular,
+  "balcony-patio-cleaning": Regular,
   "property-cleaning": PropertyCare,
   "end-of-lease-cleaning": Lease,
   "commercial-cleaning": Commercial,
@@ -1043,15 +1043,14 @@ export function ServicesOverview() {
                 for your space.
               </h1>
               <p>
-                Explore House, One-Off, Property and Construction Cleaning,
-                alongside Commercial, Office and Airbnb Cleaning. Tell us what
-                needs attention.
+                Explore residential cleaning for homes, apartments, rentals and
+                short-stay properties. Tell us what needs attention.
               </p>
             </div>
             <div className={styles.overviewNote}>
               <Sparkles size={32} strokeWidth={1.4} aria-hidden="true" />
               <p>
-                Homes. Properties. Workplaces. Sites.
+                Homes. Rentals. Residential properties.
                 <br />
                 <strong>A scope shaped around you.</strong>
               </p>
@@ -1086,8 +1085,8 @@ export function ServicesOverview() {
             label="NOT SURE WHERE TO START?"
             title="Tell us about the space."
           >
-            Share the property or workplace, its condition and the tasks that
-            matter. The team can help clarify a suitable cleaning scope.
+            Share the home or residential property, its condition and the tasks
+            that matter. The team can help clarify a suitable cleaning scope.
           </Intro>
           <Action href="/contact">Discuss your requirements</Action>
         </div>

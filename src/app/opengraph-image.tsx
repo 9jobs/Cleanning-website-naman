@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
-export const alt =
-  "Thrive4 Cleaning — House, Property & Construction Cleaning";
+export const alt = "Thrive4 Cleaning — Residential Cleaning Services";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function OG() {
@@ -50,7 +49,7 @@ export default function OG() {
         Better Living.
       </div>
       <div style={{ fontSize: 25, marginTop: 40, display: "flex" }}>
-        Homes. Properties. Workplaces. Construction sites.
+        Homes. Apartments. Rentals. Short-stay properties.
       </div>
     </div>,
     size,

@@ -363,7 +363,9 @@ export async function verifyPricingPayment(id: string) {
     item.quantity < 1 ||
     item.quantity > PRICING_MAX_HOURS ||
     !(
-      live ? [PRICING_HOURLY_RATE * 100] : [6000, PRICING_HOURLY_RATE * 100]
+      live
+        ? [7000, PRICING_HOURLY_RATE * 100]
+        : [6000, 7000, PRICING_HOURLY_RATE * 100]
     ).includes(item.price.unit_amount) ||
     item.price.currency !== "aud" ||
     session.amount_total !== item.quantity * item.price.unit_amount

@@ -1,0 +1,11 @@
+Built-in imagegen edits. Each clean reference is retained as the matching AFTER image.
+
+BATHROOM BEFORE
+Edit the reference photo into a clearly challenging BEFORE-cleaning photograph for an illustrative residential cleaning slider. Keep EXACTLY the same room, camera, perspective, framing, tile layout, fixtures, plant, towel, window, daylight and all object positions. Change only surface dirt: substantially heavy opaque chalky soap scum and hard-water crust on the lower two-thirds of the shower glass; visibly brown accumulated body-soap grime along the shower tray edges and grout; widespread dirty grey grout on the shower and bathroom floors; thick smeared grime across the white vanity top, basin and chrome tap. Make the cleaning workload instantly obvious at thumbnail size, rather than subtle faint marks. Keep all underlying materials intact so professional cleaning could reveal the supplied clean reference. Photorealistic. No mould, hazardous waste, structural damage, renovations, people, dishes, crockery, dishwashing, cleaning tools, text, split-screen, labels or watermark. One full-frame landscape photo.
+
+MOVE-OUT BEFORE
+Edit this exact reference into a genuinely tough residential move-out BEFORE-cleaning photograph. Preserve EXACT camera viewpoint, lens, framing, dimensions, daylight, architecture, kitchen fittings in the background, timber floorboard pattern, sliding doors, plants and garden. Change ONLY cleanliness: extensive ground-in dark muddy footprints and streaks across the whole living-room timber floor, broad visible sticky dull grime patches, thick settled dust and dirt at skirting edges and door tracks, greasy hand smudges low on white walls and sliding-door glass, dust on reachable ledges. Dirt should be clearly obvious even when the image is shown half-width, illustrating a demanding vacate deep-clean. No broken flooring, scratches, holes, peeling paint, rubbish piles, dishes, utensils, dishwashing, people, construction debris, hazardous material, text or watermark. All stains are removable surface dirt; the supplied reference is the matching after-cleaning state. Natural photographic realism, not CGI. One landscape photo.
+
+Workspace outputs:
+public/images/comparison-bathroom-before-v2.webp
+public/images/comparison-moveout-before-v2.webp

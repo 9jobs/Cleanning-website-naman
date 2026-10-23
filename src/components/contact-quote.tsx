@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -69,14 +69,7 @@ export function ContactQuotePage({
       website: "",
     },
   });
-  const [property, service] = useWatch({
-    control,
-    name: ["property", "service"],
-  });
-  const commercial =
-    property === "Office" ||
-    property === "Other commercial space" ||
-    ["commercial-cleaning", "office-cleaning"].includes(service);
+  const commercial = false;
   const [busy, setBusy] = useState(false);
   const [error, setErrorMessage] = useState("");
   const [reference, setReference] = useState("");
@@ -211,8 +204,8 @@ export function ContactQuotePage({
               starts here.
             </h2>
             <p>
-              Speak with our team about cleaning your property, workplace or
-              completed building site.
+              Speak with our team about cleaning your home or residential rental
+              property.
             </p>
             <div className="contact-info-links">
               <a href={`mailto:${site.email}`}>
@@ -350,13 +343,7 @@ export function ContactQuotePage({
                         {...accessibility("property")}
                       >
                         <option value="">Select property type</option>
-                        {[
-                          "House",
-                          "Apartment",
-                          "Townhouse",
-                          "Office",
-                          "Other commercial space",
-                        ].map((item) => (
+                        {["House", "Apartment", "Townhouse"].map((item) => (
                           <option key={item}>{item}</option>
                         ))}
                       </select>

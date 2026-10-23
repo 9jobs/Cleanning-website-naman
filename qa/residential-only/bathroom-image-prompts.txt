@@ -1,0 +1,11 @@
+Built-in imagegen tool used.
+
+BEFORE PROMPT
+Photorealistic, ordinary Australian residential bathroom seen from its doorway. Show difficult but realistic accumulated soap scum and mineral water marks on the shower glass, brownish grime in tile grout and floor edges, and dull basin and taps. Keep the room intact, naturally lit and free of dishes, crockery, kitchen scenes, people, tools, labels, split screens and watermarks.
+
+AFTER PROMPT
+Edit the generated BEFORE photograph. Change only cleanliness: remove shower-glass deposits, basin grime and dirty grout, and polish existing chrome. Preserve the same bathroom, camera viewpoint, framing, lighting, window, fixtures, plant, towel, tile pattern and materials. Do not renovate, rearrange or add objects. No dishes, text or watermarks.
+
+Workspace assets
+public/images/comparison-bathroom-before-v1.webp
+public/images/comparison-bathroom-after-v1.webp

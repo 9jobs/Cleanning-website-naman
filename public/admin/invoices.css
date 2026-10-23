@@ -2015,7 +2015,7 @@ dialog p strong {
   min-height: 37px;
 }
 .admin-app .work-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .admin-app .full {
   grid-column: 1/-1;
@@ -2289,7 +2289,7 @@ dialog p strong {
     grid-template-columns: 1fr 1fr;
   }
   .admin-app .work-grid > .field:nth-child(4) {
-    grid-column: 1/-1;
+    grid-column: auto;
   }
   .admin-app .detail-card dl {
     gap: 10px;
@@ -2454,3 +2454,7 @@ dialog p strong {
 .payment-confetti i:nth-child(3n) { border-radius:50%; width:6px; height:6px; background:#c1d5b6; }
 @media(max-width:540px) { #payment-result-dialog.payment-confirmed { padding:38px 22px 28px; } }
 #payment-download-status { font-size:10px;color:#789071;line-height:1.6; }
+
+.admin-app #invoice-form .field-grid.billing-fields {
+  grid-template-columns: 1fr;
+}

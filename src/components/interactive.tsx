@@ -82,7 +82,7 @@ export function ServiceFilter() {
   return (
     <>
       <div className="tabs" role="group" aria-label="Filter cleaning services">
-        {["All services", "Residential", "Commercial"].map((c) => (
+        {["All services", "Residential"].map((c) => (
           <button
             aria-pressed={category === c}
             key={c}
@@ -90,7 +90,7 @@ export function ServiceFilter() {
             onClick={() => setCategory(c)}
           >
             {c === "Residential"
-              ? "House Cleaning"
+              ? "Regular House Cleaning"
               : c === "Property Cleaning"
                 ? "Property Cleaning"
                 : c === "End of Lease"
@@ -168,15 +168,31 @@ export function FAQ({ compact = false }: { compact?: boolean }) {
     </div>
   );
 }
+const comparisonScenes: Record<
+  string,
+  { before: string; after: string; subject: string }
+> = {
+  "Move-Out": {
+    before: "/images/comparison-moveout-before-v2.webp",
+    after: "/images/after-property-cleaning.webp",
+    subject: "empty residential living room",
+  },
+  Bedroom: {
+    before: "/images/comparison-bedroom-before-v1.webp",
+    after: "/images/comparison-bedroom-after-v2.webp",
+    subject: "bedroom surfaces and floors",
+  },
+  Patio: {
+    before: "/images/comparison-garden-before-v3.webp",
+    after: "/images/comparison-garden-after-v3.webp",
+    subject: "paved patio at a home",
+  },
+};
+
 export function Comparison() {
   const [value, setValue] = useState(50);
-  const [category, setCategory] = useState("Property");
-  const image = category.toLowerCase();
-  const before = `/images/comparison-${image}-before-v3.webp`;
-  const after =
-    image === "construction"
-      ? "/images/comparison-construction-after-v4.webp"
-      : `/images/comparison-${image}-after-v3.webp`;
+  const [category, setCategory] = useState("Move-Out");
+  const { before, after, subject } = comparisonScenes[category];
   return (
     <div className="comparison-wrap">
       <div
@@ -184,7 +200,7 @@ export function Comparison() {
         role="group"
         aria-label="Comparison cleaning area"
       >
-        {["Property", "Construction"].map((room) => (
+        {Object.keys(comparisonScenes).map((room) => (
           <button
             key={room}
             className={room === category ? "selected" : ""}
@@ -204,7 +220,7 @@ export function Comparison() {
             fill
             src={before}
             sizes="(max-width: 700px) 100vw, 1300px"
-            alt={`Illustrative ${category.toLowerCase()} before cleaning demo`}
+            alt={`Illustrative ${subject} before cleaning`}
             style={{ objectFit: "cover" }}
           />
         </div>
@@ -220,7 +236,7 @@ export function Comparison() {
               fill
               src={after}
               sizes="(max-width: 700px) 100vw, 1300px"
-              alt={`Illustrative ${category.toLowerCase()} after cleaning demo`}
+              alt={`Illustrative ${subject} after cleaning`}
               style={{ objectFit: "cover" }}
             />
           </div>
@@ -390,13 +406,7 @@ export function Pricing({
               value={property}
               onChange={(e) => setProperty(e.target.value)}
             >
-              {[
-                "House",
-                "Apartment",
-                "Townhouse",
-                "Office",
-                "Other commercial space",
-              ].map((x) => (
+              {["House", "Apartment", "Townhouse"].map((x) => (
                 <option key={x}>{x}</option>
               ))}
             </select>
@@ -609,7 +619,7 @@ export function Reviews() {
   return (
     <>
       <div className="tabs" role="group" aria-label="Filter reviews">
-        {["All services", "Residential", "Commercial"].map((c) => (
+        {["All services", "Residential"].map((c) => (
           <button
             key={c}
             className={filter === c ? "selected" : ""}
@@ -617,7 +627,7 @@ export function Reviews() {
             onClick={() => setFilter(c)}
           >
             {c === "Residential"
-              ? "House Cleaning"
+              ? "Regular House Cleaning"
               : c === "Property Cleaning"
                 ? "Property Cleaning"
                 : c === "End of Lease"

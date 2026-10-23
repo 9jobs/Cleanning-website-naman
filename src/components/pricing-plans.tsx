@@ -8,11 +8,7 @@ import {
   Crown,
   House,
   KeyRound,
-  Building2,
-  BedDouble,
-  Layers,
   Leaf,
-  Sparkles,
   UsersRound,
 } from "lucide-react";
 import { services } from "@/lib/data";
@@ -44,43 +40,46 @@ function servicePlan(slug: string, icon: typeof House): PricingPlan {
 const residentialPlans: PricingPlan[] = [
   {
     slug: "house-cleaning",
-    title: "House Cleaning",
+    title: "Regular House Cleaning",
     icon: House,
     description:
-      "Keep your home clean, fresh and comfortable with ongoing care.",
+      "Stay on top of everyday upkeep with visits that fit your household routine.",
     price: PRICING_HOURLY_RATE,
     features: [
-      "Kitchen & bathroom cleaning",
-      "Dusting, vacuuming & mopping",
-      "Bedrooms & living areas",
-      "Weekly, fortnightly or monthly visits",
-      "Optional extras available",
+      "Scheduled weekly or fortnightly visits",
+      "Day-to-day kitchen and bathroom upkeep",
+      "Bedroom and lounge maintenance",
+      "Dusting, vacuuming and floor mopping",
+      "Optional add-ons by arrangement",
     ],
   },
   {
     slug: "one-off-cleaning",
     title: "One-Off Cleaning",
     icon: House,
-    description: "A single-visit House Cleaning request for priority rooms.",
+    description:
+      "Plan a focused reset after a busy period or ahead of a special occasion.",
     price: PRICING_HOURLY_RATE,
     features: [
-      "Choose your priority rooms",
-      "Kitchen & bathroom refresh",
-      "Dusting and surface cleaning",
-      "Vacuuming & mopping",
-      "No recurring commitment",
+      "One appointment, no ongoing plan",
+      "Focus on the areas you choose",
+      "Extra attention for built-up dirt",
+      "Benches, fixtures and reachable surfaces",
+      "Scope confirmed before the visit",
     ],
     oneOff: true,
   },
-  servicePlan("property-cleaning", KeyRound),
-];
-const commercialPlans: PricingPlan[] = [
   {
-    ...servicePlan("commercial-cleaning", Building2),
-    title: "Commercial & Office Cleaning",
+    ...servicePlan("property-cleaning", KeyRound),
+    description:
+      "Prepare a rental or vacant home for its next use with a property-specific checklist.",
+    features: [
+      "Suitable for occupied or vacant rentals",
+      "Empty cupboards by prior agreement",
+      "Room-by-room presentation checklist",
+      "Access planned with the owner or agent",
+    ],
   },
-  servicePlan("construction-cleaning", Layers),
-  servicePlan("airbnb-cleaning", BedDouble),
 ];
 
 export function PricingPlans({
@@ -139,16 +138,7 @@ export function PricingPlans({
       checkoutBusy.current = false;
     }
   }
-  const [category, setCategory] = useState(
-    services.some(
-      (service) =>
-        service.slug === initial.service && service.category === "Commercial",
-    )
-      ? "commercial"
-      : "residential",
-  );
-  const visiblePlans =
-    category === "commercial" ? commercialPlans : residentialPlans;
+  const visiblePlans = residentialPlans;
   function destination(path: string, slug: string, oneOff = false) {
     const query = new URLSearchParams(initial);
     query.set("service", slug);
@@ -166,40 +156,16 @@ export function PricingPlans({
               <br className="pricing-title-break" /> that fits your needs.
             </h1>
             <p>
-              Cleaning plans for homes, rentals and workplaces.
+              Cleaning plans for homes and residential rentals.
               <br className="pricing-title-break" /> Select a plan or get a
               personalised quote based on your space.
             </p>
           </div>
         </div>
         <div
-          className="pricing-plan-switch"
-          role="group"
-          aria-label="Cleaning plan category"
-        >
-          <button
-            type="button"
-            aria-pressed={category === "residential"}
-            aria-controls="pricing-plan-results"
-            onClick={() => setCategory("residential")}
-          >
-            <House size={23} />
-            Residential
-          </button>
-          <button
-            type="button"
-            aria-pressed={category === "commercial"}
-            aria-controls="pricing-plan-results"
-            onClick={() => setCategory("commercial")}
-          >
-            <Sparkles size={23} />
-            Commercial
-          </button>
-        </div>
-        <div
           id="pricing-plan-results"
           role="region"
-          aria-label={`${category === "commercial" ? "Commercial" : "Residential"} cleaning plans`}
+          aria-label="Residential cleaning plans"
           className={`pricing-plan-grid${visiblePlans.length === 2 ? " pricing-plan-grid--two" : ""}`}
         >
           {visiblePlans.map((plan) => {
@@ -290,8 +256,8 @@ export function PricingPlans({
         <p className="pricing-plan-note">
           Every space is different. Your final quote depends on property size,
           condition and any selected extras.{" "}
-          <Link href="/contact?service=commercial-cleaning">
-            Need a workplace cleaning plan? Get in touch{" "}
+          <Link href="/contact">
+            Need a personalised home cleaning plan? Get in touch{" "}
             <ArrowRight size={14} />
           </Link>
         </p>

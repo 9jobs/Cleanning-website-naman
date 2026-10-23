@@ -12,10 +12,7 @@ import {
   Sparkles,
   Quote,
   House,
-  KeyRound,
   Star,
-  Building2,
-  BedDouble,
 } from "lucide-react";
 import { Photo, Button } from "./ui";
 import { Reveal } from "./motion";
@@ -46,12 +43,12 @@ export function CleaningJourney() {
           {[
             {
               Icon: MousePointer2,
-              title: "Choose your cleaning service",
-              text: "Select residential or commercial cleaning for your space.",
+              title: "Choose your residential cleaning service",
+              text: "Select the home cleaning service that best suits your needs.",
             },
             {
               Icon: CalendarDays,
-              title: "Tell us about your space",
+              title: "Tell us about your home",
               text: "Share your property type, location, condition and cleaning requirements.",
             },
             {
@@ -115,22 +112,22 @@ export function ScrollStory() {
         </div>
         <div className="story-copy">
           <Reveal variant="right">
-            <span className="eyebrow">PROFESSIONAL CLEANING STANDARDS</span>
+            <span className="eyebrow">RESIDENTIAL CLEANING STANDARDS</span>
             <h2>
-              From busy properties
+              From busy homes
               <br />
               to{" "}
               <motion.span style={{ opacity }}>
-                clean, ready spaces.
+                fresh, comfortable spaces.
               </motion.span>
             </h2>
             <p>
-              Our cleaning services support homes, managed properties, living
-              areas, workplaces and post-construction spaces.
+              Our residential cleaning services support houses, apartments,
+              rentals and short-stay homes across everyday living areas.
             </p>
             <p>
-              Whether you need routine cleaning, a property refresh, a one-off clean or a final post-build clean, we tailor the service to your
-              space and priorities.
+              Whether you need regular cleaning, a one-off visit or help around
+              a move, we tailor the agreed scope to your home and priorities.
             </p>
             <Button href="/about" secondary>
               Learn About Our Standards
@@ -151,7 +148,7 @@ const demoStories = [
     label: "HOUSE & PROPERTY CARE",
     quote:
       "Cleaning support for family homes, rental properties and vacant spaces, based on an agreed property checklist.",
-    name: "House & Property Cleaning",
+    name: "Regular House Cleaning",
     type: "Routine or one-off property care",
   },
   {
@@ -162,11 +159,11 @@ const demoStories = [
     type: "A detailed reset for your home",
   },
   {
-    label: "CONSTRUCTION CLEANING",
+    label: "APARTMENT CLEANING",
     quote:
-      "Final cleaning of agreed finished surfaces after building, renovation or maintenance work.",
-    name: "Construction Cleaning",
-    type: "Post-build and renovation cleaning",
+      "Care for residential kitchens, bathrooms, bedrooms and living areas, shaped around your apartment or unit.",
+    name: "Apartment Cleaning",
+    type: "Care for apartments and units",
   },
 ];
 export function ExperienceCarousel() {
@@ -253,24 +250,15 @@ export function ExperienceCarousel() {
   );
 }
 
-type HomeServiceCategory = "Residential" | "Commercial";
+type HomeServiceCategory = "Residential";
 const homeServiceSlugs = {
-  Residential: ["house-cleaning", "one-off-cleaning", "property-cleaning"],
-  Commercial: [
-    "commercial-cleaning",
-    "office-cleaning",
-    "construction-cleaning",
-    "airbnb-cleaning",
-  ],
+  Residential: ["house-cleaning", "one-off-cleaning", "apartment-cleaning"],
 };
 const serviceIcons: Record<string, typeof House> = {
   "house-cleaning": House,
   "property-cleaning": Sparkles,
   "one-off-cleaning": House,
-  "commercial-cleaning": Building2,
-  "office-cleaning": Building2,
-  "construction-cleaning": KeyRound,
-  "airbnb-cleaning": BedDouble,
+  "apartment-cleaning": House,
 };
 function homeServices(category: HomeServiceCategory) {
   return homeServiceSlugs[category].map((slug) =>
@@ -292,8 +280,8 @@ function ServiceCategorySwitch({
       role="group"
       aria-label="Cleaning service category"
     >
-      {(["Residential", "Commercial"] as const).map((name) => {
-        const Icon = name === "Residential" ? House : Building2;
+      {(["Residential"] as const).map((name) => {
+        const Icon = House;
         return (
           <button
             key={name}
@@ -313,10 +301,8 @@ function ServiceCategorySwitch({
 export function HomeServiceMosaic() {
   const visible = [
     "house-cleaning",
+    "one-off-cleaning",
     "property-cleaning",
-    "construction-cleaning",
-    "airbnb-cleaning",
-    "commercial-cleaning",
   ].map((slug) => services.find((service) => service.slug === slug)!);
   return (
     <div
@@ -329,8 +315,8 @@ export function HomeServiceMosaic() {
           description={service.summary}
           slug={service.slug}
           image={
-            service.slug === "airbnb-cleaning"
-              ? service.thumbnail
+            service.slug === "one-off-cleaning"
+              ? service.image
               : `/images/service-preview-${service.slug}-v3.webp`
           }
           index={index}
@@ -340,15 +326,55 @@ export function HomeServiceMosaic() {
     </div>
   );
 }
+const homePlanCopy: Record<
+  string,
+  { label: string; description: string; features: string[]; cta: string }
+> = {
+  "house-cleaning": {
+    label: "REGULAR HOME CARE",
+    description:
+      "Keep everyday upkeep manageable with a visit pattern that suits your household.",
+    features: [
+      "Weekly or fortnightly upkeep",
+      "Kitchen, bathroom and living-room care",
+      "Dusting, vacuuming and mopping",
+    ],
+    cta: "Explore regular care",
+  },
+  "one-off-cleaning": {
+    label: "SINGLE-VISIT REFRESH",
+    description:
+      "Focus on the areas that need a reset, without committing to an ongoing schedule.",
+    features: [
+      "Choose your priority rooms",
+      "Extra attention where it is needed",
+      "A single visit with a clear checklist",
+    ],
+    cta: "See one-off options",
+  },
+  "apartment-cleaning": {
+    label: "APARTMENT LIVING",
+    description:
+      "Practical attention for units and compact layouts, from entrance to living area.",
+    features: [
+      "Care suited to smaller layouts",
+      "Benches, fixtures and reachable ledges",
+      "Floors across your apartment",
+    ],
+    cta: "Discover apartment care",
+  },
+};
+
 export function PricingPaths() {
   const [category, setCategory] = useState<HomeServiceCategory>("Residential");
   const id = useId();
   const plans = homeServices(category).map((service) => ({
     name: service.name,
-    label: `${category.toUpperCase()} CLEANING`,
+    label: homePlanCopy[service.slug].label,
     Icon: serviceIcons[service.slug],
-    description: service.summary,
-    features: service.includes.slice(0, 3),
+    description: homePlanCopy[service.slug].description,
+    features: homePlanCopy[service.slug].features,
+    cta: homePlanCopy[service.slug].cta,
     slug: service.slug,
   }));
   return (
@@ -374,9 +400,7 @@ export function PricingPaths() {
             {i === 1 && (
               <span className="path-featured-badge">
                 <Star size={14} fill="currentColor" />
-                {category === "Residential"
-                  ? "PROPERTY CARE"
-                  : "WORKPLACE CARE"}
+                YOUR PRIORITIES FIRST
               </span>
             )}
             <div className="path-top">
@@ -401,7 +425,7 @@ export function PricingPaths() {
               ))}
             </ul>
             <Button href={`/services/${p.slug}`} secondary={i !== 1}>
-              View Service
+              {p.cta}
             </Button>
             <span className="path-corner-art" aria-hidden="true" />
           </Reveal>

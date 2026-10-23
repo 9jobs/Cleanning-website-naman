@@ -26,13 +26,13 @@ const pages: Record<
     title: "Care for your space. Room to thrive.",
     eyebrow: "Who We Are",
     description:
-      "Learn more about Thrive4 Cleaning, our commitment to high cleaning standards, and our house, one-off, property, construction and commercial cleaning services.",
+      "Thrive4 provides residential cleaning for houses, apartments, rentals and short-stay properties, with clear communication and a home-specific scope.",
   },
   services: {
     title: "Professional Cleaning for Every Space.",
     eyebrow: "Our Services",
     description:
-      "Explore House, One-Off, Property, Construction and specialist cleaning services.",
+      "Explore residential cleaning for houses, apartments, rentals, move-in and move-out properties, bedrooms and outdoor living areas.",
   },
   pricing: {
     title: "Clear Pricing for Professional Cleaning Services.",
@@ -62,7 +62,7 @@ const pages: Record<
     title: "Let’s Talk About Your Cleaning Needs.",
     eyebrow: "Contact Us",
     description:
-      "Have a question or need a cleaning quote? Get in touch and tell us how we can help.",
+      "Tell us about your home and the residential cleaning service you need. Request a quote or ask our team a question.",
   },
   book: {
     title: "Book Your Professional Cleaning Service.",
@@ -80,7 +80,7 @@ const pages: Record<
     title: "Practical Cleaning Guides & Expert Advice.",
     eyebrow: "Cleaning Guides & Tips",
     description:
-      "Explore cleaning guides for homes, rentals, post-build properties and workplaces.",
+      "Practical residential cleaning guides for houses, apartments, rentals, moving home and short-stay properties.",
   },
   privacy: {
     title: "Privacy Policy.",

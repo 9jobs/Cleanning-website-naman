@@ -206,7 +206,7 @@ test("pricing checkout pins hourly AUD rate and lets customers select hours with
   harness(async (calls, i, set) => {
     set(
       session(i, {
-        amount_total: 7000,
+        amount_total: 7900,
         metadata: {
           app: "thrive4-pricing-checkout",
           service: "property-cleaning",
@@ -220,7 +220,7 @@ test("pricing checkout pins hourly AUD rate and lets customers select hours with
     );
     const post = calls.find((c) => c.options.method === "POST")!;
     const fields = new URLSearchParams(String(post.options.body));
-    assert.equal(fields.get("line_items[0][price_data][unit_amount]"), "7000");
+    assert.equal(fields.get("line_items[0][price_data][unit_amount]"), "7900");
     assert.equal(
       fields.get("line_items[0][adjustable_quantity][enabled]"),
       "true",
@@ -282,7 +282,7 @@ test("pricing success requires Stripe paid status and verifies selected hours ag
     assert.equal((await verifyPricingPayment(receipt.id)).paid, false);
   }));
 
-test("current pricing verifies AUD 70 per person-hour", () =>
+test("historical pricing still verifies AUD 70 per person-hour", () =>
   harness(
     async (_calls, i, set) => {
       const paid = session(i, {
@@ -302,4 +302,26 @@ test("current pricing verifies AUD 70 per person-hour", () =>
     },
     THRIVE4_TEST_ACCOUNT,
     7000,
+  ));
+
+test("current pricing verifies AUD 79 per person-hour", () =>
+  harness(
+    async (_calls, i, set) => {
+      const paid = session(i, {
+        status: "complete",
+        payment_status: "paid",
+        amount_total: 15800,
+        metadata: {
+          app: "thrive4-pricing-checkout",
+          service: "house-cleaning",
+        },
+      });
+      set(paid);
+      const result = await verifyPricingPayment(paid.id);
+      assert.equal(result.hourlyRate, 79);
+      assert.equal(result.hours, 2);
+      assert.equal(result.amount, 158);
+    },
+    THRIVE4_TEST_ACCOUNT,
+    7900,
   ));

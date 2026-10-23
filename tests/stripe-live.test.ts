@@ -2,9 +2,54 @@ import { test, mock } from "node:test";
 import assert from "node:assert/strict";
 import {
   createPricingCheckout,
+  verifyPricingPayment,
   verifiedPaymentDetails,
   THRIVE4_LIVE_ACCOUNT,
 } from "../src/lib/invoices/stripe";
+
+test("live pricing verifies the new rate and historical AUD 70 without allowing arbitrary rates", async () => {
+  const old = process.env.THRIVE4_STRIPE_LIVE_SECRET_KEY;
+  process.env.THRIVE4_STRIPE_LIVE_SECRET_KEY = "rk_live_unit_fixture";
+  let unitAmount = 7900;
+  const stub = mock.method(globalThis, "fetch", async (url: string) => {
+    if (url.endsWith("/account"))
+      return Response.json({ id: THRIVE4_LIVE_ACCOUNT });
+    if (url.includes("/line_items?"))
+      return Response.json({
+        data: [
+          { quantity: 2, price: { unit_amount: unitAmount, currency: "aud" } },
+        ],
+        has_more: false,
+      });
+    return Response.json({
+      id: "cs_live_RATE",
+      livemode: true,
+      currency: "aud",
+      amount_total: unitAmount * 2,
+      status: "complete",
+      payment_status: "paid",
+      metadata: { app: "thrive4-pricing-checkout", service: "house-cleaning" },
+    });
+  });
+  try {
+    for (const rate of [7900, 7000]) {
+      unitAmount = rate;
+      const result = await verifyPricingPayment("cs_live_RATE");
+      assert.equal(result.hourlyRate, rate / 100);
+      assert.equal(result.amount, (rate * 2) / 100);
+      assert.equal(result.paid, true);
+    }
+    unitAmount = 7500;
+    await assert.rejects(
+      verifyPricingPayment("cs_live_RATE"),
+      /hours and amount/,
+    );
+  } finally {
+    stub.mock.restore();
+    if (old === undefined) delete process.env.THRIVE4_STRIPE_LIVE_SECRET_KEY;
+    else process.env.THRIVE4_STRIPE_LIVE_SECRET_KEY = old;
+  }
+});
 
 test("live Checkout uses only the dedicated restricted key and pinned Thrive4 live account", async () => {
   const keys = ["THRIVE4_STRIPE_MODE", "THRIVE4_STRIPE_LIVE_SECRET_KEY"];
@@ -25,14 +70,14 @@ test("live Checkout uses only the dedicated restricted key and pinned Thrive4 li
       const fields = new URLSearchParams(String(options.body));
       assert.equal(
         fields.get("line_items[0][price_data][unit_amount]"),
-        "7000",
+        "7900",
       );
       return Response.json({
         id: "cs_live_UNIT",
         url: "https://checkout.stripe.com/c/pay/cs_live_UNIT",
         livemode: true,
         currency: "aud",
-        amount_total: 7000,
+        amount_total: 7900,
         metadata: {
           app: "thrive4-pricing-checkout",
           service: "house-cleaning",

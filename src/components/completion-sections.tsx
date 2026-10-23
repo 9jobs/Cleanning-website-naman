@@ -84,12 +84,12 @@ export function RequestSteps({ service }: { service?: string }) {
         {[
           {
             Icon: MousePointer2,
-            title: "Choose your service",
-            text: "Choose house, one-off, property, construction or specialist cleaning.",
+            title: "Choose your residential cleaning service",
+            text: "Select the type of home cleaning that best suits your needs.",
           },
           {
             Icon: ClipboardList,
-            title: "Tell us about your space",
+            title: "Tell us about your home",
             text: "Share property details, priority tasks, extras and your preferred timing.",
           },
           {
@@ -693,7 +693,7 @@ export function ServiceCompletion({
               ...guide.questions,
               [
                 "How do I get a quote for this service?",
-                "Share your location, property details, current condition and the work you need. A written quote confirms the agreed scope. No payment details are collected by this website.",
+                "Share your location, property details, current condition and the work you need. A written quote confirms the agreed scope. No payment details are required to submit a quote enquiry.",
               ],
             ].map(([question, answer]) => (
               <details key={question}>

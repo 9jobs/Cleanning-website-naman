@@ -86,16 +86,18 @@ test("configured estimate responds to rooms, extras and frequency", () => {
   }
 });
 
-test("current residential and commercial services are bookable, retired services are rejected", () => {
+test("only residential services are bookable, retired services are rejected", () => {
   for (const service of [
     "house-cleaning",
 
     "one-off-cleaning",
     "property-cleaning",
-    "commercial-cleaning",
-    "office-cleaning",
-    "construction-cleaning",
+    "apartment-cleaning",
+    "move-in-cleaning",
+    "end-of-lease-cleaning",
     "airbnb-cleaning",
+    "bedroom-living-area-cleaning",
+    "balcony-patio-cleaning",
   ]) {
     assert.equal(
       bookingSchema.safeParse({ ...booking, service }).success,
@@ -104,6 +106,9 @@ test("current residential and commercial services are bookable, retired services
     );
   }
   for (const service of [
+    "commercial-cleaning",
+    "office-cleaning",
+    "construction-cleaning",
     "deep-cleaning",
     "garden-cleaning",
     "carpet-cleaning",

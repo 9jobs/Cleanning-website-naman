@@ -36,11 +36,10 @@ import { homeGuideCards } from "@/lib/home-guide-cards";
 
 export const metadata = {
   title: {
-    absolute:
-      "Property, House & Construction Cleaning | Thrive4 Cleaning",
+    absolute: "Residential Cleaning Services | Thrive4 Cleaning Australia",
   },
   description:
-    "Thrive4 Cleaning provides professional house, one-off, property, construction and commercial cleaning services.",
+    "Thrive4 Cleaning provides professional residential cleaning for homes, apartments, rentals, move-in and move-out properties and short-stay accommodation.",
   alternates: { canonical: "/" },
 };
 
@@ -72,21 +71,20 @@ export default function Home() {
       <section className="section reference-intro">
         <div className="container split">
           <Reveal variant="left">
-            <span className="eyebrow">RELIABLE CLEANING SERVICES</span>
+            <span className="eyebrow">RESIDENTIAL CLEANING, MADE SIMPLE</span>
             <h2>
               Professional cleaning
               <br />
-              <span>you can count on.</span>
+              <span>for the way you live.</span>
             </h2>
             <p>
-              From family homes and rental properties to workplaces and
-              construction sites, Thrive4 provides cleaning shaped around your
-              property and requirements.
+              From family homes and apartments to rentals and short-stay
+              properties, Thrive4 provides residential cleaning shaped around
+              your home, schedule and priorities.
             </p>
             <p>
-              Our services cover routine upkeep, detailed property cleaning,
-              property cleaning, one-off visits and post-build cleans, with clear
-              communication from enquiry through to completion.
+              Choose regular care, a one-off refresh, move-in or move-out
+              cleaning, with a clear scope agreed before the service begins.
             </p>
             <div className="actions">
               <Button href="/pricing">View Cleaning Plans</Button>
@@ -159,7 +157,7 @@ export default function Home() {
               </span>
             </div>
             <span className="team-photo-caption">
-              CARE FOR HOMES, PROPERTIES, WORKPLACES & SITES.
+              CARE FOR HOMES & RESIDENTIAL PROPERTIES.
             </span>
           </Reveal>
         </div>
@@ -175,8 +173,8 @@ export default function Home() {
                 <span>service for your needs.</span>
               </h2>
               <p>
-                Choose residential or commercial cleaning to find the right
-                service for your space.
+                Choose residential cleaning to find the right service for your
+                space.
               </p>
             </div>
           </Reveal>
@@ -215,13 +213,12 @@ export default function Home() {
               <div className="section-heading">
                 <span className="eyebrow">OUR CLEANING SERVICES</span>
                 <h2>
-                  Professional cleaning
+                  Find the right care
                   <br />
-                  for every space.
+                  for each part of home.
                 </h2>
                 <p>
-                  Explore cleaning for homes, properties, construction sites and
-                  workplaces.
+                  Explore cleaning for homes and residential rental properties.
                 </p>
               </div>
             </Reveal>
@@ -269,20 +266,20 @@ export default function Home() {
           <Reveal variant="image" className="editorial-image">
             <Photo
               src="/images/end-of-lease-detail.webp"
-              alt="Professional cleaner wiping an empty wardrobe during a property clean"
+              alt="Cleaner wiping a skirting board in an empty residential home"
               className="tall-photo"
             />
             <div className="editorial-accent" aria-hidden />
             <span className="image-editorial-label">
-              <Sun size={22} /> PROPERTY CARE. MADE SIMPLE.
+              <Sun size={22} /> A FRESH START, EITHER WAY
             </span>
           </Reveal>
           <div>
             <Reveal variant="right">
               <Heading
-                eyebrow="PROPERTY CLEANING"
-                title="A fresh start for your property."
-                description="Property Cleaning for rentals, vacant and managed properties, with agreed tasks across kitchens, bathrooms, floors, cupboards and living areas."
+                eyebrow="MOVE-IN / MOVE-OUT CLEANING"
+                title="Moving home? We’ll handle the clean."
+                description="Whether you are moving in or preparing to move out, Thrive4 can help clean the residential spaces that matter before your next chapter begins."
               />
             </Reveal>
             <Reveal delay={0.12}>
@@ -296,12 +293,12 @@ export default function Home() {
               />
             </Reveal>
             <Reveal delay={0.22}>
-              <Button href="/services/property-cleaning">
-                Explore Property Cleaning
+              <Button href="/services/move-in-cleaning">
+                Explore Move-In Cleaning
               </Button>
             </Reveal>
             <p className="editorial-footnote">
-              Professional cleaning tailored to your property.
+              A checklist shaped around your next move.
             </p>
           </div>
         </div>
@@ -311,16 +308,16 @@ export default function Home() {
           <Reveal>
             <Heading
               eyebrow="WHY CHOOSE THRIVE4 CLEANING"
-              title="Reliable cleaning for every type of property."
+              title="Residential cleaning you can feel good about."
               center
-              description="Practical cleaning for homes, properties, workplaces and sites, with clear requirements and an agreed scope."
+              description="Home-focused care, flexible scheduling and a clear cleaning scope for houses, apartments and rental properties."
             />
           </Reveal>
           <div className="benefits-grid">
             <Reveal variant="image" className="benefit-photo">
               <Photo
                 src="/images/home-benefit.webp"
-                alt="Professional male cleaner wiping a shared workplace table"
+                alt="Professional male cleaner wiping a home dining table"
               />
               <div>
                 <span>PROFESSIONAL CLEANERS</span>
@@ -329,9 +326,7 @@ export default function Home() {
                   <br />
                   Dependable results.
                 </h3>
-                <p>
-                  Care for homes, managed properties, offices and workplaces.
-                </p>
+                <p>Care for homes and managed residential properties.</p>
               </div>
             </Reveal>
             <Reveal className="benefit-card benefit-navy" variant="down">
@@ -342,8 +337,8 @@ export default function Home() {
                 schedules.
               </h3>
               <p>
-                Request routine, one-off or post-build cleaning to suit
-                your property.
+                Choose routine, one-off or moving-related cleaning to suit your
+                home.
               </p>
               <Link href="/book">
                 Book a clean <ArrowUpRight size={19} />
@@ -409,7 +404,7 @@ export default function Home() {
               <Heading
                 eyebrow="BEFORE & AFTER CLEANING"
                 title="A closer look at cleaning, inside and out."
-                description="Explore illustrative comparisons for property and post-construction cleaning."
+                description="Compare vacate-room dirt, dusty bedroom surfaces and patio buildup with their refreshed appearance."
               />
             </Reveal>
             <span className="comparison-kicker">
@@ -428,14 +423,14 @@ export default function Home() {
           <Reveal variant="left">
             <span className="eyebrow">THE CLEANING EXPERIENCE</span>
             <h2>
-              Professional cleaning.
+              A cleaner home.
               <br />
-              <span>Consistent care.</span>
+              <span>A simpler routine.</span>
             </h2>
             <p>
-              From homes and rentals to commercial premises and construction
-              sites, cleaning helps prepare spaces for everyday use,
-              presentation or handover.
+              From everyday house cleaning to apartment, move-in and short-stay
+              services, Thrive4 helps keep residential spaces fresh, comfortable
+              and ready to enjoy.
             </p>
             <Button href="/reviews" secondary>
               View Customer Reviews

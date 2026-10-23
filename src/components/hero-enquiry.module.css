@@ -1,4 +1,44 @@
 /* Scope the glass treatment to this homepage quick quote, including its controls. */
+.offerLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  min-width: 0;
+  margin-bottom: 8px;
+}
+.offerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  max-width: 100%;
+  white-space: nowrap;
+  border-radius: 999px;
+  background: linear-gradient(110deg, #0d8251, #075b3b);
+  color: #fff;
+  border: 1px solid #0b6b44;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.4;
+  box-shadow:
+    0 5px 14px #075b3b2b,
+    0 0 0 3px #dcf2df;
+}
+.card:global(.hero-enquiry) .offerCopy {
+  margin: 5px 0 13px;
+  color: #204e36;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.card:global(.hero-enquiry) .offerTerms {
+  margin: 5px 0 0;
+  color: #365b48;
+  text-align: right;
+  font-size: 11px;
+  line-height: 1.5;
+}
 :global(.reference-lead) .card:global(.hero-enquiry) {
   background: linear-gradient(
     115deg,
@@ -182,5 +222,23 @@
 @supports not (backdrop-filter: blur(1px)) {
   :global(.reference-lead) .card:global(.hero-enquiry) {
     background: #f4f9f5;
+  }
+}
+
+@media (max-width: 600px) {
+  .offerLine {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .offerBadge {
+    padding: 9px 13px;
+    font-size: 12px;
+  }
+  .card:global(.hero-enquiry) .offerCopy {
+    font-size: 13px;
+  }
+  .card:global(.hero-enquiry) .offerTerms {
+    text-align: left;
   }
 }

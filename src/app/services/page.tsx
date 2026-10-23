@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ServicesOverview } from "@/components/services/service-page";
 
 export const metadata: Metadata = {
-  title: "Cleaning Services",
+  title: "Residential Cleaning Services",
   description:
-    "Explore Thrive4 House, One-Off, Property, Construction, workplace and specialist cleaning services. Find the right scope for your property.",
+    "Explore Regular House Cleaning, Apartment Cleaning, moving-related cleaning, residential property care and short-stay cleaning from Thrive4.",
   alternates: { canonical: "/services" },
 };
 

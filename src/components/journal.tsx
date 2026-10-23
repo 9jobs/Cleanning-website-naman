@@ -13,7 +13,7 @@ export function BlogListing() {
       <div className="split" style={{ marginBottom: 60 }}>
         <Photo
           src={featured.image}
-          alt={featured.title}
+          alt={featured.imageAlt}
           className="tall-photo"
         />
         <div>
@@ -46,7 +46,7 @@ export function BlogListing() {
           .map((a) => (
             <Reveal className="card" key={a.slug}>
               <Link href={`/blog/${a.slug}`}>
-                <Photo src={a.image} alt={a.title} />
+                <Photo src={a.image} alt={a.imageAlt} />
                 <div className="card-body">
                   <span className="mini-label">
                     {a.category} · {a.read}

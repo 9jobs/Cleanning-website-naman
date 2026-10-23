@@ -204,3 +204,33 @@
     grid-row: auto;
   }
 }
+
+/* Three residential services fill the mosaic without empty tracks. */
+:global(.service-showcase) .restoredMosaic.mosaic:global(.service-mosaic) {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-rows: repeat(2, minmax(265px, auto));
+}
+:global(.service-showcase)
+  .restoredMosaic
+  > .tile:global(.service-tile):nth-child(n) {
+  grid-column: 2;
+  grid-row: auto;
+}
+:global(.service-showcase)
+  .restoredMosaic
+  > .tile:global(.service-tile-featured):first-child {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+@media (max-width: 700px) {
+  :global(.service-showcase) .restoredMosaic.mosaic:global(.service-mosaic) {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(380px, auto) repeat(2, minmax(265px, auto));
+  }
+  :global(.service-showcase)
+    .restoredMosaic
+    > .tile:global(.service-tile):nth-child(n) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}

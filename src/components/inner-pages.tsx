@@ -1,8 +1,7 @@
 import {
-  Building2,
   House,
-  Sparkles,
   Heart,
+  Sparkles,
   Leaf,
   ClipboardCheck,
   ArrowRight,
@@ -16,23 +15,13 @@ import { Reveal } from "./motion";
 const highlights = [
   {
     Icon: House,
-    title: "House & property cleaning",
+    title: "Regular House Cleaning",
     text: "Care for homes, rentals and managed properties.",
   },
   {
-    Icon: Building2,
-    title: "Commercial cleaning",
-    text: "A fresh start for your working day.",
-  },
-  {
     Icon: CalendarDays,
-    title: "One-off cleaning",
+    title: "One-Off Cleaning",
     text: "Detailed home cleaning or a single visit for priority rooms.",
-  },
-  {
-    Icon: Heart,
-    title: "Construction cleaning",
-    text: "A final clean after building or renovation work.",
   },
 ];
 
@@ -52,13 +41,13 @@ export function AboutPage() {
           <Reveal className="about-hero-copy">
             <span className="eyebrow">ABOUT THRIVE4 CLEANING</span>
             <h1>
-              Care for your space.
+              Cleaning designed around
               <br />
-              <em>Room to thrive.</em>
+              <em>everyday homes.</em>
             </h1>
             <p>
-              We support homes, properties, workplaces and completed
-              construction sites with practical cleaning scopes and clear
+              Thrive4 provides residential cleaning for houses, apartments,
+              rentals and short-stay homes, with practical care and clear
               communication.
             </p>
             <div className="actions">
@@ -78,10 +67,10 @@ export function AboutPage() {
           </Reveal>
           <div className="about-float-group">
             <div className="about-float about-float--workplace">
-              <Building2 />
+              <House />
               <span>
-                <strong>Fresher workplaces</strong>
-                <small>Care for the space you work in.</small>
+                <strong>Fresher homes</strong>
+                <small>Care for the space you live in.</small>
               </span>
             </div>
             <div className="about-float about-float--care">
@@ -119,8 +108,8 @@ export function AboutPage() {
             alt="Clean apartment kitchenette with open empty cupboards"
           />
           <Photo
-            src="/images/about-office-male.webp"
-            alt="Male cleaner wiping a table in an office lounge"
+            src="/images/house-cleaning.webp"
+            alt="Cleaner wiping a residential kitchen island"
           />
           <span className="collage-caption">
             <Sparkles size={20} />
@@ -135,13 +124,13 @@ export function AboutPage() {
             <em>A personal approach.</em>
           </h2>
           <p>
-            Family homes, rental properties, workplaces and completed building
-            sites all need different care. Thrive4 starts by understanding the
-            property and the work required.
+            Family homes and residential rental properties all need different
+            care. Thrive4 starts by understanding the property and the work
+            required.
           </p>
           <p>
-            Our services cover routine upkeep, detailed property cleaning, one-off visits and post-build cleans. An agreed checklist
-            sets out the work before a visit is confirmed.
+            Choose regular care, a one-off refresh or cleaning around a move. An
+            agreed checklist sets out the work before a visit is confirmed.
           </p>
           <Button href="/contact">Talk to our team</Button>
         </Reveal>
@@ -197,8 +186,8 @@ export function AboutPage() {
         </div>
         <div>
           <p>
-            Tell us about your home, property, workplace or completed building
-            site. Share the cleaning requirements and preferred timing.
+            Tell us about your home or residential rental property. Share the
+            cleaning requirements and preferred timing.
           </p>
           <Button href="/contact">Build your cleaning plan</Button>
         </div>
@@ -210,7 +199,7 @@ export function AboutPage() {
 const heroImages: Record<string, { src: string; label: string }> = {
   services: {
     src: "/images/cleaning-plans-room.webp",
-    label: "HOMES · PROPERTIES · WORKPLACES · SITES",
+    label: "HOMES · RENTALS · RESIDENTIAL PROPERTIES",
   },
   pricing: {
     src: "/images/kitchen.webp",

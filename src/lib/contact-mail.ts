@@ -30,10 +30,6 @@ export function contactTransport() {
 export async function sendContactMail(data: ContactRequest, reference: string) {
   const service =
     services.find((item) => item.slug === data.service)?.name || data.service;
-  const commercial =
-    data.property === "Office" ||
-    data.property === "Other commercial space" ||
-    ["office-cleaning", "commercial-cleaning"].includes(data.service);
   const text = [
     "NEW THRIVE4 CLEANING WEBSITE ENQUIRY",
     `Reference: ${reference}`,
@@ -48,9 +44,8 @@ export async function sendContactMail(data: ContactRequest, reference: string) {
     `Service: ${service}`,
     `Property type: ${data.property}`,
     `Suburb / postcode: ${data.location}`,
-    ...(commercial
-      ? [`Approximate floor area: ${data.size || "Not supplied"} m²`]
-      : [`Bedrooms: ${data.bedrooms}`, `Bathrooms: ${data.bathrooms}`]),
+    `Bedrooms: ${data.bedrooms}`,
+    `Bathrooms: ${data.bathrooms}`,
     `Frequency: ${data.frequency}`,
     `Preferred date: ${data.date || "Not specified"}`,
     "",

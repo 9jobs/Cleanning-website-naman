@@ -16,6 +16,7 @@ import {
   Mail,
   MapPin,
   MessageCircle,
+  X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { nav, site } from "@/lib/config";
@@ -24,6 +25,7 @@ import { ScrollProgress } from "./motion";
 import styles from "./navigation-menu.module.css";
 import footerStyles from "./footer.module.css";
 import logoStyles from "./logo.module.css";
+import offerStyles from "./first-clean-offer.module.css";
 export function Logo() {
   return (
     <Link
@@ -44,6 +46,7 @@ export function Logo() {
 }
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [offerVisible, setOfferVisible] = useState(true);
   const path = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -106,8 +109,27 @@ export function Header() {
   return (
     <>
       <ScrollProgress />
+      {path === "/" && offerVisible && (
+        <aside className={offerStyles.banner} aria-label="First clean offer">
+          <strong className={offerStyles.badge}>
+            <Sparkles size={19} aria-hidden="true" />
+            10% OFF YOUR FIRST CLEAN
+          </strong>
+          <span className={offerStyles.message}>
+            Book your first residential clean today and save 10%.
+          </span>
+          <button
+            type="button"
+            className={offerStyles.close}
+            aria-label="Dismiss first clean offer"
+            onClick={() => setOfferVisible(false)}
+          >
+            <X size={18} aria-hidden="true" />
+          </button>
+        </aside>
+      )}
       <div className="announcement">
-        Cleaning for Homes, Properties, Workplaces & Sites ·{" "}
+        Cleaning for Homes & Residential Properties ·{" "}
         <Link href="/services">
           Explore Cleaning Services <ArrowUpRight size={13} />
         </Link>
@@ -263,7 +285,8 @@ export function Footer() {
               </span>
             </div>
             <p>
-              Cleaning for homes, properties, workplaces and sites.
+              Residential cleaning for homes, apartments, rentals and short-stay
+              properties.
               <br />
               Practical care inside and out, with an agreed scope.
             </p>
@@ -357,7 +380,7 @@ export function Footer() {
           <nav className={footerStyles.linkColumn} aria-label="Our services">
             <h2>Our services</h2>
             <ul>
-              {services.slice(0, 6).map((s) => (
+              {services.map((s) => (
                 <li key={s.slug}>
                   <Link href={`/services/${s.slug}`}>
                     <ChevronRight size={17} aria-hidden="true" />

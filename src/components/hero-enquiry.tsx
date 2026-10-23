@@ -10,6 +10,7 @@ import {
   UserRound,
   Mail,
   Phone,
+  Sparkles,
 } from "lucide-react";
 import { quickQuoteFieldsSchema } from "@/lib/quick-quote-validation";
 import styles from "./hero-enquiry.module.css";
@@ -116,8 +117,17 @@ export function HeroEnquiry() {
     <div className={`hero-enquiry ${styles.card}`}>
       <div className="lead-form-heading">
         <div>
-          <span className="eyebrow">REQUEST A CLEANING QUOTE</span>
+          <div className={styles.offerLine}>
+            <span className="eyebrow">REQUEST A CLEANING QUOTE</span>
+            <span className={styles.offerBadge}>
+              <Sparkles size={15} aria-hidden="true" />
+              10% OFF FIRST CLEAN
+            </span>
+          </div>
           <h2>Get a quick cleaning quote.</h2>
+          <p className={styles.offerCopy}>
+            Book your first residential clean and receive 10% off.
+          </p>
         </div>
       </div>
       {reference ? (
@@ -236,7 +246,8 @@ export function HeroEnquiry() {
                 </>
               ) : (
                 <>
-                  Get My Free Quote <ArrowRight size={18} aria-hidden="true" />
+                  Get My 10% Off Quote{" "}
+                  <ArrowRight size={18} aria-hidden="true" />
                 </>
               )}
             </button>
@@ -247,6 +258,9 @@ export function HeroEnquiry() {
               By requesting a quote, you agree we may contact you about this
               enquiry. <Link href="/privacy">Privacy notice</Link>.
             </span>
+          </p>
+          <p className={styles.offerTerms}>
+            Offer applies to first-time residential cleaning bookings.
           </p>
           {error && (
             <p className={styles.error} role="alert">

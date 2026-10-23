@@ -60,7 +60,7 @@ export function ServiceDiscovery({ preview = false }: { preview?: boolean }) {
             role="group"
             aria-label="Filter cleaning services"
           >
-            {["All services", "Residential", "Commercial"].map((item) => (
+            {["All services", "Residential"].map((item) => (
               <button
                 key={item}
                 type="button"
@@ -341,7 +341,7 @@ const appointmentQuestions = [
   {
     category: "Quotes",
     q: "Are any payment details required online?",
-    a: "No payment details are collected by the current website. A personalised written quote and appointment details must be agreed before work begins.",
+    a: "No payment details are required to submit an enquiry. Published pricing plans have a separate secure payment option; personalised quotes and appointments are confirmed with the team.",
   },
   {
     category: "Areas",
@@ -592,7 +592,7 @@ export function JournalLibrary({ preview = false }: { preview?: boolean }) {
             className="finish-journal-card"
           >
             <Link href={`/blog/${article.slug}`}>
-              <Photo src={article.image} alt={article.title} />
+              <Photo src={article.image} alt={article.imageAlt} />
               <div>
                 <span className="finish-kicker">
                   {article.category} · {article.read}

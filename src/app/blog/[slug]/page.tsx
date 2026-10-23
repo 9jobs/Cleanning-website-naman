@@ -56,7 +56,7 @@ export default async function Article({
         </div>
         <h1>{a.title}</h1>
         <p>{a.intro}</p>
-        <Photo src={a.image} alt={a.title} priority />
+        <Photo src={a.image} alt={a.imageAlt} priority />
         <ArticleCompletion article={a} />
       </article>
       <RelatedGuides exclude={a.slug} />

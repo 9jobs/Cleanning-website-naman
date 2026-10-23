@@ -191,12 +191,14 @@ test("invoice sender addresses the client, sends branded HTML, returns a receipt
   try {
     process.env.CONTACT_SMTP_USER = " Sender@Example.Test ";
     process.env.CONTACT_SMTP_PASSWORD = "test-only";
-    const invoice = saveInvoice([], input);
+    const invoice = saveInvoice([], { ...input, numberOfPeople: 3 });
     const receipt = await sendInvoiceEmail(
       invoice,
       "http://localhost:4317/admin/pay/test",
     );
     assert.equal(message?.to, input.email);
+    assert.match(String(message?.html), /Number of people/);
+    assert.match(String(message?.text), /Number of people: 3/);
     assert.deepEqual(message?.from, {
       name: "Thrive4 Cleaning",
       address: "sender@example.test",
@@ -364,4 +366,25 @@ test("Stripe top-level returns open only the local review shell; cross-site API,
     if (previous === undefined) Reflect.deleteProperty(process.env, "NODE_ENV");
     else Reflect.set(process.env, "NODE_ENV", previous);
   }
+});
+
+test("people count persists through invoice edits and preview without changing billing", () => {
+  const items: Invoice[] = [];
+  const parsed = invoiceSchema.parse({ ...input, numberOfPeople: 3 });
+  const invoice = saveInvoice(items, parsed);
+  assert.equal(invoice.numberOfPeople, 3);
+  assert.equal(invoice.amount, input.amount);
+  assert.match(invoiceEmailHtml(invoice), /Number of people/);
+  const edited = invoiceSchema.parse({ ...input, numberOfPeople: 2 });
+  saveInvoice(items, edited, invoice.id, invoice.revision);
+  assert.equal(items[0].numberOfPeople, 2);
+  assert.equal(items[0].amount, input.amount);
+  for (const numberOfPeople of [0, -1, 1.5, 1001]) {
+    assert.equal(
+      invoiceSchema.safeParse({ ...input, numberOfPeople }).success,
+      false,
+    );
+  }
+  assert.equal(invoiceSchema.safeParse(input).success, true);
+  assert.doesNotMatch(invoiceEmailHtml(input), /Number of people/);
 });

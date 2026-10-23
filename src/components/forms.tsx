@@ -315,13 +315,7 @@ export function BookingForm({
                 <label>
                   Property type
                   <select {...register("property")}>
-                    {[
-                      "House",
-                      "Apartment",
-                      "Townhouse",
-                      "Office",
-                      "Other commercial space",
-                    ].map((p) => (
+                    {["House", "Apartment", "Townhouse"].map((p) => (
                       <option key={p}>{p}</option>
                     ))}
                   </select>

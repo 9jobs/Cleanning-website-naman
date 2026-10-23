@@ -5,6 +5,12 @@ export type ServicePageContent = {
   lead: string;
   heading: string;
   description: string;
+  heroDescription: string;
+  scopeHeading: string;
+  processHeading: string;
+  extrasHeading: string;
+  detailsHeading: string;
+  scopeNote: string;
   image: string;
   alt: string;
   supportImage: string;
@@ -20,685 +26,736 @@ export type ServicePageContent = {
 
 export const servicePages: Record<string, ServicePageContent> = {
   "house-cleaning": {
-    label: "HOUSE & PROPERTY CARE",
-    lead: "Routine care or a one-off clean for the place you call home.",
-    heading: "A home clean shaped around your routine.",
+    heroDescription:
+      "Keep busy rooms comfortable with regular visits planned around your household, favourite finishes and the way you use your home.",
+    scopeHeading: "Everyday rooms, thoughtfully maintained.",
+    processHeading: "From household priorities to a steady routine.",
+    extrasHeading: "Choose the details that matter to you.",
+    detailsHeading: "Tell us how your household works.",
+    scopeNote:
+      "Use the checklist to set a practical baseline for each visit, then discuss priorities as your routine changes.",
+    label: "REGULAR HOME CARE",
+    lead: "Routine residential cleaning for everyday home maintenance.",
+    heading: "A cleaner home, built into your routine.",
     description:
-      "House Cleaning covers kitchens, bathrooms, bedrooms and everyday living areas. Request routine upkeep or a single visit, with the rooms and priorities agreed for your home.",
+      "Regular House Cleaning looks after kitchens, bathrooms, bedrooms and living areas. Choose the rooms and priorities for your house or townhouse, with a checklist and visit frequency agreed before cleaning begins.",
     image: "/images/house-cleaning.webp",
-    alt: "Cleaner wiping an island in a bright Australian home",
-    supportImage: "/images/airbnb.webp",
-    supportAlt:
-      "Neatly presented bedroom with light bedding and natural daylight",
+    alt: "Cleaner wiping a kitchen bench in a bright residential home",
+    supportImage: "/images/airbnb-cover.webp",
+    supportAlt: "Cleaner wiping a coffee table in a residential living room",
     preparation:
-      "Clear loose items from the agreed surfaces and floors. Share access instructions, pets and any delicate finishes before your visit.",
+      "Clear loose belongings from agreed surfaces. Share access instructions, pets, delicate finishes and rooms that should be left untouched.",
     areas: [
       {
         title: "Kitchen",
         items: [
-          "Benchtops, stovetop and sink",
-          "Accessible splashbacks and cupboard exteriors",
+          "Wipe accessible kitchen benches",
+          "Clean the sink and splashback",
+          "Wipe appliance exteriors",
         ],
       },
       {
         title: "Bathrooms",
         items: [
-          "Basins, toilets and shower screens",
-          "Accessible mirrors and bathroom surfaces",
+          "Clean showers, basins and toilets",
+          "Wipe mirrors and accessible fixtures",
+          "Mop suitable bathroom floors",
+        ],
+      },
+      {
+        title: "Everyday living",
+        items: [
+          "Dust accessible bedroom and lounge surfaces",
+          "Vacuum bedrooms and living areas",
+          "Mop suitable hard floors",
+        ],
+      },
+    ],
+    details: [
+      "Bedrooms, bathrooms and living areas",
+      "Preferred weekly or fortnightly routine",
+      "Pets, parking and surface-care instructions",
+    ],
+    steps: [
+      [
+        "Tell us about your home",
+        "Share the room numbers and the areas you use most.",
+      ],
+      [
+        "Agree your routine",
+        "Confirm visit frequency, tasks and the written quote.",
+      ],
+      [
+        "Prepare for the visit",
+        "Arrange access and clear the agreed surfaces.",
+      ],
+    ],
+    questions: [
+      [
+        "What is included in regular house cleaning?",
+        "Kitchen surfaces, bathrooms, accessible dusting, vacuuming and mopping can be included. Your written checklist confirms the rooms and tasks for each visit.",
+      ],
+      [
+        "Can I choose the rooms you clean?",
+        "Yes. Share your priorities and any rooms to leave untouched when the scope is agreed.",
+      ],
+      [
+        "Are appliance interiors included?",
+        "Oven and fridge interiors are optional requests and need a separate scope and quote.",
+      ],
+    ],
+    related: [
+      "one-off-cleaning",
+      "apartment-cleaning",
+      "bedroom-living-area-cleaning",
+    ],
+    closing: "A fresher home. A simpler routine.",
+  },
+  "one-off-cleaning": {
+    heroDescription:
+      "Catch up after a busy period or prepare for an occasion with a single appointment focused on the areas you choose.",
+    scopeHeading: "A focused reset, room by room.",
+    processHeading: "Plan a refresh without an ongoing commitment.",
+    extrasHeading: "Add a little extra to this visit.",
+    detailsHeading: "Share the priorities for your single clean.",
+    scopeNote:
+      "Set the focus before the appointment so the available time goes towards the rooms that need it most.",
+    label: "FLEXIBLE HOME CARE",
+    lead: "A single residential clean for the rooms that need extra attention.",
+    heading: "One visit, shaped around your priorities.",
+    description:
+      "One-Off Cleaning is for a home refresh without an ongoing schedule. Request a kitchen and bathroom clean, dusting, surface care and floors, then agree a realistic checklist for the condition of your home.",
+    image: "/images/house-cleaning.webp",
+    alt: "Cleaner wiping a residential kitchen island",
+    supportImage: "/images/home-benefit.webp",
+    supportAlt: "Cleaner wiping a wooden dining table at home",
+    preparation:
+      "Choose priority rooms and clear personal items from surfaces. Mention built-up grime, delicate materials and any appliances you want assessed separately.",
+    areas: [
+      {
+        title: "Kitchen & bathrooms",
+        items: [
+          "Refresh accessible kitchen surfaces",
+          "Clean bathroom fixtures",
+          "Wipe sinks and mirrors",
         ],
       },
       {
         title: "Living areas",
         items: [
-          "Dust accessible furniture and surfaces",
-          "Vacuum carpets and mop hard floors",
+          "Dust accessible furniture",
+          "Wipe agreed surfaces",
+          "Vacuum or mop suitable floors",
+        ],
+      },
+      {
+        title: "Your priority rooms",
+        items: [
+          "Focus on the rooms you choose",
+          "Agree tasks for a single visit",
+          "Discuss extra time before confirming",
         ],
       },
     ],
     details: [
-      "Your property type and room numbers",
-      "Routine or one-off cleaning requirements",
-      "Priority areas, pets and access instructions",
+      "Priority rooms and current condition",
+      "Preferred visit date",
+      "Optional appliance or cupboard requests",
     ],
     steps: [
-      ["Choose your home clean", "Request routine upkeep or a single visit."],
       [
-        "Share the room details",
-        "Describe the rooms, surface care and tasks that matter.",
+        "Choose your priorities",
+        "Tell us which rooms and tasks need attention.",
       ],
+      ["Confirm the checklist", "Agree the scope, access and quote."],
       [
-        "Confirm the agreed scope",
-        "The team reviews your request, quote and availability.",
+        "Plan a single visit",
+        "Request your preferred date without a recurring commitment.",
       ],
     ],
     questions: [
       [
-        "Can I request routine or one-off House Cleaning?",
-        "Yes. Share your preferred frequency or request a single visit. Scope and availability are confirmed with the team.",
+        "Is this an ongoing cleaning plan?",
+        "No. One-Off Cleaning is a single visit. You can discuss regular cleaning separately if your needs change.",
       ],
       [
-        "Are appliance interiors included?",
-        "Fridge detailing is an optional request, included only when agreed in your quote.",
+        "Can I focus on just a few rooms?",
+        "Yes. Tell us your priority rooms so the visit can be planned around them.",
       ],
       [
-        "How do I request a more detailed clean?",
-        "Describe the condition and any built-up dirt. Property Cleaning can be discussed for a broader property-specific checklist.",
-      ],
-    ],
-    related: ["property-cleaning", "end-of-lease-cleaning", "one-off-cleaning"],
-    closing: "A home clean that fits the way you live.",
-  },
-  "property-cleaning": {
-    label: "CARE FOR THE WHOLE PROPERTY",
-    lead: "A practical clean for rentals, vacant spaces and managed properties.",
-    heading: "A clear checklist for the property’s next stage.",
-    description:
-      "Property Cleaning supports rental, vacant and managed residential properties. Tell us about the layout, condition and purpose of the clean so the scope can be tailored to the property.",
-    image: "/images/property-cover.webp",
-    alt: "Male cleaner wiping built-in shelves in a vacant apartment",
-    supportImage: "/images/property-detail.webp",
-    supportAlt: "Clean apartment kitchenette with open empty cupboards",
-    preparation:
-      "Explain whether the property is occupied or vacant, clear access to agreed areas and share keys, parking and property-manager instructions.",
-    areas: [
-      {
-        title: "Rooms & floors",
-        items: [
-          "Accessible living, bedroom and floor areas",
-          "Dusting, vacuuming and mopping to the agreed scope",
-          "Identify any delicate or damaged finishes",
-        ],
-      },
-      {
-        title: "Kitchen & bathroom",
-        items: [
-          "Kitchen surfaces, sink and accessible cupboard exteriors",
-          "Basins, toilets and agreed bathroom surfaces",
-          "Detail priorities based on the property’s condition",
-        ],
-      },
-      {
-        title: "Storage & handover",
-        items: [
-          "Empty cupboards and wardrobes where agreed",
-          "Property-specific presentation checklist",
-          "Discuss fridge detailing extras",
-        ],
-      },
-    ],
-    details: [
-      "Property type, size and current condition",
-      "Rental, vacant or managed-property requirements",
-      "Access, handover timing and optional extras",
-    ],
-    steps: [
-      [
-        "Describe the property",
-        "Share its layout, condition and the reason for cleaning.",
-      ],
-      [
-        "Agree the checklist",
-        "Review priority rooms, storage and optional work.",
-      ],
-      [
-        "Confirm the visit",
-        "The team confirms the quote, access and availability.",
-      ],
-    ],
-    questions: [
-      [
-        "Who is Property Cleaning for?",
-        "It is for rental, vacant and managed residential properties where the clean needs a property-specific checklist.",
-      ],
-      [
-        "Can occupied properties be cleaned?",
-        "Tell us what remains in the property and which surfaces can be accessed. The team confirms a suitable scope.",
-      ],
-      [
-        "How is the property cleaning scope agreed?",
-        "Property Cleaning follows a checklist shaped around rental, vacant or managed-property requirements. Share your priorities and property condition so the scope can be confirmed.",
+        "Does a one-off clean include every task?",
+        "The scope depends on your priorities, the condition of the home and the agreed time. Additional tasks must be confirmed in advance.",
       ],
     ],
     related: [
       "house-cleaning",
-      "end-of-lease-cleaning",
-      "construction-cleaning",
+      "apartment-cleaning",
+      "bedroom-living-area-cleaning",
     ],
-    closing: "Prepare the property for what comes next.",
+    closing: "One visit. A fresher home.",
   },
-  "end-of-lease-cleaning": {
-    label: "A CONSIDERED MOVE-OUT",
-    lead: "Close one chapter with a cleaner space.",
-    heading: "A checklist built around your property.",
+  "apartment-cleaning": {
+    heroDescription:
+      "From compact kitchens to open-plan lounges, request care that fits your layout and works with your building’s entry arrangements.",
+    scopeHeading: "A checklist for compact spaces.",
+    processHeading: "A little planning for apartment access.",
+    extrasHeading: "Tailor the visit to your apartment.",
+    detailsHeading: "A few notes about your apartment.",
+    scopeNote:
+      "Compact layouts still have different needs. Identify the surfaces, fixtures and floor areas to include within your unit.",
+    label: "APARTMENT CARE",
+    lead: "Residential cleaning for apartments, units and compact living spaces.",
+    heading: "Thoughtful care for apartment living.",
     description:
-      "End of lease cleaning helps prepare an empty rental property for its next stage. Share the property details and your agent’s checklist so the team can review the work required.",
-    image: "/images/lease-cover.webp",
-    alt: "Male cleaner mopping the floor of a vacated rental property",
-    supportImage: "/images/blog-moving.webp",
-    supportAlt: "Open wardrobes showing shelves and hanging space",
+      "Apartment Cleaning focuses on the rooms and surfaces within your home. From compact kitchens to open-plan living areas, agree practical tasks for your apartment or unit and share lift, parking and entry arrangements before the visit.",
+    image: "/images/hero-property-v2.webp",
+    alt: "Bright vacant apartment with timber floors and an open-plan kitchen",
+    supportImage: "/images/property-detail.webp",
+    supportAlt: "Residential apartment kitchen with open cupboards",
     preparation:
-      "Arrange for belongings to be removed and cupboards emptied. Discuss key collection, parking and property access before the appointment.",
+      "Check building entry and lift arrangements. Tell us about visitor parking, access restrictions and any shared areas outside your apartment that are excluded.",
     areas: [
       {
-        title: "Kitchen & storage",
+        title: "Kitchen & dining",
         items: [
-          "Inside and outside empty cupboards and drawers",
-          "Kitchen surfaces, stovetop and rangehood filters",
-          "Empty wardrobes and accessible storage",
+          "Wipe compact kitchen benches",
+          "Clean sinks and splashbacks",
+          "Wipe accessible dining surfaces",
         ],
       },
       {
         title: "Bathrooms & laundry",
         items: [
-          "Shower screens, basins and toilets",
-          "Bathtubs and accessible bathroom surfaces",
-          "Tell us about laundry requirements in your checklist",
+          "Clean basins, showers and toilets",
+          "Wipe accessible mirrors",
+          "Mop suitable wet-area floors",
         ],
       },
-      {
-        title: "Floors & finishing details",
-        items: [
-          "Vacuum carpets and mop hard floors",
-          "Wipe accessible skirting boards",
-          "Review property-specific priorities with the team",
-        ],
-      },
-    ],
-    details: [
-      "Property size and room numbers",
-      "Your move-out date and agent’s checklist",
-      "Empty-property access and any appliance extras",
-    ],
-    steps: [
-      [
-        "Send the property details",
-        "Include your move-out date, room count and inspection checklist.",
-      ],
-      [
-        "Review the quote",
-        "Agree cleaning tasks, extras and access arrangements.",
-      ],
-      [
-        "Confirm the appointment",
-        "Timing is confirmed with the team before work begins.",
-      ],
-    ],
-    questions: [
-      [
-        "Is a bond return guaranteed?",
-        "No. Bond decisions and inspection outcomes are made by the property agent or landlord. Cleaning is completed to the scope agreed with you.",
-      ],
-      [
-        "Should the property be empty?",
-        "Empty rooms, cupboards and wardrobes allow access to the agreed surfaces. Tell us about any items that will remain so the team can plan the clean.",
-      ],
-      [
-        "Are appliance interiors included?",
-        "Fridge detailing can be discussed separately. Share your appliance requirements when requesting a quote.",
-      ],
-    ],
-    related: ["one-off-cleaning", "oven-cleaning", "window-cleaning"],
-    closing: "Plan the clean around your move.",
-  },
-  "commercial-cleaning": {
-    label: "CARE FOR WORKING SPACES",
-    lead: "A considered clean for your business.",
-    heading: "Different workplaces. A clearly agreed scope.",
-    description:
-      "Commercial cleaning is planned around the way a business uses its space. Discuss your premises, shared areas and practical requirements so the team can shape a suitable cleaning scope.",
-    image: "/images/commercial-cleaning.webp",
-    alt: "Cleaner mopping the floor of a bright commercial workplace",
-    supportImage: "/images/service-office.webp",
-    supportAlt: "Shared workplace with desks, plants and meeting areas",
-    preparation:
-      "Nominate a site contact, identify restricted areas and explain entry procedures. Timing and site requirements need to be agreed in advance.",
-    areas: [
-      {
-        title: "Shared surfaces",
-        items: [
-          "Communal desks and workstations",
-          "Agreed high-touch contact points",
-        ],
-      },
-      {
-        title: "Floors & facilities",
-        items: ["Vacuum carpets and runners", "Mop accessible hard floors"],
-      },
-      {
-        title: "Staff spaces",
-        items: [
-          "Kitchen benches, sinks and break rooms",
-          "Standard rubbish and recycling bins",
-        ],
-      },
-    ],
-    details: [
-      "Premises type, size and layout",
-      "Operating hours and preferred visit times",
-      "Access procedures and an on-site contact",
-    ],
-    steps: [
-      [
-        "Discuss your site",
-        "Share the spaces used by staff, visitors and customers.",
-      ],
-      [
-        "Agree the requirements",
-        "Review surfaces, frequency and access considerations.",
-      ],
-      [
-        "Confirm the scope",
-        "The team confirms the work and appointment arrangements with you.",
-      ],
-    ],
-    questions: [
-      [
-        "Which business spaces can I enquire about?",
-        "Existing services cover offices, retail stores, communal facilities and shared workplaces. Describe your premises so the team can confirm suitability.",
-      ],
-      [
-        "Can cleaning fit around business hours?",
-        "Share your operating hours and preferred timing. Scheduling and access are discussed before any visit is confirmed.",
-      ],
-      [
-        "Can the scope change between sites?",
-        "Yes. Each enquiry should describe its layout, shared facilities and cleaning priorities. The final scope is specific to the agreed site.",
-      ],
-    ],
-    related: ["office-cleaning", "window-cleaning", "one-off-cleaning"],
-    closing: "Let’s discuss your working space.",
-  },
-  "airbnb-cleaning": {
-    label: "THOUGHTFUL GUEST CHANGEOVERS",
-    lead: "A fresh welcome starts with the details.",
-    heading: "Clean between stays. Prepare for the next arrival.",
-    description:
-      "Changeover cleaning for short-stay properties focuses on guest-facing rooms and surfaces. Share your booking calendar, property instructions and priorities so each request can be reviewed.",
-    image: "/images/airbnb-cover.webp",
-    alt: "Male cleaner wiping a bedside table in a short-stay bedroom",
-    supportImage: "/images/kitchen.webp",
-    supportAlt: "Guest kitchen with clear benchtops and a bright dining space",
-    preparation:
-      "Provide check-out and check-in times, entry instructions and a property checklist. Timing and any additional tasks must be confirmed before the changeover.",
-    areas: [
       {
         title: "Bedrooms & living",
         items: [
-          "Dust furniture and accessible decor",
-          "Vacuum flooring and mop hard surfaces",
+          "Dust accessible shelves and furniture",
+          "Vacuum bedrooms and lounge areas",
+          "Mop suitable hard floors",
+        ],
+      },
+    ],
+    details: [
+      "Apartment level, lift and parking access",
+      "Bedroom and bathroom numbers",
+      "Compact-space priorities and delicate surfaces",
+    ],
+    steps: [
+      [
+        "Describe the apartment",
+        "Share room numbers, flooring and cleaning priorities.",
+      ],
+      [
+        "Plan building access",
+        "Confirm entry, lift access and visitor parking.",
+      ],
+      ["Agree the visit", "Review the checklist, quote and preferred timing."],
+    ],
+    questions: [
+      [
+        "Do you clean units as well as apartments?",
+        "Yes. Share the layout and room numbers so the team can plan a suitable residential cleaning scope.",
+      ],
+      [
+        "Are shared corridors included?",
+        "This service is for the interior of your residential apartment or unit. Building common areas are outside the scope.",
+      ],
+      [
+        "Can I include the balcony?",
+        "Accessible residential balconies can be discussed as Balcony / Patio Cleaning. Confirm surfaces and access with the team.",
+      ],
+    ],
+    related: ["house-cleaning", "balcony-patio-cleaning", "move-in-cleaning"],
+    closing: "A fresh apartment. Ready to enjoy.",
+  },
+  "property-cleaning": {
+    heroDescription:
+      "Keep your residential rental or vacant home ready for its next use, with attention guided by its condition and access.",
+    scopeHeading: "Follow the room-by-room priorities.",
+    processHeading: "Turn property notes into a practical plan.",
+    extrasHeading: "Extend your property checklist.",
+    detailsHeading: "Help us understand the rental.",
+    scopeNote:
+      "Occupied and vacant rooms need different preparation. Let us know which areas will be clear and accessible.",
+    label: "PROPERTY CARE",
+    lead: "Cleaning for rentals, vacant homes and managed residential properties.",
+    heading: "A fresh start for your residential property.",
+    description:
+      "Property Cleaning supports residential rentals and vacant homes with a room-by-room scope. Share the property condition, access and priorities so kitchens, bathrooms, storage and living spaces can receive the care they need.",
+    image: "/images/property-cover.webp",
+    alt: "Cleaner dusting a shelf beside a residential living room",
+    supportImage: "/images/property-detail.webp",
+    supportAlt: "Clean residential kitchenette with open cupboards",
+    preparation:
+      "Confirm which rooms will be empty. Remove belongings from storage you want cleaned and arrange keys, utilities and access before the visit.",
+    areas: [
+      {
+        title: "Kitchen & bathrooms",
+        items: [
+          "Wipe kitchen benches and sinks",
+          "Clean bathroom fixtures",
+          "Wipe agreed cupboard exteriors",
+        ],
+      },
+      {
+        title: "Bedrooms & living",
+        items: [
+          "Dust accessible furniture and shelves",
+          "Vacuum agreed rooms",
+          "Mop suitable hard floors",
+        ],
+      },
+      {
+        title: "Storage & details",
+        items: [
+          "Wipe empty cupboards by agreement",
+          "Clean accessible door handles",
+          "Discuss property-specific tasks",
+        ],
+      },
+    ],
+    details: [
+      "Residential property type and condition",
+      "Occupied or vacant rooms",
+      "Access arrangements and priority tasks",
+    ],
+    steps: [
+      [
+        "Describe the property",
+        "Share the residential layout and current condition.",
+      ],
+      [
+        "Agree room-by-room care",
+        "Confirm storage, surfaces, floors and any optional work.",
+      ],
+      ["Arrange access", "Agree the quote, keys and preferred visit window."],
+    ],
+    questions: [
+      [
+        "Is Property Cleaning for residential homes?",
+        "Yes. It is for rentals, vacant homes and managed residential properties.",
+      ],
+      [
+        "Can an occupied rental be cleaned?",
+        "Yes. Tell us which rooms are occupied and which surfaces will be accessible so the scope can be agreed.",
+      ],
+      [
+        "Is this the same as a move-out clean?",
+        "Property Cleaning can support an ongoing rental or vacant home. End of Lease / Move-Out Cleaning focuses on preparing to leave a rental, using your property checklist.",
+      ],
+    ],
+    related: ["move-in-cleaning", "end-of-lease-cleaning", "house-cleaning"],
+    closing: "Residential property care, clearly planned.",
+  },
+  "move-in-cleaning": {
+    heroDescription:
+      "Give your next chapter a fresher beginning by arranging access to your new home before unpacking starts.",
+    scopeHeading: "Prepare the spaces you will use first.",
+    processHeading: "Coordinate keys, cleaning and moving day.",
+    extrasHeading: "Consider the finishing touches before unpacking.",
+    detailsHeading: "What to share before you move in.",
+    scopeNote:
+      "Choose the rooms and empty storage you want prepared before your belongings arrive.",
+    label: "A FRESH START",
+    lead: "Residential cleaning before you settle into a new home or rental.",
+    heading: "Move in. Feel at home sooner.",
+    description:
+      "Move-In Cleaning helps prepare a house, apartment or rental before your belongings arrive. Focus on kitchens, bathrooms, empty storage and floors, with the tasks agreed around the condition of your new home.",
+    image: "/images/end-of-lease-cleaning.webp",
+    alt: "Bright empty residential living area with clean timber floors",
+    supportImage: "/images/property-detail.webp",
+    supportAlt: "Empty residential kitchen cupboards ready for cleaning",
+    preparation:
+      "Plan the visit before furniture and boxes arrive where possible. Ensure water, power and keys are available, and identify any newly finished or delicate surfaces.",
+    areas: [
+      {
+        title: "Kitchen & storage",
+        items: [
+          "Wipe kitchen benches and sinks",
+          "Wipe empty cupboards by agreement",
+          "Clean accessible appliance exteriors",
         ],
       },
       {
         title: "Bathrooms",
         items: [
-          "Bathroom fixtures, mirrors and toilets",
-          "Guest-facing surfaces and fittings",
+          "Clean showers, basins and toilets",
+          "Wipe mirrors and accessible fittings",
+          "Mop suitable floors",
         ],
       },
+      {
+        title: "Empty living spaces",
+        items: [
+          "Dust accessible shelves and ledges",
+          "Vacuum bedrooms and living areas",
+          "Mop suitable hard floors",
+        ],
+      },
+    ],
+    details: [
+      "Move-in date and key collection",
+      "Empty rooms and storage to include",
+      "Water, power and surface-care requirements",
+    ],
+    steps: [
+      [
+        "Share your moving plans",
+        "Tell us when keys are available and belongings will arrive.",
+      ],
+      ["Set the priorities", "Agree rooms, empty cupboards and floor care."],
+      [
+        "Prepare your new home",
+        "Confirm access, utilities and the written scope.",
+      ],
+    ],
+    questions: [
+      [
+        "Should I book before moving furniture in?",
+        "An empty home usually makes agreed surfaces easier to reach. Share your moving schedule so suitable timing can be discussed.",
+      ],
+      [
+        "Can you clean inside cupboards?",
+        "Empty cupboard interiors can be included by prior agreement. Confirm which storage areas should be cleaned.",
+      ],
+      [
+        "Can I request cleaning for a new rental?",
+        "Yes. Share the property layout, current condition and key collection date.",
+      ],
+    ],
+    related: [
+      "apartment-cleaning",
+      "property-cleaning",
+      "end-of-lease-cleaning",
+    ],
+    closing: "Start your next chapter with a fresher home.",
+  },
+  "end-of-lease-cleaning": {
+    heroDescription:
+      "Bring your rental checklist and moving dates together so the clean can be scheduled before you return the keys.",
+    scopeHeading: "Work through your vacate checklist.",
+    processHeading: "Plan the clean before the keys go back.",
+    extrasHeading: "Discuss extra tasks on your agent checklist.",
+    detailsHeading: "Details to organise before key return.",
+    scopeNote:
+      "Use the property checklist to confirm accessible rooms, empty storage and any optional work.",
+    label: "MOVING HOME",
+    lead: "Detailed residential cleaning when it is time to move out.",
+    heading: "A practical plan for your move-out clean.",
+    description:
+      "End of Lease / Move-Out Cleaning is planned around your rental home and agreed checklist. Share the condition report, agent requirements and moving dates so the team can review kitchens, bathrooms, empty rooms and accessible storage.",
+    image: "/images/end-of-lease-cleaning.webp",
+    alt: "Vacant residential living room with timber floors",
+    supportImage: "/images/end-of-lease-detail.webp",
+    supportAlt: "Cleaner wiping a low skirting board in an empty home",
+    preparation:
+      "Remove belongings and empty the storage included in the scope. Keep water and power available and share the condition report, access instructions and key return date.",
+    areas: [
       {
         title: "Kitchen",
         items: [
-          "Benchtops, sinks and agreed appliance surfaces",
-          "Walkthrough for visible damage or maintenance concerns",
+          "Clean accessible benches, sink and splashback",
+          "Wipe empty cupboards by agreement",
+          "Discuss oven or fridge interiors separately",
+        ],
+      },
+      {
+        title: "Bathrooms",
+        items: [
+          "Clean showers, basins and toilets",
+          "Wipe mirrors and accessible fixtures",
+          "Mop suitable bathroom floors",
+        ],
+      },
+      {
+        title: "Rooms & floors",
+        items: [
+          "Dust accessible ledges and skirting",
+          "Vacuum empty bedrooms and living areas",
+          "Mop suitable hard floors",
         ],
       },
     ],
     details: [
-      "Guest changeover window and property size",
-      "Entry arrangements and room-by-room instructions",
-      "Any linen, towel or restocking request for separate confirmation",
+      "Agent checklist and condition report",
+      "Vacating date and key return timing",
+      "Empty rooms, utilities and optional extras",
     ],
     steps: [
       [
-        "Share the changeover",
-        "Tell us about the property and the time between stays.",
+        "Share the rental checklist",
+        "Send the property details and agent requirements.",
       ],
+      ["Confirm the scope", "Agree rooms, extras, quote and access."],
       [
-        "Agree the checklist",
-        "List presentation priorities and tasks needing prior arrangement.",
-      ],
-      [
-        "Confirm access & timing",
-        "The team reviews the request before agreeing the visit.",
+        "Prepare for moving day",
+        "Remove belongings and confirm the preferred visit window.",
       ],
     ],
     questions: [
       [
-        "Are linen and restocking included?",
-        "Linen changeovers, towel laundering and amenity restocking require prior agreement. Do not assume supply or these tasks are included in a standard request.",
+        "Do you guarantee a bond return?",
+        "No. Bond decisions depend on the tenancy, property condition and inspection. Cleaning is carried out to an agreed scope.",
       ],
       [
-        "Can you guarantee a same-day changeover?",
-        "No timing is guaranteed through the website. Share the full check-out and check-in window so the team can confirm whether it can be accommodated.",
+        "Is carpet steam cleaning included?",
+        "Specialist carpet treatments are not assumed. Discuss any agent requirements before the scope is confirmed.",
       ],
       [
-        "Is this service affiliated with Airbnb?",
-        "No. Thrive4 Cleaning is an independent cleaning business. This service is for hosts and managers of short-stay properties.",
+        "Does the property need to be empty?",
+        "Please remove belongings and empty the rooms and storage included in the checklist. Tell us about anything that will remain.",
       ],
     ],
-    related: ["construction-cleaning", "one-off-cleaning", "oven-cleaning"],
-    closing: "Make the next welcome a fresh one.",
+    related: ["move-in-cleaning", "property-cleaning", "apartment-cleaning"],
+    closing: "Leave the cleaning clearly planned.",
   },
-  "construction-cleaning": {
-    label: "CONSTRUCTION & POST-BUILD CLEANING",
-    lead: "The final clean after building or renovation work.",
-    heading: "From completed works to a presentation-ready space.",
+  "airbnb-cleaning": {
+    heroDescription:
+      "Prepare a welcoming return for the next guests with a room reset based on your access details and presentation instructions.",
+    scopeHeading: "Focus on the rooms guests have used.",
+    processHeading: "Coordinate the gap between guest stays.",
+    extrasHeading: "Refine the reset for your next guests.",
+    detailsHeading: "Notes that help with a changeover.",
+    scopeNote:
+      "Follow the agreed presentation notes, with linen, supplies and guest timing confirmed in advance.",
+    label: "SHORT-STAY CARE",
+    lead: "Cleaning between guest stays in residential short-stay homes.",
+    heading: "A considered reset between guest visits.",
     description:
-      "Construction Cleaning focuses on ordinary settled dust, light residue and final presentation after building, renovation or maintenance work. Site condition and access are reviewed before a scope is agreed.",
-    image: "/images/construction-cover.webp",
-    alt: "Male cleaner removing ordinary settled dust from newly fitted shelves",
-    supportImage: "/images/construction-detail.webp",
-    supportAlt: "Newly renovated bathroom with clean tiles and fittings",
+      "Airbnb / Short-Stay Cleaning supports residential holiday homes and apartments between bookings. Agree the kitchen, bathroom, bedroom and living-area checklist, together with access and guest timing, before confirming the visit.",
+    image: "/images/airbnb-cleaning.webp",
+    alt: "Neatly presented bedroom in a residential short-stay home",
+    supportImage: "/images/airbnb-cover.webp",
+    supportAlt: "Cleaner wiping a coffee table in a short-stay living room",
     preparation:
-      "Confirm building work has finished and the space is ready for cleaning access. Share builder instructions, delicate new finishes and any remaining residue or materials.",
+      "Share guest departure and arrival times, entry instructions and presentation notes. Linen, laundry, supplies and restocking must be agreed separately.",
     areas: [
       {
-        title: "Floors & surfaces",
+        title: "Bedrooms",
         items: [
-          "Ordinary settled dust on agreed accessible surfaces",
-          "Vacuuming or mopping suitable finished floors",
+          "Dust accessible bedside surfaces",
+          "Vacuum bedroom floors",
+          "Discuss supplied linen changes in advance",
         ],
       },
       {
-        title: "Fittings & fixtures",
+        title: "Kitchen & bathrooms",
         items: [
-          "Accessible skirting, fittings and finished surfaces",
-          "Surface care guided by the installed materials",
+          "Wipe benches, sink and splashback",
+          "Clean showers, basins and toilets",
+          "Wipe accessible appliance exteriors",
         ],
       },
       {
-        title: "Light residue & presentation",
+        title: "Living spaces",
         items: [
-          "Discuss small, non-hazardous debris and residue",
-          "Final presentation tasks agreed for the completed space",
+          "Wipe accessible tables and shelves",
+          "Vacuum or mop suitable floors",
+          "Follow agreed room-presentation notes",
         ],
       },
     ],
     details: [
-      "New-build, renovation or maintenance-work details",
-      "Area, finish types and photos of the current condition",
-      "Access, handover timing and remaining light debris",
+      "Guest departure and next arrival windows",
+      "Access details and room presentation notes",
+      "Linen, supplies and restocking requests",
     ],
     steps: [
       [
-        "Describe the completed work",
-        "Explain the property, finishes and remaining dust or residue.",
+        "Share the guest schedule",
+        "Tell us the departure and arrival windows.",
       ],
       [
-        "Review the site requirements",
-        "Confirm access and tasks suitable for the finished surfaces.",
+        "Agree the reset",
+        "Confirm the rooms, presentation notes and any linen tasks.",
       ],
       [
-        "Agree the final clean",
-        "The team confirms scope, quote and availability.",
+        "Plan access",
+        "Confirm the visit window and written quote before the next stay.",
       ],
     ],
     questions: [
       [
-        "What is included in Construction Cleaning?",
-        "The agreed scope may include ordinary dust, light debris, surface and floor cleaning, and final presentation tasks in completed spaces.",
+        "Is this for residential Airbnb properties?",
+        "Yes. The service is for residential short-stay homes and apartments.",
       ],
       [
-        "Do you handle hazardous material or heavy construction waste?",
-        "Hazardous waste handling, heavy construction waste disposal and regulated specialist cleaning are not confirmed services. Such material must be identified before a scope is discussed.",
+        "Are laundry and linen supplied?",
+        "Laundry, linen supply and linen changes require prior agreement. They are not assumed to be included.",
       ],
       [
-        "Can I request cleaning after renovation work?",
-        "Yes. Share what work was completed, whether trades have finished, the surface types and photos of remaining residue. Access and suitability are confirmed before the visit.",
+        "Can you guarantee a same-day turnaround?",
+        "No. Timing depends on scope and availability. Confirm the guest schedule with the team before relying on a visit.",
       ],
     ],
-    related: ["property-cleaning", "commercial-cleaning", "window-cleaning"],
-    closing: "Plan the final clean after the final trade.",
+    related: [
+      "apartment-cleaning",
+      "bedroom-living-area-cleaning",
+      "property-cleaning",
+    ],
+    closing: "A fresher space for the next stay.",
   },
-  "office-cleaning": {
-    label: "SPACE TO DO YOUR BEST WORK",
-    lead: "A clearer workspace, from desk to meeting room.",
-    heading: "A workplace checklist, zone by zone.",
+  "bedroom-living-area-cleaning": {
+    heroDescription:
+      "Bring a little order back to your resting and gathering spaces, from bedside tables to the lounge and dining area.",
+    scopeHeading: "Care for the places you unwind.",
+    processHeading: "Choose the rooms, then plan the refresh.",
+    extrasHeading: "Personalise care for your living spaces.",
+    detailsHeading: "Tell us about the rooms you enjoy.",
+    scopeNote:
+      "Focus on reachable furniture and floor areas, while identifying fragile belongings and anything to leave untouched.",
+    label: "EVERYDAY LIVING",
+    lead: "Focused care for bedrooms, lounges and everyday living areas.",
+    heading: "Make room for more comfortable living.",
     description:
-      "Office cleaning focuses on the rooms your team uses every day: workstations, meeting areas, shared kitchens and amenities. Agree the work around your office layout and operating requirements.",
-    image: "/images/office-cover.webp",
-    alt: "Male cleaner vacuuming between desks in a sunlit office",
-    supportImage: "/images/office-detail-male.webp",
-    supportAlt: "Male cleaner wiping the bench in an office shared kitchen",
+      "Bedroom & Living Area Cleaning focuses on the places you rest and spend time together. Choose accessible furniture, shelves and floors, with care instructions and priority rooms agreed before the visit.",
+    image: "/images/airbnb.webp",
+    alt: "Bright residential bedroom with neatly arranged bedding",
+    supportImage: "/images/home-benefit.webp",
+    supportAlt: "Cleaner wiping a residential dining table",
     preparation:
-      "Clear desk surfaces intended for cleaning, secure documents and identify restricted equipment or rooms. Agree entry and alarm procedures with your site contact.",
+      "Put away loose personal items and identify fragile objects. Tell us about floor finishes, pets and furniture that should remain in place.",
     areas: [
       {
-        title: "Desks & meeting rooms",
+        title: "Bedrooms",
         items: [
-          "Clear work surfaces and reception counters",
-          "Meeting tables and accessible shared surfaces",
+          "Dust accessible bedside tables and shelves",
+          "Wipe agreed furniture surfaces",
+          "Vacuum accessible bedroom floors",
         ],
       },
       {
-        title: "Kitchens & amenities",
+        title: "Lounge & dining",
         items: [
-          "Staff kitchen benches and sinks",
-          "Restrooms, mirrors and hand basins",
+          "Wipe coffee and dining tables",
+          "Dust accessible shelving",
+          "Vacuum or mop suitable floors",
         ],
       },
       {
-        title: "Floors & waste",
+        title: "Finishing details",
         items: [
-          "Vacuum carpets and mop hard flooring",
-          "Empty standard office waste bins",
+          "Wipe accessible handles and switches",
+          "Dust reachable ledges",
+          "Follow agreed surface-care instructions",
         ],
       },
     ],
     details: [
-      "Desk numbers, meeting rooms and shared facilities",
-      "Opening hours and preferred cleaning times",
-      "A site contact, entry procedures and restricted areas",
+      "Bedrooms and living rooms to include",
+      "Furniture access and floor finishes",
+      "Fragile belongings and priority surfaces",
     ],
     steps: [
       [
-        "Map your office",
-        "Describe workstations and the shared areas used by the team.",
+        "Choose the rooms",
+        "Tell us which bedrooms and living spaces need attention.",
       ],
       [
-        "Discuss practical access",
-        "Agree suitable timing and entry procedures with your contact.",
+        "Agree surface care",
+        "Identify delicate finishes, furniture access and floor types.",
       ],
-      [
-        "Confirm the checklist",
-        "The team confirms the office-specific tasks before the visit.",
-      ],
+      ["Plan the refresh", "Confirm the checklist and preferred appointment."],
     ],
     questions: [
       [
-        "Will papers and equipment be moved?",
-        "Clear the surfaces you want cleaned and identify items that should not be touched. Document and equipment handling requirements must be agreed in advance.",
+        "Can I request just a bedroom or lounge clean?",
+        "Yes. Share the rooms and priorities you want included so a focused scope can be agreed.",
       ],
       [
-        "Can I request a particular cleaning time?",
-        "Share opening hours and preferred visit times. Availability, entry and any alarm procedures need to be confirmed with the team.",
+        "Do you move heavy furniture?",
+        "Heavy furniture moving is not assumed. Confirm accessible areas and any limitations before the visit.",
       ],
       [
-        "How does this differ from commercial cleaning?",
-        "Office cleaning is specifically organised around desks, meeting rooms, reception and staff facilities. Commercial cleaning is the broader category for other business premises.",
+        "Are mattresses or upholstery treated?",
+        "Specialist mattress or upholstery treatments are not included in standard surface and floor cleaning.",
       ],
     ],
-    related: ["commercial-cleaning", "one-off-cleaning", "window-cleaning"],
-    closing: "Plan a clean that works for your office.",
+    related: ["house-cleaning", "one-off-cleaning", "airbnb-cleaning"],
+    closing: "Comfort starts in the rooms you use most.",
   },
-  "window-cleaning": {
-    label: "LET THE DAYLIGHT IN",
-    lead: "A clearer view of your space.",
-    heading: "Start with the glass. Plan for the access.",
+  "balcony-patio-cleaning": {
+    heroDescription:
+      "Make your outdoor corner more inviting with suitable care for reachable surfaces, taking drainage and building rules into account.",
+    scopeHeading: "Outdoor surfaces within easy reach.",
+    processHeading: "Review access before refreshing the outdoors.",
+    extrasHeading: "Agree the outdoor details in advance.",
+    detailsHeading: "Share your outdoor surface requirements.",
+    scopeNote:
+      "Surface materials, drainage and entry arrangements guide the tasks suitable for your balcony or patio.",
+    label: "OUTDOOR HOME CARE",
+    lead: "Cleaning for accessible residential balconies, patios and outdoor surfaces.",
+    heading: "Freshen up your outdoor living space.",
     description:
-      "Window cleaning focuses on interior glass, accessible sills and tracks. Accessible exterior panes can be discussed as part of your enquiry, with access and suitability confirmed before work is agreed.",
-    image: "/images/window-cleaning.webp",
-    alt: "Gloved hand using a squeegee on an accessible window",
-    supportImage: "/images/window-detail-male.webp",
-    supportAlt:
-      "Male cleaner wiping accessible window tracks with a cloth and brush",
+      "Balcony / Patio Cleaning focuses on accessible outdoor areas at your home or apartment. Discuss loose debris, suitable floor surfaces, reachable railings and outdoor furniture, with drainage and access reviewed before work is agreed.",
+    image: "/images/garden-cleaning.webp",
+    alt: "Residential patio with outdoor seating and paved surfaces",
+    supportImage: "/images/garden-detail.webp",
+    supportAlt: "Cleaner wiping the railing of a residential balcony",
     preparation:
-      "Clear items from sills and move small obstacles away from windows. Explain locks, screens, height and any access restrictions before the visit.",
+      "Clear small personal items and share building rules, surface-care guidance and drainage details. Identify fragile plants and anything that should remain untouched.",
     areas: [
       {
-        title: "Interior glass",
+        title: "Outdoor floors",
         items: [
-          "Requested interior panes",
-          "Accessible internal sills, tracks and frames",
+          "Remove ordinary loose debris",
+          "Sweep accessible floor areas",
+          "Agree suitable surface cleaning methods",
         ],
       },
       {
-        title: "Exterior enquiries",
+        title: "Reachable details",
         items: [
-          "Describe accessible exterior panes",
-          "Confirm access and agreed scope with the team",
+          "Wipe accessible railings",
+          "Wipe agreed outdoor furniture surfaces",
+          "Clean reachable ledges",
         ],
       },
       {
-        title: "Access review",
+        title: "Access & care",
         items: [
-          "Window height and opening style",
-          "Obstacles, screens and existing glass damage",
+          "Review drainage and water access",
+          "Follow residential building requirements",
+          "Agree tasks for the surface condition",
         ],
       },
     ],
     details: [
-      "Approximate window numbers and sizes",
-      "Interior or exterior glass and its height",
-      "Photos, screens and access restrictions",
+      "Balcony or patio size and access",
+      "Surface materials and drainage",
+      "Building rules and outdoor furniture",
     ],
     steps: [
       [
-        "Show us the windows",
-        "Share pane numbers, height and photographs if helpful.",
+        "Describe the outdoor area",
+        "Share photos, surface materials and access details.",
       ],
       [
-        "Review access",
-        "The team confirms which requested windows are suitable.",
+        "Review suitable tasks",
+        "Confirm drainage, building requirements and accessible areas.",
       ],
-      [
-        "Agree the clean",
-        "Scope and access arrangements are confirmed before the appointment.",
-      ],
+      ["Agree the visit", "Review the cleaning method, scope and quote."],
     ],
     questions: [
       [
-        "Can I request exterior windows?",
-        "Accessible exterior panes can be discussed. Share height and access details so the team can confirm suitability before quoting.",
+        "Do you clean apartment balconies?",
+        "Accessible residential balconies can be assessed. Share entry, drainage and building requirements with the team.",
       ],
       [
-        "Do you offer rope-access or high-rise cleaning?",
-        "These capabilities are not confirmed. Do not assume high-rise, rope-access or specialist equipment is included; describe the site for assessment.",
+        "Is pressure washing included?",
+        "Specialist pressure washing is not a confirmed inclusion. Cleaning methods are agreed for your surfaces and access.",
       ],
       [
-        "Are tracks and frames included?",
-        "Accessible internal sills, tracks and frames can form part of the agreed scope. Mention screens, locks and any particularly detailed work when enquiring.",
+        "Can you clean high exterior glass or façades?",
+        "No high-access exterior work is assumed. The scope is limited to agreed, safely accessible residential surfaces.",
       ],
     ],
-    related: ["construction-cleaning", "office-cleaning", "property-cleaning"],
-    closing: "Tell us about your view.",
+    related: ["apartment-cleaning", "house-cleaning", "one-off-cleaning"],
+    closing: "Enjoy a fresher outdoor corner of home.",
   },
-  "oven-cleaning": {
-    label: "DETAILS AT THE HEART OF THE KITCHEN",
-    lead: "Give the oven some focused attention.",
-    heading: "An appliance clean with a clearly defined scope.",
-    description:
-      "Oven cleaning focuses on built-up grease and food residue. Share the appliance type and condition so the team can confirm which accessible components and surfaces are suitable to clean.",
-    image: "/images/oven-cleaning.webp",
-    alt: "Open oven with racks and a gloved cleaner attending to the door",
-    supportImage: "/images/oven-detail-male.webp",
-    supportAlt:
-      "Male cleaner wiping an oven rack on a protected kitchen worktop",
-    preparation:
-      "Switch the oven off and allow it to cool completely. Clear the surrounding work area and share manufacturer instructions or details of damaged components.",
-    areas: [
-      {
-        title: "Discuss for inclusion",
-        items: [
-          "Removable racks, runners and trays",
-          "Accessible oven interior surfaces",
-          "Door glass and exterior controls",
-        ],
-      },
-      {
-        title: "Outside the cleaning scope",
-        items: [
-          "Electrical repairs or fault diagnosis",
-          "Heating-element replacement",
-          "Unagreed dismantling or appliance repairs",
-        ],
-      },
-    ],
-    details: [
-      "Oven make, model and appliance type",
-      "Current condition and photos of build-up",
-      "Manufacturer care instructions and existing damage",
-    ],
-    steps: [
-      [
-        "Describe the appliance",
-        "Share the type, model and condition of your oven.",
-      ],
-      [
-        "Confirm the components",
-        "Agree suitable surfaces and removable parts for cleaning.",
-      ],
-      [
-        "Prepare a cool oven",
-        "Switch it off, let it cool and clear the nearby work area.",
-      ],
-    ],
-    questions: [
-      [
-        "Which oven parts can be cleaned?",
-        "Removable racks, trays, accessible interior surfaces, door glass and controls can be discussed. Exact components and any disassembly must be agreed for your appliance.",
-      ],
-      [
-        "Can you repair or restore my oven?",
-        "Electrical repairs and element replacement are not cleaning services. No repair, restoration or improved cooking performance is promised.",
-      ],
-      [
-        "Can I request oven cleaning with a house clean?",
-        "Yes. Oven interior cleaning is an optional request alongside relevant home-cleaning services. The team confirms the additional scope and quote.",
-      ],
-    ],
-    related: ["property-cleaning", "house-cleaning", "end-of-lease-cleaning"],
-    closing: "A little care for a hard-working appliance.",
-  },
-};
-
-servicePages["one-off-cleaning"] = {
-  ...servicePages["house-cleaning"],
-  label: "A SINGLE VISIT, YOUR PRIORITIES",
-  lead: "A single-visit House Cleaning request for priority rooms.",
-  heading: "A home clean when you need it.",
-  description:
-    "One-Off Cleaning is a single visit for the rooms and tasks you choose. Request a kitchen and bathroom refresh, dusting, surface cleaning, vacuuming and mopping without a recurring commitment.",
-  areas: [
-    {
-      title: "Your priority rooms",
-      items: ["Choose your priority rooms", "Kitchen & bathroom refresh"],
-    },
-    {
-      title: "Surfaces",
-      items: [
-        "Dusting and surface cleaning",
-        "Accessible fixtures and furniture",
-      ],
-    },
-    {
-      title: "Floors",
-      items: ["Vacuuming & mopping", "No recurring commitment"],
-    },
-  ],
-  details: [
-    "Rooms and priority tasks",
-    "Property condition and access",
-    "Your preferred visit date",
-  ],
-  steps: [
-    ["Choose your priorities", "Tell us which rooms and tasks need attention."],
-    ["Agree the checklist", "The team confirms scope, quote and access."],
-    [
-      "Plan a single visit",
-      "Request your preferred date with no recurring commitment.",
-    ],
-  ],
-  related: ["house-cleaning", "one-off-cleaning", "property-cleaning"],
-  closing: "One visit. A fresher home.",
 };

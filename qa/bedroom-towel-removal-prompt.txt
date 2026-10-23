@@ -1,0 +1,4 @@
+Tool: built-in imagegen.
+Saved asset: public/images/comparison-bedroom-after-v2.webp
+
+Precise object removal edit of the attached clean AFTER bedroom photograph. Remove ONLY the beige/tan towel or decorative throw draped across the foot and lower-right side of the white bed. Reconstruct the white duvet and its natural gentle folds beneath that throw, with matching texture and lighting. Preserve every other pixel as closely as possible: camera, crop, aspect ratio, room geometry, bed frame, all pillows, headboard, bedside tables, lamps, plant, mirror and reflection, artwork, curtains, window, outdoor view, timber floor, rug, clean surfaces and daylight. Keep the clean AFTER state. Do not remove the beige pillow, do not change curtains or the rug, do not restyle the room. No new objects, text, labels or watermark. One full-frame photograph matching the input.

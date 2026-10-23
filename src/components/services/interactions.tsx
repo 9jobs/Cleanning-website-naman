@@ -156,7 +156,7 @@ export function ServiceDirectory({ items }: { items: DirectoryItem[] }) {
         role="group"
         aria-label="Filter cleaning services"
       >
-        {["All services", "Residential", "Commercial"].map((label) => (
+        {["All services", "Residential"].map((label) => (
           <button
             key={label}
             type="button"

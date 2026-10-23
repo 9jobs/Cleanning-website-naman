@@ -63,6 +63,7 @@ export const invoiceSchema = z
     plan: z.enum(["Weekly", "Fortnightly", "One-off", "Onboarding fees"]),
     autopay: z.boolean(),
     description: line(300),
+    numberOfPeople: z.number().int().min(1).max(1000).optional(),
     hours: billingNumber(10000),
     hourlyRate: billingNumber(100000),
     amount: z

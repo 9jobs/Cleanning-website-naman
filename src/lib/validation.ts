@@ -21,13 +21,7 @@ export function australianDate() {
 }
 export const bookingSchema = z.object({
   service: serviceSchema,
-  property: z.enum([
-    "House",
-    "Apartment",
-    "Townhouse",
-    "Office",
-    "Other commercial space",
-  ]),
+  property: z.enum(["House", "Apartment", "Townhouse"]),
   bedrooms: z.coerce.number().int().min(1).max(8),
   bathrooms: z.coerce.number().int().min(1).max(6),
   frequency: z.enum(frequencies as [string, ...string[]]),

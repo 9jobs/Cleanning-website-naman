@@ -58,7 +58,7 @@ export function PageHero({
     about: { src: "/images/regular.webp", label: "RELIABLE CLEANING SERVICES" },
     services: {
       src: "/images/lease.webp",
-      label: "CLEANING FOR HOMES & WORKPLACES",
+      label: "RESIDENTIAL CLEANING FOR EVERYDAY HOMES",
     },
     pricing: {
       src: "/images/kitchen.webp",
