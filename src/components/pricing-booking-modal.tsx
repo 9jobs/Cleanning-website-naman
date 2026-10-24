@@ -15,7 +15,7 @@ import {
   bookingLocalNow,
   pricingBookingSchema,
 } from "@/lib/pricing-booking-validation";
-import { PRICING_HOURLY_RATE } from "@/lib/pricing";
+import { pricingHourlyRate } from "@/lib/pricing";
 import styles from "./pricing-booking-modal.module.css";
 
 export function PricingBookingModal({
@@ -188,7 +188,7 @@ export function PricingBookingModal({
       </div>
       <h2 id="pricing-booking-title">{title}</h2>
       <div className={styles.price}>
-        AUD {PRICING_HOURLY_RATE}
+        AUD {pricingHourlyRate(service)}
         <span>/ person / hour</span>
       </div>
       <div className={styles.summary}>

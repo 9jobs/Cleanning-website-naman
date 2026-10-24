@@ -15,7 +15,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { publicServices as services } from "@/lib/data";
-import { PRICING_HOURLY_RATE } from "@/lib/pricing";
+import { PRICING_HOURLY_RATE, pricingHourlyRate } from "@/lib/pricing";
 import styles from "./pricing-plans.module.css";
 import { PricingBookingModal } from "./pricing-booking-modal";
 
@@ -37,7 +37,7 @@ function servicePlan(slug: string, icon: typeof House): PricingPlan {
     title: service.name,
     icon,
     description: service.summary,
-    price: PRICING_HOURLY_RATE,
+    price: pricingHourlyRate(slug),
     features: service.includes,
   };
 }
@@ -62,7 +62,7 @@ const residentialPlans: PricingPlan[] = [
     title: "One-Off Cleaning",
     icon: CalendarCheck,
     description: "Perfect for a deep clean or a special occasion.",
-    price: PRICING_HOURLY_RATE,
+    price: pricingHourlyRate("one-off-cleaning"),
     features: [
       "One appointment, no ongoing plan",
       "Bedroom and living room cleaning",
@@ -156,7 +156,9 @@ export function PricingPlans({
                     aria-hidden="true"
                   />
                   <div>
-                    <strong>Service Rate / Booking Charges (Non-refundable)</strong>
+                    <strong>
+                      Service Rate / Booking Charges (Non-refundable)
+                    </strong>
                     <p>
                       This amount will be adjusted against your final service
                       payment.

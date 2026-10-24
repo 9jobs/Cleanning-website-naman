@@ -9,6 +9,7 @@ import {
 } from "./invoices/stripe";
 import { stripeAccount } from "./invoices/stripe-mode";
 import type { StripeWebhookEvent } from "./invoices/webhook";
+import { pricingBookingIdentity } from "./pricing-booking-checkout";
 
 function digest(value: string) {
   return createHmac("sha256", process.env.CONTACT_RATE_LIMIT_SECRET!)
@@ -47,6 +48,11 @@ export async function notifyPaidPricingBooking(sessionId: string) {
   });
   if (!pricingBookingReady())
     throw new Error("Booking notifications unavailable");
+  // Persist the paid identity even if the notification mail needs a later retry.
+  await contactDatabase().query(
+    "insert into public.contact_request_limits (client_hash) values ($1) on conflict do nothing",
+    [pricingBookingIdentity(payment.booking.email, payment.live)],
+  );
   const reference = digest(`pricing-booking:paid:${payment.sessionId}`);
   const db = await contactDatabase().connect();
   try {

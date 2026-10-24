@@ -5,7 +5,8 @@ import {
   requestOrigin,
 } from "@/lib/invoices/access";
 import { InvoiceError } from "@/lib/invoices/store";
-import { createPricingCheckout } from "@/lib/invoices/stripe";
+import { createUniquePricingCheckout } from "@/lib/pricing-booking-checkout";
+import { contactDatabase } from "@/lib/contact-database";
 import { pricingBookingCheckoutSchema } from "@/lib/pricing-booking-validation";
 import {
   limitPricingBookings,
@@ -51,7 +52,8 @@ export async function POST(request: NextRequest) {
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local",
     );
     return json(
-      await createPricingCheckout(
+      await createUniquePricingCheckout(
+        contactDatabase(),
         parsed.data.service,
         parsed.data.requestId,
         requestOrigin(request),

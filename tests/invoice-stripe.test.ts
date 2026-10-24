@@ -206,7 +206,7 @@ test("pricing checkout pins hourly AUD rate and lets customers select hours with
   harness(async (calls, i, set) => {
     set(
       session(i, {
-        amount_total: 7900,
+        amount_total: 9900,
         metadata: {
           app: "thrive4-pricing-checkout",
           service: "property-cleaning",
@@ -220,7 +220,7 @@ test("pricing checkout pins hourly AUD rate and lets customers select hours with
     );
     const post = calls.find((c) => c.options.method === "POST")!;
     const fields = new URLSearchParams(String(post.options.body));
-    assert.equal(fields.get("line_items[0][price_data][unit_amount]"), "7900");
+    assert.equal(fields.get("line_items[0][price_data][unit_amount]"), "9900");
     assert.equal(
       fields.get("line_items[0][adjustable_quantity][enabled]"),
       "true",

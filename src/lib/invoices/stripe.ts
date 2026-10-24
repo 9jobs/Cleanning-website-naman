@@ -9,6 +9,7 @@ import {
   pricingServices,
   PRICING_HOURLY_RATE,
   PRICING_MAX_HOURS,
+  pricingHourlyRate,
 } from "../pricing";
 
 import {
@@ -288,6 +289,7 @@ export async function createPricingCheckout(
   const selected = services.find((item) => item.slug === service);
   if (!selected || !pricingServices.some((slug) => slug === service))
     throw new InvoiceError("Choose a supported cleaning service.");
+  const hourlyRate = pricingHourlyRate(service);
   await verifyThrive4Account();
   const fields = new URLSearchParams({
     mode: "payment",
@@ -297,9 +299,9 @@ export async function createPricingCheckout(
     "payment_intent_data[metadata][app]": "thrive4-pricing-checkout",
     "payment_intent_data[metadata][service]": service,
     "line_items[0][price_data][currency]": "aud",
-    "line_items[0][price_data][unit_amount]": String(PRICING_HOURLY_RATE * 100),
+    "line_items[0][price_data][unit_amount]": String(hourlyRate * 100),
     "line_items[0][price_data][product_data][name]": `Thrive4 Cleaning · ${selected.name} (per person/hour)`,
-    "line_items[0][price_data][product_data][description]": `Quantity = total person-hours (people × hours). AUD ${PRICING_HOURLY_RATE} per person/hour. One-time ${stripeLiveMode() ? "payment" : "sandbox payment"}; appointment scheduling is separate.`,
+    "line_items[0][price_data][product_data][description]": `Quantity = total person-hours (people × hours). AUD ${hourlyRate} per person/hour. One-time ${stripeLiveMode() ? "payment" : "sandbox payment"}; appointment scheduling is separate.`,
     "line_items[0][quantity]": "1",
     "line_items[0][adjustable_quantity][enabled]": "true",
     "line_items[0][adjustable_quantity][minimum]": "1",
@@ -317,12 +319,12 @@ export async function createPricingCheckout(
   const session = await call<Session>(
     "checkout/sessions",
     fields,
-    `thrive4-pricing-v2-${service}-${requestId}`,
+    `thrive4-pricing-v3-${service}-${requestId}`,
   );
   if (
     session.livemode !== stripeLiveMode() ||
     session.currency !== "aud" ||
-    session.amount_total !== PRICING_HOURLY_RATE * 100 ||
+    session.amount_total !== hourlyRate * 100 ||
     session.metadata?.app !== "thrive4-pricing-checkout" ||
     session.metadata?.service !== service ||
     !session.id.startsWith(stripeLiveMode() ? "cs_live_" : "cs_test_") ||
@@ -380,8 +382,17 @@ export async function verifyPricingPayment(id: string) {
     item.quantity > PRICING_MAX_HOURS ||
     !(
       live
-        ? [7000, PRICING_HOURLY_RATE * 100]
-        : [6000, 7000, PRICING_HOURLY_RATE * 100]
+        ? [
+            7000,
+            PRICING_HOURLY_RATE * 100,
+            pricingHourlyRate(session.metadata.service!) * 100,
+          ]
+        : [
+            6000,
+            7000,
+            PRICING_HOURLY_RATE * 100,
+            pricingHourlyRate(session.metadata.service!) * 100,
+          ]
     ).includes(item.price.unit_amount) ||
     item.price.currency !== "aud" ||
     session.amount_total !== item.quantity * item.price.unit_amount
@@ -392,6 +403,8 @@ export async function verifyPricingPayment(id: string) {
     );
   return {
     sessionId: id,
+    status: session.status,
+    url: session.url,
     live,
     // Retired service/rate remain readable only for historical payment documents.
     service:
